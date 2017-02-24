@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/post_list"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        app:menu="@menu/navigation_items"/>
+        android:layout_height="match_parent"
+        android:divider="#ffff0000"
+        android:dividerHeight="10dp">
+
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>
