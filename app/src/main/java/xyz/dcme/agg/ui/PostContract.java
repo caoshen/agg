@@ -11,11 +11,12 @@ public interface PostContract {
 
     interface View extends BaseView<Presenter> {
 
-        void refreshPosts(List<String> data);
+        void onRefresh(List<String> data);
+        void onLoadMore(List<String> data);
     }
 
     interface Presenter extends BasePresenter {
-
+        void loadMore(int nextPage);
     }
 
 }

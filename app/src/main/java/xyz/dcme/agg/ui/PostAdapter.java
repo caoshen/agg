@@ -41,6 +41,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         mData.addAll(data);
     }
 
+    public void clear() {
+        mData.clear();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mContent;
 

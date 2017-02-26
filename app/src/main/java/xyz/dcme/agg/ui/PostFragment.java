@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zhy.adapter.recyclerview.wrapper.LoadMoreWrapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,9 @@ public class PostFragment extends Fragment implements PostContract.View {
     private PostContract.Presenter mPresenter;
     private RecyclerView mPostRecycler;
     private PostAdapter mAdapter;
+    private LoadMoreWrapper mLoadMoreWrapper;
     private ArrayList<String> mData = new ArrayList<>();
+    private int mNextPage = 2;
 
     public static PostFragment newInstance() {
         return new PostFragment();
@@ -43,6 +47,14 @@ public class PostFragment extends Fragment implements PostContract.View {
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getActivity());
         mPostRecycler.setLayoutManager(lm);
         mAdapter = new PostAdapter(getActivity(), mData);
+        mLoadMoreWrapper = new LoadMoreWrapper(mAdapter);
+        mLoadMoreWrapper.setLoadMoreView(R.layout.load_more);
+        mLoadMoreWrapper.setOnLoadMoreListener(new LoadMoreWrapper.OnLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                mPresenter.loadMore(mNextPage);
+            }
+        });
         mPostRecycler.setAdapter(mAdapter);
     }
 
@@ -58,8 +70,16 @@ public class PostFragment extends Fragment implements PostContract.View {
     }
 
     @Override
-    public void refreshPosts(List<String> data) {
+    public void onRefresh(List<String> data) {
+        mAdapter.clear();
         mAdapter.addData(data);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoadMore(List<String> data) {
+        mAdapter.addData(data);
+        mAdapter.notifyDataSetChanged();
+        mNextPage++;
     }
 }
