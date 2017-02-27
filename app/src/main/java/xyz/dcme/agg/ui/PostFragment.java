@@ -15,14 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.model.Post;
 
 public class PostFragment extends Fragment implements PostContract.View {
 
     private PostContract.Presenter mPresenter;
     private RecyclerView mPostRecycler;
-    private PostAdapter mAdapter;
+//    private PostAdapter mAdapter;
+    private PostCommonAdapter mPostCommonAdapter;
     private LoadMoreWrapper mLoadMoreWrapper;
-    private ArrayList<String> mData = new ArrayList<>();
+    private ArrayList<Post> mData = new ArrayList<>();
     private int mNextPage = 2;
 
     public static PostFragment newInstance() {
@@ -46,8 +48,8 @@ public class PostFragment extends Fragment implements PostContract.View {
         mPostRecycler = (RecyclerView) view.findViewById(R.id.post_list);
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getActivity());
         mPostRecycler.setLayoutManager(lm);
-        mAdapter = new PostAdapter(getActivity(), mData);
-        mLoadMoreWrapper = new LoadMoreWrapper(mAdapter);
+        mPostCommonAdapter = new PostCommonAdapter(getActivity(), R.layout.item_post, mData);
+        mLoadMoreWrapper = new LoadMoreWrapper(mPostCommonAdapter);
         mLoadMoreWrapper.setLoadMoreView(R.layout.load_more);
         mLoadMoreWrapper.setOnLoadMoreListener(new LoadMoreWrapper.OnLoadMoreListener() {
             @Override
@@ -55,7 +57,7 @@ public class PostFragment extends Fragment implements PostContract.View {
                 mPresenter.loadMore(mNextPage);
             }
         });
-        mPostRecycler.setAdapter(mAdapter);
+        mPostRecycler.setAdapter(mLoadMoreWrapper);
     }
 
     @Override
@@ -70,16 +72,16 @@ public class PostFragment extends Fragment implements PostContract.View {
     }
 
     @Override
-    public void onRefresh(List<String> data) {
-        mAdapter.clear();
-        mAdapter.addData(data);
-        mAdapter.notifyDataSetChanged();
+    public void onRefresh(List<Post> data) {
+        mPostCommonAdapter.getDatas().clear();
+        mPostCommonAdapter.getDatas().addAll(data);
+        mLoadMoreWrapper.notifyDataSetChanged();
     }
 
     @Override
-    public void onLoadMore(List<String> data) {
-        mAdapter.addData(data);
-        mAdapter.notifyDataSetChanged();
+    public void onLoadMore(List<Post> data) {
+        mPostCommonAdapter.getDatas().addAll(data);
+        mLoadMoreWrapper.notifyDataSetChanged();
         mNextPage++;
     }
 }

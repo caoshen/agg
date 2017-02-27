@@ -2,17 +2,14 @@ package xyz.dcme.agg.ui;
 
 import java.util.List;
 
-/**
- * @author cs
- * @date 17-2-23
- */
+import xyz.dcme.agg.model.Post;
 
 public interface PostContract {
 
     interface View extends BaseView<Presenter> {
 
-        void onRefresh(List<String> data);
-        void onLoadMore(List<String> data);
+        void onRefresh(List<Post> data);
+        void onLoadMore(List<Post> data);
     }
 
     interface Presenter extends BasePresenter {

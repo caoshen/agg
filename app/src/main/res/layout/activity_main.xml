@@ -14,5 +14,6 @@
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
+        android:background="@color/white"
         app:menu="@menu/navigation_items"/>
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.util.List;
 
+import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.parser.PostParser;
 
 public class PostPresenter implements PostContract.Presenter {
@@ -18,36 +19,64 @@ public class PostPresenter implements PostContract.Presenter {
 
     @Override
     public void start() {
-        new AsyncTask<Void, Void, List<String>>() {
+//        new AsyncTask<Void, Void, List<String>>() {
+//
+//            @Override
+//            protected List<String> doInBackground(Void... voids) {
+//                return PostParser.parse("http://www.guanggoo.com/?p=1");
+//            }
+//
+//            @Override
+//            protected void onPostExecute(List<String> data) {
+//                super.onPostExecute(data);
+//                mView.onRefresh(data);
+//                Log.d(TAG, "" + data.size());
+//            }
+//        }.execute();
+
+        new AsyncTask<Void, Void, List<Post>>() {
 
             @Override
-            protected List<String> doInBackground(Void... voids) {
-                return PostParser.parse("http://www.guanggoo.com/?p=1");
+            protected List<Post> doInBackground(Void... voids) {
+                return PostParser.parseUrl("http://www.guanggoo.com/?p=1");
             }
 
             @Override
-            protected void onPostExecute(List<String> data) {
+            protected void onPostExecute(List<Post> data) {
                 super.onPostExecute(data);
                 mView.onRefresh(data);
-                Log.d(TAG, "" + data.size());
             }
         }.execute();
-
     }
 
     @Override
     public void loadMore(final int nextPage) {
-        new AsyncTask<Void, Void, List<String>>() {
+//        new AsyncTask<Void, Void, List<String>>() {
+//
+//            @Override
+//            protected List<String> doInBackground(Void... voids) {
+//                return PostParser.parse("http://www.guanggoo.com/?p=" + nextPage);
+//            }
+//
+//            @Override
+//            protected void onPostExecute(List<String> data) {
+//                super.onPostExecute(data);
+//                mView.onLoadMore(data);
+//                Log.d(TAG, "" + data.size());
+//            }
+//        }.execute();
+
+        new AsyncTask<Void, Void, List<Post>>() {
 
             @Override
-            protected List<String> doInBackground(Void... voids) {
-                return PostParser.parse("http://www.guanggoo.com/?p=" + nextPage);
+            protected List<Post> doInBackground(Void... voids) {
+                return PostParser.parseUrl("http://www.guanggoo.com/?p=" + nextPage);
             }
 
             @Override
-            protected void onPostExecute(List<String> data) {
+            protected void onPostExecute(List<Post> data) {
                 super.onPostExecute(data);
-                mView.onRefresh(data);
+                mView.onLoadMore(data);
                 Log.d(TAG, "" + data.size());
             }
         }.execute();

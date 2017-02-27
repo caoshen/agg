@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import xyz.dcme.agg.model.Post;
+
 public class PostParser {
     private static final String TAG = "PostParser";
 
@@ -27,6 +29,26 @@ public class PostParser {
             String text = element.text();
             data.add(text);
             Log.d(TAG, text);
+        }
+        return data;
+    }
+
+    public static List<Post> parseUrl(String url) {
+        Document doc = null;
+        List<Post> data = new ArrayList<Post>();
+
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Elements items = doc.select("div.topic-item");
+        for (Element element : items) {
+            Element avatar = element.select("img.avatar").first();
+            String avatarUrl = avatar.attr("src");
+            Element text = element.select("h3.title").first();
+            String title = text.text();
+            data.add(new Post(title, avatarUrl));
         }
         return data;
     }
