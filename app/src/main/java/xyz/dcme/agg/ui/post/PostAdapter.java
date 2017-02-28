@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui;
+package xyz.dcme.agg.ui.post;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui;
+package xyz.dcme.agg.ui.post;
 
 import android.os.AsyncTask;
 import android.util.Log;

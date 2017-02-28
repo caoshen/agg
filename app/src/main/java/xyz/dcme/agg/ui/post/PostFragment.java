@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui;
+package xyz.dcme.agg.ui.post;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
