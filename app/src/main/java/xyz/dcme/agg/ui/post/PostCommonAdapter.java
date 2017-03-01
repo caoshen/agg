@@ -1,6 +1,8 @@
 package xyz.dcme.agg.ui.post;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -28,4 +30,6 @@ public class PostCommonAdapter extends CommonAdapter<Post> {
                 .crossFade()
                 .into(avatar);
     }
+
+
 }

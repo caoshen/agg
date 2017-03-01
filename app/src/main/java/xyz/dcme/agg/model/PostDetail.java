@@ -3,7 +3,9 @@ package xyz.dcme.agg.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class PostDetail implements Parcelable {
+import xyz.dcme.agg.ui.postdetail.PostDetailType;
+
+public class PostDetail implements Parcelable, PostDetailType {
     public String title;
     public String userName;
     public String avatarUrl;
@@ -42,5 +44,10 @@ public class PostDetail implements Parcelable {
         parcel.writeString(avatarUrl);
         parcel.writeString(createdTime);
         parcel.writeString(content);
+    }
+
+    @Override
+    public int getPostType() {
+        return PostDetailType.CONTENT_TYPE;
     }
 }

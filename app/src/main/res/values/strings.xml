@@ -6,4 +6,6 @@
     <string name="loading">加载中</string>
     <string name="post_title">标题</string>
     <string name="post_content">内容</string>
+    <string name="name">姓名</string>
+    <string name="comment_content">评论内容</string>
 </resources>
