@@ -1,7 +1,7 @@
 package xyz.dcme.agg.ui.post;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -13,6 +13,7 @@ import java.util.List;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.model.Post;
+import xyz.dcme.agg.ui.postdetail.PostDetailActivity;
 
 public class PostCommonAdapter extends CommonAdapter<Post> {
     public PostCommonAdapter(Context context, int layoutId, List<Post> datas) {
@@ -29,7 +30,15 @@ public class PostCommonAdapter extends CommonAdapter<Post> {
                 .placeholder(R.drawable.ic_default_avatar)
                 .crossFade()
                 .into(avatar);
+        holder.setOnClickListener(R.id.post_item, new OnRvItemListener());
     }
 
 
+    public class OnRvItemListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            mContext.startActivity(new Intent(mContext, PostDetailActivity.class));
+        }
+    }
 }

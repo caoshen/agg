@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +20,15 @@ import xyz.dcme.agg.ui.postdetail.delegate.PostCommentItemDelegate;
 import xyz.dcme.agg.ui.postdetail.delegate.PostDetailItemDelegate;
 
 public class PostDetailFragment extends Fragment implements PostDetailContract.View {
+    public static final String KEY_ARG_URL = "arg_url";
     private PostDetailContract.Presenter mPresenter;
     private MultiItemTypeAdapter mAdapter;
     private List<PostDetailType> mData = new ArrayList<>();
     private RecyclerView mRecycler;
+    private String mUrl;
 
     @Override
-    public void onRefresh() {
+    public void onRefresh(List<PostDetailType> data) {
 
     }
 
@@ -37,7 +40,10 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Bundle args = getArguments();
+        if (args != null) {
+            mUrl = args.getString(KEY_ARG_URL);
+        }
     }
 
     @Nullable
@@ -66,6 +72,16 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+        if (!TextUtils.isEmpty(mUrl)) {
+            mPresenter.loadDetail(mUrl);
+        }
+    }
+
+    public static PostDetailFragment newInstance(String url) {
+        PostDetailFragment fragment = new PostDetailFragment();
+        Bundle args = new Bundle();
+        args.putString(KEY_ARG_URL, url);
+        fragment.setArguments(args);
+        return fragment;
     }
 }

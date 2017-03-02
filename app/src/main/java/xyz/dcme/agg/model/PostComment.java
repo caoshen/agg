@@ -10,6 +10,11 @@ public class PostComment implements Parcelable, PostDetailType {
     public String userName;
     public String content;
 
+    public PostComment(String userName, String content) {
+        this.userName = userName;
+        this.content = content;
+    }
+
     protected PostComment(Parcel in) {
         userName = in.readString();
         content = in.readString();
