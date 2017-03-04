@@ -12,7 +12,12 @@ import java.util.List;
 import xyz.dcme.agg.model.PostComment;
 
 public class PostDetailParser {
+    private static final String PREFIX = "http://www.guanggoo.com/";
+
     public static List<PostDetailType> parseUrl(String url) {
+        if (!url.startsWith(PREFIX)) {
+            url = PREFIX + url;
+        }
         Document doc = null;
         List<PostDetailType> data = new ArrayList<PostDetailType>();
 
@@ -21,7 +26,8 @@ public class PostDetailParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Elements items = doc.select("div.topic-item");
+        Elements items = doc.select("div.ui-content");
+        String content = items.first().text();
         for (Element element : items) {
             Element avatar = element.select("img.avatar").first();
             String avatarUrl = avatar.attr("src");

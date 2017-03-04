@@ -6,15 +6,18 @@ import android.os.Parcelable;
 public class Post implements Parcelable {
     public String title;
     public String avatarUrl;
+    public String link;
 
-    public Post(String title, String avatarUrl) {
+    public Post(String title, String avatarUrl, String link) {
         this.title = title;
         this.avatarUrl = avatarUrl;
+        this.link = link;
     }
 
     protected Post(Parcel in) {
         title = in.readString();
         avatarUrl = in.readString();
+        link = in.readString();
     }
 
     public static final Creator<Post> CREATOR = new Creator<Post>() {
@@ -38,5 +41,6 @@ public class Post implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(title);
         parcel.writeString(avatarUrl);
+        parcel.writeString(link);
     }
 }

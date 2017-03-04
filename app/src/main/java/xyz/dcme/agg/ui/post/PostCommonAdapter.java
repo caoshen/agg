@@ -1,7 +1,6 @@
 package xyz.dcme.agg.ui.post;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -30,15 +29,21 @@ public class PostCommonAdapter extends CommonAdapter<Post> {
                 .placeholder(R.drawable.ic_default_avatar)
                 .crossFade()
                 .into(avatar);
-        holder.setOnClickListener(R.id.post_item, new OnRvItemListener());
+        holder.setOnClickListener(R.id.post_item, new OnRvItemListener(post));
     }
 
 
     public class OnRvItemListener implements View.OnClickListener {
 
+        private final Post mPost;
+
+        public OnRvItemListener(Post post) {
+            mPost = post;
+        }
+
         @Override
         public void onClick(View view) {
-            mContext.startActivity(new Intent(mContext, PostDetailActivity.class));
+            PostDetailActivity.startActivity(mContext, mPost.link);
         }
     }
 }

@@ -48,7 +48,8 @@ public class PostParser {
             String avatarUrl = avatar.attr("src");
             Element text = element.select("h3.title").first();
             String title = text.text();
-            data.add(new Post(title, avatarUrl));
+            String link = text.select("a").first().attr("href");
+            data.add(new Post(title, avatarUrl, link));
         }
         return data;
     }
