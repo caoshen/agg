@@ -3,21 +3,22 @@ package xyz.dcme.agg.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import xyz.dcme.agg.ui.postdetail.PostDetailType;
 
-
-public class PostComment implements Parcelable, PostDetailType {
+public class PostComment implements Parcelable {
     public String userName;
+    public String avatar;
     public String content;
 
-    public PostComment(String userName, String content) {
+    public PostComment(String userName, String content, String avatar) {
         this.userName = userName;
         this.content = content;
+        this.avatar = avatar;
     }
 
     protected PostComment(Parcel in) {
         userName = in.readString();
         content = in.readString();
+        avatar = in.readString();
     }
 
     public static final Creator<PostComment> CREATOR = new Creator<PostComment>() {
@@ -41,10 +42,7 @@ public class PostComment implements Parcelable, PostDetailType {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(userName);
         parcel.writeString(content);
+        parcel.writeString(avatar);
     }
 
-    @Override
-    public int getPostType() {
-        return PostDetailType.COMMENT_TYPE;
-    }
 }

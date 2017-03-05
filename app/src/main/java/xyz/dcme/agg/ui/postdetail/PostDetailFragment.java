@@ -10,27 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.postdetail.delegate.PostCommentItemDelegate;
-import xyz.dcme.agg.ui.postdetail.delegate.PostDetailItemDelegate;
+import xyz.dcme.agg.model.PostComment;
 
 public class PostDetailFragment extends Fragment implements PostDetailContract.View {
     public static final String KEY_ARG_URL = "arg_url";
     private PostDetailContract.Presenter mPresenter;
-    private MultiItemTypeAdapter mAdapter;
-    private List<PostDetailType> mData = new ArrayList<>();
+    private PostDetailAdapter mAdapter;
+    private List<PostComment> mData = new ArrayList<>();
     private RecyclerView mRecycler;
     private String mUrl;
-
-    @Override
-    public void onRefresh(List<PostDetailType> data) {
-
-    }
 
     @Override
     public void setPresenter(PostDetailContract.Presenter presenter) {
@@ -63,9 +55,7 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
         mRecycler = (RecyclerView) view.findViewById(R.id.post_detail);
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(lm);
-        mAdapter = new MultiItemTypeAdapter<>(getActivity(), mData);
-        mAdapter.addItemViewDelegate(new PostDetailItemDelegate());
-        mAdapter.addItemViewDelegate(new PostCommentItemDelegate());
+        mAdapter = new PostDetailAdapter(getActivity(), R.layout.item_post_comment, mData);
         mRecycler.setAdapter(mAdapter);
     }
 
@@ -83,5 +73,17 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
         args.putString(KEY_ARG_URL, url);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onRefresh(List<PostComment> data) {
+        mAdapter.getDatas().clear();
+        mAdapter.getDatas().addAll(data);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoadMore(List<PostComment> data) {
+
     }
 }

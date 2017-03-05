@@ -1,7 +1,5 @@
 package xyz.dcme.agg.parser;
 
-import android.util.Log;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,7 +26,6 @@ public class PostParser {
         for (Element element : newsHeadlines) {
             String text = element.text();
             data.add(text);
-            Log.d(TAG, text);
         }
         return data;
     }

@@ -2,14 +2,12 @@ package xyz.dcme.agg.util;
 
 import android.util.Log;
 
-import xyz.dcme.agg.BuildConfig;
-
 public class LogUtils {
     private static final String LOG_PREFIX = "agg_";
     private static final int LOG_PREFIX_LENGTH   = LOG_PREFIX.length();
     private static final int MAX_LOG_TAG_LENGTH   = 23;
 
-    public static boolean LOGGING_ENABLED = !BuildConfig.BUILD_TYPE.equalsIgnoreCase("release");
+    public static boolean LOGGING_ENABLED = true;//!BuildConfig.BUILD_TYPE.equalsIgnoreCase("release");
 
     private LogUtils() {
 

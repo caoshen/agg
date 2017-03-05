@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:id="@+id/post_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="72dp"
     android:padding="@dimen/default_padding">
+
     <ImageView
         android:id="@+id/post_avatar"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/ic_default_avatar"/>
 
     <TextView
         android:id="@+id/post_content"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_toRightOf="@id/post_avatar"
-        android:layout_marginLeft="@dimen/default_inner_margin"/>
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginStart="@dimen/default_inner_margin"
+        android:layout_toEndOf="@id/post_avatar"
+        android:layout_alignBaseline="@id/post_avatar"
+        android:maxLines="2"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+
 </RelativeLayout>

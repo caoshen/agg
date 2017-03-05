@@ -21,7 +21,6 @@ public class PostFragment extends Fragment implements PostContract.View {
 
     private PostContract.Presenter mPresenter;
     private RecyclerView mPostRecycler;
-//    private PostAdapter mAdapter;
     private PostCommonAdapter mPostCommonAdapter;
     private LoadMoreWrapper mLoadMoreWrapper;
     private ArrayList<Post> mData = new ArrayList<>();

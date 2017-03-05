@@ -10,30 +10,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.model.PostComment;
+import xyz.dcme.agg.util.LogUtils;
 
 public class PostDetailParser {
-    private static final String PREFIX = "http://www.guanggoo.com/";
+    private static final String TAG = LogUtils.makeLogTag("PostDetailParser");
+    private static final String PREFIX = "http://www.guanggoo.com";
 
-    public static List<PostDetailType> parseUrl(String url) {
+    public static List<PostComment> parseComment(String url) {
         if (!url.startsWith(PREFIX)) {
             url = PREFIX + url;
+            LogUtils.LOGD(TAG, url);
         }
         Document doc = null;
-        List<PostDetailType> data = new ArrayList<PostDetailType>();
+        List<PostComment> data = new ArrayList<PostComment>();
 
         try {
             doc = Jsoup.connect(url).get();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Elements items = doc.select("div.ui-content");
-        String content = items.first().text();
-        for (Element element : items) {
-            Element avatar = element.select("img.avatar").first();
-            String avatarUrl = avatar.attr("src");
-            Element text = element.select("h3.title").first();
-            String title = text.text();
-            data.add(new PostComment(title, avatarUrl));
+//        Elements items = doc.select("div.ui-content");
+        Elements replyItems = doc.select("div.reply-item");
+        for (Element replyItem : replyItems) {
+            String replyUserName = replyItem.select("a.reply-username").text();
+            String replyContent = replyItem.select("span.content").text();
+            String replyAvatar = replyItem.select("img.src").text();
+            data.add(new PostComment(replyUserName, replyContent, replyAvatar));
+            LogUtils.LOGD(TAG, "name: " + replyUserName + " content: " + replyContent + " avatar: " + replyAvatar);
         }
         return data;
     }

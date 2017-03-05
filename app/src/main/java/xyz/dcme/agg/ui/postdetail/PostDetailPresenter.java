@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
+import xyz.dcme.agg.model.PostComment;
+
 public class PostDetailPresenter implements PostDetailContract.Presenter {
     private final PostDetailContract.View mView;
 
@@ -15,15 +17,15 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
     @Override
     public void loadDetail(String url) {
         final String reqUrl = url;
-        new AsyncTask<Void, Void, List<PostDetailType>>() {
+        new AsyncTask<Void, Void, List<PostComment>>() {
 
             @Override
-            protected List<PostDetailType> doInBackground(Void... voids) {
-                return PostDetailParser.parseUrl(reqUrl);
+            protected List<PostComment> doInBackground(Void... voids) {
+                return PostDetailParser.parseComment(reqUrl);
             }
 
             @Override
-            protected void onPostExecute(List<PostDetailType> data) {
+            protected void onPostExecute(List<PostComment> data) {
                 super.onPostExecute(data);
                 mView.onRefresh(data);
             }
