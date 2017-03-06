@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="88dp"
+    android:layout_height="wrap_content"
     android:padding="@dimen/default_padding">
 
     <ImageView
@@ -18,7 +18,7 @@
         android:layout_marginStart="@dimen/default_inner_margin"
         android:layout_toEndOf="@id/comment_avatar"
         android:maxLines="1"
-        android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="16sp"/>
 
     <TextView
@@ -26,8 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/comment_name"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="@dimen/default_inner_margin"
         android:layout_toEndOf="@id/comment_avatar"
-        android:maxLines="2"
+        android:lineSpacingMultiplier="1.1"
         android:textSize="14sp"/>
 </RelativeLayout>

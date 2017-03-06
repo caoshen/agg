@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="88dp"
+    android:layout_height="match_parent"
     android:padding="@dimen/default_padding">
 
     <ImageView
@@ -14,19 +14,29 @@
     <TextView
         android:id="@+id/post_detail_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_inner_margin"
         android:layout_toEndOf="@id/post_detail_avatar"
-        android:text="@string/post_title"/>
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
 
     <TextView
-        android:id="@+id/post_detail_content"
-        style="@style/TextAppearance.AppCompat.Medium"
+        android:id="@+id/post_detail_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/post_detail_title"
         android:layout_marginStart="@dimen/default_inner_margin"
-        android:layout_marginTop="@dimen/default_inner_margin"
+        android:layout_marginTop="8dp"
         android:layout_toEndOf="@id/post_detail_avatar"
-        android:text="@string/post_content"/>
+        android:textSize="14sp"/>
+
+    <WebView
+        android:id="@+id/post_detail_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/post_detail_user"
+        android:layout_marginStart="@dimen/default_inner_margin"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/post_detail_avatar"
+        android:textSize="14sp"/>
 </RelativeLayout>

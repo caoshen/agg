@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.model.PostComment;
+import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 
 public class PostDetailFragment extends Fragment implements PostDetailContract.View {
     public static final String KEY_ARG_URL = "arg_url";
     private PostDetailContract.Presenter mPresenter;
     private PostDetailAdapter mAdapter;
-    private List<PostComment> mData = new ArrayList<>();
+    private List<PostDetailItem> mData = new ArrayList<>();
     private RecyclerView mRecycler;
     private String mUrl;
 
@@ -55,7 +55,9 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
         mRecycler = (RecyclerView) view.findViewById(R.id.post_detail);
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(lm);
-        mAdapter = new PostDetailAdapter(getActivity(), R.layout.item_post_comment, mData);
+        mAdapter = new PostDetailAdapter(getActivity(), mData);
+        mAdapter.addItemViewDelegate(new PostContentDelegate(getActivity()));
+        mAdapter.addItemViewDelegate(new PostCommentDelegate(getActivity()));
         mRecycler.setAdapter(mAdapter);
     }
 
@@ -76,14 +78,14 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
     }
 
     @Override
-    public void onRefresh(List<PostComment> data) {
+    public void onRefresh(List<PostDetailItem> data) {
         mAdapter.getDatas().clear();
         mAdapter.getDatas().addAll(data);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onLoadMore(List<PostComment> data) {
+    public void onLoadMore(List<PostDetailItem> data) {
 
     }
 }
