@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/post_detail_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="@dimen/default_padding">
 
-    <ImageView
-        android:id="@+id/post_detail_avatar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_default_avatar"/>
-
-    <TextView
-        android:id="@+id/post_detail_title"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_inner_margin"
-        android:layout_toEndOf="@id/post_detail_avatar"
-        android:textColor="@color/black"
-        android:textSize="16sp"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/post_detail_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/post_detail_title"
-        android:layout_marginStart="@dimen/default_inner_margin"
-        android:layout_marginTop="8dp"
-        android:layout_toEndOf="@id/post_detail_avatar"
-        android:textSize="14sp"/>
+        <ImageView
+            android:id="@+id/post_detail_avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_default_avatar"/>
+
+        <TextView
+            android:id="@+id/post_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_inner_margin"
+            android:layout_toEndOf="@id/post_detail_avatar"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/post_detail_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/post_detail_title"
+            android:layout_marginStart="@dimen/default_inner_margin"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/post_detail_avatar"
+            android:textSize="14sp"/>
+    </RelativeLayout>
 
     <WebView
         android:id="@+id/post_detail_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/post_detail_user"
-        android:layout_marginStart="@dimen/default_inner_margin"
-        android:layout_marginTop="8dp"
-        android:layout_toEndOf="@id/post_detail_avatar"
-        android:textSize="14sp"/>
-</RelativeLayout>
+        android:layout_marginTop="8dp"/>
+</LinearLayout>

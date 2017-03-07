@@ -1,5 +1,8 @@
 package xyz.dcme.agg.ui.postdetail;
 
+import android.util.Log;
+
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -7,7 +10,9 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
@@ -28,9 +33,23 @@ public class PostDetailParser {
 
         try {
             doc = Jsoup.connect(url).get();
+            Elements contents = doc.select("div.ui-content");
+            if (contents == null || contents.isEmpty()) {
+                Map<String, String> userCookies = mockLogin();
+                doc = Jsoup.connect(url).cookies(userCookies).get();
+                LogUtils.LOGD(TAG, doc.body().html());
+                Log.d(TAG, doc.body().html());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Elements images = doc.getElementsByTag("img");
+        for (Element image : images) {
+            image.attr("width", "100%");
+            image.attr("height", "auto");
+        }
+
         String title = doc.select("h3.title").first().text();
         String avatar = doc.select("div.ui-header img").attr("src");
         String name = doc.select("span.username a").text();
@@ -52,5 +71,32 @@ public class PostDetailParser {
             LogUtils.LOGD(TAG, "name: " + replyUserName + " content: " + replyContent + " avatar: " + replyAvatar);
         }
         return data;
+    }
+
+    private static Map<String, String> mockLogin() {
+        try {
+            final String url = PREFIX + "/login";
+            Map<String, String> loginCookies = Jsoup.connect(url)
+                    .method(Connection.Method.GET)
+                    .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
+                    .execute().cookies();
+
+            String email = "1012504657@qq.com";
+            String password = "x1234567X";
+
+            Connection.Response res = Jsoup.connect(url)
+                    .data("email", email, "password", password, "_xsrf", loginCookies.get("_xsrf"))
+                    .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
+                    .cookies(loginCookies)
+                    .method(Connection.Method.POST).execute();
+
+            Log.d(TAG, " login response:\n" + "status code: " + res.statusCode()
+                    + "\nstatus message: " + res.statusMessage()
+                    + "\nbody: " + res.body());
+            return res.cookies();
+        } catch (IOException e) {
+            Log.d(TAG, e.getMessage());
+        }
+        return new HashMap<String, String>();
     }
 }
