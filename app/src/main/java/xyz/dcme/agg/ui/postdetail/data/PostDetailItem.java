@@ -18,17 +18,28 @@ public class PostDetailItem implements Parcelable {
     protected String userName;
     protected String avatar;
     protected String content;
+    protected String createTime;
 
-    public PostDetailItem(String userName, String avatar, String content) {
+    public PostDetailItem(String userName, String avatar, String content, String createTime) {
         this.userName = userName;
         this.avatar = avatar;
         this.content = content;
+        this.createTime = createTime;
     }
 
     protected PostDetailItem(Parcel in) {
         userName = in.readString();
         avatar = in.readString();
         content = in.readString();
+        createTime = in.readString();
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public String getUserName() {
@@ -65,5 +76,6 @@ public class PostDetailItem implements Parcelable {
         parcel.writeString(userName);
         parcel.writeString(avatar);
         parcel.writeString(content);
+        parcel.writeString(createTime);
     }
 }

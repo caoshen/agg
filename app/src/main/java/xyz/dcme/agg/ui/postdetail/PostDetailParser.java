@@ -53,13 +53,16 @@ public class PostDetailParser {
         String title = doc.select("h3.title").first().text();
         String avatar = doc.select("div.ui-header img").attr("src");
         String name = doc.select("span.username a").text();
+        String createTime = doc.select("span.created-time").text();
+        String node = doc.select("span.node").text();
+        String clickCount = doc.select("span.hits.fr.mr10").text();
         String content = "";
         Elements items = doc.select("div.ui-content");
         for (Element item : items) {
             content = item.html();
             break;
         }
-        PostContent postContent = new PostContent(name, avatar, content, title);
+        PostContent postContent = new PostContent(name, avatar, content, createTime, title, clickCount, node);
         data.add(postContent);
 
         Elements replyItems = doc.select("div.reply-item");
@@ -67,7 +70,8 @@ public class PostDetailParser {
             String replyUserName = replyItem.select("a.reply-username").text();
             String replyContent = replyItem.select("span.content").text();
             String replyAvatar = replyItem.select("img").attr("src");
-            data.add(new PostComment(replyUserName, replyAvatar, replyContent));
+            String replyTime = replyItem.select("span.time").text();
+            data.add(new PostComment(replyUserName, replyAvatar, replyContent, replyTime));
             LogUtils.LOGD(TAG, "name: " + replyUserName + " content: " + replyContent + " avatar: " + replyAvatar);
         }
         return data;

@@ -5,13 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBar;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.BaseActivity;
 import xyz.dcme.agg.util.ActivityUtils;
 
 
-public class PostDetailActivity extends AppCompatActivity {
+public class PostDetailActivity extends BaseActivity {
 
     private static final String KEY_POST_DETAIL_URL = "key_post_detail_url";
     private String mUrl;
@@ -20,8 +21,16 @@ public class PostDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
+        initViews();
         initData();
         initFragment();
+    }
+
+    private void initViews() {
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setDisplayShowTitleEnabled(false);
+        }
     }
 
     private void initData() {

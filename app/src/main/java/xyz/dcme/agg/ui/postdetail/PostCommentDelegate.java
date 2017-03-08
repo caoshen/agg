@@ -11,6 +11,7 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
+import xyz.dcme.agg.util.transformation.CircleTransformation;
 
 public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
 
@@ -34,13 +35,14 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
     public void convert(ViewHolder holder, PostDetailItem item, int position) {
         holder.setText(R.id.comment_name, item.getUserName());
         holder.setText(R.id.comment_content, item.getContent());
+        holder.setText(R.id.comment_number, mContext.getString(R.string.x_floor, position + ""));
+        holder.setText(R.id.comment_create_time, item.getCreateTime());
         ImageView avatar = holder.getView(R.id.comment_avatar);
 
         Glide.with(mContext)
                 .load(item.getAvatar())
-                .centerCrop()
                 .placeholder(R.drawable.ic_default_avatar)
-                .crossFade()
+                .transform(new CircleTransformation(mContext))
                 .into(avatar);
     }
 }

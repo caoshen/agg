@@ -2,9 +2,7 @@ package xyz.dcme.agg.ui.postdetail;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +14,8 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
+import xyz.dcme.agg.util.HtmlUtils;
+import xyz.dcme.agg.util.transformation.CircleTransformation;
 
 
 public class PostContentDelegate implements ItemViewDelegate<PostDetailItem> {
@@ -47,42 +47,28 @@ public class PostContentDelegate implements ItemViewDelegate<PostDetailItem> {
         container.setLayoutParams(params);
 
         holder.setText(R.id.post_detail_user, postDetailItem.getUserName());
+        holder.setText(R.id.post_detail_create_time, postDetailItem.getCreateTime());
 
         WebView webView = holder.getView(R.id.post_detail_content);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         webView.setLayoutParams(lp);
-        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        WebSettings settings = webView.getSettings();
-
-        // User settings
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadsImagesAutomatically(true);
-        // Auto fit screen
-        settings.setLoadWithOverviewMode(true);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        settings.setJavaScriptCanOpenWindowsAutomatically(true);
-        settings.setDomStorageEnabled(true);
-        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        settings.setAllowFileAccess(true);
-        settings.setDatabaseEnabled(true);
-
-        webView.setHorizontalScrollBarEnabled(false);
-        webView.addJavascriptInterface(this, "App");
 
         String detail = postDetailItem.getContent();
-        webView.loadDataWithBaseURL(null, detail, "text/html", "UTF-8", null);
+        webView.loadDataWithBaseURL(null, HtmlUtils.makeHtml(detail), "text/html", "UTF-8", null);
+        webView.setDrawingCacheEnabled(true);
 
         if (postDetailItem instanceof PostContent) {
             holder.setText(R.id.post_detail_title, ((PostContent) postDetailItem).getTitle());
+            holder.setText(R.id.post_detail_click_count, ((PostContent) postDetailItem).getClickCount());
+            holder.setText(R.id.post_detail_node, ((PostContent) postDetailItem).getNode());
         }
         ImageView avatar = holder.getView(R.id.post_detail_avatar);
 
         Glide.with(mContext)
                 .load(postDetailItem.getAvatar())
-                .centerCrop()
                 .placeholder(R.drawable.ic_default_avatar)
-                .crossFade()
+                .transform(new CircleTransformation(mContext))
                 .into(avatar);
     }
 }

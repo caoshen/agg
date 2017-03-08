@@ -13,6 +13,7 @@ import java.util.List;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.ui.postdetail.PostDetailActivity;
+import xyz.dcme.agg.util.transformation.CircleTransformation;
 
 public class PostCommonAdapter extends CommonAdapter<Post> {
     public PostCommonAdapter(Context context, int layoutId, List<Post> datas) {
@@ -22,12 +23,15 @@ public class PostCommonAdapter extends CommonAdapter<Post> {
     @Override
     protected void convert(ViewHolder holder, Post post, int position) {
         holder.setText(R.id.post_content, post.title);
+        holder.setText(R.id.post_user_name, post.userName);
+        holder.setText(R.id.post_last_visit_time, post.lastVisitTime);
+        String commentCount = mContext.getString(R.string.post_comment_count, post.commentCount);
+        holder.setText(R.id.post_comment_count, commentCount);
         ImageView avatar = holder.getView(R.id.post_avatar);
         Glide.with(mContext)
                 .load(post.avatarUrl)
-                .centerCrop()
                 .placeholder(R.drawable.ic_default_avatar)
-                .crossFade()
+                .transform(new CircleTransformation(mContext))
                 .into(avatar);
         holder.setOnClickListener(R.id.post_item, new OnRvItemListener(post));
     }

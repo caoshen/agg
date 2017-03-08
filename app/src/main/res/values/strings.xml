@@ -8,4 +8,17 @@
     <string name="post_content">内容</string>
     <string name="name">姓名</string>
     <string name="comment_content">评论内容</string>
+    <string name="welcome">欢迎</string>
+    <string name="login">登陆</string>
+    <string name="form_password">请输入密码</string>
+    <string name="form_username">请输入账号</string>
+    <string name="post_read_count">阅读%1$s</string>
+    <string name="post_comment_count">评论%1$s</string>
+    <string name="post_like_count">喜欢%1$s</string>
+    <string name="right_now">刚刚</string>
+    <string name="welcome_to_gg_community">欢迎来到光谷社区 Guanggoo.com—源自光谷的交流分享社区</string>
+    <string name="close_and_go_back">关闭并且回退</string>
+    <string name="post_click_count">%1$s次点击</string>
+    <string name="city_construction">城市建设</string>
+    <string name="x_floor">%1$s楼</string>
 </resources>

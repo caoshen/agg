@@ -3,11 +3,13 @@ package xyz.dcme.agg.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.login.LoginFragment;
 import xyz.dcme.agg.ui.post.PostFragment;
 import xyz.dcme.agg.ui.post.PostPresenter;
 import xyz.dcme.agg.util.ActivityUtils;
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     private PostPresenter mPresenter;
     private BottomNavigationView mBottomNav;
+    private PostFragment mPostFragment;
+    private LoginFragment mLoginFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +36,30 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_home_page: {
+                        initFragment();
+                        if (mPostFragment != null && mPostFragment.isHidden()) {
+                            FragmentManager fm = getSupportFragmentManager();
+                            fm.beginTransaction().show(mPostFragment).commit();
+                        }
+                        if (mLoginFragment != null && !mLoginFragment.isHidden()) {
+                            FragmentManager fm = getSupportFragmentManager();
+                            fm.beginTransaction().hide(mLoginFragment).commit();
+                        }
                         break;
                     }
                     case R.id.action_search: {
                         break;
                     }
                     case R.id.action_me: {
+                        initLoginFragment();
+                        if (mPostFragment != null && !mPostFragment.isHidden()) {
+                            FragmentManager fm = getSupportFragmentManager();
+                            fm.beginTransaction().hide(mPostFragment).commit();
+                        }
+                        if (mLoginFragment != null && mLoginFragment.isHidden()) {
+                            FragmentManager fm = getSupportFragmentManager();
+                            fm.beginTransaction().show(mLoginFragment).commit();
+                        }
                         break;
                     }
                     default: {
@@ -51,11 +73,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void initFragment() {
         FragmentManager fm = getSupportFragmentManager();
-        PostFragment postFragment = (PostFragment) fm.findFragmentById(R.id.main_content);
-        if (postFragment == null) {
-            postFragment = PostFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(fm, postFragment, R.id.main_content);
+        Fragment fragment = fm.findFragmentById(R.id.main_content);
+        if (fragment instanceof PostFragment) {
+            mPostFragment = (PostFragment) fragment;
         }
-        mPresenter = new PostPresenter(postFragment);
+        if (mPostFragment == null) {
+            mPostFragment = PostFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(fm, mPostFragment, R.id.main_content);
+        }
+        mPresenter = new PostPresenter(mPostFragment);
+    }
+
+    private void initLoginFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.main_content);
+        if (fragment instanceof LoginFragment) {
+            mLoginFragment = (LoginFragment) fragment;
+        }
+        if (mLoginFragment == null) {
+            mLoginFragment = new LoginFragment();
+            ActivityUtils.addFragmentToActivity(fm, mLoginFragment, R.id.main_content);
+        }
     }
 }

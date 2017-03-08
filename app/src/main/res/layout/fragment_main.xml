@@ -5,20 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="8dp"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/post_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#ffff0000"
-        android:dividerHeight="10dp">
+        android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="8dp"/>
 </LinearLayout>

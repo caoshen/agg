@@ -46,7 +46,11 @@ public class PostParser {
             Element text = element.select("h3.title").first();
             String title = text.text();
             String link = text.select("a").first().attr("href");
-            data.add(new Post(title, avatarUrl, link));
+            String userName = element.select("span.username").text();
+            String lastVisitTime = element.select("span.last-touched").text();
+            String node = element.select("span.node").text();
+            String commentCount = element.select("div.count").text();
+            data.add(new Post(title, avatarUrl, link, userName, lastVisitTime, node, commentCount));
         }
         return data;
     }
