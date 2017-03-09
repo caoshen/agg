@@ -5,4 +5,5 @@
     <dimen name="default_padding">16dp</dimen>
     <dimen name="default_inner_margin">16dp</dimen>
     <dimen name="post_item_inner_margin">8dp</dimen>
+    <dimen name="about_me_margin">24dp</dimen>
 </resources>

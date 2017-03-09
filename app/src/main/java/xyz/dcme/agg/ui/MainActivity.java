@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.login.LoginFragment;
+import xyz.dcme.agg.ui.me.AboutMeFragment;
 import xyz.dcme.agg.ui.post.PostFragment;
 import xyz.dcme.agg.ui.post.PostPresenter;
 import xyz.dcme.agg.util.ActivityUtils;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNav;
     private PostFragment mPostFragment;
     private LoginFragment mLoginFragment;
+    private AboutMeFragment mAboutMeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
                             FragmentManager fm = getSupportFragmentManager();
                             fm.beginTransaction().show(mPostFragment).commit();
                         }
-                        if (mLoginFragment != null && !mLoginFragment.isHidden()) {
+                        if (mAboutMeFragment != null && !mAboutMeFragment.isHidden()) {
                             FragmentManager fm = getSupportFragmentManager();
-                            fm.beginTransaction().hide(mLoginFragment).commit();
+                            fm.beginTransaction().hide(mAboutMeFragment).commit();
                         }
                         break;
                     }
@@ -56,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
                             FragmentManager fm = getSupportFragmentManager();
                             fm.beginTransaction().hide(mPostFragment).commit();
                         }
-                        if (mLoginFragment != null && mLoginFragment.isHidden()) {
+                        if (mAboutMeFragment != null && mAboutMeFragment.isHidden()) {
                             FragmentManager fm = getSupportFragmentManager();
-                            fm.beginTransaction().show(mLoginFragment).commit();
+                            fm.beginTransaction().show(mAboutMeFragment).commit();
                         }
                         break;
                     }
@@ -87,12 +89,12 @@ public class MainActivity extends AppCompatActivity {
     private void initLoginFragment() {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.main_content);
-        if (fragment instanceof LoginFragment) {
-            mLoginFragment = (LoginFragment) fragment;
+        if (fragment instanceof AboutMeFragment) {
+            mAboutMeFragment = (AboutMeFragment) fragment;
         }
-        if (mLoginFragment == null) {
-            mLoginFragment = new LoginFragment();
-            ActivityUtils.addFragmentToActivity(fm, mLoginFragment, R.id.main_content);
+        if (mAboutMeFragment == null) {
+            mAboutMeFragment = new AboutMeFragment();
+            ActivityUtils.addFragmentToActivity(fm, mAboutMeFragment, R.id.main_content);
         }
     }
 }

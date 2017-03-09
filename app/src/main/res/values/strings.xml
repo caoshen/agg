@@ -21,4 +21,24 @@
     <string name="post_click_count">%1$s次点击</string>
     <string name="city_construction">城市建设</string>
     <string name="x_floor">%1$s楼</string>
+    <string name="id">ID: %1$s</string>
+    <string name="email">Email: %1$s</string>
+    <string name="topic">主题</string>
+    <string name="reply">回复</string>
+    <string name="favorite">收藏</string>
+    <string name="credit">信用</string>
+    <string name="settings">设置</string>
+    <string name="title_activity_login">登陆</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">邮箱</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登陆</string>
+    <string name="action_sign_in_short">登陆</string>
+    <string name="error_invalid_email">邮箱地址无效</string>
+    <string name="error_invalid_password">密码不少于４位数</string>
+    <string name="error_incorrect_password">账号或密码不正确</string>
+    <string name="error_field_required">必填</string>
+    <string name="permission_rationale">邮箱自动填写需要开启"通讯录"权限</string>
+    <string name="login_please">请登录账号</string>
 </resources>
