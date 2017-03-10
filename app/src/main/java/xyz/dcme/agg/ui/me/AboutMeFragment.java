@@ -1,5 +1,6 @@
 package xyz.dcme.agg.ui.me;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,13 +11,15 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.login.AccountInfo;
 import xyz.dcme.agg.ui.login.LoginActivity;
 
 
 public class AboutMeFragment extends Fragment implements View.OnClickListener {
 
-    private static final int REQUEST_ABOUT_ME = 10;
+    public static final int REQUEST_ABOUT_ME = 10;
     private LinearLayout mAboutMe;
+    private AccountInfo mAccountInfo;
 
     @Nullable
     @Override
@@ -45,5 +48,20 @@ public class AboutMeFragment extends Fragment implements View.OnClickListener {
                 break;
             }
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_ABOUT_ME) {
+            if (data != null) {
+                mAccountInfo = data.getParcelableExtra(LoginActivity.KEY_EXTRA_LOGIN_ACCOUNT);
+                loadAccountInfo(mAccountInfo);
+            }
+        }
+    }
+
+    private void loadAccountInfo(AccountInfo accountInfo) {
+
     }
 }

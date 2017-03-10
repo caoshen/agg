@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -37,10 +38,10 @@ import java.util.Map;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseActivity;
+import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
-import static android.provider.ContactsContract.CommonDataKinds.StructuredName.PREFIX;
 
 /**
  * A login screen that offers login via email/password.
@@ -52,14 +53,8 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     private static final String TAG = LogUtils.makeLogTag("LoginActivity");
+    public static final String KEY_EXTRA_LOGIN_ACCOUNT = "key_login_account";
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -200,12 +195,10 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 
@@ -303,7 +296,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Void, Void, AccountInfo> {
 
         private final String mEmail;
         private final String mPassword;
@@ -314,16 +307,21 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected AccountInfo doInBackground(Void... params) {
             return mockLogin(mEmail, mPassword);
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final AccountInfo accountInfo) {
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
+            String id = accountInfo.getId();
+
+            if (!TextUtils.isEmpty(id)) {
+                Intent data = new Intent();
+                data.putExtra(KEY_EXTRA_LOGIN_ACCOUNT, accountInfo);
+                setResult(RESULT_OK, data);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -338,9 +336,10 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         }
     }
 
-    private static boolean mockLogin(String email, String password) {
+    private static AccountInfo mockLogin(String email, String password) {
+        AccountInfo accountInfo = new AccountInfo();
         try {
-            final String url = PREFIX + "/login";
+            final String url = Constants.WEBSITE_URL + "/login";
             Map<String, String> loginCookies = Jsoup.connect(url)
                     .method(Connection.Method.GET)
                     .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
@@ -352,14 +351,24 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                     .cookies(loginCookies)
                     .method(Connection.Method.POST).execute();
 
-            Log.d(TAG, " login response:\n" + "status code: " + res.statusCode()
-                    + "\nstatus message: " + res.statusMessage()
-                    + "\nbody: " + res.body());
-            return res.statusCode() == 200;
+            boolean isLogin = !TextUtils.isEmpty(res.cookie("user"));
+
+            Log.d(TAG, "login response:\n" + "status code: " + res.statusCode()
+                    + "\nstatus message: " + res.statusMessage());
+            for (String key : res.cookies().keySet()) {
+                Log.d(TAG, key + " -> " + res.cookie(key));
+            }
+
+            if (!isLogin) {
+                return accountInfo;
+            } else {
+                return AccountParser.parseAccount(Constants.WEBSITE_URL, res.cookies());
+            }
         } catch (IOException e) {
             Log.d(TAG, e.getMessage());
         }
-        return false;
+        return accountInfo;
     }
+
 }
 
