@@ -5,14 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.login.AccountInfo;
 import xyz.dcme.agg.ui.login.LoginActivity;
+import xyz.dcme.agg.util.transformation.CircleTransformation;
 
 
 public class AboutMeFragment extends Fragment implements View.OnClickListener {
@@ -20,6 +26,9 @@ public class AboutMeFragment extends Fragment implements View.OnClickListener {
     public static final int REQUEST_ABOUT_ME = 10;
     private LinearLayout mAboutMe;
     private AccountInfo mAccountInfo;
+    private TextView mIdText;
+    private ImageView mAvatar;
+    private AccountHelper mHelper;
 
     @Nullable
     @Override
@@ -32,11 +41,21 @@ public class AboutMeFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+        checkLogin();
+    }
+
+    private void checkLogin() {
+        mHelper = new AccountHelper(getActivity());
+        if (mHelper.isLogin()) {
+            loadAccountInfo(mHelper.getAccountInfo());
+        }
     }
 
     private void initViews(View view) {
         mAboutMe = (LinearLayout) view.findViewById(R.id.about_me);
         mAboutMe.setOnClickListener(this);
+        mIdText = (TextView) view.findViewById(R.id.id_text);
+        mAvatar = (ImageView) view.findViewById(R.id.about_me_avatar);
     }
 
 
@@ -62,6 +81,19 @@ public class AboutMeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loadAccountInfo(AccountInfo accountInfo) {
-
+        if (accountInfo != null) {
+            String id = accountInfo.getId();
+            if (!TextUtils.isEmpty(id)) {
+                mIdText.setText(id);
+            }
+            String avatarUrl = accountInfo.getAvatarUrl();
+            if (!TextUtils.isEmpty(avatarUrl)) {
+                Glide.with(getActivity())
+                        .load(avatarUrl)
+                        .placeholder(R.drawable.ic_default_avatar)
+                        .transform(new CircleTransformation(getActivity()))
+                        .into(mAvatar);
+            }
+        }
     }
 }

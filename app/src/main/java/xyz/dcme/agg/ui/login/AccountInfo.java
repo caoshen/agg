@@ -29,6 +29,17 @@ public class AccountInfo implements Parcelable {
     private String mRegisterTime;
 
     protected AccountInfo(Parcel in) {
+        mId = in.readString();
+        mNickName = in.readString();
+        mEmail = in.readString();
+        mAvatarUrl = in.readString();
+        mLink = in.readString();
+        mTopicCount = in.readString();
+        mReplyCount = in.readString();
+        mFavouriteCount = in.readString();
+        mCreditCount = in.readString();
+        mRegisterCount = in.readString();
+        mRegisterTime = in.readString();
     }
 
     public AccountInfo() {
@@ -130,5 +141,16 @@ public class AccountInfo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(mId);
+        parcel.writeString(mNickName);
+        parcel.writeString(mEmail);
+        parcel.writeString(mAvatarUrl);
+        parcel.writeString(mLink);
+        parcel.writeString(mTopicCount);
+        parcel.writeString(mReplyCount);
+        parcel.writeString(mFavouriteCount);
+        parcel.writeString(mCreditCount);
+        parcel.writeString(mRegisterCount);
+        parcel.writeString(mRegisterTime);
     }
 }

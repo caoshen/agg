@@ -38,6 +38,7 @@ import java.util.Map;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseActivity;
+import xyz.dcme.agg.ui.me.AccountHelper;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 
@@ -319,6 +320,8 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             String id = accountInfo.getId();
 
             if (!TextUtils.isEmpty(id)) {
+                AccountHelper.saveAccountInfo(LoginActivity.this, accountInfo);
+
                 Intent data = new Intent();
                 data.putExtra(KEY_EXTRA_LOGIN_ACCOUNT, accountInfo);
                 setResult(RESULT_OK, data);
