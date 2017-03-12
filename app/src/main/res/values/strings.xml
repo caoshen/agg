@@ -41,4 +41,6 @@
     <string name="error_field_required">必填</string>
     <string name="permission_rationale">邮箱自动填写需要开启"通讯录"权限</string>
     <string name="login_please">请登录账号</string>
+    <string name="send">发送</string>
+    <string name="reply_to_author">回复</string>
 </resources>

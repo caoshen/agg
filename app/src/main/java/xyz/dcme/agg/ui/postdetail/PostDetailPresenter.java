@@ -33,6 +33,11 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
     }
 
     @Override
+    public void sendReply(String comment) {
+        mView.addComment(comment);
+    }
+
+    @Override
     public void start() {
 
     }
