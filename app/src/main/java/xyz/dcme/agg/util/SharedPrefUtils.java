@@ -22,6 +22,13 @@ public class SharedPrefUtils {
         edit.apply();
     }
 
+    public static void setPrefString(Context context, String pref, String key, String value) {
+        SharedPreferences sp = context.getSharedPreferences(pref, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString(key, value);
+        edit.apply();
+    }
+
     public static String getUserName(Context context) {
         return getPrefString(context, ACCOUNT_USERNAME, EMPTY_STR);
     }

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 
 public class PostDetailFragment extends Fragment implements PostDetailContract.View,
@@ -103,6 +104,15 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
 
     @Override
     public void addComment(String comment) {
+        PostDetailItem item = new PostComment("visitor", "", comment, "1 min ago");
+        int size = mAdapter.getItemCount();
+        mAdapter.getDatas().add(item);
+        mAdapter.notifyItemInserted(size);
+        mRecycler.scrollToPosition(size);
+    }
+
+    @Override
+    public void sendCommentFailed() {
 
     }
 
@@ -110,7 +120,7 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
     public void onClick(View v) {
         if (v.getId() == R.id.send_reply) {
             String comment = mCommentText.getText().toString();
-            mPresenter.sendReply(comment);
+            mPresenter.sendReply(comment, mUrl);
         }
     }
 
@@ -122,7 +132,7 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         String comment = mCommentText.getText().toString();
-        mSendBtn.setEnabled(!TextUtils.isEmpty(comment));
+//        mSendBtn.setEnabled(!TextUtils.isEmpty(comment));
     }
 
     @Override

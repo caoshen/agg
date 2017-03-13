@@ -10,7 +10,7 @@ public interface PostDetailContract {
     interface Presenter extends BasePresenter {
         void loadDetail(String url);
 
-        void sendReply(String comment);
+        void sendReply(String comment, String url);
     }
 
     interface View extends BaseView<Presenter> {
@@ -18,5 +18,7 @@ public interface PostDetailContract {
         void onLoadMore(List<PostDetailItem> data);
 
         void addComment(String comment);
+
+        void sendCommentFailed();
     }
 }

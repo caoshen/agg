@@ -8,7 +8,8 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/post_detail"
@@ -20,23 +21,30 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/default_padding"
-        android:paddingEnd="@dimen/default_padding">
+        android:paddingEnd="@dimen/reply_margin_bottom"
+        android:paddingStart="@dimen/reply_margin_bottom">
 
         <EditText
             android:id="@+id/reply_content"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/reply_to_author"/>
+            android:maxLines="3"
+            android:hint="@string/reply_to_author"
+            android:textSize="12sp"/>
 
         <Button
             android:id="@+id/send_reply"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/reply_margin_bottom"
             android:layout_marginStart="@dimen/default_padding"
-            android:text="@string/send"/>
+            android:background="@color/colorPrimary"
+            android:text="@string/send"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
     </LinearLayout>
 </LinearLayout>
