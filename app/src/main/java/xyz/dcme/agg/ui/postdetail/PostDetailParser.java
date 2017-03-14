@@ -77,7 +77,7 @@ public class PostDetailParser {
         return data;
     }
 
-    private static Map<String, String> mockLogin() {
+    public static Map<String, String> mockLogin() {
         try {
             final String url = PREFIX + "/login";
             Map<String, String> loginCookies = Jsoup.connect(url)
