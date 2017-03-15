@@ -1,5 +1,7 @@
 package xyz.dcme.agg.ui.postdetail;
 
+import android.app.Fragment;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -18,9 +20,14 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
     private static final String TAG = LogUtils.makeLogTag("PostDetailPresenter");
 
     private final PostDetailContract.View mView;
+    private Context mContext;
 
     public PostDetailPresenter(PostDetailContract.View view) {
         mView = view;
+
+        if (mView instanceof Fragment) {
+            mContext = ((Fragment) mView).getActivity();
+        }
         view.setPresenter(this);
     }
 
@@ -52,26 +59,30 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
             protected Boolean doInBackground(Void... voids) {
                 String tid = extractTidFromUrl(url);
                 String content = comment;
-                String xsrf = "360b2cac5e274a11bff1b42ef6de9ca5";
                 Map<String, String> cookies = PostDetailParser.mockLogin();
                 try {
                     Log.d(TAG, tid + " " + content);
-                    Connection.Response resp = Jsoup.connect(Constants.WEBSITE_URL + url)
-                            .method(Connection.Method.GET)
-                            .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
-                            .cookies(cookies)
-                            .execute();
-                    Map<String, String> reqCookies = resp.cookies();
-                    Connection.Response res = Jsoup.connect(Constants.WEBSITE_URL + url)
+                    String realUrl = url;
+
+                    if (realUrl.contains("#")) {
+                        int pos = realUrl.indexOf("#");
+                        realUrl = realUrl.substring(0, pos);
+                    }
+
+                    for (String key : cookies.keySet()) {
+                        LogUtils.LOGD(TAG, key + ": " + cookies.get(key));
+                    }
+
+                    String xsrf = "360b2cac5e274a11bff1b42ef6de9ca5";
+                    cookies.put("_xsrf", xsrf);
+                    Connection.Response res = Jsoup.connect(Constants.WEBSITE_URL + realUrl)
                             .data("tid", tid, "content", content, "_xsrf", xsrf)
                             .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
-                            .cookies(reqCookies)
+                            .cookies(cookies)
                             .method(Connection.Method.POST).execute();
-                    Log.d(TAG, "response:\n" + "status code: " + res.statusCode()
-                            + "\nstatus message: " + res.statusMessage()
-                            + "\nbody: " + res.body());
+
                 } catch (IOException e) {
-                    Log.d(TAG, e.getMessage());
+                    e.printStackTrace();
                 }
                 return false;
             }

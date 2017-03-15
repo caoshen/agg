@@ -85,8 +85,8 @@ public class PostDetailParser {
                     .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
                     .execute().cookies();
 
-            String email = "1012504657@qq.com";
-            String password = "x1234567X";
+            String email = "cshenn@163.com";//"1012504657@qq.com";
+            String password = "x1234567";//"x1234567X";
 
             Connection.Response res = Jsoup.connect(url)
                     .data("email", email, "password", password, "_xsrf", loginCookies.get("_xsrf"))
@@ -94,9 +94,6 @@ public class PostDetailParser {
                     .cookies(loginCookies)
                     .method(Connection.Method.POST).execute();
 
-            Log.d(TAG, " login response:\n" + "status code: " + res.statusCode()
-                    + "\nstatus message: " + res.statusMessage()
-                    + "\nbody: " + res.body());
             return res.cookies();
         } catch (IOException e) {
             Log.d(TAG, e.getMessage());
