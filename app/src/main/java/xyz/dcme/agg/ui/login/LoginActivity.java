@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -39,6 +40,7 @@ import java.util.Map;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseActivity;
 import xyz.dcme.agg.ui.me.AccountHelper;
+import xyz.dcme.agg.ui.postdetail.CookieUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 
@@ -309,7 +311,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
         @Override
         protected AccountInfo doInBackground(Void... params) {
-            return mockLogin(mEmail, mPassword);
+            return mockLogin(LoginActivity.this, mEmail, mPassword);
         }
 
         @Override
@@ -339,18 +341,18 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         }
     }
 
-    private static AccountInfo mockLogin(String email, String password) {
+    private static AccountInfo mockLogin(Context context, String email, String password) {
         AccountInfo accountInfo = new AccountInfo();
         try {
-            final String url = Constants.WEBSITE_URL + "/login";
+            final String url = Constants.WEBSITE_LOGIN_URL;
             Map<String, String> loginCookies = Jsoup.connect(url)
                     .method(Connection.Method.GET)
-                    .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
+                    .userAgent(Constants.USER_AGENT)
                     .execute().cookies();
 
             Connection.Response res = Jsoup.connect(url)
                     .data("email", email, "password", password, "_xsrf", loginCookies.get("_xsrf"))
-                    .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
+                    .userAgent(Constants.USER_AGENT)
                     .cookies(loginCookies)
                     .method(Connection.Method.POST).execute();
 
@@ -362,10 +364,12 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                 Log.d(TAG, key + " -> " + res.cookie(key));
             }
 
+            CookieUtils.putCookies(context, res.cookies());
+
             if (!isLogin) {
                 return accountInfo;
             } else {
-                return AccountParser.parseAccount(Constants.WEBSITE_URL, res.cookies());
+                return AccountParser.parseAccount(Constants.WEBSITE_HOME_URL, res.cookies());
             }
         } catch (IOException e) {
             Log.d(TAG, e.getMessage());

@@ -75,7 +75,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
 
                     String xsrf = "360b2cac5e274a11bff1b42ef6de9ca5";
                     cookies.put("_xsrf", xsrf);
-                    Connection.Response res = Jsoup.connect(Constants.WEBSITE_URL + realUrl)
+                    Connection.Response res = Jsoup.connect(Constants.WEBSITE_HOME_URL + realUrl)
                             .data("tid", tid, "content", content, "_xsrf", xsrf)
                             .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
                             .cookies(cookies)

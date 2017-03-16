@@ -17,8 +17,8 @@ public class AccountParser {
     private static final String TAG = LogUtils.makeLogTag("AccountParser");
 
     public static AccountInfo parseAccount(String url, Map<String, String> userCookies) {
-        if (!url.startsWith(Constants.WEBSITE_URL)) {
-            url = Constants.WEBSITE_URL + url;
+        if (!url.startsWith(Constants.WEBSITE_HOME_URL)) {
+            url = Constants.WEBSITE_HOME_URL + url;
         }
         AccountInfo accountInfo = new AccountInfo();
         Document doc = null;

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class CookieHelper {
+public class CookieUtils {
     private static final String COOKIES = "cookies";
     private static final String EMPTY_STRING = "";
 
