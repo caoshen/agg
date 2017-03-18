@@ -14,6 +14,9 @@ import com.bumptech.glide.load.model.stream.BaseGlideUrlLoader;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestListener;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ImageLoader {
     private static final String TAG = LogUtils.makeLogTag("ImageLoader");
 
@@ -32,6 +35,18 @@ public class ImageLoader {
     public ImageLoader(Context context, int placeHolderResId) {
         this(context);
         mPlaceHolderResId = placeHolderResId;
+    }
+
+    public void loadImage(String url, ImageView imageView) {
+        loadImage(url, imageView, false);
+    }
+
+    public void loadImage(String url, ImageView imageView, boolean crop) {
+        loadImage(url, imageView, null, null, crop);
+    }
+
+    public void loadImage(String url, ImageView imageView, RequestListener<String, Bitmap> requestListener) {
+        loadImage(url, imageView, requestListener, null);
     }
 
     public void loadImage(String url, ImageView imageView, RequestListener<String, Bitmap> requestListener,
@@ -54,15 +69,30 @@ public class ImageLoader {
         Glide.with(context).load(drawableResId).into(imageView);
     }
 
-
     private static class VariableWidthImageLoader extends BaseGlideUrlLoader<String> {
+        private static final Pattern PATTERN = Pattern.compile("__w-((?:-?\\\\d+)+)__");
+
         public VariableWidthImageLoader(Context context) {
             super(context, urlCache);
         }
 
         @Override
         protected String getUrl(String model, int width, int height) {
-            return null;
+            Matcher matcher = PATTERN.matcher(model);
+            int bestBucket = 0;
+            if (matcher.find()) {
+                String[] found = matcher.group(1).split("-");
+                for (String bucket : found) {
+                    bestBucket = Integer.parseInt(bucket);
+                    if (bestBucket >= width) {
+                        break;
+                    }
+                }
+                if (bestBucket > 0) {
+                    model = matcher.replaceFirst("w" + bestBucket);
+                }
+            }
+            return model;
         }
     }
 
