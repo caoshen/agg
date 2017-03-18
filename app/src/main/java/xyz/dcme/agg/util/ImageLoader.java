@@ -1,14 +1,18 @@
 package xyz.dcme.agg.util;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import com.bumptech.glide.BitmapRequestBuilder;
 import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.ModelCache;
 import com.bumptech.glide.load.model.stream.BaseGlideUrlLoader;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.request.RequestListener;
 
 public class ImageLoader {
     private static final String TAG = LogUtils.makeLogTag("ImageLoader");
@@ -30,9 +34,26 @@ public class ImageLoader {
         mPlaceHolderResId = placeHolderResId;
     }
 
+    public void loadImage(String url, ImageView imageView, RequestListener<String, Bitmap> requestListener,
+                          Drawable placeholderOverride) {
+        loadImage(url, imageView, requestListener, placeholderOverride, false);
+    }
+
+    public void loadImage(String url, ImageView imageView, RequestListener<String, Bitmap> requestListener,
+                          Drawable placeholderOverride, boolean crop) {
+        BitmapRequestBuilder requestBuilder = beginImageLoad(url, requestListener, crop);
+        if (placeholderOverride != null) {
+            requestBuilder.placeholder(placeholderOverride);
+        } else if (mPlaceHolderResId != -1){
+            requestBuilder.placeholder(mPlaceHolderResId);
+        }
+        requestBuilder.into(imageView);
+    }
+
     public static void loadImage(Context context, int drawableResId, ImageView imageView) {
         Glide.with(context).load(drawableResId).into(imageView);
     }
+
 
     private static class VariableWidthImageLoader extends BaseGlideUrlLoader<String> {
         public VariableWidthImageLoader(Context context) {
@@ -42,6 +63,15 @@ public class ImageLoader {
         @Override
         protected String getUrl(String model, int width, int height) {
             return null;
+        }
+    }
+
+    public BitmapRequestBuilder beginImageLoad(String url, RequestListener<String, Bitmap> requestListener,
+                                               boolean crop) {
+        if (crop) {
+            return mGlideModelRequest.load(url).listener(requestListener).transform(mCenterCrop);
+        } else {
+            return mGlideModelRequest.load(url).listener(requestListener);
         }
     }
 }
