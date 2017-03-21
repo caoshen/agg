@@ -63,7 +63,11 @@ public class AboutMeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.about_me : {
-                startActivityForResult(new Intent(getActivity(), LoginActivity.class), REQUEST_ABOUT_ME);
+                if (mHelper.isLogin()) {
+                    PersonalInfoActivity.showPersonalInfo(getActivity());
+                } else {
+                    LoginActivity.startLoginProcess(getActivity(), REQUEST_ABOUT_ME);
+                }
                 break;
             }
         }

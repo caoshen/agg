@@ -3,6 +3,7 @@ package xyz.dcme.agg.ui.login;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -377,5 +378,9 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         return accountInfo;
     }
 
+    public static void startLoginProcess(Activity activity, int requestCode) {
+        Intent intent = new Intent(activity, LoginActivity.class);
+        activity.startActivityForResult(intent, requestCode);
+    }
 }
 

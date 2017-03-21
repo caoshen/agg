@@ -43,4 +43,7 @@
     <string name="login_please">请登录账号</string>
     <string name="send">发送</string>
     <string name="reply_to_author">回复</string>
+    <string name="photo">头像</string>
+    <string name="username">用户名</string>
+    <string name="email_address">邮箱</string>
 </resources>
