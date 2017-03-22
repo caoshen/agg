@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.login.AccountInfo;
 import xyz.dcme.agg.ui.login.LoginActivity;
+import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.transformation.CircleTransformation;
 
 
@@ -63,7 +64,7 @@ public class AboutMeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.about_me : {
-                if (mHelper.isLogin()) {
+                if (AccountUtils.hasActiveAccount(getActivity())) {
                     PersonalInfoActivity.showPersonalInfo(getActivity());
                 } else {
                     LoginActivity.startLoginProcess(getActivity(), REQUEST_ABOUT_ME);
@@ -80,6 +81,7 @@ public class AboutMeFragment extends Fragment implements View.OnClickListener {
             if (data != null) {
                 mAccountInfo = data.getParcelableExtra(LoginActivity.KEY_EXTRA_LOGIN_ACCOUNT);
                 loadAccountInfo(mAccountInfo);
+                AccountUtils.setActiveAccount(getActivity(), mAccountInfo.getNickName());
             }
         }
     }

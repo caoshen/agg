@@ -14,6 +14,10 @@ public interface PostDetailContract {
     }
 
     interface View extends BaseView<Presenter> {
+
+        void showIndicator();
+        void hideIndicator();
+
         void onRefresh(List<PostDetailItem> data);
         void onLoadMore(List<PostDetailItem> data);
 

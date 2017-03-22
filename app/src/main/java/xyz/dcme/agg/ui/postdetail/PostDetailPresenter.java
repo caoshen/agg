@@ -37,6 +37,12 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
         new AsyncTask<Void, Void, List<PostDetailItem>>() {
 
             @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                mView.showIndicator();
+            }
+
+            @Override
             protected List<PostDetailItem> doInBackground(Void... voids) {
                 return PostDetailParser.parseDetail(reqUrl);
             }
@@ -45,6 +51,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
             protected void onPostExecute(List<PostDetailItem> data) {
                 super.onPostExecute(data);
                 mView.onRefresh(data);
+                mView.hideIndicator();
             }
         }.execute();
     }

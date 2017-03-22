@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,8 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
     private String mUrl;
     private EditText mCommentText;
     private Button mSendBtn;
+    private ProgressBar mLoadingProgressBar;
+    private LinearLayout mContent;
 
     public static PostDetailFragment newInstance(String url) {
         PostDetailFragment fragment = new PostDetailFragment();
@@ -80,6 +84,8 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
         mSendBtn = (Button) view.findViewById(R.id.send_reply);
         mSendBtn.setOnClickListener(this);
         mSendBtn.addTextChangedListener(this);
+        mLoadingProgressBar = (ProgressBar) view.findViewById(R.id.loading);
+        mContent = (LinearLayout) view.findViewById(R.id.content_frame);
     }
 
     @Override
@@ -88,6 +94,18 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
         if (!TextUtils.isEmpty(mUrl)) {
             mPresenter.loadDetail(mUrl);
         }
+    }
+
+    @Override
+    public void showIndicator() {
+        mLoadingProgressBar.setVisibility(View.VISIBLE);
+        mContent.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideIndicator() {
+        mLoadingProgressBar.setVisibility(View.GONE);
+        mContent.setVisibility(View.VISIBLE);
     }
 
     @Override
