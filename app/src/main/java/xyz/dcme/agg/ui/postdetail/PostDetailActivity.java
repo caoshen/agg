@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseActivity;
@@ -27,10 +26,7 @@ public class PostDetailActivity extends BaseActivity {
     }
 
     private void initViews() {
-        ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setDisplayShowTitleEnabled(false);
-        }
+        getToolbar();
     }
 
     private void initData() {

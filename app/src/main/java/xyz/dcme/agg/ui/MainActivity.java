@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import xyz.dcme.agg.R;
@@ -15,7 +14,7 @@ import xyz.dcme.agg.ui.post.PostFragment;
 import xyz.dcme.agg.ui.post.PostPresenter;
 import xyz.dcme.agg.util.ActivityUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private PostPresenter mPresenter;
     private BottomNavigationView mBottomNav;
@@ -32,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        getToolbar();
+
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
