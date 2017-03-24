@@ -8,4 +8,14 @@
     <dimen name="about_me_margin">24dp</dimen>
     <dimen name="reply_margin_bottom">8dp</dimen>
     <dimen name="keyline_2">72dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
+    <dimen name="margin_72">72dp</dimen>
+    <dimen name="margin_56">56dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
 </resources>
