@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.login.LoginFragment;
-import xyz.dcme.agg.ui.me.AboutMeFragment;
+import xyz.dcme.agg.ui.me.MeFragment;
 import xyz.dcme.agg.ui.post.PostFragment;
 import xyz.dcme.agg.ui.post.PostPresenter;
 import xyz.dcme.agg.util.ActivityUtils;
@@ -20,7 +20,7 @@ public class MainActivity extends BaseActivity {
     private BottomNavigationView mBottomNav;
     private PostFragment mPostFragment;
     private LoginFragment mLoginFragment;
-    private AboutMeFragment mAboutMeFragment;
+    private MeFragment mAboutMeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initViews() {
-        getToolbar();
-
-        mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
+        mBottomNav = (BottomNavigationView) findViewById(R.id.nav_bar);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -90,11 +88,11 @@ public class MainActivity extends BaseActivity {
     private void initLoginFragment() {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.main_content);
-        if (fragment instanceof AboutMeFragment) {
-            mAboutMeFragment = (AboutMeFragment) fragment;
+        if (fragment instanceof MeFragment) {
+            mAboutMeFragment = (MeFragment) fragment;
         }
         if (mAboutMeFragment == null) {
-            mAboutMeFragment = new AboutMeFragment();
+            mAboutMeFragment = new MeFragment();
             ActivityUtils.addFragmentToActivity(fm, mAboutMeFragment, R.id.main_content);
         }
     }

@@ -191,4 +191,5 @@
     <!-- welcome -->
     <color name="welcome_nav_bar">#ff296e78</color>
     <color name="welcome_attending_in_person_background">#fffff6de</color>
+    <color name="red">#FF0000</color>
 </resources>
