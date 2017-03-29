@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include layout="@layout/toolbar_auto_hide"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@color/white"
+                android:elevation="4dp"
+                android:foreground="?attr/selectableItemBackground">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_margin="@dimen/margin_16"
+                    android:src="@drawable/ic_me"/>
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/avatar"
+                    android:gravity="center"
+                    android:text="@string/login_please"
+                    android:textSize="18sp"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@color/white"
+                android:divider="@drawable/bg_divider"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <TextView
+                    android:id="@+id/my_focus"
+                    style="@style/AppTheme.MeItemText"
+                    android:drawableStart="@drawable/ic_favourite"
+                    android:text="@string/favourite"/>
+
+                <TextView
+                    android:id="@+id/my_topic"
+                    style="@style/AppTheme.MeItemText"
+                    android:drawableStart="@drawable/ic_chat"
+                    android:text="@string/topic"/>
+
+                <TextView
+                    android:id="@+id/my_reply"
+                    style="@style/AppTheme.MeItemText"
+                    android:drawableStart="@drawable/ic_comment"
+                    android:text="@string/reply"/>
+
+                <TextView
+                    android:id="@+id/my_credit"
+                    style="@style/AppTheme.MeItemText"
+                    android:drawableStart="@drawable/ic_credit"
+                    android:text="@string/credit"/>
+
+                <TextView
+                    android:id="@+id/my_history"
+                    style="@style/AppTheme.MeItemText"
+                    android:drawableStart="@drawable/ic_history"
+                    android:text="@string/history"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

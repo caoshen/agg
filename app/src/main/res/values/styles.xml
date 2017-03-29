@@ -34,4 +34,16 @@
     <style name="AppTheme.ToolBarOverlay" parent="ThemeOverlay.AppCompat.Dark"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="AppTheme.MeItemText">
+        <item name="android:background">@color/white</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/margin_16</item>
+        <item name="android:drawablePadding">@dimen/margin_16</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/app_body_text_2</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

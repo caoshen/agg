@@ -11,6 +11,7 @@
     <color name="theme_primary_dark">#2196F3</color>
     <color name="theme_primary_light">#03A9F4</color>
 
+    <color name="icon_color">#ffb4b4b4</color>
     <!-- Copy from iosched -->
     <color name="transparent">#00000000</color>
     <color name="background">#fff7f9f9</color>

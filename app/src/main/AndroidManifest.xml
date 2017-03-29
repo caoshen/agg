@@ -20,7 +20,6 @@
             android:theme="@style/AppTheme.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -28,19 +27,8 @@
             android:name=".ui.postdetail.PostDetailActivity"
             android:parentActivityName=".ui.MainActivity">
         </activity>
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
-        <activity
-            android:name=".ui.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:parentActivityName=".ui.MainActivity"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="xyz.dcme.agg.ui.MainActivity"/>
-        </activity>
+        <activity android:name=".ui.login.LoginActivity"/>
+        <activity android:name=".ui.me.PersonalInfoActivity"/>
     </application>
 
 </manifest>

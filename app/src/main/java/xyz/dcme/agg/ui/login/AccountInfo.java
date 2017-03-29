@@ -17,6 +17,7 @@ public class AccountInfo implements Parcelable {
     };
 
     private String mId;
+    private String mUserName;
     private String mNickName;
     private String mEmail;
     private String mAvatarUrl;
@@ -30,6 +31,7 @@ public class AccountInfo implements Parcelable {
 
     protected AccountInfo(Parcel in) {
         mId = in.readString();
+        mUserName = in.readString();
         mNickName = in.readString();
         mEmail = in.readString();
         mAvatarUrl = in.readString();
@@ -52,6 +54,14 @@ public class AccountInfo implements Parcelable {
 
     public void setId(String id) {
         mId = id;
+    }
+
+    public String getUserName() {
+        return mUserName;
+    }
+
+    public void setUserName(String userName) {
+        mUserName = userName;
     }
 
     public String getNickName() {
@@ -142,6 +152,7 @@ public class AccountInfo implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(mId);
+        parcel.writeString(mUserName);
         parcel.writeString(mNickName);
         parcel.writeString(mEmail);
         parcel.writeString(mAvatarUrl);

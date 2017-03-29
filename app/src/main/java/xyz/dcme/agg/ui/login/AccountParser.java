@@ -25,18 +25,13 @@ public class AccountParser {
 
         try {
             doc = Jsoup.connect(url).cookies(userCookies).get();
-            Element ele = doc.select("div.col-md-3.sidebar-right.mt10").first();
-            String link = ele.select("div a").attr("href");
-            String avatarUrl = ele.select("div a img").attr("src");
-            String id = "";
-            if (link.startsWith("/u/")) {
-                id = link.substring(3);
-            }
-            String userName = ele.select("div.username").text();
+            Element ele = doc.select("div.col-sm-8 div").first();
+            String avatarUrl = ele.select("img").first().attr("src");
+            String userName = doc.select("input#username").attr("value");
 
-            accountInfo.setId(id);
+            LogUtils.LOGD(TAG, "username: " + userName + " avatar: " + avatarUrl);
+            accountInfo.setUserName(userName);
             accountInfo.setAvatarUrl(avatarUrl);
-            accountInfo.setLink(link);
 
         } catch (IOException e) {
             Log.d(TAG, e.getMessage());

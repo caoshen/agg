@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
+import xyz.dcme.agg.ui.login.AccountInfo;
+
 public class AccountUtils {
     private static final String TAG = LogUtils.makeLogTag("AccountUtils");
 
@@ -21,6 +23,23 @@ public class AccountUtils {
 
     public static boolean hasActiveAccount(final Context context) {
         return !TextUtils.isEmpty(getActiveAccountName(context));
+    }
+
+    public static AccountInfo getActiveAccountInfo(final Context context) {
+        AccountInfo info = new AccountInfo();
+        String userName = getUserName(context);
+        String avatar = getImageUrl(context);
+        info.setUserName(userName);
+        info.setAvatarUrl(avatar);
+        return info;
+    }
+
+    public static void setActiveAccountInfo(final Context context, AccountInfo info) {
+        String userName = info.getUserName();
+        String avatar = info.getAvatarUrl();
+        setUserName(context, userName, userName);
+        setImageUrl(context, userName, avatar);
+        setActiveAccount(context, userName);
     }
 
     public static String getActiveAccountName(final Context context) {

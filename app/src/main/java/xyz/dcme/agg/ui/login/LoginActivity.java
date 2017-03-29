@@ -40,7 +40,6 @@ import java.util.Map;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseActivity;
-import xyz.dcme.agg.ui.me.AccountHelper;
 import xyz.dcme.agg.ui.postdetail.CookieUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
@@ -320,11 +319,9 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             mAuthTask = null;
             showProgress(false);
 
-            String id = accountInfo.getId();
+            String username = accountInfo.getUserName();
 
-            if (!TextUtils.isEmpty(id)) {
-                AccountHelper.saveAccountInfo(LoginActivity.this, accountInfo);
-
+            if (!TextUtils.isEmpty(username)) {
                 Intent data = new Intent();
                 data.putExtra(KEY_EXTRA_LOGIN_ACCOUNT, accountInfo);
                 setResult(RESULT_OK, data);
@@ -370,7 +367,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             if (!isLogin) {
                 return accountInfo;
             } else {
-                return AccountParser.parseAccount(Constants.WEBSITE_HOME_URL, res.cookies());
+                return AccountParser.parseAccount(Constants.WEBSITE_HOME_URL + "/setting", res.cookies());
             }
         } catch (IOException e) {
             Log.d(TAG, e.getMessage());
