@@ -24,6 +24,7 @@ import xyz.dcme.agg.ui.login.AccountInfo;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.AnimationUtils;
+import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 
 public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChangedListener, View.OnClickListener {
@@ -76,8 +77,8 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
 
         mIsLogin = AccountUtils.hasActiveAccount(getActivity());
         if (mIsLogin) {
-            AccountInfo info = AccountUtils.getActiveAccountInfo(getActivity());
-            loadAccountInfo(info);
+            mAccountInfo = AccountUtils.getActiveAccountInfo(getActivity());
+            loadAccountInfo(mAccountInfo);
         }
 //        mAppBar = (AppBarLayout) view.findViewById(R.id.appbar);
 //        mTitleContainer = (RelativeLayout) view.findViewById(R.id.main_title);
@@ -147,6 +148,7 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
             case R.id.account: {
                 if (mIsLogin) {
                     Intent intent = new Intent(getActivity(), PersonalInfoActivity.class);
+                    intent.putExtra(Constants.EXTRA_ACCOUNT_INFO, mAccountInfo);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);

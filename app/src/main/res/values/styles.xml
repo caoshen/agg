@@ -23,15 +23,12 @@
         <item name="android:textColorSecondary">@color/subtitle_on_primary</item>
     </style>
 
-    <!-- ActionBar popup theme -->
-    <style name="ActionBarPopupThemeOverlay" parent="ThemeOverlay.AppCompat.Light">
-    </style>
-
     <style name="AppTheme.Light" parent="AppTheme">
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.ToolBarOverlay" parent="ThemeOverlay.AppCompat.Dark"/>
+
+    <style name="AppTheme.ToolBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
@@ -46,4 +43,14 @@
         <item name="android:textColor">@color/app_body_text_2</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="AppTheme.MeItemText.Small">
+        <item name="android:layout_margin">@dimen/margin_4</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/app_body_text_2</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <dimen name="margin_4">4dp</dimen>
 </resources>

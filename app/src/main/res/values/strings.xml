@@ -142,4 +142,7 @@
     <string name="share">分享</string>
     <string name="my_avatar">我的头像</string>
     <string name="history">最近浏览</string>
+    <string name="info_page">个人主页</string>
+    <string name="info_detail">详细信息</string>
+    <string name="zero">0</string>
 </resources>

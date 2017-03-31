@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/AppTheme.MeItemText.Small"
+                android:text="@string/zero"/>
+
+            <TextView
+                style="@style/AppTheme.MeItemText.Small"
+                android:text="@string/topic"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/AppTheme.MeItemText.Small"
+                android:text="@string/zero"/>
+
+            <TextView
+                style="@style/AppTheme.MeItemText.Small"
+                android:text="@string/reply"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/AppTheme.MeItemText.Small"
+                android:text="@string/zero"/>
+
+            <TextView
+                style="@style/AppTheme.MeItemText.Small"
+                android:text="@string/favourite"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/AppTheme.MeItemText.Small"
+                android:text="@string/zero"/>
+
+            <TextView
+                style="@style/AppTheme.MeItemText.Small"
+                android:text="@string/credit"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@color/white"
+        android:divider="@drawable/bg_divider"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/my_focus"
+            style="@style/AppTheme.MeItemText"
+            android:drawableStart="@drawable/ic_favourite"
+            android:text="@string/favourite"/>
+
+        <TextView
+            android:id="@+id/my_topic"
+            style="@style/AppTheme.MeItemText"
+            android:drawableStart="@drawable/ic_chat"
+            android:text="@string/topic"/>
+
+        <TextView
+            android:id="@+id/my_reply"
+            style="@style/AppTheme.MeItemText"
+            android:drawableStart="@drawable/ic_comment"
+            android:text="@string/reply"/>
+
+    </LinearLayout>
+</LinearLayout>

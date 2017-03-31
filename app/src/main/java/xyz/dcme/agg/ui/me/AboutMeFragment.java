@@ -65,7 +65,7 @@ public class AboutMeFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.about_me : {
                 if (AccountUtils.hasActiveAccount(getActivity())) {
-                    PersonalInfoActivity.showPersonalInfo(getActivity());
+//                    PersonalInfoActivity.showPersonalInfo(getActivity());
                 } else {
                     LoginActivity.startLoginProcess(getActivity(), REQUEST_ABOUT_ME);
                 }
