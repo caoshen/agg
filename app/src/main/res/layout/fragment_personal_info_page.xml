@@ -10,8 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_8"
+        android:padding="@dimen/margin_16"
         android:background="@color/white"
-        android:elevation="4dp"
+        android:elevation="2dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -21,12 +22,12 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/AppTheme.MeItemText.Small"
+                style="@style/AppTheme.MeItemText.Small.Black"
                 android:text="@string/zero"/>
 
             <TextView
                 style="@style/AppTheme.MeItemText.Small"
-                android:text="@string/topic"/>
+                android:text="@string/count_topic"/>
         </LinearLayout>
 
         <LinearLayout
@@ -36,12 +37,12 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/AppTheme.MeItemText.Small"
+                style="@style/AppTheme.MeItemText.Small.Black"
                 android:text="@string/zero"/>
 
             <TextView
                 style="@style/AppTheme.MeItemText.Small"
-                android:text="@string/reply"/>
+                android:text="@string/count_reply"/>
         </LinearLayout>
 
         <LinearLayout
@@ -51,12 +52,12 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/AppTheme.MeItemText.Small"
+                style="@style/AppTheme.MeItemText.Small.Black"
                 android:text="@string/zero"/>
 
             <TextView
                 style="@style/AppTheme.MeItemText.Small"
-                android:text="@string/favourite"/>
+                android:text="@string/count_favourite"/>
         </LinearLayout>
 
         <LinearLayout
@@ -66,12 +67,12 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/AppTheme.MeItemText.Small"
+                style="@style/AppTheme.MeItemText.Small.Black"
                 android:text="@string/zero"/>
 
             <TextView
                 style="@style/AppTheme.MeItemText.Small"
-                android:text="@string/credit"/>
+                android:text="@string/count_credit"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -82,7 +83,7 @@
         android:layout_marginTop="@dimen/margin_8"
         android:background="@color/white"
         android:divider="@drawable/bg_divider"
-        android:elevation="4dp"
+        android:elevation="2dp"
         android:orientation="vertical"
         android:showDividers="middle">
 

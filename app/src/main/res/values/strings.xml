@@ -145,4 +145,13 @@
     <string name="info_page">个人主页</string>
     <string name="info_detail">详细信息</string>
     <string name="zero">0</string>
+    <string name="count_topic">主题</string>
+    <string name="count_reply">回复</string>
+    <string name="count_favourite">收藏</string>
+    <string name="count_credit">信用</string>
+    <string name="detail_id">Id</string>
+    <string name="detail_id_content">guanggoo</string>
+    <string name="detail_email">邮箱</string>
+    <string name="detail_reg">注册时间</string>
+    <string name="join_time">加入时间%1$s，第%2$s位成员．</string>
 </resources>

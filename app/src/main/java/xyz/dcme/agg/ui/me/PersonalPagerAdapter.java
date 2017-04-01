@@ -26,8 +26,9 @@ public class PersonalPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
             return new PersonalInfoPageFragment();
+        } else {
+            return new PersonalInfoDetailFragment();
         }
-        return new PersonalInfoFragment();
     }
 
     @Override
