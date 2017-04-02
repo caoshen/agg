@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui.me;
+package xyz.dcme.agg.ui.personal;
 
 import android.content.Intent;
 import android.os.Bundle;

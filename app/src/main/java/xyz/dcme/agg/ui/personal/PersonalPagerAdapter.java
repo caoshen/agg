@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui.me;
+package xyz.dcme.agg.ui.personal;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

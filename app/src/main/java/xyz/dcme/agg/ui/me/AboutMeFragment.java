@@ -21,7 +21,6 @@ import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.transformation.CircleTransformation;
 
-
 public class AboutMeFragment extends Fragment implements View.OnClickListener {
 
     public static final int REQUEST_ABOUT_ME = 10;

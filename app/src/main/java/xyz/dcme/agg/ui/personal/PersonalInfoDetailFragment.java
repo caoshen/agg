@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui.me;
+package xyz.dcme.agg.ui.personal;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 
 import xyz.dcme.agg.R;
 
-public class PersonalInfoPageFragment extends Fragment {
+public class PersonalInfoDetailFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_personal_info_page,
+        View root = inflater.inflate(R.layout.fragment_personal_info_detail,
                 container, false);
         return root;
     }

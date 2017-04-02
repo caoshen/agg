@@ -22,6 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.login.AccountInfo;
 import xyz.dcme.agg.ui.login.LoginActivity;
+import xyz.dcme.agg.ui.personal.PersonalInfoActivity;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.AnimationUtils;
 import xyz.dcme.agg.util.Constants;

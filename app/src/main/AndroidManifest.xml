@@ -28,7 +28,7 @@
             android:parentActivityName=".ui.MainActivity">
         </activity>
         <activity android:name=".ui.login.LoginActivity"/>
-        <activity android:name=".ui.me.PersonalInfoActivity"/>
+        <activity android:name=".ui.personal.PersonalInfoActivity"/>
     </application>
 
 </manifest>
