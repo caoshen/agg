@@ -7,8 +7,8 @@ import static xyz.dcme.agg.util.LogUtils.makeLogTag;
 
 
 public class PersonalInfo implements Parcelable {
-    private static final String TAG = makeLogTag("PersonalInfo");
 
+    private static final String TAG = makeLogTag("PersonalInfo");
     private String mUserId;
     private String mUserName;
     private String mNumber;
@@ -20,9 +20,6 @@ public class PersonalInfo implements Parcelable {
     private String mFavouritesCount;
     private String mReputationCount;
     private String mIntro;
-
-    protected PersonalInfo(Parcel in) {
-    }
 
     public static final Creator<PersonalInfo> CREATOR = new Creator<PersonalInfo>() {
         @Override
@@ -36,6 +33,20 @@ public class PersonalInfo implements Parcelable {
         }
     };
 
+    protected PersonalInfo(Parcel in) {
+        mUserId = in.readString();
+        mUserName = in.readString();
+        mNumber = in.readString();
+        mSince = in.readString();
+        mNickName = in.readString();
+        mCompany = in.readString();
+        mTopicsCount = in.readString();
+        mRepliesCount = in.readString();
+        mFavouritesCount = in.readString();
+        mReputationCount = in.readString();
+        mIntro = in.readString();
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -43,6 +54,17 @@ public class PersonalInfo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mUserId);
+        dest.writeString(mUserName);
+        dest.writeString(mNumber);
+        dest.writeString(mSince);
+        dest.writeString(mNickName);
+        dest.writeString(mCompany);
+        dest.writeString(mTopicsCount);
+        dest.writeString(mRepliesCount);
+        dest.writeString(mFavouritesCount);
+        dest.writeString(mReputationCount);
+        dest.writeString(mIntro);
     }
 
     public String getUserId() {
