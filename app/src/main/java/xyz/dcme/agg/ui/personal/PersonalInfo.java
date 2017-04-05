@@ -3,6 +3,8 @@ package xyz.dcme.agg.ui.personal;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.HashMap;
+
 import static xyz.dcme.agg.util.LogUtils.makeLogTag;
 
 
@@ -20,6 +22,7 @@ public class PersonalInfo implements Parcelable {
     private String mFavouritesCount;
     private String mReputationCount;
     private String mIntro;
+    private HashMap<String, String> mDetails;
 
     public static final Creator<PersonalInfo> CREATOR = new Creator<PersonalInfo>() {
         @Override
@@ -33,6 +36,11 @@ public class PersonalInfo implements Parcelable {
         }
     };
 
+    public PersonalInfo() {
+
+    }
+
+    @SuppressWarnings({"deprecation", "unchecked"})
     protected PersonalInfo(Parcel in) {
         mUserId = in.readString();
         mUserName = in.readString();
@@ -45,6 +53,7 @@ public class PersonalInfo implements Parcelable {
         mFavouritesCount = in.readString();
         mReputationCount = in.readString();
         mIntro = in.readString();
+        mDetails = in.readHashMap(null);
     }
 
     @Override
@@ -65,6 +74,7 @@ public class PersonalInfo implements Parcelable {
         dest.writeString(mFavouritesCount);
         dest.writeString(mReputationCount);
         dest.writeString(mIntro);
+        dest.writeMap(mDetails);
     }
 
     public String getUserId() {
@@ -153,5 +163,13 @@ public class PersonalInfo implements Parcelable {
 
     public void setIntro(String intro) {
         mIntro = intro;
+    }
+
+    public HashMap<String, String> getDetails() {
+        return mDetails;
+    }
+
+    public void setDetails(HashMap<String, String> details) {
+        mDetails = details;
     }
 }

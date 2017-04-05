@@ -1,5 +1,7 @@
 package xyz.dcme.agg.ui.personal;
 
+import android.text.TextUtils;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -60,10 +62,12 @@ public class PersonalInfoParser implements IParser {
 
         String introTitle = doc.select("div.self-introduction span.title").text();
         String introContent = doc.select("div.self-introduction div.ui-content").text();
-        details.put(introTitle, introContent);
+        if (!TextUtils.isEmpty(introTitle) && !TextUtils.isEmpty(introContent)) {
+            details.put(introTitle, introContent);
+        }
 
         info.setDetails(details);
-        
+
         return info;
     }
 
