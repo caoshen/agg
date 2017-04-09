@@ -67,6 +67,8 @@ public class PersonalInfoDetailFragment extends Fragment
         CommonAdapter<Detail> adapter = new PersonalInfoDetailAdapter(getActivity(),
                 R.layout.item_personal_info_detail, mData);
         mDetailList.setAdapter(adapter);
+
+        mProgressView = (ProgressBar) root.findViewById(R.id.progress);
     }
 
 
@@ -86,10 +88,19 @@ public class PersonalInfoDetailFragment extends Fragment
                         mProgressView.setVisibility(active ? View.VISIBLE : View.GONE);
                     }
                 });
+        mDetailList.setVisibility(!active ? View.VISIBLE : View.GONE);
+        mDetailList.animate().setDuration(time).alpha(!active ? 1 : 0)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mProgressView.setVisibility(!active ? View.VISIBLE : View.GONE);
+                    }
+                });
     }
 
     @Override
     public void showDetails(List<Detail> details) {
+        mData.clear();
         mData.addAll(details);
         mDetailList.getAdapter().notifyDataSetChanged();
     }

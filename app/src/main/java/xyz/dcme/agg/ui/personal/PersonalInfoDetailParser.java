@@ -11,21 +11,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import xyz.dcme.agg.parser.IParser;
-
 import static xyz.dcme.agg.util.LogUtils.LOGE;
 import static xyz.dcme.agg.util.LogUtils.makeLogTag;
 
-public class PersonalInfoDetailParser implements IParser<Detail> {
+public class PersonalInfoDetailParser {
     private static final String TAG = makeLogTag("PersonalInfoDetailParser");
 
-    @Override
     public Detail parse(String url) {
         return null;
     }
 
-    @Override
-    public List<Detail> parseList(String url) {
+    public static List<Detail> parseList(String url) {
         Document doc = null;
         List<Detail> detailList = new ArrayList<>();
         try {
@@ -55,6 +51,15 @@ public class PersonalInfoDetailParser implements IParser<Detail> {
             d.title = introTitle;
             d.content = introContent;
             detailList.add(d);
+        }
+
+        Element number = doc.select("div.profile div.user-number div.number").first();
+        Element since = doc.select("div.profile div.user-number div.since").first();
+        if (!TextUtils.isEmpty(number.text()) && !TextUtils.isEmpty(since.text())) {
+            Detail detailNumber = new Detail();
+            detailNumber.title = since.text();
+            detailNumber.content = number.text();
+            detailList.add(detailNumber);
         }
 
         return detailList;
