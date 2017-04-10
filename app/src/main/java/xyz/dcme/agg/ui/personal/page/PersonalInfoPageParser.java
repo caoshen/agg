@@ -30,6 +30,19 @@ public class PersonalInfoPageParser {
         Elements replies = doc.select("div.status.status-reply");
         Elements fav = doc.select("div.status.status-favorite");
         Elements rep = doc.select("div.status.status-reputation");
-        return null;
+
+        if (topics != null && !topics.isEmpty()) {
+            count.topicCount = topics.first().select("a").text();
+        }
+        if (replies != null && !replies.isEmpty()) {
+            count.replyCount = replies.first().select("a").text();
+        }
+        if (fav != null && !fav.isEmpty()) {
+            count.favCount = fav.first().select("a").text();
+        }
+        if (rep != null && !rep.isEmpty()) {
+            count.reputationCount = rep.first().select("a").text();
+        }
+        return count;
     }
 }
