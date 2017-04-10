@@ -1,12 +1,12 @@
-package xyz.dcme.agg.ui.personal;
+package xyz.dcme.agg.ui.personal.detail;
 
 import android.os.AsyncTask;
+import android.text.TextUtils;
 
 import java.util.List;
 
 import xyz.dcme.agg.util.Constants;
 
-import static xyz.dcme.agg.util.LogUtils.LOGD;
 import static xyz.dcme.agg.util.LogUtils.makeLogTag;
 
 public class PersonalInfoDetailPresenter implements PersonalInfoDetailContract.Presenter {
@@ -21,12 +21,19 @@ public class PersonalInfoDetailPresenter implements PersonalInfoDetailContract.P
 
     @Override
     public void start() {
-        LOGD(TAG, "start");
+
+    }
+
+    @Override
+    public void load(String name) {
         mView.setLoadingIndicator(true);
         new AsyncTask<String, Void, List<Detail>>() {
             @Override
-            protected List<Detail> doInBackground(String... userId) {
-                return PersonalInfoDetailParser.parseList(Constants.WEBSITE_USER_PROFILE_URL + "/" + userId[0]);
+            protected List<Detail> doInBackground(String... names) {
+                if (TextUtils.isEmpty(names[0])) {
+                    return null;
+                }
+                return PersonalInfoDetailParser.parseList(Constants.WEBSITE_USER_PROFILE_URL + "/" + names[0]);
             }
 
             @Override
@@ -37,6 +44,6 @@ public class PersonalInfoDetailPresenter implements PersonalInfoDetailContract.P
                 }
                 mView.setLoadingIndicator(false);
             }
-        }.execute("justyouknowwhy");
+        }.execute(name);
     }
 }

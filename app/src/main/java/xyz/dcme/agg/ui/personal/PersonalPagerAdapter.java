@@ -6,16 +6,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.personal.detail.PersonalInfoDetailFragment;
+import xyz.dcme.agg.ui.personal.page.PersonalInfoPageFragment;
 
 public class PersonalPagerAdapter extends FragmentStatePagerAdapter {
 
     public static final int PAGER_SIZE = 2;
     private static final int[] mTitles = {R.string.info_page, R.string.info_detail};
     private Context mContext;
+    private String mUserName;
 
-    public PersonalPagerAdapter(Context context, FragmentManager fm) {
+    public PersonalPagerAdapter(Context context, FragmentManager fm, String userName) {
         super(fm);
         mContext = context;
+        mUserName = userName;
     }
 
     public PersonalPagerAdapter(FragmentManager fm) {
@@ -27,7 +31,7 @@ public class PersonalPagerAdapter extends FragmentStatePagerAdapter {
         if (position == 0) {
             return new PersonalInfoPageFragment();
         } else {
-            return new PersonalInfoDetailFragment();
+            return PersonalInfoDetailFragment.newInstance(mUserName);
         }
     }
 

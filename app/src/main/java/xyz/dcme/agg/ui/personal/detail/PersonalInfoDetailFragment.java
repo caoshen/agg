@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui.personal;
+package xyz.dcme.agg.ui.personal.detail;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -15,7 +15,6 @@ import android.widget.ProgressBar;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import xyz.dcme.agg.R;
@@ -23,25 +22,34 @@ import xyz.dcme.agg.R;
 public class PersonalInfoDetailFragment extends Fragment
         implements PersonalInfoDetailContract.View {
 
+    private static final String EXTRA_NAME = "extra_username";
     private RecyclerView mDetailList;
     private ArrayList<Detail> mData;
     private PersonalInfoDetailContract.Presenter mPresenter;
     private ProgressBar mProgressView;
+    private String mUserName;
 
-    public static PersonalInfoDetailFragment newInstance(HashMap<String, String> details) {
+    public static PersonalInfoDetailFragment newInstance(String userName) {
         PersonalInfoDetailFragment fragment = new PersonalInfoDetailFragment();
+        Bundle args = new Bundle();
+        args.putString(EXTRA_NAME, userName);
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle args = getArguments();
+        if (args != null) {
+            mUserName = args.getString(EXTRA_NAME);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+        mPresenter.load(mUserName);
     }
 
     @Nullable

@@ -65,7 +65,7 @@ public class PersonalInfoActivity extends BaseActivity {
 
         mPager = (ViewPager) findViewById(R.id.pager);
         FragmentManager fm = getSupportFragmentManager();
-        PersonalPagerAdapter adapter = new PersonalPagerAdapter(this, fm);
+        PersonalPagerAdapter adapter = new PersonalPagerAdapter(this, fm, mUserName);
         mPager.setAdapter(adapter);
     }
 

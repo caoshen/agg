@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui.personal;
+package xyz.dcme.agg.ui.personal.detail;
 
 import java.util.List;
 
@@ -13,6 +13,6 @@ public interface PersonalInfoDetailContract {
     }
 
     interface Presenter extends BasePresenter {
-
+        void load(String name);
     }
 }

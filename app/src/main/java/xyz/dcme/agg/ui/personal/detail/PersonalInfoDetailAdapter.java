@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui.personal;
+package xyz.dcme.agg.ui.personal.detail;
 
 import android.content.Context;
 

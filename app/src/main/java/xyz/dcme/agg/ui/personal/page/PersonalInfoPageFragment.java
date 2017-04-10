@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui.personal;
+package xyz.dcme.agg.ui.personal.page;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
