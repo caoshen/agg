@@ -13,7 +13,7 @@ public class PersonalInfoPageParser {
 
     private static final String TAG = makeLogTag("PersonalInfoPageParser");
 
-    public Count parse(String url) {
+    public static Count parse(String url) {
         Document doc = null;
         try {
             doc = Jsoup.connect(url).get();
@@ -41,7 +41,7 @@ public class PersonalInfoPageParser {
             count.favCount = fav.first().select("a").text();
         }
         if (rep != null && !rep.isEmpty()) {
-            count.reputationCount = rep.first().select("a").text();
+            count.reputationCount = rep.first().select("strong").text();
         }
         return count;
     }

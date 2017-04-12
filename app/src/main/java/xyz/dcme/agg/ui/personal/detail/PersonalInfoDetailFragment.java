@@ -101,7 +101,7 @@ public class PersonalInfoDetailFragment extends Fragment
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        mProgressView.setVisibility(!active ? View.VISIBLE : View.GONE);
+                        mDetailList.setVisibility(!active ? View.VISIBLE : View.GONE);
                     }
                 });
     }

@@ -9,6 +9,7 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.Map;
 
+import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 

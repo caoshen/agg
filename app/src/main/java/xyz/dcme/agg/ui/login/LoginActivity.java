@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.ui.BaseActivity;
 import xyz.dcme.agg.ui.postdetail.CookieUtils;
 import xyz.dcme.agg.util.Constants;

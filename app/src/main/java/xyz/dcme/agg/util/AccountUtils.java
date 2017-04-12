@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
-import xyz.dcme.agg.ui.login.AccountInfo;
+import xyz.dcme.agg.account.AccountInfo;
 
 public class AccountUtils {
     private static final String TAG = LogUtils.makeLogTag("AccountUtils");

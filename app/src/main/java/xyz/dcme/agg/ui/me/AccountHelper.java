@@ -3,7 +3,7 @@ package xyz.dcme.agg.ui.me;
 import android.content.Context;
 import android.text.TextUtils;
 
-import xyz.dcme.agg.ui.login.AccountInfo;
+import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.util.SharedPrefUtils;
 
 public class AccountHelper {

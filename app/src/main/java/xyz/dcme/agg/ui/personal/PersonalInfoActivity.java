@@ -1,5 +1,6 @@
 package xyz.dcme.agg.ui.personal;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -16,7 +17,7 @@ import com.bumptech.glide.Glide;
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseActivity;
-import xyz.dcme.agg.ui.login.AccountInfo;
+import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.util.Constants;
 
 public class PersonalInfoActivity extends BaseActivity {
@@ -83,4 +84,9 @@ public class PersonalInfoActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static void start(Context context, AccountInfo info) {
+        Intent intent = new Intent(context, PersonalInfoActivity.class);
+        intent.putExtra(Constants.EXTRA_ACCOUNT_INFO, info);
+        context.startActivity(intent);
+    }
 }

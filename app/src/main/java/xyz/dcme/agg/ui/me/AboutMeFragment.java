@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.login.AccountInfo;
+import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.transformation.CircleTransformation;

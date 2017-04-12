@@ -29,7 +29,7 @@ public class PersonalPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new PersonalInfoPageFragment();
+            return PersonalInfoPageFragment.newInstance(mUserName);
         } else {
             return PersonalInfoDetailFragment.newInstance(mUserName);
         }

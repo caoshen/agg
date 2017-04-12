@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui.login;
+package xyz.dcme.agg.account;
 
 import android.os.Parcel;
 import android.os.Parcelable;
