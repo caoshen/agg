@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.util.AccountUtils;
 
 public class PersonalInfoPageFragment extends Fragment
     implements PersonalInfoPageContract.View {
@@ -61,6 +63,16 @@ public class PersonalInfoPageFragment extends Fragment
         mReplyView = (TextView) root.findViewById(R.id.reply_count);
         mFavView = (TextView) root.findViewById(R.id.favourite_count);
         mReputationView = (TextView) root.findViewById(R.id.reputation_count);
+
+        String accountName = AccountUtils.getActiveAccountName(getActivity());
+        if (!TextUtils.isEmpty(mUserName) && mUserName.equals(accountName)) {
+            TextView myTopic = (TextView) root.findViewById(R.id.my_topic);
+            TextView myReply = (TextView) root.findViewById(R.id.my_reply);
+            TextView myFav = (TextView) root.findViewById(R.id.my_focus);
+            myTopic.setText(R.string.his_topic);
+            myReply.setText(R.string.his_reply);
+            myFav.setText(R.string.his_fav);
+        }
     }
 
     private void initPresenter() {

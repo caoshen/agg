@@ -154,4 +154,7 @@
     <string name="detail_email">邮箱</string>
     <string name="detail_reg">注册时间</string>
     <string name="join_time">加入时间%1$s，第%2$s位成员．</string>
+    <string name="his_topic">Ta的主题</string>
+    <string name="his_reply">Ta的回复</string>
+    <string name="his_fav">Ta的收藏</string>
 </resources>
