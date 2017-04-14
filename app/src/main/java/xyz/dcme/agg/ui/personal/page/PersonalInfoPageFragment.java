@@ -14,10 +14,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.topic.TopicActivity;
 import xyz.dcme.agg.util.AccountUtils;
 
 public class PersonalInfoPageFragment extends Fragment
-    implements PersonalInfoPageContract.View {
+    implements PersonalInfoPageContract.View, View.OnClickListener {
 
     private static final String EXTRA_NAME = "extra_name";
     private PersonalInfoPageContract.Presenter mPresenter;
@@ -63,16 +64,23 @@ public class PersonalInfoPageFragment extends Fragment
         mReplyView = (TextView) root.findViewById(R.id.reply_count);
         mFavView = (TextView) root.findViewById(R.id.favourite_count);
         mReputationView = (TextView) root.findViewById(R.id.reputation_count);
+        TextView myTopic = (TextView) root.findViewById(R.id.my_topic);
+        TextView myReply = (TextView) root.findViewById(R.id.my_reply);
+        TextView myFav = (TextView) root.findViewById(R.id.my_focus);
 
         String accountName = AccountUtils.getActiveAccountName(getActivity());
         if (!TextUtils.isEmpty(mUserName) && mUserName.equals(accountName)) {
-            TextView myTopic = (TextView) root.findViewById(R.id.my_topic);
-            TextView myReply = (TextView) root.findViewById(R.id.my_reply);
-            TextView myFav = (TextView) root.findViewById(R.id.my_focus);
             myTopic.setText(R.string.his_topic);
             myReply.setText(R.string.his_reply);
             myFav.setText(R.string.his_fav);
         }
+
+        mTopicView.setOnClickListener(this);
+        mReplyView.setOnClickListener(this);
+        mFavView.setOnClickListener(this);
+        myTopic.setOnClickListener(this);
+        myReply.setOnClickListener(this);
+        myFav.setOnClickListener(this);
     }
 
     private void initPresenter() {
@@ -117,5 +125,16 @@ public class PersonalInfoPageFragment extends Fragment
         mReplyView.setText(count.replyCount);
         mFavView.setText(count.favCount);
         mReputationView.setText(count.reputationCount);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.my_topic:
+            case R.id.topic_count: {
+                TopicActivity.start(getActivity(), mUserName);
+                break;
+            }
+        }
     }
 }
