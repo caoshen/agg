@@ -69,7 +69,7 @@ public class PersonalInfoPageFragment extends Fragment
         TextView myFav = (TextView) root.findViewById(R.id.my_focus);
 
         String accountName = AccountUtils.getActiveAccountName(getActivity());
-        if (!TextUtils.isEmpty(mUserName) && mUserName.equals(accountName)) {
+        if (!TextUtils.isEmpty(mUserName) && !mUserName.equals(accountName)) {
             myTopic.setText(R.string.his_topic);
             myReply.setText(R.string.his_reply);
             myFav.setText(R.string.his_fav);
