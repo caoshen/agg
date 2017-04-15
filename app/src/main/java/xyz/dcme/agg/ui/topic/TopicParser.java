@@ -32,11 +32,17 @@ class TopicParser {
                 String title = e.select("h3.title a").text();
                 String lastTouched = e.select("span.last-touched").text();
                 String replyCount = e.select("div.count a").text();
+                String name = e.select("span.username a").text();
+                String avatar = e.select("img").attr("src");
+                String detailUrl = e.select("h3.title a").attr("href");
 
                 Topic d = new Topic();
+                d.authorName = name;
+                d.authorAvatar = avatar;
                 d.title = title;
                 d.lastTouched = lastTouched;
                 d.replyCount = replyCount;
+                d.detailUrl = detailUrl;
                 topics.add(d);
             }
         } catch (IOException e) {

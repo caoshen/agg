@@ -59,7 +59,7 @@
             android:id="@+id/post_comment_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/post_comment_count"
+            android:text="@string/comment_count"
             android:textSize="12sp"/>
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/post_item_inner_margin"
-            android:text="@string/post_read_count"
+            android:text="@string/read_count"
             android:textSize="12sp"
             android:visibility="gone"/>
 
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/post_item_inner_margin"
-            android:text="@string/post_like_count"
+            android:text="@string/like_count"
             android:textSize="12sp"
             android:visibility="gone"/>
     </LinearLayout>

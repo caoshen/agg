@@ -17,6 +17,9 @@ import com.bumptech.glide.request.RequestListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import xyz.dcme.agg.R;
+import xyz.dcme.agg.util.transformation.CircleTransformation;
+
 public class ImageLoader {
     private static final String TAG = LogUtils.makeLogTag("ImageLoader");
 
@@ -67,6 +70,14 @@ public class ImageLoader {
 
     public static void loadImage(Context context, int drawableResId, ImageView imageView) {
         Glide.with(context).load(drawableResId).into(imageView);
+    }
+
+    public static void loadAvatar(Context context, String imageUrl, ImageView imageView) {
+        Glide.with(context)
+                .load(imageUrl)
+                .placeholder(R.drawable.ic_default_avatar)
+                .transform(new CircleTransformation(context))
+                .into(imageView);
     }
 
     private static class VariableWidthImageLoader extends BaseGlideUrlLoader<String> {

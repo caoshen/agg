@@ -25,7 +25,7 @@ public class PostCommonAdapter extends CommonAdapter<Post> {
         holder.setText(R.id.post_content, post.title);
         holder.setText(R.id.post_user_name, post.userName);
         holder.setText(R.id.post_last_visit_time, post.lastVisitTime);
-        String commentCount = mContext.getString(R.string.post_comment_count, post.commentCount);
+        String commentCount = mContext.getString(R.string.comment_count, post.commentCount);
         holder.setText(R.id.post_comment_count, commentCount);
         ImageView avatar = holder.getView(R.id.post_avatar);
         Glide.with(mContext)

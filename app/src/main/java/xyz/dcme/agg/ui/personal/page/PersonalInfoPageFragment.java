@@ -67,6 +67,9 @@ public class PersonalInfoPageFragment extends Fragment
         TextView myTopic = (TextView) root.findViewById(R.id.my_topic);
         TextView myReply = (TextView) root.findViewById(R.id.my_reply);
         TextView myFav = (TextView) root.findViewById(R.id.my_focus);
+        LinearLayout topics = (LinearLayout) root.findViewById(R.id.topics);
+        LinearLayout replies = (LinearLayout) root.findViewById(R.id.replies);
+        LinearLayout fav = (LinearLayout) root.findViewById(R.id.favourites);
 
         String accountName = AccountUtils.getActiveAccountName(getActivity());
         if (!TextUtils.isEmpty(mUserName) && !mUserName.equals(accountName)) {
@@ -75,9 +78,9 @@ public class PersonalInfoPageFragment extends Fragment
             myFav.setText(R.string.his_fav);
         }
 
-        mTopicView.setOnClickListener(this);
-        mReplyView.setOnClickListener(this);
-        mFavView.setOnClickListener(this);
+        topics.setOnClickListener(this);
+        replies.setOnClickListener(this);
+        fav.setOnClickListener(this);
         myTopic.setOnClickListener(this);
         myReply.setOnClickListener(this);
         myFav.setOnClickListener(this);
@@ -130,8 +133,8 @@ public class PersonalInfoPageFragment extends Fragment
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.my_topic:
-            case R.id.topic_count: {
+            case R.id.topics:
+            case R.id.my_topic: {
                 TopicActivity.start(getActivity(), mUserName);
                 break;
             }

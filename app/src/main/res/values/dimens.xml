@@ -24,4 +24,7 @@
     <dimen name="image_height">120dp</dimen>
     <dimen name="spacing_normail">16dp</dimen>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
+    <dimen name="card_radius">2dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="margin_2">2dp</dimen>
 </resources>
