@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,8 +70,7 @@ public class PersonalInfoPageFragment extends Fragment
         LinearLayout replies = (LinearLayout) root.findViewById(R.id.replies);
         LinearLayout fav = (LinearLayout) root.findViewById(R.id.favourites);
 
-        String accountName = AccountUtils.getActiveAccountName(getActivity());
-        if (!TextUtils.isEmpty(mUserName) && !mUserName.equals(accountName)) {
+        if (!AccountUtils.isCurrentAccount(getActivity(), mUserName)) {
             myTopic.setText(R.string.his_topic);
             myReply.setText(R.string.his_reply);
             myFav.setText(R.string.his_fav);

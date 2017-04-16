@@ -15,5 +15,6 @@ public interface TopicContract {
 
         void setLoadingIndicator(boolean active);
         void showTopics(List<Topic> topics);
+        void showNoTopics();
     }
 }

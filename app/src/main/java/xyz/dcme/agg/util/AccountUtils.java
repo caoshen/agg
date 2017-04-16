@@ -107,4 +107,9 @@ public class AccountUtils {
         String name = makeAccountSpecificPrefKey(context, PREFIX_PREF_IMAGE_URL);
         return hasActiveAccount(context) ? sp.getString(name, null) : null;
     }
+
+    public static boolean isCurrentAccount(Context context, String userName) {
+        String accountName = getActiveAccountName(context);
+        return !TextUtils.isEmpty(userName) && userName.equals(accountName);
+    }
 }
