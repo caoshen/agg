@@ -30,6 +30,7 @@
         <activity android:name=".ui.login.LoginActivity"/>
         <activity android:name=".ui.personal.PersonalInfoActivity"/>
         <activity android:name=".ui.topic.TopicActivity"/>
+        <activity android:name=".ui.reply.ReplyActivity"/>
     </application>
 
 </manifest>

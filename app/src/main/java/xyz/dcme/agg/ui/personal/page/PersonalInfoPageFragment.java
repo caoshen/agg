@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.reply.ReplyActivity;
 import xyz.dcme.agg.ui.topic.TopicActivity;
 import xyz.dcme.agg.util.AccountUtils;
 
@@ -134,6 +135,11 @@ public class PersonalInfoPageFragment extends Fragment
             case R.id.topics:
             case R.id.my_topic: {
                 TopicActivity.start(getActivity(), mUserName);
+                break;
+            }
+            case R.id.replies:
+            case R.id.my_reply: {
+                ReplyActivity.start(getActivity(), mUserName);
                 break;
             }
         }
