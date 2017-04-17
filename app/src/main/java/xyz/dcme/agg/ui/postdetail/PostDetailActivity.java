@@ -21,17 +21,8 @@ public class PostDetailActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
-        initViews();
         initData();
         initFragment();
-    }
-
-    private void initViews() {
-        getToolbar();
-        ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setTitle("");
-        }
     }
 
     private void initData() {

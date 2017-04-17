@@ -3,8 +3,12 @@ package xyz.dcme.agg.ui.postdetail;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -83,6 +87,21 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
         mSendBtn.setOnClickListener(this);
         mSendBtn.addTextChangedListener(this);
         mLoadingProgressBar = (ProgressBar) view.findViewById(R.id.loading);
+
+        initToolbar(view);
+    }
+
+    private void initToolbar(View view) {
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+
+        FragmentActivity activity = getActivity();
+        if (activity != null && activity instanceof AppCompatActivity) {
+            ((AppCompatActivity) activity).setSupportActionBar(toolbar);
+            ActionBar ab = ((AppCompatActivity) activity).getSupportActionBar();
+            if (ab != null) {
+                ab.setDisplayHomeAsUpEnabled(true);
+            }
+        }
     }
 
     @Override
