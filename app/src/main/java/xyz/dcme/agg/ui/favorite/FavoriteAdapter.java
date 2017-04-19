@@ -1,7 +1,6 @@
-package xyz.dcme.agg.ui.post;
+package xyz.dcme.agg.ui.favorite;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -12,12 +11,12 @@ import java.util.List;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.model.Post;
-import xyz.dcme.agg.ui.postdetail.PostDetailActivity;
+import xyz.dcme.agg.ui.post.PostCommonAdapter;
 import xyz.dcme.agg.util.transformation.CircleTransformation;
 
-public class PostCommonAdapter extends CommonAdapter<Post> {
-    public PostCommonAdapter(Context context, int layoutId, List<Post> datas) {
-        super(context, layoutId, datas);
+class FavoriteAdapter extends CommonAdapter<Post> {
+    public FavoriteAdapter(Context context, int layoutId, List<Post> data) {
+        super(context, layoutId, data);
     }
 
     @Override
@@ -33,23 +32,6 @@ public class PostCommonAdapter extends CommonAdapter<Post> {
                 .placeholder(R.drawable.ic_default_avatar)
                 .transform(new CircleTransformation(mContext))
                 .into(avatar);
-        holder.setOnClickListener(R.id.post_item, new OnRvItemListener(mContext, post));
-    }
-
-
-    public static class OnRvItemListener implements View.OnClickListener {
-
-        private Post mPost;
-        private Context mContext;
-
-        public OnRvItemListener(Context context, Post post) {
-            mContext = context;
-            mPost = post;
-        }
-
-        @Override
-        public void onClick(View view) {
-            PostDetailActivity.startActivity(mContext, mPost.link);
-        }
+        holder.setOnClickListener(R.id.post_item, new PostCommonAdapter.OnRvItemListener(mContext, post));
     }
 }
