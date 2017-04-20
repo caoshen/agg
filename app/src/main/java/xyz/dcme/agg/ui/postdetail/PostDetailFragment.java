@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -78,9 +80,28 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
         mRecycler = (RecyclerView) view.findViewById(R.id.post_detail);
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(lm);
+        mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+
         mAdapter = new PostDetailAdapter(getActivity(), mData);
         mAdapter.addItemViewDelegate(new PostContentDelegate(getActivity()));
+        PostMyCommentDelegate myCommentDelegate = new PostMyCommentDelegate(getActivity());
+        myCommentDelegate.setOnMyCommentClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentActivity activity = getActivity();
+                if (activity != null) {
+                    FragmentManager fm = activity.getSupportFragmentManager();
+                    fm.beginTransaction()
+                            .setCustomAnimations(R.anim.footer_menu_slide_in, R.anim.footer_menu_slide_out)
+                            .replace(R.id.emoji_keyboard, CommentFragment.newInstance())
+                            .commit();
+                }
+            }
+        });
+        mAdapter.addItemViewDelegate(myCommentDelegate);
         mAdapter.addItemViewDelegate(new PostCommentDelegate(getActivity()));
+
+
         mRecycler.setAdapter(mAdapter);
         mCommentText = (EditText) view.findViewById(R.id.reply_content);
         mSendBtn = (Button) view.findViewById(R.id.send_reply);

@@ -21,8 +21,11 @@ import com.bumptech.glide.Glide;
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.account.AccountInfo;
+import xyz.dcme.agg.ui.favorite.FavoriteActivity;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.personal.PersonalInfoActivity;
+import xyz.dcme.agg.ui.reply.ReplyActivity;
+import xyz.dcme.agg.ui.topic.TopicActivity;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.AnimationUtils;
 import xyz.dcme.agg.util.Constants;
@@ -88,6 +91,16 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
 //        mToolbar.inflateMenu(R.menu.menu_me);
 //        mAppBar.addOnOffsetChangedListener(this);
 //        AnimationUtils.startAlphaAnimation(mToolbar, 0, View.INVISIBLE);
+
+        TextView myTopic = (TextView) view.findViewById(R.id.my_topic);
+        TextView myReply = (TextView) view.findViewById(R.id.my_reply);
+        TextView myFocus = (TextView) view.findViewById(R.id.my_focus);
+        TextView myHistory = (TextView) view.findViewById(R.id.my_history);
+        
+        myTopic.setOnClickListener(this);
+        myReply.setOnClickListener(this);
+        myFocus.setOnClickListener(this);
+        myHistory.setOnClickListener(this);
     }
 
     @Override
@@ -151,6 +164,33 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
                     Intent intent = new Intent(getActivity(), PersonalInfoActivity.class);
                     intent.putExtra(Constants.EXTRA_ACCOUNT_INFO, mAccountInfo);
                     startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivityForResult(intent, REQUEST_LOGIN);
+                }
+                break;
+            }
+            case R.id.my_topic: {
+                if (mIsLogin) {
+                    TopicActivity.start(getActivity(), mAccountInfo.getUserName());
+                } else {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivityForResult(intent, REQUEST_LOGIN);
+                }
+                break;
+            }
+            case R.id.my_reply: {
+                if (mIsLogin) {
+                    ReplyActivity.start(getActivity(), mAccountInfo.getUserName());
+                } else {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivityForResult(intent, REQUEST_LOGIN);
+                }
+                break;
+            }
+            case R.id.my_focus: {
+                if (mIsLogin) {
+                    FavoriteActivity.start(getActivity(), mAccountInfo.getUserName());
                 } else {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivityForResult(intent, REQUEST_LOGIN);

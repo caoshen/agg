@@ -68,4 +68,6 @@
     <string name="his_topic">Ta 的主题</string>
     <string name="his_reply">Ta 的回复</string>
     <string name="his_fav">Ta 的收藏</string>
+    <string name="send_comment_hint">发表评论 &#8230;</string>
+    <string name="comment">评论</string>
 </resources>

@@ -34,7 +34,7 @@
 
     <style name="AppTheme.MeItemText">
         <item name="android:background">@color/white</item>
-        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:padding">@dimen/margin_16</item>
@@ -60,5 +60,7 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <dimen name="margin_4">4dp</dimen>
+    <style name="PostDetailTheme" parent="AppTheme">
+        <item name="android:listDivider">@drawable/divider_bg_post_detail</item>
+    </style>
 </resources>

@@ -28,7 +28,8 @@
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingEnd="@dimen/reply_margin_bottom"
-        android:paddingStart="@dimen/reply_margin_bottom">
+        android:paddingStart="@dimen/reply_margin_bottom"
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/reply_content"

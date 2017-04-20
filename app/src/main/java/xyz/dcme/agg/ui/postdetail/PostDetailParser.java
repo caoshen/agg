@@ -17,6 +17,7 @@ import java.util.Map;
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
+import xyz.dcme.agg.ui.postdetail.data.PostMyComment;
 import xyz.dcme.agg.util.LogUtils;
 
 public class PostDetailParser {
@@ -64,6 +65,14 @@ public class PostDetailParser {
         }
         PostContent postContent = new PostContent(name, avatar, content, createTime, title, clickCount, node);
         data.add(postContent);
+
+        PostMyComment myComment = new PostMyComment(null, null, null, null);
+        Elements replyHeaders = doc.select("div.topic-reply div.ui-header span");
+        if (replyHeaders != null && !replyHeaders.isEmpty()) {
+            String totalCommentCount = replyHeaders.first().text();
+            myComment.setTotalCount(totalCommentCount);
+        }
+        data.add(myComment);
 
         Elements replyItems = doc.select("div.reply-item");
         for (Element replyItem : replyItems) {
