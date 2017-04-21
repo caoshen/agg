@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -27,6 +26,7 @@ import java.util.List;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
+import xyz.dcme.agg.widget.BottomSheetBar;
 
 public class PostDetailFragment extends Fragment implements PostDetailContract.View,
         View.OnClickListener, TextWatcher {
@@ -88,14 +88,7 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
         myCommentDelegate.setOnMyCommentClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentActivity activity = getActivity();
-                if (activity != null) {
-                    FragmentManager fm = activity.getSupportFragmentManager();
-                    fm.beginTransaction()
-                            .setCustomAnimations(R.anim.footer_menu_slide_in, R.anim.footer_menu_slide_out)
-                            .replace(R.id.emoji_keyboard, CommentFragment.newInstance())
-                            .commit();
-                }
+                BottomSheetBar.delegation(getActivity()).show();
             }
         });
         mAdapter.addItemViewDelegate(myCommentDelegate);
