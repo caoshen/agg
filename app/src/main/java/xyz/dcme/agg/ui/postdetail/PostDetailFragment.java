@@ -39,6 +39,7 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
     private EditText mCommentText;
     private Button mSendBtn;
     private ProgressBar mLoadingProgressBar;
+    private BottomSheetBar mBottomBar;
 
     public static PostDetailFragment newInstance(String url) {
         PostDetailFragment fragment = new PostDetailFragment();
@@ -85,10 +86,12 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
         mAdapter = new PostDetailAdapter(getActivity(), mData);
         mAdapter.addItemViewDelegate(new PostContentDelegate(getActivity()));
         PostMyCommentDelegate myCommentDelegate = new PostMyCommentDelegate(getActivity());
+        mBottomBar = BottomSheetBar.delegation(getActivity());
+        mBottomBar.setSendCommentListener(this);
         myCommentDelegate.setOnMyCommentClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomSheetBar.delegation(getActivity()).show();
+                mBottomBar.show();
             }
         });
         mAdapter.addItemViewDelegate(myCommentDelegate);
@@ -164,9 +167,11 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.send_reply) {
-            String comment = mCommentText.getText().toString();
-            mPresenter.sendReply(comment, mUrl);
+        if (v.getId() == R.id.send_button) {
+            String comment = mBottomBar.getComment();
+            if (!TextUtils.isEmpty(comment)) {
+                mPresenter.sendReply(comment, mUrl);
+            }
         }
     }
 

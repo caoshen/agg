@@ -89,4 +89,12 @@ public class BottomSheetBar {
             mSend.setOnClickListener(listener);
         }
     }
+
+    public String getComment() {
+        if (mComment != null) {
+            return mComment.getText().toString();
+        } else {
+            return null;
+        }
+    }
 }
