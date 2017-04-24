@@ -37,7 +37,7 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
     public void convert(ViewHolder holder, PostDetailItem item, int position) {
         holder.setText(R.id.comment_name, item.getUserName());
         holder.setText(R.id.comment_content, item.getContent());
-        holder.setText(R.id.comment_number, mContext.getString(R.string.x_floor, position + ""));
+        holder.setText(R.id.comment_number, mContext.getString(R.string.x_floor, (position - 1) + ""));
         holder.setText(R.id.comment_create_time, item.getCreateTime());
         ImageView avatar = holder.getView(R.id.comment_avatar);
 
