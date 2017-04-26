@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -14,7 +13,6 @@ import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.account.OnAccountClickListener;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.ui.postdetail.data.PostMyComment;
-import xyz.dcme.agg.util.transformation.CircleTransformation;
 
 class PostMyCommentDelegate implements ItemViewDelegate<PostDetailItem> {
     private Context mContext;
@@ -51,14 +49,6 @@ class PostMyCommentDelegate implements ItemViewDelegate<PostDetailItem> {
         if (TextUtils.isEmpty(item.getUserName()) || TextUtils.isEmpty(item.getAvatar())) {
             return;
         }
-
-        ImageView avatar = holder.getView(R.id.my_avatar);
-
-        Glide.with(mContext)
-                .load(item.getAvatar())
-                .placeholder(R.drawable.ic_default_avatar)
-                .transform(new CircleTransformation(mContext))
-                .into(avatar);
 
         AccountInfo info = new AccountInfo();
         info.setUserName(item.getUserName());

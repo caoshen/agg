@@ -27,7 +27,8 @@
             android:layout_marginStart="@dimen/post_item_inner_margin"
             android:text="@string/app_name"
             android:textColor="@color/black"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:ellipsize="marquee"/>
 
         <TextView
             android:id="@+id/post_last_visit_time"
