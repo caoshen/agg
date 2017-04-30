@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.util.StringUtils;
 import xyz.dcme.agg.util.TDevice;
 
 public class BottomSheetBar {
@@ -58,7 +59,7 @@ public class BottomSheetBar {
             @Override
             public void afterTextChanged(Editable s) {
                 String comment = mComment.getText().toString();
-                boolean isInputEmpty = TextUtils.isEmpty(comment);
+                boolean isInputEmpty = StringUtils.isBlank(comment);
                 mSend.setVisibility(isInputEmpty ? View.GONE : View.VISIBLE);
             }
         });
