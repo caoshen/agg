@@ -92,6 +92,13 @@ public class BottomSheetBar {
             return;
         }
         mDialog.hide();
+        if (mProgressBar.getVisibility() == View.VISIBLE) {
+            mProgressBar.setVisibility(View.GONE);
+        }
+        String comment = mComment.getText().toString();
+        if (!TextUtils.isEmpty(comment)) {
+            mComment.setText(R.string.empty_str);
+        }
         mRootView.postDelayed(new Runnable() {
             @Override
             public void run() {
