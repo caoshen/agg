@@ -70,4 +70,6 @@
     <string name="his_fav">Ta 的收藏</string>
     <string name="send_comment_hint">发表评论 &#8230;</string>
     <string name="comment">评论</string>
+    <string name="send_comment_success">send comment success</string>
+    <string name="send_comment_fail">send comment fail</string>
 </resources>

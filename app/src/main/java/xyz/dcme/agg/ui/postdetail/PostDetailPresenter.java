@@ -58,7 +58,8 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
 
     @Override
     public void sendReply(final String comment, final String url) {
-        mView.addComment(comment);
+
+        mView.showCommentIndicator(true);
 
         new AsyncTask<Void, Void, Boolean>() {
 
@@ -84,9 +85,10 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
                     cookies.put("_xsrf", xsrf);
                     Connection.Response res = Jsoup.connect(Constants.WEBSITE_HOME_URL + realUrl)
                             .data("tid", tid, "content", content, "_xsrf", xsrf)
-                            .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
+                            .userAgent(Constants.USER_AGENT)
                             .cookies(cookies)
                             .method(Connection.Method.POST).execute();
+                    return res.statusCode() == Constants.HTTP_OK;
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -99,6 +101,9 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
                 super.onPostExecute(result);
                 if (!result) {
                     mView.sendCommentFailed();
+                } else {
+                    mView.setCommentSuccess();
+                    mView.addComment(comment);
                 }
             }
         }.execute();

@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,7 +154,8 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
 
     @Override
     public void addComment(String comment) {
-        PostDetailItem item = new PostComment("visitor", "", comment, "1 min ago");
+        String rightNow = getString(R.string.right_now);
+        PostDetailItem item = new PostComment("visitor", "", comment, rightNow);
         int size = mAdapter.getItemCount();
         mAdapter.getDatas().add(item);
         mAdapter.notifyItemInserted(size);
@@ -162,7 +164,25 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
 
     @Override
     public void sendCommentFailed() {
+        mBottomBar.hide();
+        FragmentActivity activity = getActivity();
+        if (activity != null) {
+            Toast.makeText(activity, R.string.send_comment_fail, Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    @Override
+    public void showCommentIndicator(boolean b) {
+        mBottomBar.sendingComment(b);
+    }
+
+    @Override
+    public void setCommentSuccess() {
+        mBottomBar.hide();
+        FragmentActivity activity = getActivity();
+        if (activity != null) {
+            Toast.makeText(activity, R.string.send_comment_success, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

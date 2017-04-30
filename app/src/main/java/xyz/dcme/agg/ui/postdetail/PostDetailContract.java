@@ -24,5 +24,9 @@ public interface PostDetailContract {
         void addComment(String comment);
 
         void sendCommentFailed();
+
+        void showCommentIndicator(boolean b);
+
+        void setCommentSuccess();
     }
 }

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.util.TDevice;
@@ -21,6 +22,7 @@ public class BottomSheetBar {
     private EditText mComment;
     private ImageButton mSend;
     private BottomDialog mDialog;
+    private ProgressBar mProgressBar;
 
     private BottomSheetBar(Context context) {
         mContext = context;
@@ -40,6 +42,7 @@ public class BottomSheetBar {
         }
         mComment = (EditText) mRootView.findViewById(R.id.comment);
         mSend = (ImageButton) mRootView.findViewById(R.id.send_button);
+        mProgressBar = (ProgressBar) mRootView.findViewById(R.id.send_progress);
 
         mComment.addTextChangedListener(new TextWatcher() {
             @Override
@@ -84,6 +87,19 @@ public class BottomSheetBar {
         }, 50);
     }
 
+    public void hide() {
+        if (mDialog == null || mRootView == null) {
+            return;
+        }
+        mDialog.hide();
+        mRootView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                TDevice.hideSoftKeyboard(mComment);
+            }
+        }, 50);
+    }
+
     public void setSendCommentListener(View.OnClickListener listener) {
         if (mSend != null && listener != null) {
             mSend.setOnClickListener(listener);
@@ -95,6 +111,16 @@ public class BottomSheetBar {
             return mComment.getText().toString();
         } else {
             return null;
+        }
+    }
+
+    public void sendingComment(boolean isSending) {
+        if (isSending) {
+            mSend.setVisibility(View.GONE);
+            mProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mSend.setVisibility(View.VISIBLE);
+            mProgressBar.setVisibility(View.GONE);
         }
     }
 }
