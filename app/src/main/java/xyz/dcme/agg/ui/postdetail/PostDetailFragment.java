@@ -120,13 +120,13 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
     }
 
     @Override
-    public void showIndicator() {
-        mLoadingProgressBar.setVisibility(View.VISIBLE);
-    }
+    public void showIndicator(boolean isActive) {
+        if (isActive) {
+            mLoadingProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mLoadingProgressBar.setVisibility(View.GONE);
 
-    @Override
-    public void hideIndicator() {
-        mLoadingProgressBar.setVisibility(View.GONE);
+        }
     }
 
     @Override

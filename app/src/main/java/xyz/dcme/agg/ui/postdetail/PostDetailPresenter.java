@@ -1,7 +1,5 @@
 package xyz.dcme.agg.ui.postdetail;
 
-import android.app.Fragment;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -20,14 +18,9 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
     private static final String TAG = LogUtils.makeLogTag("PostDetailPresenter");
 
     private final PostDetailContract.View mView;
-    private Context mContext;
 
     public PostDetailPresenter(PostDetailContract.View view) {
         mView = view;
-
-        if (mView instanceof Fragment) {
-            mContext = ((Fragment) mView).getActivity();
-        }
         view.setPresenter(this);
     }
 
@@ -39,7 +32,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mView.showIndicator();
+                mView.showIndicator(true);
             }
 
             @Override
@@ -51,7 +44,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
             protected void onPostExecute(List<PostDetailItem> data) {
                 super.onPostExecute(data);
                 mView.onRefresh(data);
-                mView.hideIndicator();
+                mView.showIndicator(false);
             }
         }.execute();
     }
@@ -66,10 +59,9 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
             @Override
             protected Boolean doInBackground(Void... voids) {
                 String tid = extractTidFromUrl(url);
-                String content = comment;
                 Map<String, String> cookies = PostDetailParser.mockLogin();
                 try {
-                    Log.d(TAG, tid + " " + content);
+                    Log.d(TAG, tid + " " + comment);
                     String realUrl = url;
 
                     if (realUrl.contains("#")) {
@@ -84,7 +76,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
                     String xsrf = "360b2cac5e274a11bff1b42ef6de9ca5";
                     cookies.put("_xsrf", xsrf);
                     Connection.Response res = Jsoup.connect(Constants.WEBSITE_HOME_URL + realUrl)
-                            .data("tid", tid, "content", content, "_xsrf", xsrf)
+                            .data("tid", tid, "content", comment, "_xsrf", xsrf)
                             .userAgent(Constants.USER_AGENT)
                             .cookies(cookies)
                             .method(Connection.Method.POST).execute();
