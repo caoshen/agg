@@ -16,9 +16,18 @@ public class ReplyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reply);
         initData();
         initFragment();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_reply;
+    }
+
+    @Override
+    public void initView() {
+
     }
 
     private void initData() {

@@ -33,9 +33,18 @@ public class PersonalInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_info);
         getIntentData();
         initViews();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_personal_info;
+    }
+
+    @Override
+    public void initView() {
+
     }
 
     private void getIntentData() {

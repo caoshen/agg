@@ -3,97 +3,88 @@ package xyz.dcme.agg.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.login.LoginFragment;
 import xyz.dcme.agg.ui.me.MeFragment;
 import xyz.dcme.agg.ui.post.PostFragment;
-import xyz.dcme.agg.ui.post.PostPresenter;
-import xyz.dcme.agg.util.ActivityUtils;
+import xyz.dcme.agg.util.Constants;
 
 public class MainActivity extends BaseActivity {
-
-    private PostPresenter mPresenter;
     private BottomNavigationView mBottomNav;
     private PostFragment mPostFragment;
-    private LoginFragment mLoginFragment;
-    private MeFragment mAboutMeFragment;
+    private MeFragment mMeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initViews();
-        initFragment();
+        initFragment(savedInstanceState);
     }
 
-    private void initViews() {
+    private void initFragment(Bundle savedInstanceState) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        int curFrag = R.id.action_home_page;
+
+        if (savedInstanceState == null) {
+            mPostFragment = PostFragment.newInstance();
+            mMeFragment = MeFragment.newInstance();
+            transaction.add(R.id.main_content, mPostFragment, PostFragment.TAG);
+            transaction.add(R.id.main_content, mMeFragment, MeFragment.TAG);
+        } else {
+            mPostFragment = (PostFragment) fm.findFragmentByTag(PostFragment.TAG);
+            mMeFragment = (MeFragment) fm.findFragmentByTag(MeFragment.TAG);
+            curFrag = savedInstanceState.getInt(Constants.CUR_FRAG, 0);
+        }
+
+        transaction.commit();
+        switchTo(curFrag);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(Constants.CUR_FRAG, mBottomNav.getSelectedItemId());
+    }
+
+    private void switchTo(int curFrag) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        switch (curFrag) {
+            case R.id.action_home_page: {
+                transaction.show(mPostFragment).hide(mMeFragment);
+                break;
+            }
+            case R.id.action_me: {
+                transaction.show(mMeFragment).hide(mPostFragment);
+                break;
+            }
+            default:
+                break;
+        }
+        transaction.commit();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void initView() {
+        initNavBar();
+    }
+
+    private void initNavBar() {
         mBottomNav = (BottomNavigationView) findViewById(R.id.nav_bar);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_home_page: {
-                        initFragment();
-                        if (mPostFragment != null && mPostFragment.isHidden()) {
-                            FragmentManager fm = getSupportFragmentManager();
-                            fm.beginTransaction().show(mPostFragment).commit();
-                        }
-                        if (mAboutMeFragment != null && !mAboutMeFragment.isHidden()) {
-                            FragmentManager fm = getSupportFragmentManager();
-                            fm.beginTransaction().hide(mAboutMeFragment).commit();
-                        }
-                        break;
-                    }
-                    case R.id.action_search: {
-                        break;
-                    }
-                    case R.id.action_me: {
-                        initLoginFragment();
-                        if (mPostFragment != null && !mPostFragment.isHidden()) {
-                            FragmentManager fm = getSupportFragmentManager();
-                            fm.beginTransaction().hide(mPostFragment).commit();
-                        }
-                        if (mAboutMeFragment != null && mAboutMeFragment.isHidden()) {
-                            FragmentManager fm = getSupportFragmentManager();
-                            fm.beginTransaction().show(mAboutMeFragment).commit();
-                        }
-                        break;
-                    }
-                    default: {
-                        return true;
-                    }
-                }
+                switchTo(item.getItemId());
                 return true;
             }
         });
-    }
-
-    private void initFragment() {
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.main_content);
-        if (fragment instanceof PostFragment) {
-            mPostFragment = (PostFragment) fragment;
-        }
-        if (mPostFragment == null) {
-            mPostFragment = PostFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(fm, mPostFragment, R.id.main_content);
-        }
-        mPresenter = new PostPresenter(mPostFragment);
-    }
-
-    private void initLoginFragment() {
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.main_content);
-        if (fragment instanceof MeFragment) {
-            mAboutMeFragment = (MeFragment) fragment;
-        }
-        if (mAboutMeFragment == null) {
-            mAboutMeFragment = new MeFragment();
-            ActivityUtils.addFragmentToActivity(fm, mAboutMeFragment, R.id.main_content);
-        }
     }
 }

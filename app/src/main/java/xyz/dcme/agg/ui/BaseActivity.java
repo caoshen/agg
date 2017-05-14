@@ -1,5 +1,6 @@
 package xyz.dcme.agg.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +10,22 @@ import android.view.MenuItem;
 
 import xyz.dcme.agg.R;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
+    protected Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        mContext = this;
+        initView();
     }
+
+    public abstract int getLayoutId();
+
+    public abstract void initView();
 
     public Toolbar getToolbar() {
         if (mToolbar == null) {

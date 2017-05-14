@@ -32,12 +32,12 @@ import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 
 public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChangedListener, View.OnClickListener {
+    public static final String TAG = "MeFragment";
 
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS     = 0.3f;
     private static final long ALPHA_ANIMATIONS_DURATION = 200;
     private static final int REQUEST_LOGIN = 100;
-    private static final String TAG = LogUtils.makeLogTag("MeFragment");
 
     private Toolbar mToolbar;
     private AppBarLayout mAppBar;
@@ -231,5 +231,10 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
         } else {
             LogUtils.LOGD(TAG, "account info is null!");
         }
+    }
+
+    public static MeFragment newInstance() {
+        MeFragment fragment = new MeFragment();
+        return fragment;
     }
 }

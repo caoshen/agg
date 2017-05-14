@@ -21,6 +21,8 @@ import xyz.dcme.agg.model.Post;
 
 public class PostFragment extends Fragment implements PostContract.View {
 
+    public static final String TAG = "PostFragment";
+
     private PostContract.Presenter mPresenter;
     private RecyclerView mPostRecycler;
     private PostCommonAdapter mPostCommonAdapter;
@@ -36,7 +38,12 @@ public class PostFragment extends Fragment implements PostContract.View {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
+        initPresenter();
         return root;
+    }
+
+    private void initPresenter() {
+        new PostPresenter(this);
     }
 
     @Override

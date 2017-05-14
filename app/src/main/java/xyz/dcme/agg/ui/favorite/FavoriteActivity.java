@@ -16,9 +16,18 @@ public class FavoriteActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorite);
         initData();
         initFragment();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_favorite;
+    }
+
+    @Override
+    public void initView() {
+
     }
 
     private void initData() {

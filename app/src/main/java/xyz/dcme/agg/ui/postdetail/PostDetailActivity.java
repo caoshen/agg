@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseActivity;
@@ -20,9 +19,18 @@ public class PostDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_detail);
         initData();
         initFragment();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_post_detail;
+    }
+
+    @Override
+    public void initView() {
+
     }
 
     private void initData() {

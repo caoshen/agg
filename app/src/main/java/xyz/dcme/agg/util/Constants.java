@@ -9,4 +9,5 @@ public class Constants {
             "(KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36";
     public static final String EXTRA_ACCOUNT_INFO = "extra_account_info";
     public static final int HTTP_OK = 200;
+    public static final String CUR_FRAG = "current_fragment";
 }

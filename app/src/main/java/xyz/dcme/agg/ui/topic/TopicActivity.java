@@ -16,9 +16,18 @@ public class TopicActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_topic);
         initData();
         initFragment();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_topic;
+    }
+
+    @Override
+    public void initView() {
+
     }
 
     private void initData() {
