@@ -73,4 +73,5 @@
     <string name="send_comment_success">send comment success</string>
     <string name="send_comment_fail">send comment fail</string>
     <string name="empty_str"/>
+    <string name="add_node">add node</string>
 </resources>

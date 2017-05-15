@@ -5,7 +5,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
-    app:layout_scrollFlags="scroll|enterAlways|snap"
-    android:background="@color/theme_primary">
+    android:background="@color/theme_primary"
+    app:layout_scrollFlags="scroll|enterAlways|snap">
 
 </android.support.v7.widget.Toolbar>
