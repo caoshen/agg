@@ -10,4 +10,5 @@ public class Constants {
     public static final String EXTRA_ACCOUNT_INFO = "extra_account_info";
     public static final int HTTP_OK = 200;
     public static final String CUR_FRAG = "current_fragment";
+    public static final String NODE_NAME = "node_name";
 }
