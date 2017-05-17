@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.me.MeFragment;
+import xyz.dcme.agg.ui.node.NodeMainFragment;
 import xyz.dcme.agg.ui.post.PostFragment;
 import xyz.dcme.agg.util.Constants;
 
@@ -16,6 +17,7 @@ public class MainActivity extends BaseActivity {
     private BottomNavigationView mBottomNav;
     private PostFragment mPostFragment;
     private MeFragment mMeFragment;
+    private NodeMainFragment mNodeMainFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +32,14 @@ public class MainActivity extends BaseActivity {
 
         if (savedInstanceState == null) {
             mPostFragment = PostFragment.newInstance();
+            mNodeMainFragment = NodeMainFragment.newInstance();
             mMeFragment = MeFragment.newInstance();
             transaction.add(R.id.main_content, mPostFragment, PostFragment.TAG);
+            transaction.add(R.id.main_content, mNodeMainFragment, NodeMainFragment.LOG_TAG);
             transaction.add(R.id.main_content, mMeFragment, MeFragment.TAG);
         } else {
             mPostFragment = (PostFragment) fm.findFragmentByTag(PostFragment.TAG);
+            mNodeMainFragment = (NodeMainFragment) fm.findFragmentByTag(NodeMainFragment.LOG_TAG);
             mMeFragment = (MeFragment) fm.findFragmentByTag(MeFragment.TAG);
             curFrag = savedInstanceState.getInt(Constants.CUR_FRAG, 0);
         }
@@ -54,11 +59,15 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction transaction = fm.beginTransaction();
         switch (curFrag) {
             case R.id.action_home_page: {
-                transaction.show(mPostFragment).hide(mMeFragment);
+                transaction.show(mPostFragment).hide(mNodeMainFragment).hide(mMeFragment);
+                break;
+            }
+            case R.id.action_node: {
+                transaction.show(mNodeMainFragment).hide(mMeFragment).hide(mPostFragment);
                 break;
             }
             case R.id.action_me: {
-                transaction.show(mMeFragment).hide(mPostFragment);
+                transaction.show(mMeFragment).hide(mPostFragment).hide(mNodeMainFragment);
                 break;
             }
             default:

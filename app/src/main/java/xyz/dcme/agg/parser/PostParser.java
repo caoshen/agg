@@ -1,5 +1,7 @@
 package xyz.dcme.agg.parser;
 
+import android.util.Log;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -37,9 +39,12 @@ public class PostParser {
         try {
             doc = Jsoup.connect(url).get();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "parseUrl -> " + e);
         }
         Elements items = doc.select("div.topic-item");
+        if (null == items || items.isEmpty()) {
+            Log.e(TAG, "parseUrl -> " + doc.text());
+        }
         for (Element element : items) {
             Element avatar = element.select("img.avatar").first();
             String avatarUrl = avatar.attr("src");

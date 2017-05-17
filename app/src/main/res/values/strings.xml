@@ -3,7 +3,7 @@
     <string name="menu_home_page">首页</string>
     <string name="menu_search">搜索</string>
     <string name="menu_me">我</string>
-    <string name="loading">加载中</string>
+    <string name="loading">加载中&#8230;</string>
     <string name="post_title">标题</string>
     <string name="post_content">内容</string>
     <string name="name">姓名</string>
@@ -74,4 +74,10 @@
     <string name="send_comment_fail">send comment fail</string>
     <string name="empty_str"/>
     <string name="add_node">add node</string>
+    <string name="reload">重新加载</string>
+    <string name="server_error">服务器出错了</string>
+    <string name="network_error">网络出错了</string>
+    <string name="no_data">没有数据</string>
+    <string name="menu_node">节点</string>
+    <string name="node">节点</string>
 </resources>

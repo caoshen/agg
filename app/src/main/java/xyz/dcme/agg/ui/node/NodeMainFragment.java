@@ -3,6 +3,7 @@ package xyz.dcme.agg.ui.node;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import xyz.dcme.agg.ui.BaseFragmentAdapter;
 import xyz.dcme.agg.util.LogUtils;
 
 public class NodeMainFragment extends BaseFragment implements NodeMainContract.View {
-    private static final String LOG_TAG = "NodeMainFragment";
+    public static final String LOG_TAG = "NodeMainFragment";
 
     private TabLayout mTab;
     private ViewPager mPager;
@@ -27,6 +28,8 @@ public class NodeMainFragment extends BaseFragment implements NodeMainContract.V
         mTab = (TabLayout) mRootView.findViewById(R.id.tab);
         mPager = (ViewPager) mRootView.findViewById(R.id.node_pager);
         mAdd = (ImageView) mRootView.findViewById(R.id.add_node);
+        Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.node);
 
         mPresenter.load();
     }
@@ -56,7 +59,7 @@ public class NodeMainFragment extends BaseFragment implements NodeMainContract.V
         List<String> nodeNames = new ArrayList<>();
         List<Fragment> nodeFragments = new ArrayList<>();
         for (Node n : nodes) {
-            nodeNames.add(n.getName());
+            nodeNames.add(n.getNodeName());
             nodeFragments.add(createFragment(n));
         }
 
@@ -82,5 +85,9 @@ public class NodeMainFragment extends BaseFragment implements NodeMainContract.V
 
     private Fragment createFragment(Node node) {
         return NodeListFragment.newInstance(node);
+    }
+
+    public static NodeMainFragment newInstance() {
+        return new NodeMainFragment();
     }
 }

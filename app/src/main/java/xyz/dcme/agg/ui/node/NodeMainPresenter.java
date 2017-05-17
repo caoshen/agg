@@ -17,9 +17,14 @@ public class NodeMainPresenter implements NodeMainContract.Presenter {
 
     private void initNode() {
         Node nodeQna = new Node("qna", "你问我答");
+        Node nodeLowShine = new Node("lowshine", "同城活动");
+        // Job node needs login first!
         Node nodeJob = new Node("job", "找工作");
+        Node nodeIT = new Node("IT", "IT技术");
         mNodes.add(nodeQna);
+        mNodes.add(nodeLowShine);
         mNodes.add(nodeJob);
+        mNodes.add(nodeIT);
     }
 
     @Override
