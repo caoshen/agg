@@ -9,8 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -25,17 +24,19 @@ import xyz.dcme.agg.ui.favorite.FavoriteActivity;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.personal.PersonalInfoActivity;
 import xyz.dcme.agg.ui.reply.ReplyActivity;
+import xyz.dcme.agg.ui.settings.SettingsActivity;
 import xyz.dcme.agg.ui.topic.TopicActivity;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.AnimationUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 
-public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChangedListener, View.OnClickListener {
+public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChangedListener,
+        View.OnClickListener, Toolbar.OnMenuItemClickListener {
     public static final String TAG = "MeFragment";
 
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
-    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS     = 0.3f;
+    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
     private static final long ALPHA_ANIMATIONS_DURATION = 200;
     private static final int REQUEST_LOGIN = 100;
 
@@ -52,6 +53,11 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
     private AccountInfo mAccountInfo;
     private boolean mIsLogin = false;
 
+    public static MeFragment newInstance() {
+        MeFragment fragment = new MeFragment();
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -62,15 +68,12 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
         return root;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_me, menu);
-    }
-
     private void initViews(View view) {
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         if (mToolbar != null) {
             mToolbar.setTitle(R.string.app_name);
+            mToolbar.inflateMenu(R.menu.menu_me);
+            mToolbar.setOnMenuItemClickListener(this);
         }
 
         mAccount = (RelativeLayout) view.findViewById(R.id.account);
@@ -96,7 +99,7 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
         TextView myReply = (TextView) view.findViewById(R.id.my_reply);
         TextView myFocus = (TextView) view.findViewById(R.id.my_focus);
         TextView myHistory = (TextView) view.findViewById(R.id.my_history);
-        
+
         myTopic.setOnClickListener(this);
         myReply.setOnClickListener(this);
         myFocus.setOnClickListener(this);
@@ -233,8 +236,21 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
         }
     }
 
-    public static MeFragment newInstance() {
-        MeFragment fragment = new MeFragment();
-        return fragment;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_item_settings) {
+            startActivity(new Intent(getActivity(), SettingsActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.menu_item_settings) {
+            if (getActivity() != null) {
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+            }
+        }
+        return true;
     }
 }

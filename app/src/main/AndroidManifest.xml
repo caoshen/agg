@@ -33,6 +33,7 @@
         <activity android:name=".ui.topic.TopicActivity"/>
         <activity android:name=".ui.reply.ReplyActivity"/>
         <activity android:name=".ui.favorite.FavoriteActivity"/>
+        <activity android:name=".ui.settings.SettingsActivity"/>
     </application>
 
 </manifest>

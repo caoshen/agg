@@ -80,4 +80,13 @@
     <string name="no_data">没有数据</string>
     <string name="menu_node">节点</string>
     <string name="node">节点</string>
+    <string name="cache">缓存</string>
+    <string name="clean_cache">清除缓存</string>
+    <string name="double_click_exit">双击退出</string>
+    <string name="advice">建议</string>
+    <string name="send_advice">意见反馈</string>
+    <string name="about_us">关于我们</string>
+    <string name="check_update">检查更新</string>
+    <string name="logout">退出</string>
+    <string name="account">账号</string>
 </resources>
