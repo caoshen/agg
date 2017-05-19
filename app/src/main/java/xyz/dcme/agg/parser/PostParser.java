@@ -10,8 +10,10 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import xyz.dcme.agg.model.Post;
+import xyz.dcme.agg.ui.postdetail.PostDetailParser;
 
 public class PostParser {
     private static final String TAG = "PostParser";
@@ -36,15 +38,26 @@ public class PostParser {
         Document doc = null;
         List<Post> data = new ArrayList<Post>();
 
+        Elements items = null;
         try {
             doc = Jsoup.connect(url).get();
+
+            items = doc.select("div.topic-item");
+            if (null == items || items.isEmpty()) {
+                Log.e(TAG, "parseUrl -> " + doc.text());
+                Map<String, String> userCookies = PostDetailParser.mockLogin();
+                doc = Jsoup.connect(url).cookies(userCookies).get();
+                items = doc.select("div.topic-item");
+                Log.d(TAG, doc.text());
+            }
         } catch (IOException e) {
             Log.e(TAG, "parseUrl -> " + e);
         }
-        Elements items = doc.select("div.topic-item");
+
         if (null == items || items.isEmpty()) {
-            Log.e(TAG, "parseUrl -> " + doc.text());
+            return data;
         }
+
         for (Element element : items) {
             Element avatar = element.select("img.avatar").first();
             String avatarUrl = avatar.attr("src");
