@@ -112,4 +112,8 @@ public class AccountUtils {
         String accountName = getActiveAccountName(context);
         return !TextUtils.isEmpty(userName) && userName.equals(accountName);
     }
+
+    public static void clearAccount(Context context) {
+        setActiveAccount(context, null);
+    }
 }
