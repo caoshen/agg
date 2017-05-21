@@ -37,6 +37,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="account"
         android:title="@string/account">
 
         <Preference

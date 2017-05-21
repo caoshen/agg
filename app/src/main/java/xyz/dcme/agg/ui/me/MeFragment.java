@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -27,29 +26,21 @@ import xyz.dcme.agg.ui.reply.ReplyActivity;
 import xyz.dcme.agg.ui.settings.SettingsActivity;
 import xyz.dcme.agg.ui.topic.TopicActivity;
 import xyz.dcme.agg.util.AccountUtils;
-import xyz.dcme.agg.util.AnimationUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 
-public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChangedListener,
+public class MeFragment extends Fragment implements
         View.OnClickListener, Toolbar.OnMenuItemClickListener {
     public static final String TAG = "MeFragment";
 
-    private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
-    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
-    private static final long ALPHA_ANIMATIONS_DURATION = 200;
     private static final int REQUEST_LOGIN = 100;
+    private static final int REQUEST_SETTINGS = 200;
 
     private Toolbar mToolbar;
-    private AppBarLayout mAppBar;
-    private RelativeLayout mTitleContainer;
-    private TextView mTitle;
     private RelativeLayout mAccount;
     private CircleImageView mAvatar;
     private TextView mUsername;
 
-    private boolean isTitleVisible = false;
-    private boolean isTitleContainerVisible = true;
     private AccountInfo mAccountInfo;
     private boolean mIsLogin = false;
 
@@ -82,18 +73,7 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
         mAvatar = (CircleImageView) view.findViewById(R.id.avatar);
         mUsername = (TextView) view.findViewById(R.id.user_name);
 
-        mIsLogin = AccountUtils.hasActiveAccount(getActivity());
-        if (mIsLogin) {
-            mAccountInfo = AccountUtils.getActiveAccountInfo(getActivity());
-            loadAccountInfo(mAccountInfo);
-        }
-//        mAppBar = (AppBarLayout) view.findViewById(R.id.appbar);
-//        mTitleContainer = (RelativeLayout) view.findViewById(R.id.main_title);
-//        mTitle = (TextView) view.findViewById(R.id.toolbar_title);
-//
-//        mToolbar.inflateMenu(R.menu.menu_me);
-//        mAppBar.addOnOffsetChangedListener(this);
-//        AnimationUtils.startAlphaAnimation(mToolbar, 0, View.INVISIBLE);
+        updateAccount();
 
         TextView myTopic = (TextView) view.findViewById(R.id.my_topic);
         TextView myReply = (TextView) view.findViewById(R.id.my_reply);
@@ -104,59 +84,6 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
         myReply.setOnClickListener(this);
         myFocus.setOnClickListener(this);
         myHistory.setOnClickListener(this);
-    }
-
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        int maxScroll = appBarLayout.getTotalScrollRange();
-        float offsetPercent = (float) Math.abs(verticalOffset) / (float) maxScroll;
-
-        handleAlphaOnTitle(offsetPercent);
-        handleTitleVisibility(offsetPercent);
-    }
-
-    private void handleTitleVisibility(float offsetPercent) {
-        if (offsetPercent >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
-            showTitle();
-        } else {
-            hideTitle();
-        }
-    }
-
-    private void showTitle() {
-        if (!isTitleVisible) {
-            AnimationUtils.startAlphaAnimation(mToolbar, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-            isTitleVisible = true;
-        }
-    }
-
-    private void hideTitle() {
-        if (isTitleVisible) {
-            AnimationUtils.startAlphaAnimation(mToolbar, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-            isTitleVisible = false;
-        }
-    }
-
-    private void handleAlphaOnTitle(float offsetPercent) {
-        if (offsetPercent >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
-            hideTitleDetails();
-        } else {
-            showTitleDetails();
-        }
-    }
-
-    private void hideTitleDetails() {
-        if (isTitleContainerVisible) {
-            AnimationUtils.startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-            isTitleContainerVisible = false;
-        }
-    }
-
-    private void showTitleDetails() {
-        if (!isTitleContainerVisible) {
-            AnimationUtils.startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-            isTitleContainerVisible = true;
-        }
     }
 
     @Override
@@ -215,7 +142,25 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
             } else {
                 LogUtils.LOGD(TAG, "data is null!");
             }
+        } else if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_SETTINGS) {
+            updateAccount();
         }
+    }
+
+    private void updateAccount() {
+        mIsLogin = AccountUtils.hasActiveAccount(getActivity());
+        if (mIsLogin) {
+            mAccountInfo = AccountUtils.getActiveAccountInfo(getActivity());
+            loadAccountInfo(mAccountInfo);
+        } else {
+            mAccountInfo = null;
+            clearAccountInfo();
+        }
+    }
+
+    private void clearAccountInfo() {
+        mUsername.setText(R.string.login_please);
+        mAvatar.setImageResource(R.drawable.ic_me);
     }
 
     private void loadAccountInfo(AccountInfo accountInfo) {
@@ -237,20 +182,14 @@ public class MeFragment extends Fragment implements AppBarLayout.OnOffsetChanged
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_item_settings) {
-            startActivity(new Intent(getActivity(), SettingsActivity.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.menu_item_settings) {
             if (getActivity() != null) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivityForResult(intent, REQUEST_SETTINGS);
             }
         }
         return true;
     }
+
 }
