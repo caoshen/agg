@@ -22,7 +22,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:tabIndicatorColor="@color/white">
+                app:tabIndicatorColor="@color/white"
+                app:tabMode="scrollable">
             </android.support.design.widget.TabLayout>
 
             <ImageView
