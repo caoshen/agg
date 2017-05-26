@@ -1,7 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_home_page"
-          android:title="@string/menu_home_page"
-          android:icon="@drawable/ic_home_page" />
     <item android:id="@+id/action_node"
           android:title="@string/menu_node"
           android:icon="@drawable/ic_search" />
