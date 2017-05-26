@@ -3,10 +3,8 @@ package xyz.dcme.agg.ui.node;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.LinearLayout;
 
 import com.zhy.adapter.recyclerview.wrapper.LoadMoreWrapper;
 
@@ -62,8 +60,6 @@ public class NodeListFragment extends BaseFragment implements NodeListContract.V
             }
         });
         mNodeList.setAdapter(mLoadMoreWrapper);
-        mNodeList.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
-
         mPresenter.start(mNodeName);
     }
 

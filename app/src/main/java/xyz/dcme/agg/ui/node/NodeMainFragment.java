@@ -29,7 +29,7 @@ public class NodeMainFragment extends BaseFragment implements NodeMainContract.V
         mPager = (ViewPager) mRootView.findViewById(R.id.node_pager);
         mAdd = (ImageView) mRootView.findViewById(R.id.add_node);
         Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.node);
+        toolbar.setTitle(R.string.app_name);
 
         mPresenter.load();
     }
