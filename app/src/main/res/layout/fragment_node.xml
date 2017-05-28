@@ -26,7 +26,7 @@
                 app:tabMode="scrollable">
             </android.support.design.widget.TabLayout>
 
-            <ImageView
+            <TextView
                 android:id="@+id/add_node"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,7 +34,8 @@
                 android:contentDescription="@string/add_node"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/margin_8"
-                android:src="@drawable/ic_add"/>
+                android:textColor="@color/white"
+                android:text="@string/more"/>
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>
 

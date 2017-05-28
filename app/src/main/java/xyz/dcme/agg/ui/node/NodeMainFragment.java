@@ -1,10 +1,12 @@
 package xyz.dcme.agg.ui.node;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,20 +16,26 @@ import xyz.dcme.agg.ui.BaseFragment;
 import xyz.dcme.agg.ui.BaseFragmentAdapter;
 import xyz.dcme.agg.util.LogUtils;
 
-public class NodeMainFragment extends BaseFragment implements NodeMainContract.View {
+public class NodeMainFragment extends BaseFragment
+        implements NodeMainContract.View, View.OnClickListener {
     public static final String LOG_TAG = "NodeMainFragment";
 
     private TabLayout mTab;
     private ViewPager mPager;
-    private ImageView mAdd;
+    private TextView mAdd;
     private NodeMainContract.Presenter mPresenter;
     private BaseFragmentAdapter mAdapter;
+
+    public static NodeMainFragment newInstance() {
+        return new NodeMainFragment();
+    }
 
     @Override
     protected void initView() {
         mTab = (TabLayout) mRootView.findViewById(R.id.tab);
         mPager = (ViewPager) mRootView.findViewById(R.id.node_pager);
-        mAdd = (ImageView) mRootView.findViewById(R.id.add_node);
+        mAdd = (TextView) mRootView.findViewById(R.id.add_node);
+        mAdd.setOnClickListener(this);
         Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
 
@@ -87,7 +95,14 @@ public class NodeMainFragment extends BaseFragment implements NodeMainContract.V
         return NodeListFragment.newInstance(node);
     }
 
-    public static NodeMainFragment newInstance() {
-        return new NodeMainFragment();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.add_node: {
+                Intent intent = new Intent(getActivity(), NodeChooseActivity.class);
+                startActivity(intent);
+                break;
+            }
+        }
     }
 }

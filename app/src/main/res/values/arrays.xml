@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fixed_node_title">
+        <item>全部</item>
+        <item>最新话题</item>
+        <item>精华主题</item>
+    </string-array>
+
+    <string-array name="all_node_title">
+        <item>你问我答</item>
+        <item>同城活动</item>
+        <item>找工作</item>
+        <item>IT技术</item>
+    </string-array>
+
+    <string-array name="fixed_node_name">
+        <item>home</item>
+        <item>latest</item>
+        <item>elite</item>
+    </string-array>
+
+    <string-array name="all_node_name">
+        <item>qna</item>
+        <item>lowshine</item>
+        <item>job</item>
+        <item>IT</item>
+    </string-array>
+</resources>
