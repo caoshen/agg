@@ -16,6 +16,8 @@
     <color name="transparent">#00000000</color>
     <color name="background">#fff7f9f9</color>
 
+    <color name="black_05">#0d000000</color>
+
     <!-- 2016 palette -->
     <color name="io16_primary_cyan">#ff25c5d9</color>
     <color name="io16_primary_purple">#ff5d6abf</color>

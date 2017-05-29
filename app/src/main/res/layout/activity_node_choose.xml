@@ -5,4 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <fragment
+        android:id="@+id/node_choose_fragment"
+        android:name="xyz.dcme.agg.ui.node.NodeChooseFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </FrameLayout>

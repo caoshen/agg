@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar_back"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:textStyle="bold"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/cur_node_list"
+        android:id="@+id/node_choose_cur_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never">
@@ -39,7 +39,7 @@
         android:textStyle="bold"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/more_node_list"
+        android:id="@+id/node_choose_more_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never">

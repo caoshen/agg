@@ -16,16 +16,16 @@ public class Node implements Parcelable {
         }
     };
     private String mName;
-    private String mNodeName;
+    private String mTitle;
 
     protected Node(Parcel in) {
         mName = in.readString();
-        mNodeName = in.readString();
+        mTitle = in.readString();
     }
 
-    public Node(String name, String nodeName) {
+    public Node(String name, String title) {
         mName = name;
-        mNodeName = nodeName;
+        mTitle = title;
     }
 
     public String getName() {
@@ -36,12 +36,12 @@ public class Node implements Parcelable {
         mName = name;
     }
 
-    public String getNodeName() {
-        return mNodeName;
+    public String getTitle() {
+        return mTitle;
     }
 
-    public void setNodeName(String nodeName) {
-        mNodeName = nodeName;
+    public void setTitle(String title) {
+        mTitle = title;
     }
 
     @Override
@@ -52,6 +52,6 @@ public class Node implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mName);
-        dest.writeString(mNodeName);
+        dest.writeString(mTitle);
     }
 }

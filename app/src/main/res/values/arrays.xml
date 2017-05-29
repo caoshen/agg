@@ -11,6 +11,9 @@
         <item>同城活动</item>
         <item>找工作</item>
         <item>IT技术</item>
+        <item>金融财经</item>
+        <item>创业创客</item>
+        <item>城市建设</item>
     </string-array>
 
     <string-array name="fixed_node_name">
@@ -24,5 +27,8 @@
         <item>lowshine</item>
         <item>job</item>
         <item>IT</item>
+        <item>finance</item>
+        <item>startup</item>
+        <item>city</item>
     </string-array>
 </resources>

@@ -67,7 +67,7 @@ public class NodeMainFragment extends BaseFragment
         List<String> nodeNames = new ArrayList<>();
         List<Fragment> nodeFragments = new ArrayList<>();
         for (Node n : nodes) {
-            nodeNames.add(n.getNodeName());
+            nodeNames.add(n.getTitle());
             nodeFragments.add(createFragment(n));
         }
 

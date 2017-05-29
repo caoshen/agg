@@ -1,5 +1,9 @@
 package xyz.dcme.agg.ui.node;
 
+import android.content.Context;
+
+import java.util.List;
+
 import xyz.dcme.agg.BasePresenter;
 import xyz.dcme.agg.BaseView;
 
@@ -19,8 +23,10 @@ public interface NodeChooseContract {
 
         void showError();
 
-        void showMyNode();
+        void showCurNode(List<Node> curNodes);
 
-        void showMoreNode();
+        void showMoreNode(List<Node> moreNodes);
+
+        Context getViewContext();
     }
 }
