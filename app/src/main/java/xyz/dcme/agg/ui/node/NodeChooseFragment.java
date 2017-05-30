@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseFragment;
+import xyz.dcme.agg.widget.ItemDragHelperCallback;
 
 public class NodeChooseFragment extends BaseFragment
         implements NodeChooseContract.View {
@@ -52,7 +54,11 @@ public class NodeChooseFragment extends BaseFragment
         mCurNodeAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-
+                Node node = mCurNodeAdapter.getDatas().get(position);
+                mCurNodeAdapter.getDatas().remove(position);
+                mCurNodeAdapter.notifyDataSetChanged();
+                mMoreNodeAdapter.getDatas().add(node);
+                mMoreNodeAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -60,6 +66,11 @@ public class NodeChooseFragment extends BaseFragment
                 return false;
             }
         });
+
+        ItemDragHelperCallback callback = new ItemDragHelperCallback(mCurNodeAdapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(mCurNodeList);
+        mCurNodeAdapter.setItemDragHelperCallback(callback);
     }
 
     @Override
@@ -72,7 +83,11 @@ public class NodeChooseFragment extends BaseFragment
         mMoreNodeAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-
+                Node node = mMoreNodeAdapter.getDatas().get(position);
+                mMoreNodeAdapter.getDatas().remove(position);
+                mMoreNodeAdapter.notifyDataSetChanged();
+                mCurNodeAdapter.getDatas().add(node);
+                mCurNodeAdapter.notifyDataSetChanged();
             }
 
             @Override
