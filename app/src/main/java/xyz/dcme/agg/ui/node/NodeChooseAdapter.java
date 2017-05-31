@@ -5,6 +5,7 @@ import android.content.Context;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import java.util.Collections;
 import java.util.List;
 
 import xyz.dcme.agg.R;
@@ -25,7 +26,9 @@ public class NodeChooseAdapter extends CommonAdapter<Node>
 
     @Override
     public boolean onItemMove(int from, int to) {
-        return false;
+        Collections.swap(getDatas(), from, to);
+        notifyItemMoved(from, to);
+        return true;
     }
 
     public void setItemDragHelperCallback(ItemDragHelperCallback callback) {
