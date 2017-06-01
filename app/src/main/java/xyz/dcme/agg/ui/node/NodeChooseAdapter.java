@@ -13,7 +13,6 @@ import xyz.dcme.agg.widget.ItemDragHelperCallback;
 
 public class NodeChooseAdapter extends CommonAdapter<Node>
         implements ItemDragHelperCallback.OnItemMoveListener {
-    private ItemDragHelperCallback mItemDragHelperCallback;
 
     public NodeChooseAdapter(Context context, int layoutId, List<Node> datas) {
         super(context, layoutId, datas);
@@ -31,7 +30,4 @@ public class NodeChooseAdapter extends CommonAdapter<Node>
         return true;
     }
 
-    public void setItemDragHelperCallback(ItemDragHelperCallback callback) {
-        mItemDragHelperCallback = callback;
-    }
 }

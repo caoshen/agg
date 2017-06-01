@@ -70,7 +70,6 @@ public class NodeChooseFragment extends BaseFragment
         ItemDragHelperCallback callback = new ItemDragHelperCallback(mCurNodeAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(mCurNodeList);
-        mCurNodeAdapter.setItemDragHelperCallback(callback);
     }
 
     @Override
