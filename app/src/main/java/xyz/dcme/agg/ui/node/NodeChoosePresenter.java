@@ -59,6 +59,10 @@ public class NodeChoosePresenter implements NodeChooseContract.Presenter {
 
     @Override
     public void onItemRemove() {
+    }
+
+    @Override
+    public void onItemChange(List<Node> curNodes, List<Node> moreNodes) {
 
     }
 }

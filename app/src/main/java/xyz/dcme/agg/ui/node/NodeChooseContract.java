@@ -16,6 +16,8 @@ public interface NodeChooseContract {
         void onItemAdd();
 
         void onItemRemove();
+
+        void onItemChange(List<Node> curNodes, List<Node> moreNodes);
     }
 
     interface View extends BaseView<Presenter> {
