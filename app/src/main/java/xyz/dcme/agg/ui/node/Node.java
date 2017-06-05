@@ -17,15 +17,48 @@ public class Node implements Parcelable {
     };
     private String mName;
     private String mTitle;
+    private int mFixed;
+    private int mCurrent;
+    private int mPosition;
 
     protected Node(Parcel in) {
         mName = in.readString();
         mTitle = in.readString();
+        mFixed = in.readInt();
+        mCurrent = in.readInt();
+        mPosition = in.readInt();
     }
 
     public Node(String name, String title) {
         mName = name;
         mTitle = title;
+        mFixed = 0;
+        mCurrent = 0;
+        mPosition = 0;
+    }
+
+    public int getFixed() {
+        return mFixed;
+    }
+
+    public void setFixed(int fixed) {
+        this.mFixed = fixed;
+    }
+
+    public int getCurrent() {
+        return mCurrent;
+    }
+
+    public void setCurrent(int current) {
+        this.mCurrent = current;
+    }
+
+    public int getPosition() {
+        return mPosition;
+    }
+
+    public void setPosition(int position) {
+        this.mPosition = position;
     }
 
     public String getName() {
@@ -53,5 +86,8 @@ public class Node implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mName);
         dest.writeString(mTitle);
+        dest.writeInt(mFixed);
+        dest.writeInt(mCurrent);
+        dest.writeInt(mPosition);
     }
 }
