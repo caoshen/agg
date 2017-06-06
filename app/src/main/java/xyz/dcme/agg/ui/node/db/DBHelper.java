@@ -8,9 +8,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "settings.db";
+    private Context mContext;
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+        mContext = context;
     }
 
     @Override
@@ -20,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     private void initTables() {
-
+        NodeLocalData.getInstance(mContext).initNodeTable();
     }
 
     @Override
