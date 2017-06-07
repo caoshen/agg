@@ -1,8 +1,9 @@
-package xyz.dcme.agg.ui.node.db;
+package xyz.dcme.agg.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +39,7 @@ public class NodeLocalData {
     public void updateNode(Node node) {
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(NodeTable.COLUMN_NODE_NAME, node.getName());
-        values.put(NodeTable.COLUMN_NODE_TITLE, node.getTitle());
-        values.put(NodeTable.COLUMN_CUR, node.getCurrent());
-        values.put(NodeTable.COLUMN_FIXED, node.getFixed());
-        values.put(NodeTable.COLUMN_POSITION, node.getPosition());
+        ContentValues values = makeContentValues(node);
 
         String select = NodeTable.COLUMN_NODE_NAME + " = ? ";
         String[] args = new String[]{node.getName()};
@@ -54,14 +50,20 @@ public class NodeLocalData {
     public void insertNode(Node node) {
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
+        ContentValues values = makeContentValues(node);
+
+        db.insert(NodeTable.TABLE_NAME, null, values);
+    }
+
+    @NonNull
+    private ContentValues makeContentValues(Node node) {
         ContentValues values = new ContentValues();
         values.put(NodeTable.COLUMN_NODE_NAME, node.getName());
         values.put(NodeTable.COLUMN_NODE_TITLE, node.getTitle());
         values.put(NodeTable.COLUMN_CUR, node.getCurrent());
         values.put(NodeTable.COLUMN_FIXED, node.getFixed());
         values.put(NodeTable.COLUMN_POSITION, node.getPosition());
-
-        db.insert(NodeTable.TABLE_NAME, null, values);
+        return values;
     }
 
     public void initNodeTable() {

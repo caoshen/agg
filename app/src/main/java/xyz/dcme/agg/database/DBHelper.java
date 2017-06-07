@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui.node.db;
+package xyz.dcme.agg.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
