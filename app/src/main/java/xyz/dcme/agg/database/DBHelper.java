@@ -18,11 +18,11 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(NodeTable.CREATE_TABLE);
-        initTables();
+        initTables(db);
     }
 
-    private void initTables() {
-        NodeLocalData.getInstance(mContext).initNodeTable();
+    private void initTables(SQLiteDatabase db) {
+        NodeLocalData.getInstance(mContext).initNodeTable(db);
     }
 
     @Override

@@ -22,6 +22,8 @@ public class NodeTable implements BaseColumns {
             + NodeTable.COLUMN_NODE_TITLE + TEXT_TYPE + COMMA_SEP
             + NodeTable.COLUMN_FIXED + INTEGER_TYPE + COMMA_SEP
             + NodeTable.COLUMN_POSITION + INTEGER_TYPE + COMMA_SEP
-            + NodeTable.COLUMN_CUR + INTEGER_TYPE + COMMA_SEP
+            + NodeTable.COLUMN_CUR + INTEGER_TYPE
             + " );";
+    public static final int CUR_NODE = 0;
+    public static final int MORE_NODE = 1;
 }
