@@ -2,7 +2,6 @@ package xyz.dcme.agg.ui.node;
 
 import android.content.Context;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.database.NodeLocalData;
@@ -34,20 +33,6 @@ public class NodeChoosePresenter implements NodeChooseContract.Presenter {
         }
     }
 
-    private List<Node> getFixedNodes(int nodeNameArray, int nodeTitleArray) {
-        String[] names = mContext.getResources().getStringArray(nodeNameArray);
-        String[] titles = mContext.getResources().getStringArray(nodeTitleArray);
-        List<Node> nodes = new ArrayList<>();
-
-        if (names.length != titles.length) {
-            return nodes;
-        }
-        for (int i = 0; i < names.length; ++i) {
-            nodes.add(new Node(names[i] , titles[i]));
-        }
-        return nodes;
-    }
-
     @Override
     public void onItemSwap() {
 
@@ -64,6 +49,6 @@ public class NodeChoosePresenter implements NodeChooseContract.Presenter {
 
     @Override
     public void onItemChange(List<Node> curNodes, List<Node> moreNodes) {
-
+        NodeLocalData.getInstance(mContext).updateNodes(curNodes, moreNodes);
     }
 }
