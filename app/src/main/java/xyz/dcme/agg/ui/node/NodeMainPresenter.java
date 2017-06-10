@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.database.NodeLocalData;
-import xyz.dcme.agg.database.NodeTable;
+import xyz.dcme.agg.database.table.CurNodeTable;
 
 public class NodeMainPresenter implements NodeMainContract.Presenter {
 
@@ -22,7 +22,7 @@ public class NodeMainPresenter implements NodeMainContract.Presenter {
     }
 
     private void initNode() {
-        mNodes = NodeLocalData.getInstance(mContext).queryNode(NodeTable.CUR_NODE);
+        mNodes = NodeLocalData.getInstance(mContext).queryNode(CurNodeTable.CUR_NODE);
     }
 
     @Override

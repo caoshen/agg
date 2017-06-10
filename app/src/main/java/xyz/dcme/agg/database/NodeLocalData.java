@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.database.table.CurNodeTable;
 import xyz.dcme.agg.ui.node.Node;
 import xyz.dcme.agg.util.LogUtils;
 
@@ -44,22 +45,19 @@ public class NodeLocalData {
 
         ContentValues values = makeContentValues(node);
 
-        String select = NodeTable.COLUMN_NODE_NAME + " = ? ";
+        String select = CurNodeTable.COLUMN_NODE_NAME + " = ? ";
         String[] args = new String[]{node.getName()};
 
-        db.update(NodeTable.TABLE_NAME, values, select, args);
+        db.update(CurNodeTable.TABLE_NAME, values, select, args);
     }
 
     public List<Node> queryNode(int type) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
-        String select = NodeTable.COLUMN_CUR + " = ? ";
-        String[] args = new String[]{String.valueOf(type)};
-
         Cursor cursor = null;
         List<Node> nodes = new ArrayList<>();
         try {
-            cursor = db.query(NodeTable.TABLE_NAME, null, select, args, null, null, null);
+            cursor = db.query(CurNodeTable.TABLE_NAME, null, null, null, null, null, null);
             while (cursor != null && cursor.moveToNext()) {
                 Node node = makeNode(cursor);
                 nodes.add(node);
@@ -76,15 +74,11 @@ public class NodeLocalData {
 
     @NonNull
     private Node makeNode(Cursor cursor) {
-        String name = cursor.getString(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_NODE_NAME));
-        String title = cursor.getString(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_NODE_TITLE));
-        int cur = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_CUR));
-        int fixed = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_FIXED));
-        int pos = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_POSITION));
+        String name = cursor.getString(cursor.getColumnIndexOrThrow(CurNodeTable.COLUMN_NODE_NAME));
+        String title = cursor.getString(cursor.getColumnIndexOrThrow(CurNodeTable.COLUMN_NODE_TITLE));
+        int fixed = cursor.getInt(cursor.getColumnIndexOrThrow(CurNodeTable.COLUMN_FIXED));
         Node node = new Node(name, title);
-        node.setCurrent(cur);
         node.setFixed(fixed);
-        node.setPosition(pos);
         return node;
     }
 
@@ -93,17 +87,15 @@ public class NodeLocalData {
 
         ContentValues values = makeContentValues(node);
 
-        db.insert(NodeTable.TABLE_NAME, null, values);
+        db.insert(CurNodeTable.TABLE_NAME, null, values);
     }
 
     @NonNull
     private ContentValues makeContentValues(Node node) {
         ContentValues values = new ContentValues();
-        values.put(NodeTable.COLUMN_NODE_NAME, node.getName());
-        values.put(NodeTable.COLUMN_NODE_TITLE, node.getTitle());
-        values.put(NodeTable.COLUMN_CUR, node.getCurrent());
-        values.put(NodeTable.COLUMN_FIXED, node.getFixed());
-        values.put(NodeTable.COLUMN_POSITION, node.getPosition());
+        values.put(CurNodeTable.COLUMN_NODE_NAME, node.getName());
+        values.put(CurNodeTable.COLUMN_NODE_TITLE, node.getTitle());
+        values.put(CurNodeTable.COLUMN_FIXED, node.getFixed());
         return values;
     }
 
@@ -117,14 +109,14 @@ public class NodeLocalData {
                 node.setFixed(0);
                 node.setCurrent(0);
                 node.setPosition(fixedNodes.indexOf(node));
-                db.insert(NodeTable.TABLE_NAME, null, makeContentValues(node));
+                db.insert(CurNodeTable.TABLE_NAME, null, makeContentValues(node));
             }
 
             for (Node node : allNodes) {
                 node.setFixed(1);
                 node.setCurrent(1);
                 node.setPosition(allNodes.indexOf(node));
-                db.insert(NodeTable.TABLE_NAME, null, makeContentValues(node));
+                db.insert(CurNodeTable.TABLE_NAME, null, makeContentValues(node));
             }
             db.setTransactionSuccessful();
         } catch (Exception e) {
