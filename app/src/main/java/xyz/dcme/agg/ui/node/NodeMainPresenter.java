@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.database.NodeLocalData;
-import xyz.dcme.agg.database.table.CurNodeTable;
 
 public class NodeMainPresenter implements NodeMainContract.Presenter {
 
@@ -18,11 +17,10 @@ public class NodeMainPresenter implements NodeMainContract.Presenter {
         mView = v;
         mView.setPresenter(this);
         mContext = mView.getViewContext();
-        initNode();
     }
 
     private void initNode() {
-        mNodes = NodeLocalData.getInstance(mContext).queryNode(CurNodeTable.CUR_NODE);
+        mNodes = NodeLocalData.getInstance(mContext).getCurNode();
     }
 
     @Override
@@ -32,6 +30,7 @@ public class NodeMainPresenter implements NodeMainContract.Presenter {
 
     @Override
     public void load() {
+        initNode();
         mView.showNodes(mNodes);
     }
 }

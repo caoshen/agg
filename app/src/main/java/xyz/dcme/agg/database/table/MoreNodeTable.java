@@ -16,6 +16,6 @@ public class MoreNodeTable implements BaseColumns {
             + TABLE_NAME + " ( "
             + _ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT " + COMMA_SEP
             + COLUMN_NODE_NAME + TEXT_TYPE + COMMA_SEP
-            + COLUMN_NODE_TITLE + TEXT_TYPE + COMMA_SEP
+            + COLUMN_NODE_TITLE + TEXT_TYPE
             + " );";
 }

@@ -26,7 +26,7 @@ public class BaseFragmentAdapter extends FragmentPagerAdapter {
     public void setFragments(FragmentManager fm, List<Fragment> fragments, List<String> titles) {
         if (mFragments != null) {
             FragmentTransaction transaction = fm.beginTransaction();
-            for (Fragment f : fragments) {
+            for (Fragment f : mFragments) {
                 transaction.remove(f);
             }
             transaction.commitAllowingStateLoss();

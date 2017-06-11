@@ -4,25 +4,22 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import xyz.dcme.agg.R;
 import xyz.dcme.agg.database.table.CurNodeTable;
+import xyz.dcme.agg.database.table.MoreNodeTable;
 import xyz.dcme.agg.ui.node.Node;
 import xyz.dcme.agg.util.LogUtils;
 
 public class NodeLocalData {
     private static final String TAG = "NodeLocalData";
     private static NodeLocalData mInstance;
-    private Context mContext;
     private DBHelper mHelper;
 
     private NodeLocalData(Context context) {
         mHelper = new DBHelper(context);
-        mContext = context;
     }
 
     public static NodeLocalData getInstance(Context context) {
@@ -37,21 +34,41 @@ public class NodeLocalData {
     }
 
     public void updateNodes(List<Node> curNodes, List<Node> moreNodes) {
-        // TODO
+        deleteNodes(CurNodeTable.TABLE_NAME);
+        insertNodes(CurNodeTable.TABLE_NAME, curNodes);
+        deleteNodes(MoreNodeTable.TABLE_NAME);
+        insertNodes(MoreNodeTable.TABLE_NAME, moreNodes);
     }
 
-    public void updateNode(Node node) {
+    private void insertNodes(String tableName, List<Node> nodes) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
-        ContentValues values = makeContentValues(node);
-
-        String select = CurNodeTable.COLUMN_NODE_NAME + " = ? ";
-        String[] args = new String[]{node.getName()};
-
-        db.update(CurNodeTable.TABLE_NAME, values, select, args);
+        db.beginTransaction();
+        try {
+            for (Node node : nodes) {
+                db.insert(tableName, null, makeContentValues(node));
+            }
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            LogUtils.LOGE(TAG, e.toString());
+        } finally {
+            db.endTransaction();
+        }
     }
 
-    public List<Node> queryNode(int type) {
+    private void deleteNodes(String tableName) {
+        SQLiteDatabase db = mHelper.getWritableDatabase();
+        db.delete(tableName, null, null);
+    }
+
+    private ContentValues makeContentValues(Node node) {
+        ContentValues values = new ContentValues();
+        values.put(CurNodeTable.COLUMN_NODE_NAME, node.getName());
+        values.put(CurNodeTable.COLUMN_NODE_TITLE, node.getTitle());
+        return values;
+    }
+
+    public List<Node> getCurNode() {
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
         Cursor cursor = null;
@@ -59,7 +76,9 @@ public class NodeLocalData {
         try {
             cursor = db.query(CurNodeTable.TABLE_NAME, null, null, null, null, null, null);
             while (cursor != null && cursor.moveToNext()) {
-                Node node = makeNode(cursor);
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(CurNodeTable.COLUMN_NODE_NAME));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(CurNodeTable.COLUMN_NODE_TITLE));
+                Node node = new Node(name, title);
                 nodes.add(node);
             }
         } catch (Exception e) {
@@ -72,72 +91,27 @@ public class NodeLocalData {
         return nodes;
     }
 
-    @NonNull
-    private Node makeNode(Cursor cursor) {
-        String name = cursor.getString(cursor.getColumnIndexOrThrow(CurNodeTable.COLUMN_NODE_NAME));
-        String title = cursor.getString(cursor.getColumnIndexOrThrow(CurNodeTable.COLUMN_NODE_TITLE));
-        int fixed = cursor.getInt(cursor.getColumnIndexOrThrow(CurNodeTable.COLUMN_FIXED));
-        Node node = new Node(name, title);
-        node.setFixed(fixed);
-        return node;
-    }
 
-    public void insertNode(Node node) {
+    public List<Node> getMoreNode() {
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
-        ContentValues values = makeContentValues(node);
-
-        db.insert(CurNodeTable.TABLE_NAME, null, values);
-    }
-
-    @NonNull
-    private ContentValues makeContentValues(Node node) {
-        ContentValues values = new ContentValues();
-        values.put(CurNodeTable.COLUMN_NODE_NAME, node.getName());
-        values.put(CurNodeTable.COLUMN_NODE_TITLE, node.getTitle());
-        values.put(CurNodeTable.COLUMN_FIXED, node.getFixed());
-        return values;
-    }
-
-    public void initNodeTable(SQLiteDatabase db) {
-        db.beginTransaction();
+        Cursor cursor = null;
+        List<Node> nodes = new ArrayList<>();
         try {
-            List<Node> fixedNodes = getNodes(R.array.fixed_node_name, R.array.fixed_node_title);
-            List<Node> allNodes = getNodes(R.array.all_node_name, R.array.all_node_title);
-
-            for (Node node : fixedNodes) {
-                node.setFixed(0);
-                node.setCurrent(0);
-                node.setPosition(fixedNodes.indexOf(node));
-                db.insert(CurNodeTable.TABLE_NAME, null, makeContentValues(node));
+            cursor = db.query(MoreNodeTable.TABLE_NAME, null, null, null, null, null, null);
+            while (cursor != null && cursor.moveToNext()) {
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(MoreNodeTable.COLUMN_NODE_NAME));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(MoreNodeTable.COLUMN_NODE_TITLE));
+                Node node = new Node(name, title);
+                nodes.add(node);
             }
-
-            for (Node node : allNodes) {
-                node.setFixed(1);
-                node.setCurrent(1);
-                node.setPosition(allNodes.indexOf(node));
-                db.insert(CurNodeTable.TABLE_NAME, null, makeContentValues(node));
-            }
-            db.setTransactionSuccessful();
         } catch (Exception e) {
             LogUtils.LOGE(TAG, e.toString());
         } finally {
-            db.endTransaction();
-        }
-    }
-
-    private List<Node> getNodes(int nodeNameArray, int nodeTitleArray) {
-        String[] names = mContext.getResources().getStringArray(nodeNameArray);
-        String[] titles = mContext.getResources().getStringArray(nodeTitleArray);
-        List<Node> nodes = new ArrayList<>();
-
-        if (names.length != titles.length) {
-            return nodes;
-        }
-        for (int i = 0; i < names.length; ++i) {
-            nodes.add(new Node(names[i] , titles[i]));
+            if (cursor != null) {
+                cursor.close();
+            }
         }
         return nodes;
     }
-
 }

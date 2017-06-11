@@ -84,7 +84,6 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(CurNodeTable.COLUMN_NODE_NAME, node.getName());
         values.put(CurNodeTable.COLUMN_NODE_TITLE, node.getTitle());
-//        values.put(CurNodeTable.COLUMN_FIXED, node.getFixed());
         return values;
     }
 }

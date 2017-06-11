@@ -5,7 +5,6 @@ import android.content.Context;
 import java.util.List;
 
 import xyz.dcme.agg.database.NodeLocalData;
-import xyz.dcme.agg.database.table.CurNodeTable;
 
 public class NodeChoosePresenter implements NodeChooseContract.Presenter {
 
@@ -26,9 +25,9 @@ public class NodeChoosePresenter implements NodeChooseContract.Presenter {
     @Override
     public void load() {
         if (mContext != null) {
-            List<Node> fixedNodes = NodeLocalData.getInstance(mContext).queryNode(CurNodeTable.CUR_NODE);
-            List<Node> moreNodes = NodeLocalData.getInstance(mContext).queryNode(CurNodeTable.MORE_NODE);
-            mView.showCurNode(fixedNodes);
+            List<Node> curNodes = NodeLocalData.getInstance(mContext).getCurNode();
+            List<Node> moreNodes = NodeLocalData.getInstance(mContext).getMoreNode();
+            mView.showCurNode(curNodes);
             mView.showMoreNode(moreNodes);
         }
     }

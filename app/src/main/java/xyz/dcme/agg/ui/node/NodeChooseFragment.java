@@ -88,6 +88,7 @@ public class NodeChooseFragment extends BaseFragment
                 mMoreNodeAdapter.notifyDataSetChanged();
                 mCurNodeAdapter.getDatas().add(node);
                 mCurNodeAdapter.notifyDataSetChanged();
+                mPresenter.onItemChange(mCurNodeAdapter.getDatas(), mMoreNodeAdapter.getDatas());
             }
 
             @Override

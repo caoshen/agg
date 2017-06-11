@@ -20,6 +20,7 @@ import xyz.dcme.agg.util.LogUtils;
 public class NodeMainFragment extends BaseFragment
         implements NodeMainContract.View, View.OnClickListener {
     public static final String LOG_TAG = "NodeMainFragment";
+    private static final int REQUEST_CHOOSE_NODE = 1000;
 
     private TabLayout mTab;
     private ViewPager mPager;
@@ -106,9 +107,17 @@ public class NodeMainFragment extends BaseFragment
         switch (v.getId()) {
             case R.id.add_node: {
                 Intent intent = new Intent(getActivity(), NodeChooseActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CHOOSE_NODE);
                 break;
             }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CHOOSE_NODE) {
+            mPresenter.load();
         }
     }
 }
