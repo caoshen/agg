@@ -11,7 +11,7 @@ public interface NodeChooseContract {
     interface Presenter extends BasePresenter {
         void load();
 
-        void onItemSwap();
+        void onItemSwap(List<Node> nodes);
 
         void onItemAdd();
 

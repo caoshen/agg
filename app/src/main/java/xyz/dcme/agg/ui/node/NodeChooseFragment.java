@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
+import java.util.Collections;
 import java.util.List;
 
 import xyz.dcme.agg.R;
@@ -68,7 +69,15 @@ public class NodeChooseFragment extends BaseFragment
             }
         });
 
-        ItemDragHelperCallback callback = new ItemDragHelperCallback(mCurNodeAdapter);
+        ItemDragHelperCallback callback = new ItemDragHelperCallback(new ItemDragHelperCallback.OnItemMoveListener() {
+            @Override
+            public boolean onItemMove(int from, int to) {
+                Collections.swap(mCurNodeAdapter.getDatas(), from, to);
+                mCurNodeAdapter.notifyItemMoved(from, to);
+                mPresenter.onItemSwap(mCurNodeAdapter.getDatas());
+                return true;
+            }
+        });
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(mCurNodeList);
     }

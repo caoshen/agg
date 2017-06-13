@@ -33,8 +33,8 @@ public class NodeChoosePresenter implements NodeChooseContract.Presenter {
     }
 
     @Override
-    public void onItemSwap() {
-
+    public void onItemSwap(List<Node> nodes) {
+        NodeLocalData.getInstance(mContext).updateNodes(nodes);
     }
 
     @Override

@@ -114,4 +114,9 @@ public class NodeLocalData {
         }
         return nodes;
     }
+
+    public void updateNodes(List<Node> nodes) {
+        deleteNodes(CurNodeTable.TABLE_NAME);
+        insertNodes(CurNodeTable.TABLE_NAME, nodes);
+    }
 }
