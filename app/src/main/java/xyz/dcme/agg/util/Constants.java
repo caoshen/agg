@@ -13,4 +13,5 @@ public class Constants {
     public static final String NODE_NAME = "node_name";
     public static final int FIXED_NODE = 1;
     public static final int NOT_FIXED_NODE = 0;
+    public static final String HOME_PAGE = "http://www.guanggoo.com/?p=";
 }

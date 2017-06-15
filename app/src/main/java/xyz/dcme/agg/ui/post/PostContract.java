@@ -12,6 +12,8 @@ public interface PostContract {
 
         void onRefresh(List<Post> data);
         void onLoadMore(List<Post> data);
+
+        void onError();
     }
 
     interface Presenter extends BasePresenter {

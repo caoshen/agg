@@ -93,4 +93,9 @@ public class PostFragment extends Fragment implements PostContract.View {
         mLoadMoreWrapper.notifyDataSetChanged();
         mNextPage++;
     }
+
+    @Override
+    public void onError() {
+
+    }
 }
