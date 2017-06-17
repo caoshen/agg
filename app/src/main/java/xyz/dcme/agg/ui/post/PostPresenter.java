@@ -3,19 +3,19 @@ package xyz.dcme.agg.ui.post;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.squareup.okhttp.Request;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.List;
 
+import okhttp3.Call;
 import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.parser.PostParser;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HttpUtils;
 
 public class PostPresenter implements PostContract.Presenter {
-    private static final String TAG = "PostPresenter";
     public static final String FIRST_PAGE = "1";
+    private static final String TAG = "PostPresenter";
     private PostContract.View mView;
 
     public PostPresenter(PostContract.View view) {
@@ -25,14 +25,14 @@ public class PostPresenter implements PostContract.Presenter {
 
     @Override
     public void start() {
-        HttpUtils.getInstance().get(Constants.HOME_PAGE + FIRST_PAGE, new StringCallback() {
+        HttpUtils.get(Constants.HOME_PAGE + FIRST_PAGE, new StringCallback() {
             @Override
-            public void onError(Request request, Exception e) {
+            public void onError(Call call, Exception e, int id) {
                 mView.onError();
             }
 
             @Override
-            public void onResponse(String response) {
+            public void onResponse(String response, int id) {
                 List<Post> posts = PostParser.parseHtml(response);
                 mView.onRefresh(posts);
             }

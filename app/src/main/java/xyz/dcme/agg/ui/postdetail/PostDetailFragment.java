@@ -1,5 +1,7 @@
 package xyz.dcme.agg.ui.postdetail;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.widget.BottomSheetBar;
@@ -28,6 +31,7 @@ import xyz.dcme.agg.widget.BottomSheetBar;
 public class PostDetailFragment extends Fragment implements PostDetailContract.View,
         View.OnClickListener {
     public static final String KEY_ARG_URL = "arg_url";
+    private static final int REQUEST_LOGIN = 1000;
     private PostDetailContract.Presenter mPresenter;
     private PostDetailAdapter mAdapter;
     private List<PostDetailItem> mData = new ArrayList<>();
@@ -172,6 +176,17 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
         if (activity != null) {
             Toast.makeText(activity, R.string.send_comment_success, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void startLogin() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivityForResult(intent, REQUEST_LOGIN);
+    }
+
+    @Override
+    public Context getViewContext() {
+        return getContext();
     }
 
     @Override

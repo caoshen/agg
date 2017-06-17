@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.util.AccountUtils;
+import xyz.dcme.agg.util.HttpUtils;
 
 
 public class SettingsFragment extends PreferenceFragment {
@@ -45,6 +46,7 @@ public class SettingsFragment extends PreferenceFragment {
                 Activity activity = getActivity();
                 if (activity != null && !activity.isFinishing()) {
                     AccountUtils.clearAccount(activity);
+                    cleanCookie();
                     activity.setResult(Activity.RESULT_OK);
                     activity.finish();
                 }
@@ -54,5 +56,9 @@ public class SettingsFragment extends PreferenceFragment {
                 break;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    private void cleanCookie() {
+        HttpUtils.cleanCookie();
     }
 }

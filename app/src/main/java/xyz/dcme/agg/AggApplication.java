@@ -2,18 +2,19 @@ package xyz.dcme.agg;
 
 import android.app.Application;
 
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.cookie.CookieJarImpl;
-import com.zhy.http.okhttp.cookie.store.PersistentCookieStore;
 
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.CookieJar;
 import okhttp3.OkHttpClient;
 import xyz.dcme.agg.util.HttpConfig;
 
 
-public class MyApplication extends Application {
+public class AggApplication extends Application {
 
 
 
@@ -21,7 +22,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        CookieJar cookieJar = new CookieJarImpl(new PersistentCookieStore(getApplicationContext()));
+        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(),
+                new SharedPrefsCookiePersistor(getApplicationContext()));
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(HttpConfig.CONN_TIMEOUT, TimeUnit.MILLISECONDS)
                 .readTimeout(HttpConfig.READ_TIMEOUT, TimeUnit.MILLISECONDS)

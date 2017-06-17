@@ -1,11 +1,14 @@
 package xyz.dcme.agg.ui.reply;
 
-import android.os.AsyncTask;
 import android.text.TextUtils;
+
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.List;
 
+import okhttp3.Call;
 import xyz.dcme.agg.util.Constants;
+import xyz.dcme.agg.util.HttpUtils;
 
 public class ReplyPresenter implements ReplyContract.Presenter {
 
@@ -23,24 +26,24 @@ public class ReplyPresenter implements ReplyContract.Presenter {
 
     @Override
     public void load(String name) {
+        if (TextUtils.isEmpty(name)) {
+            return;
+        }
+
         mView.setLoadingIndicator(true);
-        new AsyncTask<String, Void, List<Reply>>() {
+
+        HttpUtils.get(Constants.USER_PROFILE_URL + name, new StringCallback() {
             @Override
-            protected List<Reply> doInBackground(String... names) {
-                if (TextUtils.isEmpty(names[0])) {
-                    return null;
-                }
-                return ReplyParser.parseList(Constants.WEBSITE_USER_PROFILE_URL + "/" + names[0]);
+            public void onError(Call call, Exception e, int id) {
+                mView.setLoadingIndicator(false);
             }
 
             @Override
-            protected void onPostExecute(List<Reply> replies) {
-                super.onPostExecute(replies);
-                if (replies != null && !replies.isEmpty()) {
-                    mView.showReplies(replies);
-                }
+            public void onResponse(String response, int id) {
                 mView.setLoadingIndicator(false);
+                List<Reply> replies = ReplyParser.parseResponse(response);
+                mView.showReplies(replies);
             }
-        }.execute(name);
+        });
     }
 }

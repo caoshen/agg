@@ -30,7 +30,7 @@ public class TopicPresenter implements TopicContract.Presenter {
                 if (TextUtils.isEmpty(names[0])) {
                     return null;
                 }
-                return TopicParser.parseList(Constants.WEBSITE_USER_PROFILE_URL + "/" + names[0]);
+                return TopicParser.parseList(Constants.USER_PROFILE_URL + names[0]);
             }
 
             @Override

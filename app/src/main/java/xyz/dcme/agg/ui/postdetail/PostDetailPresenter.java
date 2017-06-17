@@ -1,104 +1,120 @@
 package xyz.dcme.agg.ui.postdetail;
 
-import android.os.AsyncTask;
-import android.util.Log;
+import android.content.Context;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
+import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
-import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
+import okhttp3.Call;
+import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.Constants;
+import xyz.dcme.agg.util.HttpUtils;
 import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.agg.util.LoginUtils;
 
 public class PostDetailPresenter implements PostDetailContract.Presenter {
     private static final String TAG = LogUtils.makeLogTag("PostDetailPresenter");
 
     private final PostDetailContract.View mView;
+    private Context mContext;
 
     public PostDetailPresenter(PostDetailContract.View view) {
         mView = view;
+        mContext = mView.getViewContext();
         view.setPresenter(this);
     }
 
     @Override
     public void loadDetail(String url) {
-        final String reqUrl = url;
-        new AsyncTask<Void, Void, List<PostDetailItem>>() {
+        mView.showIndicator(true);
 
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                mView.showIndicator(true);
-            }
+        if (!url.startsWith(Constants.HOME_URL)) {
+            url = Constants.HOME_URL + url;
+        }
 
+        HttpUtils.get(url, new StringCallback() {
             @Override
-            protected List<PostDetailItem> doInBackground(Void... voids) {
-                return PostDetailParser.parseDetail(reqUrl);
-            }
-
-            @Override
-            protected void onPostExecute(List<PostDetailItem> data) {
-                super.onPostExecute(data);
-                mView.onRefresh(data);
+            public void onError(Call call, Exception e, int id) {
                 mView.showIndicator(false);
             }
-        }.execute();
+
+            @Override
+            public void onResponse(String response, int id) {
+                mView.showIndicator(false);
+
+                if (LoginUtils.needLogin(response)) {
+                    mView.startLogin();
+                } else {
+                    mView.onRefresh(PostDetailParser.parseResponse(response));
+                }
+            }
+        });
     }
 
     @Override
     public void sendReply(final String comment, final String url) {
-
         mView.showCommentIndicator(true);
 
-        new AsyncTask<Void, Void, Boolean>() {
+        if (!AccountUtils.hasActiveAccount(mContext)) {
+            mView.startLogin();
+            return;
+        }
 
+        startReply(comment, url);
+    }
+
+    private void startReply(final String comment, final String url) {
+        final String realUrl = getRealUrl(url);
+        HttpUtils.get(realUrl, new StringCallback() {
             @Override
-            protected Boolean doInBackground(Void... voids) {
-                String tid = extractTidFromUrl(url);
-                Map<String, String> cookies = PostDetailParser.mockLogin();
-                try {
-                    Log.d(TAG, tid + " " + comment);
-                    String realUrl = url;
-
-                    if (realUrl.contains("#")) {
-                        int pos = realUrl.indexOf("#");
-                        realUrl = realUrl.substring(0, pos);
-                    }
-
-                    for (String key : cookies.keySet()) {
-                        LogUtils.LOGD(TAG, key + ": " + cookies.get(key));
-                    }
-
-                    String xsrf = "360b2cac5e274a11bff1b42ef6de9ca5";
-                    cookies.put("_xsrf", xsrf);
-                    Connection.Response res = Jsoup.connect(Constants.WEBSITE_HOME_URL + realUrl)
-                            .data("tid", tid, "content", comment, "_xsrf", xsrf)
-                            .userAgent(Constants.USER_AGENT)
-                            .cookies(cookies)
-                            .method(Connection.Method.POST).execute();
-                    return res.statusCode() == Constants.HTTP_OK;
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return false;
+            public void onError(Call call, Exception e, int id) {
+                mView.sendCommentFailed();
             }
 
             @Override
-            protected void onPostExecute(Boolean result) {
-                super.onPostExecute(result);
-                if (!result) {
-                    mView.sendCommentFailed();
-                } else {
-                    mView.setCommentSuccess();
-                    mView.addComment(comment);
-                }
+            public void onResponse(String response, int id) {
+                Map<String, String> params = getReplyParams(response, comment, url);
+                reply(comment, realUrl, params);
             }
-        }.execute();
+        });
+    }
+
+    private Map<String, String> getReplyParams(String response, String comment, String url) {
+        Map<String, String> params = new HashMap<>();
+        params.put("tid", extractTidFromUrl(url));
+        params.put("content", comment);
+        params.put("_xsrf", HttpUtils.findXsrf(response));
+
+        return params;
+    }
+
+    private void reply(final String comment, String url, Map<String, String> params) {
+        if (params == null) {
+            return;
+        }
+
+        HttpUtils.post(getRealUrl(url), params, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                mView.sendCommentFailed();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                mView.setCommentSuccess();
+                mView.addComment(comment);
+            }
+        });
+    }
+
+    private String getRealUrl(String url) {
+        if (url.contains("#")) {
+            int pos = url.indexOf("#");
+            return Constants.HOME_URL + url.substring(0, pos);
+        }
+        return Constants.HOME_URL + url;
     }
 
     private String extractTidFromUrl(String url) {

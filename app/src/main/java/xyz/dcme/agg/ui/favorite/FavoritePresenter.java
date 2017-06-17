@@ -31,7 +31,7 @@ public class FavoritePresenter implements FavoriteContract.Presenter {
                 if (TextUtils.isEmpty(names[0])) {
                     return null;
                 }
-                return FavoriteParser.parseList(Constants.WEBSITE_USER_PROFILE_URL + "/" + names[0]
+                return FavoriteParser.parseList(Constants.USER_PROFILE_URL + names[0]
                         + "/favorites");
             }
 

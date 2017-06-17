@@ -3,23 +3,21 @@ package xyz.dcme.agg.ui.login;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,19 +28,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
+import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.io.IOException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Call;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.ui.BaseActivity;
-import xyz.dcme.agg.ui.postdetail.CookieUtils;
 import xyz.dcme.agg.util.Constants;
+import xyz.dcme.agg.util.HttpUtils;
 import xyz.dcme.agg.util.LogUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -59,10 +62,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
     private static final String TAG = LogUtils.makeLogTag("LoginActivity");
     public static final String KEY_EXTRA_LOGIN_ACCOUNT = "key_login_account";
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -108,7 +107,14 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
     @Override
     public void initView() {
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.login);
+        toolbar.setNavigationOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void populateAutoComplete() {
@@ -161,17 +167,13 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
-
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        final String email = mEmailView.getText().toString();
+        final String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -202,9 +204,80 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+
+            startLogin(email, password);
         }
+    }
+
+    private void startLogin(final String email, final String password) {
+        HttpUtils.get(Constants.LOGIN_URL, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                showProgress(false);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                login(response, email, password);
+            }
+        });
+    }
+
+    private void login(String response, String email, String password) {
+        Map<String, String> params = getLoginParam(response, email, password);
+        if (params == null) {
+            return;
+        }
+
+        HttpUtils.post(Constants.LOGIN_URL, params, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.LOGD(TAG, e.toString());
+                showProgress(false);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                LogUtils.LOGD(TAG, response);
+                showProgress(false);
+                onLoginFinish();
+            }
+        });
+    }
+
+    private void onLoginFinish() {
+        HttpUtils.get(Constants.HOME_URL + "/setting", new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.LOGE(TAG, e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                AccountInfo accountInfo = AccountParser.parseResponse(response);
+                String username = accountInfo.getUserName();
+
+                if (!TextUtils.isEmpty(username)) {
+                    Intent data = new Intent();
+                    data.putExtra(KEY_EXTRA_LOGIN_ACCOUNT, accountInfo);
+                    setResult(RESULT_OK, data);
+                    finish();
+                } else {
+                    mPasswordView.setError(getString(R.string.error_incorrect_password));
+                    mPasswordView.requestFocus();
+                }
+            }
+        });
+    }
+
+    @Nullable
+    private Map<String, String> getLoginParam(String response, String email, String password) {
+        Map<String, String> params = new HashMap<>();
+        params.put("email", email);
+        params.put("password", password);
+        params.put("_xsrf", HttpUtils.findXsrf(response));
+
+        return params;
     }
 
     private boolean isEmailValid(String email) {
@@ -305,89 +378,5 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, AccountInfo> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected AccountInfo doInBackground(Void... params) {
-            return mockLogin(LoginActivity.this, mEmail, mPassword);
-        }
-
-        @Override
-        protected void onPostExecute(final AccountInfo accountInfo) {
-            mAuthTask = null;
-            showProgress(false);
-
-            String username = accountInfo.getUserName();
-
-            if (!TextUtils.isEmpty(username)) {
-                Intent data = new Intent();
-                data.putExtra(KEY_EXTRA_LOGIN_ACCOUNT, accountInfo);
-                setResult(RESULT_OK, data);
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-    }
-
-    private static AccountInfo mockLogin(Context context, String email, String password) {
-        AccountInfo accountInfo = new AccountInfo();
-        try {
-            final String url = Constants.WEBSITE_LOGIN_URL;
-            Map<String, String> loginCookies = Jsoup.connect(url)
-                    .method(Connection.Method.GET)
-                    .userAgent(Constants.USER_AGENT)
-                    .execute().cookies();
-
-            Connection.Response res = Jsoup.connect(url)
-                    .data("email", email, "password", password, "_xsrf", loginCookies.get("_xsrf"))
-                    .userAgent(Constants.USER_AGENT)
-                    .cookies(loginCookies)
-                    .method(Connection.Method.POST).execute();
-
-            boolean isLogin = !TextUtils.isEmpty(res.cookie("user"));
-
-            Log.d(TAG, "login response:\n" + "status code: " + res.statusCode()
-                    + "\nstatus message: " + res.statusMessage());
-            for (String key : res.cookies().keySet()) {
-                Log.d(TAG, key + " -> " + res.cookie(key));
-            }
-
-            CookieUtils.putCookies(context, res.cookies());
-
-            if (!isLogin) {
-                return accountInfo;
-            } else {
-                return AccountParser.parseAccount(Constants.WEBSITE_HOME_URL + "/setting", res.cookies());
-            }
-        } catch (IOException e) {
-            Log.d(TAG, e.getMessage());
-        }
-        return accountInfo;
-    }
-
-    public static void startLoginProcess(Activity activity, int requestCode) {
-        Intent intent = new Intent(activity, LoginActivity.class);
-        activity.startActivityForResult(intent, requestCode);
-    }
 }
 

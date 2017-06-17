@@ -33,7 +33,7 @@ public class PersonalInfoDetailPresenter implements PersonalInfoDetailContract.P
                 if (TextUtils.isEmpty(names[0])) {
                     return null;
                 }
-                return PersonalInfoDetailParser.parseList(Constants.WEBSITE_USER_PROFILE_URL + "/" + names[0]);
+                return PersonalInfoDetailParser.parseList(Constants.USER_PROFILE_URL + names[0]);
             }
 
             @Override

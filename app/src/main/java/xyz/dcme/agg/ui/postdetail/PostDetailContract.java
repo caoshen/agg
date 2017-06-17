@@ -1,9 +1,11 @@
 package xyz.dcme.agg.ui.postdetail;
 
+import android.content.Context;
+
 import java.util.List;
 
-import xyz.dcme.agg.ui.BasePresenter;
-import xyz.dcme.agg.ui.BaseView;
+import xyz.dcme.agg.BasePresenter;
+import xyz.dcme.agg.BaseView;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 
 public interface PostDetailContract {
@@ -27,5 +29,9 @@ public interface PostDetailContract {
         void showCommentIndicator(boolean b);
 
         void setCommentSuccess();
+
+        void startLogin();
+
+        Context getViewContext();
     }
 }

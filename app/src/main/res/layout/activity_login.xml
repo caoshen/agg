@@ -4,13 +4,10 @@
               android:layout_height="match_parent"
               android:gravity="center_horizontal"
               android:orientation="vertical"
-              android:paddingBottom="@dimen/activity_vertical_margin"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_vertical_margin"
               tools:context="xyz.dcme.agg.ui.login.LoginActivity">
 
-    <!-- Login progress -->
+    <include layout="@layout/toolbar_back"/>
+
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
@@ -22,13 +19,24 @@
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginStart="@dimen/margin_16"
+        android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:src="@mipmap/ic_logo"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -63,11 +71,11 @@
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                android:background="@color/primary"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@color/primary"
                 android:text="@string/action_sign_in"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>

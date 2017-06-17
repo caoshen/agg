@@ -28,7 +28,7 @@ public class PersonalInfoPagePresenter implements PersonalInfoPageContract.Prese
                 if (TextUtils.isEmpty(names[0])) {
                     return null;
                 }
-                return PersonalInfoPageParser.parse(Constants.WEBSITE_USER_PROFILE_URL + "/" + names[0]);
+                return PersonalInfoPageParser.parse(Constants.USER_PROFILE_URL + names[0]);
             }
 
             @Override

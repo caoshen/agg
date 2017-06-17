@@ -45,4 +45,34 @@ class ReplyParser {
 
         return replies;
     }
+
+    public static List<Reply> parseResponse(String response) {
+        Document doc;
+        List<Reply> replies = new ArrayList<>();
+
+        try {
+            doc = Jsoup.parse(response);
+
+            if (doc == null) {
+                return replies;
+            }
+
+            Elements elements = doc.select("div.reply-item");
+            for (Element e : elements) {
+                String title = e.select("span.title").text();
+                String content = e.select("div.content").text();
+                String detailUrl = e.select("span.title a").attr("href");
+
+                Reply r = new Reply();
+                r.title = title;
+                r.content = content;
+                r.detailUrl = detailUrl;
+                replies.add(r);
+            }
+        } catch (Exception e) {
+            LOGE(TAG, e.getMessage());
+        }
+
+        return replies;
+    }
 }
