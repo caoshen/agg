@@ -7,32 +7,17 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static xyz.dcme.agg.util.LogUtils.LOGE;
 import static xyz.dcme.agg.util.LogUtils.makeLogTag;
 
 public class PersonalInfoDetailParser {
     private static final String TAG = makeLogTag("PersonalInfoDetailParser");
 
-    public Detail parse(String url) {
-        return null;
-    }
-
-    public static List<Detail> parseList(String url) {
-        Document doc = null;
+    public static List<Detail> parseResponse(String response) {
         List<Detail> detailList = new ArrayList<>();
-        try {
-            doc = Jsoup.connect(url).get();
-        } catch (IOException e) {
-            LOGE(TAG, e.getMessage());
-        }
-
-        if (doc == null) {
-            return detailList;
-        }
+        Document doc = Jsoup.parse(response);
 
         Elements dls = doc.select("div.profile div.ui-content dl");
         for (Element dl : dls) {
@@ -64,4 +49,5 @@ public class PersonalInfoDetailParser {
 
         return detailList;
     }
+
 }

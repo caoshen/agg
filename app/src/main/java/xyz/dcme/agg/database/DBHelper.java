@@ -50,7 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
             }
             db.setTransactionSuccessful();
         } catch (Exception e) {
-            LogUtils.LOGE(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
         } finally {
             db.endTransaction();
         }

@@ -15,4 +15,6 @@ public class Constants {
     public static final int FIXED_NODE = 1;
     public static final int NOT_FIXED_NODE = 0;
     public static final String HOME_PAGE = "http://www.guanggoo.com/?p=";
+    public static final String ACTION_LOGIN_SUCCESS = "xyz.dcme.agg.action.LOGIN_SUCCESS";
+    public static final String FAVORITES = "/favorites";
 }

@@ -1,5 +1,6 @@
 package xyz.dcme.agg.ui.node;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import java.util.List;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.ui.BaseFragment;
+import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.post.PostCommonAdapter;
 import xyz.dcme.agg.util.Constants;
 
@@ -90,5 +92,11 @@ public class NodeListFragment extends BaseFragment implements NodeListContract.V
         mAdapter.getDatas().addAll(data);
         mLoadMoreWrapper.notifyDataSetChanged();
         mNextPage++;
+    }
+
+    @Override
+    public void startLogin() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
     }
 }

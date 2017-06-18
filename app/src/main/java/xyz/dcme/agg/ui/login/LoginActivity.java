@@ -16,6 +16,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -30,11 +31,6 @@ import android.widget.TextView;
 
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +40,7 @@ import okhttp3.Call;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.ui.BaseActivity;
+import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HttpUtils;
 import xyz.dcme.agg.util.LogUtils;
@@ -218,7 +215,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
             @Override
             public void onResponse(String response, int id) {
-                login(response, email, password);
+                login(response, email, password);         
             }
         });
     }
@@ -232,13 +229,13 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         HttpUtils.post(Constants.LOGIN_URL, params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                LogUtils.LOGD(TAG, e.toString());
+                LogUtils.d(TAG, e.toString());
                 showProgress(false);
             }
 
             @Override
             public void onResponse(String response, int id) {
-                LogUtils.LOGD(TAG, response);
+                LogUtils.d(TAG, response);
                 showProgress(false);
                 onLoginFinish();
             }
@@ -249,7 +246,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         HttpUtils.get(Constants.HOME_URL + "/setting", new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                LogUtils.LOGE(TAG, e.toString());
+                LogUtils.e(TAG, e.toString());
             }
 
             @Override
@@ -258,9 +255,8 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                 String username = accountInfo.getUserName();
 
                 if (!TextUtils.isEmpty(username)) {
-                    Intent data = new Intent();
-                    data.putExtra(KEY_EXTRA_LOGIN_ACCOUNT, accountInfo);
-                    setResult(RESULT_OK, data);
+                    AccountUtils.setActiveAccountInfo(LoginActivity.this, accountInfo);
+                    sendLoginBroadcast();
                     finish();
                 } else {
                     mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -270,12 +266,24 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         });
     }
 
+    private void sendLoginBroadcast() {
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
+        Intent intent = new Intent(Constants.ACTION_LOGIN_SUCCESS);
+        lbm.sendBroadcast(intent);
+    }
+
     @Nullable
     private Map<String, String> getLoginParam(String response, String email, String password) {
         Map<String, String> params = new HashMap<>();
         params.put("email", email);
         params.put("password", password);
-        params.put("_xsrf", HttpUtils.findXsrf(response));
+        String xsrf = HttpUtils.findXsrf(response);
+        if (!TextUtils.isEmpty(xsrf)) {
+            params.put("_xsrf", xsrf);
+        }
+
+        LogUtils.d(TAG, "getLoginParam -> email: " + email + " password: " + password
+            + " _xsrf: " + xsrf);
 
         return params;
     }

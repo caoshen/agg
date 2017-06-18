@@ -50,7 +50,7 @@ public class NodeLocalData {
             }
             db.setTransactionSuccessful();
         } catch (Exception e) {
-            LogUtils.LOGE(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
         } finally {
             db.endTransaction();
         }
@@ -82,7 +82,7 @@ public class NodeLocalData {
                 nodes.add(node);
             }
         } catch (Exception e) {
-            LogUtils.LOGE(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -106,7 +106,7 @@ public class NodeLocalData {
                 nodes.add(node);
             }
         } catch (Exception e) {
-            LogUtils.LOGE(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
         } finally {
             if (cursor != null) {
                 cursor.close();

@@ -27,7 +27,7 @@ public class AccountParser {
             String avatarUrl = ele.select("img").first().attr("src");
             String userName = doc.select("input#username").attr("value");
 
-            LogUtils.LOGD(TAG, "username: " + userName + " avatar: " + avatarUrl);
+            LogUtils.d(TAG, "username: " + userName + " avatar: " + avatarUrl);
 
             if (TextUtils.isEmpty(avatarUrl) || TextUtils.isEmpty(userName)) {
                 return accountInfo;
@@ -36,7 +36,7 @@ public class AccountParser {
                 accountInfo.setAvatarUrl(avatarUrl);
             }
         } catch (Exception e) {
-            LogUtils.LOGE(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
         }
 
         return accountInfo;
@@ -55,7 +55,7 @@ public class AccountParser {
             String avatarUrl = ele.select("img").first().attr("src");
             String userName = doc.select("input#username").attr("value");
 
-            LogUtils.LOGD(TAG, "username: " + userName + " avatar: " + avatarUrl);
+            LogUtils.d(TAG, "username: " + userName + " avatar: " + avatarUrl);
             accountInfo.setUserName(userName);
             accountInfo.setAvatarUrl(avatarUrl);
 

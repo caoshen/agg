@@ -17,5 +17,7 @@ public interface NodeListContract {
         void onRefresh(List<Post> data);
 
         void onLoad(List<Post> data);
+
+        void startLogin();
     }
 }

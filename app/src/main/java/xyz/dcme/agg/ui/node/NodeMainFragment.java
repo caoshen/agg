@@ -62,7 +62,7 @@ public class NodeMainFragment extends BaseFragment
     @Override
     public void showNodes(List<Node> nodes) {
         if (nodes == null || nodes.isEmpty()) {
-            LogUtils.LOGD(LOG_TAG, "showNodes -> nodes is empty");
+            LogUtils.d(LOG_TAG, "showNodes -> nodes is empty");
             return;
         }
 

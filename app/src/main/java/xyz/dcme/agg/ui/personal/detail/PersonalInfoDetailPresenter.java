@@ -1,16 +1,17 @@
 package xyz.dcme.agg.ui.personal.detail;
 
-import android.os.AsyncTask;
-import android.text.TextUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.List;
-
+import okhttp3.Call;
 import xyz.dcme.agg.util.Constants;
+import xyz.dcme.agg.util.HttpUtils;
+import xyz.dcme.agg.util.LogUtils;
 
 import static xyz.dcme.agg.util.LogUtils.makeLogTag;
 
 public class PersonalInfoDetailPresenter implements PersonalInfoDetailContract.Presenter {
     private static final String TAG = makeLogTag("PersonalInfoDetailPresenter");
+    private static final String LOG_TAG = "PersonalInfoDetailPresenter";
 
     private final PersonalInfoDetailContract.View mView;
 
@@ -27,23 +28,19 @@ public class PersonalInfoDetailPresenter implements PersonalInfoDetailContract.P
     @Override
     public void load(String name) {
         mView.setLoadingIndicator(true);
-        new AsyncTask<String, Void, List<Detail>>() {
+
+        HttpUtils.get(Constants.USER_PROFILE_URL + name + Constants.FAVORITES, new StringCallback() {
             @Override
-            protected List<Detail> doInBackground(String... names) {
-                if (TextUtils.isEmpty(names[0])) {
-                    return null;
-                }
-                return PersonalInfoDetailParser.parseList(Constants.USER_PROFILE_URL + names[0]);
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
+                mView.setLoadingIndicator(false);
             }
 
             @Override
-            protected void onPostExecute(List<Detail> details) {
-                super.onPostExecute(details);
-                if (details != null && !details.isEmpty()) {
-                    mView.showDetails(details);
-                }
+            public void onResponse(String response, int id) {
                 mView.setLoadingIndicator(false);
+                mView.showDetails(PersonalInfoDetailParser.parseResponse(response));
             }
-        }.execute(name);
+        });
     }
 }

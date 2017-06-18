@@ -140,7 +140,7 @@ public class MeFragment extends Fragment implements
                 mIsLogin = true;
                 loadAccountInfo(mAccountInfo);
             } else {
-                LogUtils.LOGD(TAG, "data is null!");
+                LogUtils.d(TAG, "data is null!");
             }
         } else if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_SETTINGS) {
             updateAccount();
@@ -175,9 +175,9 @@ public class MeFragment extends Fragment implements
                         .load(avatarUrl)
                         .into(mAvatar);
             }
-            LogUtils.LOGD(TAG, "username: " + name + " avatar: " + avatarUrl);
+            LogUtils.d(TAG, "username: " + name + " avatar: " + avatarUrl);
         } else {
-            LogUtils.LOGD(TAG, "account info is null!");
+            LogUtils.d(TAG, "account info is null!");
         }
     }
 

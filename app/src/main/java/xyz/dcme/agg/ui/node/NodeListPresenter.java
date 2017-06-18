@@ -1,12 +1,12 @@
 package xyz.dcme.agg.ui.node;
 
-import android.os.AsyncTask;
-import android.util.Log;
+import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.List;
-
-import xyz.dcme.agg.model.Post;
+import okhttp3.Call;
 import xyz.dcme.agg.parser.PostParser;
+import xyz.dcme.agg.util.HttpUtils;
+import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.agg.util.LoginUtils;
 
 public class NodeListPresenter implements NodeListContract.Presenter {
     public static final int FIRST_PAGE = 1;
@@ -31,20 +31,24 @@ public class NodeListPresenter implements NodeListContract.Presenter {
 
     @Override
     public void start(final String nodeName) {
-        new AsyncTask<Void, Void, List<Post>>() {
+        String prefix = getUrlPrefix(nodeName);
+        String url = prefix + FIRST_PAGE;
 
+        HttpUtils.get(url, new StringCallback() {
             @Override
-            protected List<Post> doInBackground(Void... voids) {
-                String prefix = getUrlPrefix(nodeName);
-                return PostParser.parseUrl(prefix + FIRST_PAGE);
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
             }
 
             @Override
-            protected void onPostExecute(List<Post> data) {
-                super.onPostExecute(data);
-                mView.onRefresh(data);
+            public void onResponse(String response, int id) {
+                if (LoginUtils.needLogin(response)) {
+                    mView.startLogin();
+                } else {
+                    mView.onRefresh(PostParser.parseResponse(response));
+                }
             }
-        }.execute();
+        });
     }
 
     private String getUrlPrefix(String nodeName) {
@@ -59,21 +63,23 @@ public class NodeListPresenter implements NodeListContract.Presenter {
 
     @Override
     public void load(final String nodeName, final int page) {
-        new AsyncTask<Void, Void, List<Post>>() {
+        String prefix = getUrlPrefix(nodeName);
+        String url = prefix + page;
 
+        HttpUtils.get(url, new StringCallback() {
             @Override
-            protected List<Post> doInBackground(Void... voids) {
-                String prefix = getUrlPrefix(nodeName);
-                Log.d(LOG_TAG, prefix + page);
-                return PostParser.parseUrl(prefix + page);
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
             }
 
             @Override
-            protected void onPostExecute(List<Post> data) {
-                super.onPostExecute(data);
-                mView.onLoad(data);
-                Log.d(LOG_TAG, "" + data.size());
+            public void onResponse(String response, int id) {
+                if (LoginUtils.needLogin(response)) {
+                    mView.startLogin();
+                } else {
+                    mView.onLoad(PostParser.parseResponse(response));
+                }
             }
-        }.execute();
+        });
     }
 }

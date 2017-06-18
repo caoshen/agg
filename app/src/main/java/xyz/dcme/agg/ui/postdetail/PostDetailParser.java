@@ -1,17 +1,22 @@
 package xyz.dcme.agg.ui.postdetail;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.ui.postdetail.data.PostMyComment;
+import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 
 public class PostDetailParser {
@@ -56,8 +61,33 @@ public class PostDetailParser {
             String replyAvatar = replyItem.select("img").attr("src");
             String replyTime = replyItem.select("span.time").text();
             data.add(new PostComment(replyUserName, replyAvatar, replyContent, replyTime));
-            LogUtils.LOGD(TAG, "name: " + replyUserName + " content: " + replyContent + " avatar: " + replyAvatar);
+            LogUtils.d(TAG, "name: " + replyUserName + " content: " + replyContent + " avatar: " + replyAvatar);
         }
         return data;
     }
+
+    public static Map<String, String> mockLogin() {
+        try {
+            final String url = Constants.LOGIN_URL;
+            Map<String, String> loginCookies = Jsoup.connect(url)
+                    .method(Connection.Method.GET)
+                    .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
+                    .execute().cookies();
+
+            String email = "cshenn@163.com";//"1012504657@qq.com";
+            String password = "x1234567";//"x1234567X";
+
+            Connection.Response res = Jsoup.connect(url)
+                    .data("email", email, "password", password, "_xsrf", loginCookies.get("_xsrf"))
+                    .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
+                    .cookies(loginCookies)
+                    .method(Connection.Method.POST).execute();
+
+            return res.cookies();
+        } catch (IOException e) {
+            LogUtils.e(TAG, e.getMessage());
+        }
+        return new HashMap<String, String>();
+    }
+
 }

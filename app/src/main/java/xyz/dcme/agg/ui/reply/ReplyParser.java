@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static xyz.dcme.agg.util.LogUtils.LOGE;
+import xyz.dcme.agg.util.LogUtils;
+
 import static xyz.dcme.agg.util.LogUtils.makeLogTag;
 
 class ReplyParser {
@@ -40,7 +41,7 @@ class ReplyParser {
                 replies.add(r);
             }
         } catch (IOException e) {
-            LOGE(TAG, e.getMessage());
+            LogUtils.e(TAG, e.getMessage());
         }
 
         return replies;
@@ -70,7 +71,7 @@ class ReplyParser {
                 replies.add(r);
             }
         } catch (Exception e) {
-            LOGE(TAG, e.getMessage());
+            LogUtils.e(TAG, e.getMessage());
         }
 
         return replies;

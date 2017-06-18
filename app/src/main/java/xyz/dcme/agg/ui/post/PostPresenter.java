@@ -1,8 +1,5 @@
 package xyz.dcme.agg.ui.post;
 
-import android.os.AsyncTask;
-import android.util.Log;
-
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.List;
@@ -12,9 +9,10 @@ import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.parser.PostParser;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HttpUtils;
+import xyz.dcme.agg.util.LogUtils;
 
 public class PostPresenter implements PostContract.Presenter {
-    public static final String FIRST_PAGE = "1";
+    private static final String FIRST_PAGE = "1";
     private static final String TAG = "PostPresenter";
     private PostContract.View mView;
 
@@ -33,7 +31,7 @@ public class PostPresenter implements PostContract.Presenter {
 
             @Override
             public void onResponse(String response, int id) {
-                List<Post> posts = PostParser.parseHtml(response);
+                List<Post> posts = PostParser.parseResponse(response);
                 mView.onRefresh(posts);
             }
         });
@@ -41,19 +39,18 @@ public class PostPresenter implements PostContract.Presenter {
 
     @Override
     public void loadMore(final int nextPage) {
-        new AsyncTask<Void, Void, List<Post>>() {
-
+        HttpUtils.get(Constants.HOME_PAGE + nextPage, new StringCallback() {
             @Override
-            protected List<Post> doInBackground(Void... voids) {
-                return PostParser.parseUrl(Constants.HOME_PAGE + nextPage);
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(TAG, e.toString());
+                mView.onError();
             }
 
             @Override
-            protected void onPostExecute(List<Post> data) {
-                super.onPostExecute(data);
-                mView.onLoadMore(data);
-                Log.d(TAG, "" + data.size());
+            public void onResponse(String response, int id) {
+                List<Post> posts = PostParser.parseResponse(response);
+                mView.onLoadMore(posts);
             }
-        }.execute();
+        });
     }
 }

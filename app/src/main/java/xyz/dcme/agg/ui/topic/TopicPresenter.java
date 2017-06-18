@@ -1,14 +1,15 @@
 package xyz.dcme.agg.ui.topic;
 
-import android.os.AsyncTask;
-import android.text.TextUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.List;
-
+import okhttp3.Call;
 import xyz.dcme.agg.util.Constants;
+import xyz.dcme.agg.util.HttpUtils;
+import xyz.dcme.agg.util.LogUtils;
 
 public class TopicPresenter implements TopicContract.Presenter {
 
+    private static final String LOG_TAG = "TopicPresenter";
     private TopicContract.View mView;
 
     public TopicPresenter(TopicContract.View view) {
@@ -24,23 +25,19 @@ public class TopicPresenter implements TopicContract.Presenter {
     @Override
     public void load(String name) {
         mView.setLoadingIndicator(true);
-        new AsyncTask<String, Void, List<Topic>>() {
+
+        HttpUtils.get(Constants.USER_PROFILE_URL + name, new StringCallback() {
             @Override
-            protected List<Topic> doInBackground(String... names) {
-                if (TextUtils.isEmpty(names[0])) {
-                    return null;
-                }
-                return TopicParser.parseList(Constants.USER_PROFILE_URL + names[0]);
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
+                mView.setLoadingIndicator(false);
             }
 
             @Override
-            protected void onPostExecute(List<Topic> topics) {
-                super.onPostExecute(topics);
-                if (topics != null && !topics.isEmpty()) {
-                    mView.showTopics(topics);
-                }
+            public void onResponse(String response, int id) {
                 mView.setLoadingIndicator(false);
+                mView.showTopics(TopicParser.parseResponse(response));
             }
-        }.execute(name);
+        });
     }
 }

@@ -1,12 +1,15 @@
 package xyz.dcme.agg.ui.personal.page;
 
-import android.os.AsyncTask;
-import android.text.TextUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import okhttp3.Call;
 import xyz.dcme.agg.util.Constants;
+import xyz.dcme.agg.util.HttpUtils;
+import xyz.dcme.agg.util.LogUtils;
 
 public class PersonalInfoPagePresenter implements PersonalInfoPageContract.Presenter {
 
+    private static final String LOG_TAG = "PersonalInfoPagePresenter";
     private final PersonalInfoPageContract.View mView;
 
     public PersonalInfoPagePresenter(PersonalInfoPageContract.View view) {
@@ -22,23 +25,19 @@ public class PersonalInfoPagePresenter implements PersonalInfoPageContract.Prese
     @Override
     public void load(String name) {
         mView.setLoadingIndicator(true);
-        new AsyncTask<String, Void, Count>() {
+
+        HttpUtils.get(Constants.USER_PROFILE_URL + name, new StringCallback() {
             @Override
-            protected Count doInBackground(String... names) {
-                if (TextUtils.isEmpty(names[0])) {
-                    return null;
-                }
-                return PersonalInfoPageParser.parse(Constants.USER_PROFILE_URL + names[0]);
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
+                mView.setLoadingIndicator(false);
             }
 
             @Override
-            protected void onPostExecute(Count count) {
-                super.onPostExecute(count);
-                if (count != null) {
-                    mView.show(count);
-                }
+            public void onResponse(String response, int id) {
                 mView.setLoadingIndicator(false);
+                mView.show(PersonalInfoPageParser.parseResponse(response));
             }
-        }.execute(name);
+        });
     }
 }

@@ -15,6 +15,7 @@ import okhttp3.CookieJar;
 import okhttp3.OkHttpClient;
 
 public class HttpUtils {
+    private static final String TAG = "HttpUtils";
 
     private HttpUtils() {
 
@@ -64,6 +65,7 @@ public class HttpUtils {
         Document doc = Jsoup.parse(response);
         Elements select = doc.select("input[type=hidden]");
         if (select.isEmpty()) {
+            LogUtils.e(TAG, "findXsrf -> response: " + response);
             return null;
         }
         Element element = select.get(0);

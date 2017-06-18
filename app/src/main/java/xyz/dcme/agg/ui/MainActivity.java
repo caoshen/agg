@@ -1,12 +1,16 @@
 package xyz.dcme.agg.ui;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
@@ -23,21 +27,31 @@ import xyz.dcme.agg.ui.settings.SettingsActivity;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.ImageLoader;
+import xyz.dcme.agg.util.LogUtils;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener {
     private static final int REQUEST_SETTINGS = 200;
     private static final int REQUEST_LOGIN = 300;
+    private static final String TAG = "MainActivity";
     private NodeMainFragment mNodeMainFragment;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawer;
     private TextView mUsername;
     private CircleImageView mAvatar;
+    private BroadcastReceiver mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initFragment(savedInstanceState);
+        registerBroadcast();
+    }
+
+    @Override
+    protected void onDestroy() {
+        unRegisterBroadcast();
+        super.onDestroy();
     }
 
     private void initFragment(Bundle savedInstanceState) {
@@ -160,6 +174,36 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     AccountInfo info = data.getParcelableExtra(LoginActivity.KEY_EXTRA_LOGIN_ACCOUNT);
                     AccountUtils.setActiveAccountInfo(this, info);
                 }
+                updateAccountInfo();
+            }
+        }
+    }
+
+    public void registerBroadcast() {
+        if (mReceiver == null) {
+            mReceiver = new MainReceiver();
+            LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Constants.ACTION_LOGIN_SUCCESS);
+            lbm.registerReceiver(mReceiver, filter);
+        }
+    }
+
+    public void unRegisterBroadcast() {
+        if (mReceiver != null) {
+            LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
+            lbm.unregisterReceiver(mReceiver);
+            mReceiver = null;
+        }
+    }
+
+    private class MainReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            LogUtils.d(TAG, "onReceive -> action: " + action);
+            if (Constants.ACTION_LOGIN_SUCCESS.equals(action)) {
                 updateAccountInfo();
             }
         }

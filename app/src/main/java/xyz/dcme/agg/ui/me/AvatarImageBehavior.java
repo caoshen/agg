@@ -9,8 +9,8 @@ import android.view.View;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.util.LogUtils;
 
-import static xyz.dcme.agg.util.LogUtils.LOGE;
 import static xyz.dcme.agg.util.LogUtils.makeLogTag;
 
 
@@ -41,7 +41,7 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageV
             mStartHeight = a.getDimension(R.styleable.AvatarImageBehavior_startHeight, 0);
             mFinalHeight = a.getDimension(R.styleable.AvatarImageBehavior_finalHeight, 0);
         } catch (Exception e) {
-            LOGE(TAG, e.getMessage());
+            LogUtils.e(TAG, e.getMessage());
         } finally {
             a.recycle();
         }
