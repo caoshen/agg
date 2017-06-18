@@ -29,7 +29,7 @@ public class PersonalInfoDetailPresenter implements PersonalInfoDetailContract.P
     public void load(String name) {
         mView.setLoadingIndicator(true);
 
-        HttpUtils.get(Constants.USER_PROFILE_URL + name + Constants.FAVORITES, new StringCallback() {
+        HttpUtils.get(Constants.USER_PROFILE_URL + name, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtils.e(LOG_TAG, e.toString());

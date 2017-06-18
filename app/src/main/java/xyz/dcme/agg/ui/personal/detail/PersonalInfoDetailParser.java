@@ -40,6 +40,10 @@ public class PersonalInfoDetailParser {
 
         Element number = doc.select("div.profile div.user-number div.number").first();
         Element since = doc.select("div.profile div.user-number div.since").first();
+        if (number == null || since == null) {
+            return detailList;
+        }
+
         if (!TextUtils.isEmpty(number.text()) && !TextUtils.isEmpty(since.text())) {
             Detail detailNumber = new Detail();
             detailNumber.title = since.text();
