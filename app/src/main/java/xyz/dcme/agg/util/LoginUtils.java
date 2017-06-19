@@ -8,7 +8,7 @@ public class LoginUtils {
 
     public static boolean needLogin(String response) {
         Document doc = Jsoup.parse(response);
-        Elements contents = doc.select("div.ui-content");
-        return (contents == null || contents.isEmpty());
+        Elements contents = doc.select("input[type=password]");
+        return contents != null && !contents.isEmpty();
     }
 }
