@@ -34,6 +34,31 @@ public class NodeListPresenter implements NodeListContract.Presenter {
         String prefix = getUrlPrefix(nodeName);
         String url = prefix + FIRST_PAGE;
 
+        mView.showIndicator(true);
+        HttpUtils.get(url, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
+                mView.showIndicator(false);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if (LoginUtils.needLogin(response)) {
+                    mView.showLoginTips();
+                } else {
+                    mView.showIndicator(false);
+                    mView.showRefresh(PostParser.parseResponse(response));
+                }
+            }
+        });
+    }
+
+    @Override
+    public void refresh(String nodeName) {
+        String prefix = getUrlPrefix(nodeName);
+        String url = prefix + FIRST_PAGE;
+
         HttpUtils.get(url, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -42,11 +67,7 @@ public class NodeListPresenter implements NodeListContract.Presenter {
 
             @Override
             public void onResponse(String response, int id) {
-                if (LoginUtils.needLogin(response)) {
-                    mView.startLogin();
-                } else {
-                    mView.onRefresh(PostParser.parseResponse(response));
-                }
+                mView.showRefresh(PostParser.parseResponse(response));
             }
         });
     }
@@ -74,11 +95,7 @@ public class NodeListPresenter implements NodeListContract.Presenter {
 
             @Override
             public void onResponse(String response, int id) {
-                if (LoginUtils.needLogin(response)) {
-                    mView.startLogin();
-                } else {
-                    mView.onLoad(PostParser.parseResponse(response));
-                }
+                mView.showLoad(PostParser.parseResponse(response));
             }
         });
     }

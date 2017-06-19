@@ -94,4 +94,6 @@
     <string name="current_node">当前节点</string>
     <string name="more_node">更多节点</string>
     <string name="node_choose">节点选择</string>
+
+    <string name="login_tips">需要先登录账号</string>
 </resources>

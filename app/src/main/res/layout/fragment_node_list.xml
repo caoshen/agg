@@ -4,17 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/node_list"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+
+        <xyz.dcme.agg.common.irecyclerview.IRecyclerView
+            android:id="@+id/node_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </xyz.dcme.agg.common.irecyclerview.IRecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <xyz.dcme.agg.widget.LoadingTip
         android:id="@+id/loading_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center">
+        android:layout_gravity="center">
     </xyz.dcme.agg.widget.LoadingTip>
+
 </FrameLayout>

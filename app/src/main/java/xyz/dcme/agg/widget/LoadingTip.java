@@ -59,9 +59,10 @@ public class LoadingTip extends LinearLayout {
         EMPTY,
         LOADING,
         FINISH,
+        NEED_LOGIN
     }
 
-    private interface OnReloadListener {
+    public interface OnReloadListener {
         void onReload();
     }
 
@@ -99,6 +100,14 @@ public class LoadingTip extends LinearLayout {
                 setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.VISIBLE);
                 mTips.setText(R.string.loading);
+                break;
+            }
+            case NEED_LOGIN: {
+                setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.GONE);
+                mReloadBtn.setVisibility(View.VISIBLE);
+                mTips.setText(R.string.login_tips);
+                mReloadBtn.setText(R.string.login);
                 break;
             }
             case FINISH: {
