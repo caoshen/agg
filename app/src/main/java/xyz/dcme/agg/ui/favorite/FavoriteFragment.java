@@ -87,7 +87,7 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.View 
         mFavList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mFavList.setHasFixedSize(true);
         CommonAdapter<Post> adapter = new FavoriteAdapter(getActivity(),
-                R.layout.item_fav, mData);
+                R.layout.item_post, mData);
         mFavList.setAdapter(adapter);
     }
 
