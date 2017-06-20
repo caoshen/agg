@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -23,12 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.BaseFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.widget.BottomSheetBar;
 
-public class PostDetailFragment extends Fragment implements PostDetailContract.View,
+public class PostDetailFragment extends BaseFragment implements PostDetailContract.View,
         View.OnClickListener {
     public static final String KEY_ARG_URL = "arg_url";
     private static final int REQUEST_LOGIN = 1000;
@@ -62,21 +60,9 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
         }
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_post_detail, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initViews(view);
-    }
-
-    private void initViews(View view) {
-        mRecycler = (RecyclerView) view.findViewById(R.id.post_detail);
+    protected void initView() {
+        mRecycler = (RecyclerView) mRootView.findViewById(R.id.post_detail);
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(lm);
         mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
@@ -97,9 +83,24 @@ public class PostDetailFragment extends Fragment implements PostDetailContract.V
 
 
         mRecycler.setAdapter(mAdapter);
-        mLoadingProgressBar = (ProgressBar) view.findViewById(R.id.loading);
+        mLoadingProgressBar = (ProgressBar) mRootView.findViewById(R.id.loading);
 
-        initToolbar(view);
+        initToolbar(mRootView);
+    }
+
+    @Override
+    protected void initPresenter() {
+        mPresenter = new PostDetailPresenter(this);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_post_detail;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     private void initToolbar(View view) {

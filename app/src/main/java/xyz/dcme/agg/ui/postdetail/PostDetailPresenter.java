@@ -57,6 +57,11 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
     public void sendReply(final String comment, final String url) {
         mView.showCommentIndicator(true);
 
+        if (mContext == null) {
+            LogUtils.e(TAG, "sendReply -> context is null");
+            mView.showCommentIndicator(false);
+            return;
+        }
         if (!AccountUtils.hasActiveAccount(mContext)) {
             mView.startLogin();
             return;
@@ -83,10 +88,14 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
 
     private Map<String, String> getReplyParams(String response, String comment, String url) {
         Map<String, String> params = new HashMap<>();
-        params.put("tid", extractTidFromUrl(url));
-        params.put("content", comment);
-        params.put("_xsrf", HttpUtils.findXsrf(response));
+        String tid = extractTidFromUrl(url);
+        String xsrf = HttpUtils.findXsrf(response);
 
+        params.put("tid", tid);
+        params.put("content", comment);
+        params.put("_xsrf", xsrf);
+
+        LogUtils.d(TAG, "getReplyParams -> tid: " + tid + " content: " + comment + " xsrf: " + xsrf);
         return params;
     }
 
@@ -95,9 +104,10 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
             return;
         }
 
-        HttpUtils.post(getRealUrl(url), params, new StringCallback() {
+        HttpUtils.post(url, params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                LogUtils.e(TAG, e.toString());
                 mView.sendCommentFailed();
             }
 
@@ -110,11 +120,13 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
     }
 
     private String getRealUrl(String url) {
-        if (url.contains("#")) {
-            int pos = url.indexOf("#");
-            return Constants.HOME_URL + url.substring(0, pos);
+        String realUrl = url;
+        if (realUrl.contains("#")) {
+            int pos = realUrl.indexOf("#");
+            realUrl = Constants.HOME_URL + realUrl.substring(0, pos);
         }
-        return Constants.HOME_URL + url;
+        LogUtils.d(TAG, "getRealUrl -> " + realUrl);
+        return realUrl;
     }
 
     private String extractTidFromUrl(String url) {

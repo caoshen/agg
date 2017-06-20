@@ -7,6 +7,9 @@
     <string-array name="all_node_title">
         <item>最新话题</item>
         <item>精华主题</item>
+        <item>兴趣节点</item>
+        <item>关注的人</item>
+
         <item>你问我答</item>
         <item>同城活动</item>
         <item>找工作</item>
@@ -23,6 +26,9 @@
     <string-array name="all_node_name">
         <item>latest</item>
         <item>elite</item>
+        <item>interest</item>
+        <item>follows</item>
+
         <item>qna</item>
         <item>lowshine</item>
         <item>job</item>

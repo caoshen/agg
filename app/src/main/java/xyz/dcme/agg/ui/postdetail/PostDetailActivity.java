@@ -47,7 +47,6 @@ public class PostDetailActivity extends BaseActivity {
             postFragment = PostDetailFragment.newInstance(mUrl);
             ActivityUtils.addFragmentToActivity(fm, postFragment, R.id.post_detail_main);
         }
-        new PostDetailPresenter(postFragment);
     }
 
     public static void startActivity(Context context, String url) {

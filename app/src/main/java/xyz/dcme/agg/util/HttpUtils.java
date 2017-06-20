@@ -16,6 +16,7 @@ import okhttp3.OkHttpClient;
 
 public class HttpUtils {
     private static final String TAG = "HttpUtils";
+    private static final String EMPTY_STR = "";
 
     private HttpUtils() {
 
@@ -63,10 +64,10 @@ public class HttpUtils {
 
     public static String findXsrf(String response) {
         Document doc = Jsoup.parse(response);
-        Elements select = doc.select("input[type=hidden]");
+        Elements select = doc.select("input[type=hidden][name=_xsrf]");
         if (select.isEmpty()) {
             LogUtils.e(TAG, "findXsrf -> response: " + response);
-            return null;
+            return EMPTY_STR;
         }
         Element element = select.get(0);
         return element.attr("value");
