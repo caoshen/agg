@@ -4,6 +4,8 @@ public class Constants {
     public static final String HOME_URL = "http://www.guanggoo.com";
     public static final String LOGIN_URL = HOME_URL + "/login";
     public static final String USER_PROFILE_URL = HOME_URL + "/u/";
+    public static final String TOPIC_URL = "/topics";
+
     public static final String SLASH = "/";
 
     public static final String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 " +

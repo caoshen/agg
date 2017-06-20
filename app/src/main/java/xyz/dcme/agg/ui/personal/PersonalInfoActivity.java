@@ -81,7 +81,6 @@ public class PersonalInfoActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_personal_info, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

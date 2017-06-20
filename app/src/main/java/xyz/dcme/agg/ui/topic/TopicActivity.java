@@ -2,7 +2,6 @@ package xyz.dcme.agg.ui.topic;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -14,26 +13,16 @@ public class TopicActivity extends BaseActivity {
     private String mUserName;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initData();
-        initFragment();
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.activity_topic;
     }
 
     @Override
     public void initView() {
-
-    }
-
-    private void initData() {
         Intent intent = getIntent();
         if (intent != null) {
             mUserName = intent.getStringExtra(EXTRA_USER_NAME);
+            initFragment();
         }
     }
 

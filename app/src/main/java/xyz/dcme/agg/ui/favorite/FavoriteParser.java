@@ -11,7 +11,7 @@ import java.util.List;
 
 import xyz.dcme.agg.model.Post;
 
-class FavoriteParser {
+public class FavoriteParser {
     public static List<Post> parseList(String url) {
         Document doc = null;
         List<Post> data = new ArrayList<Post>();

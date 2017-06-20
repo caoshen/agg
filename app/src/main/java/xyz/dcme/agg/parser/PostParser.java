@@ -1,19 +1,14 @@
 package xyz.dcme.agg.parser;
 
-import android.util.Log;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import xyz.dcme.agg.model.Post;
-import xyz.dcme.agg.ui.postdetail.PostDetailParser;
 import xyz.dcme.agg.util.LogUtils;
 
 public class PostParser {
@@ -44,4 +39,24 @@ public class PostParser {
         return data;
     }
 
+    public static int parseTotalCount(String response) {
+        Document doc = Jsoup.parse(response);
+
+        try {
+            Elements items = doc.select("div.pagination-wap div");
+            if (items != null && !items.isEmpty()) {
+                String counts = items.first().text();
+                LogUtils.d(TAG, "parseTotalCount -> counts: " + counts);
+                if (counts.contains("/")) {
+                    String[] split = counts.split("/");
+                    if (split.length == 2) {
+                        return Integer.valueOf(split[1]);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            LogUtils.e(TAG, e.toString());
+        }
+        return 0;
+    }
 }

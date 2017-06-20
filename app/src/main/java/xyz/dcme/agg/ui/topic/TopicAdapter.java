@@ -11,7 +11,7 @@ import java.util.List;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.util.ImageLoader;
 
-class TopicAdapter extends CommonAdapter<Topic> {
+public class TopicAdapter extends CommonAdapter<Topic> {
     public TopicAdapter(Context context, int layoutId, List<Topic> data) {
         super(context, layoutId, data);
     }

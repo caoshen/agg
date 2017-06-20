@@ -6,34 +6,40 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
-
-import com.zhy.adapter.recyclerview.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.common.irecyclerview.IRecyclerView;
+import xyz.dcme.agg.common.irecyclerview.OnLoadMoreListener;
+import xyz.dcme.agg.model.Post;
+import xyz.dcme.agg.ui.BaseFragment;
+import xyz.dcme.agg.ui.post.PostCommonAdapter;
 import xyz.dcme.agg.util.AccountUtils;
 
-public class TopicFragment extends Fragment implements TopicContract.View {
+public class TopicFragment extends BaseFragment
+        implements TopicContract.View, SwipeRefreshLayout.OnRefreshListener,
+        OnLoadMoreListener {
 
     private static final String KEY_USER_NAME = "key_username";
-    private RecyclerView mTopicView;
+    private IRecyclerView mTopicView;
     private ProgressBar mProgressBar;
 
     private String mUserName;
     private TopicContract.Presenter mPresenter;
-    private List<Topic> mData;
+    private List<Post> mData;
     private Toolbar mToolbar;
+    private PostCommonAdapter mAdapter;
+    private SwipeRefreshLayout mSwipeRefresh;
+    private int mNextPage = 2;
 
     public static Fragment newInstance(String userName) {
         Fragment fragment = new TopicFragment();
@@ -52,42 +58,35 @@ public class TopicFragment extends Fragment implements TopicContract.View {
         }
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_topic, container, false);
-        initViews(root);
-        initPresenter();
-        return root;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mPresenter.load(mUserName);
-    }
-
-    private void initPresenter() {
-        new TopicPresenter(this);
-    }
-
-    private void initViews(View root) {
-        mTopicView = (RecyclerView) root.findViewById(R.id.topic_list);
-        mProgressBar = (ProgressBar) root.findViewById(R.id.progress_bar);
-        mToolbar = (Toolbar) root.findViewById(R.id.toolbar);
-
+    protected void initView() {
+        mTopicView = (IRecyclerView) mRootView.findViewById(R.id.topic_list);
+        mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progress_bar);
+        mToolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
+        mSwipeRefresh = (SwipeRefreshLayout) mRootView.findViewById(R.id.topic_swipe_refresh);
+        mSwipeRefresh.setOnRefreshListener(this);
         initToolbar();
         initRecycle();
+
+        mPresenter.start(mUserName);
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter = new TopicPresenter(this);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_topic;
     }
 
     private void initRecycle() {
-        mData = new ArrayList<Topic>();
-
+        mData = new ArrayList<>();
         mTopicView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mTopicView.setHasFixedSize(true);
-        CommonAdapter<Topic> adapter = new TopicAdapter(getActivity(),
-                R.layout.item_topic, mData);
-        mTopicView.setAdapter(adapter);
+        mAdapter = new PostCommonAdapter(getActivity(), R.layout.item_post, mData);
+        mTopicView.setAdapter(mAdapter);
+        mTopicView.setOnLoadMoreListener(this);
     }
 
     private void initToolbar() {
@@ -110,7 +109,7 @@ public class TopicFragment extends Fragment implements TopicContract.View {
     }
 
     @Override
-    public void setLoadingIndicator(final boolean active) {
+    public void showIndicator(final boolean active) {
         int time = getResources().getInteger(android.R.integer.config_shortAnimTime);
         mProgressBar.setVisibility(active ? View.VISIBLE : View.GONE);
         mProgressBar.animate().setDuration(time).alpha(active ? 1 : 0)
@@ -131,14 +130,28 @@ public class TopicFragment extends Fragment implements TopicContract.View {
     }
 
     @Override
-    public void showTopics(List<Topic> topics) {
-        mData.clear();
-        mData.addAll(topics);
-        mTopicView.getAdapter().notifyDataSetChanged();
+    public void showRefresh(List<Post> topics) {
+        mSwipeRefresh.setRefreshing(false);
+        mAdapter.getDatas().clear();
+        mAdapter.getDatas().addAll(topics);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void showNoTopics() {
+    public void showLoad(List<Post> data) {
+        mAdapter.getDatas().addAll(data);
+        mAdapter.notifyDataSetChanged();
+        mNextPage++;
+    }
 
+    @Override
+    public void onRefresh() {
+        mSwipeRefresh.setRefreshing(true);
+        mPresenter.refresh(mUserName);
+    }
+
+    @Override
+    public void onLoadMore(View view) {
+        mPresenter.load(mUserName, mNextPage);
     }
 }

@@ -13,7 +13,7 @@ import xyz.dcme.agg.util.LogUtils;
 
 import static xyz.dcme.agg.util.LogUtils.makeLogTag;
 
-class ReplyParser {
+public class ReplyParser {
 
     private static final String TAG = makeLogTag("ReplyParser");
 
