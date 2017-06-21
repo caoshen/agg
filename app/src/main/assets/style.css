@@ -629,38 +629,7 @@ dfn,
 .answer h5 {
   font-size: 19px;
 }
-@media only screen and (-webkit-min-device-pixel-ratio2), only screen and (min-device-pixel-ratio2) {
-  .icon-arrow-right {
-    background-image: url(http://static.daily.zhihu.com/img/share-icons@2x.png);
-    -webkit-background-size: 82px 55px;
-    background-size: 82px 55px;
-  }
-  .icon-vote,
-  .icon-voted {
-    background-image: url(http://static.daily.zhihu.com/img/app/Comment_Vote@2x.png) !important;
-    background-size: 11px 12px;
-  }
-  .icon-voted {
-    background-image: url(http://static.daily.zhihu.com/img/app/Comment_Voted@2x.png) !important;
-  }
-  .night .icon-vote {
-    background-image: url(http://static.daily.zhihu.com/img/app/Dark_Comment_Vote@2x.png) !important;
-  }
-  .from-column {
-    background-image: url(http://static.daily.zhihu.com/img/News_Column_Entrance@2x.png) !important;
-    background-size: 280px 30px;
-  }
-  .from-column:active {
-    background-image: url(http://static.daily.zhihu.com/img/News_Column_Entrance_Highlight@2x.png) !important;
-  }
-  .night .from-column {
-    color: #2b82ac;
-    background-image: url(http://static.daily.zhihu.com/img/Dark_News_Column_Entrance@2x.png) !important;
-  }
-  .night .from-column:active {
-    background-image: url(http://static.daily.zhihu.com/img/Dark_News_Column_Entrance_Highlight@2x.png) !important;
-  }
-}
+
 .meta .meta-item {
   width: 39%;
   overflow: hidden;
@@ -778,30 +747,7 @@ a.origin-source:link .text {
 .origin-source-wrap.unfocused .origin-source:after {
   display: none;
 }
-.night .origin-source-wrap {
-  background: #292929;
-}
-.night .origin-source-wrap .focus-link {
-  color: #116f9e;
-}
-.night .origin-source-wrap .btn-label {
-  border-left: solid 1px #3f3f3f;
-}
-.night .origin-source,
-.night .origin-source.with-link {
-  background: #292929;
-  color: #666;
-}
-.night .origin-source .text,
-.night .origin-source.with-link .text {
-  color: #666;
-}
-.night .origin-source.with-link:after {
-  border-color: transparent transparent transparent #292929;
-}
-.night .origin-source.with-link:before {
-  border-color: transparent transparent transparent #666;
-}
+
 /* ==== */
 .question-title {
   color: #494b4d;
@@ -833,89 +779,4 @@ hr {
 
 p {
   margin: 20px 0 !important;
-}
-
-.dudu-night .content {
-  color: #797b80;
-}
-
-.dudu-night hr {
-  color: #27282b;
-  border-color: #27282b;
-}
-.dudu-night .meta .author,
-.dudu-night .meta .bio {
-  color: #555659;
-}
-.dudu-night .headline-title,
-.dudu-night .headline-background .heading-content,
-.dudu-night .question-title {
-  color: #919499;
-}
-
-.dudu-night .headline {
-  border-bottom: none;
-}
-.dudu-night img {
-  -webkit-mask-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7)));
-}
-body.dudu-night,
-.dudu-night .content-wrap {
-  background: #1d1e1f;
-}
-.dudu-night .answer + .answer {
-  border-top: 2px solid #27282b;
-}
-.dudu-night .question + .question {
-  border-top: 4px solid #27282b;
-}
-.dudu-night .view-more a {
-  background: #1d1e1f;
-  color: #396280;
-}
-.dudu-night .icon-arrow-right {
-  background-image: url(http://static.daily.zhihu.com/img/share-icons.png);
-  background-repeat: no-repeat;
-  display: inline-block;
-  vertical-align: middle;
-  background-position: -70px -35px;
-  width: 10px;
-  height: 15px;
-}
-.dudu-night blockquote,
-.dudu-night sup {
-  border-left: 3px solid #2e3033;
-  color: #555659;
-}
-.dudu-night .content a {
-  color: #396280;
-}
-
-.dudu-night img {
-  opacity: 0.7;
-}
-
-.dudu-night .from-column {
-  color: #2b82ac;
-  background-image: url(http://static.daily.zhihu.com/img/Dark_News_Column_Entrance.png);
-}
-.dudu-night .from-column:active {
-  background-image: url(http://static.daily.zhihu.com/img/Dark_News_Column_Entrance_Highlight.png);
-}
-
-//禁用头部下面的分隔线
-.dudu .headline {
-  border-bottom: none;
-}
-
-.dudu-night .origin-source,
-.dudu-night a.origin-source:link {
-  background: #222324;
-}
-
-.dudu-night .origin-source.with-link .text {
-  color: #797b80;
-}
-.dudu-night .origin-source.with-link:after {
-  border-color: transparent transparent transparent #797b80;
 }
