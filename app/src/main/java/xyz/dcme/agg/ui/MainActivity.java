@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initFragment(savedInstanceState);
+        initFragment();
         registerBroadcast();
     }
 
@@ -54,31 +54,21 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onDestroy();
     }
 
-    private void initFragment(Bundle savedInstanceState) {
+    private void initFragment() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
 
-        if (savedInstanceState == null) {
+        mNodeMainFragment = (NodeMainFragment) fm.findFragmentByTag(NodeMainFragment.LOG_TAG);
+        if (mNodeMainFragment == null) {
             mNodeMainFragment = NodeMainFragment.newInstance();
-            transaction.add(R.id.main_content, mNodeMainFragment, NodeMainFragment.LOG_TAG);
-        } else {
-            mNodeMainFragment = (NodeMainFragment) fm.findFragmentByTag(NodeMainFragment.LOG_TAG);
         }
-
+        transaction.replace(R.id.main_content, mNodeMainFragment, NodeMainFragment.LOG_TAG);
         transaction.commit();
-        switchTo();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-    }
-
-    private void switchTo() {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.show(mNodeMainFragment);
-        transaction.commit();
     }
 
     @Override
@@ -136,7 +126,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
             }
             case R.id.action_node: {
-                switchTo();
                 break;
             }
         }
