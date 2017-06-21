@@ -5,6 +5,7 @@ public class Constants {
     public static final String LOGIN_URL = HOME_URL + "/login";
     public static final String USER_PROFILE_URL = HOME_URL + "/u/";
     public static final String TOPIC_URL = "/topics";
+    public static final String REPLY_URL = "/replies";
 
     public static final String SLASH = "/";
 

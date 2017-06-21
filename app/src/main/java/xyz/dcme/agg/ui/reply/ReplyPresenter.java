@@ -1,17 +1,16 @@
 package xyz.dcme.agg.ui.reply;
 
-import android.text.TextUtils;
-
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.List;
-
 import okhttp3.Call;
+import xyz.dcme.agg.parser.PostParser;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HttpUtils;
+import xyz.dcme.agg.util.LogUtils;
 
 public class ReplyPresenter implements ReplyContract.Presenter {
 
+    private static final String LOG_TAG = "ReplyPresenter";
     private ReplyContract.View mView;
 
     public ReplyPresenter(ReplyContract.View view) {
@@ -25,24 +24,57 @@ public class ReplyPresenter implements ReplyContract.Presenter {
     }
 
     @Override
-    public void load(String name) {
-        if (TextUtils.isEmpty(name)) {
-            return;
-        }
+    public void start(String name) {
+        mView.showIndicator(true);
 
-        mView.setLoadingIndicator(true);
-
-        HttpUtils.get(Constants.USER_PROFILE_URL + name, new StringCallback() {
+        HttpUtils.get(Constants.USER_PROFILE_URL + name + Constants.REPLY_URL, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                mView.setLoadingIndicator(false);
+                mView.showIndicator(false);
+                LogUtils.e(LOG_TAG, e.toString());
             }
 
             @Override
             public void onResponse(String response, int id) {
-                mView.setLoadingIndicator(false);
-                List<Reply> replies = ReplyParser.parseResponse(response);
-                mView.showReplies(replies);
+                mView.showIndicator(false);
+                mView.showRefresh(ReplyParser.parseResponse(response));
+            }
+        });
+    }
+
+    @Override
+    public void refresh(String name) {
+        HttpUtils.get(Constants.USER_PROFILE_URL + name + Constants.REPLY_URL, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                mView.showRefresh(ReplyParser.parseResponse(response));
+            }
+        });
+    }
+
+    @Override
+    public void load(String name, final int page) {
+        String url = Constants.USER_PROFILE_URL + name + Constants.REPLY_URL
+                + "?p=" + page;
+        HttpUtils.get(url, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                int total = PostParser.parseTotalCount(response);
+                LogUtils.d(LOG_TAG, "load -> total page: " + total + " current page: " + page);
+                if (page > total) {
+                    return;
+                }
+                mView.showLoad(ReplyParser.parseResponse(response));
             }
         });
     }

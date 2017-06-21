@@ -8,13 +8,18 @@ import xyz.dcme.agg.BaseView;
 public interface ReplyContract {
 
     interface Presenter extends BasePresenter {
-        void load(String name);
+        void start(String name);
+
+        void refresh(String name);
+
+        void load(String name, int page);
     }
 
     interface View extends BaseView<Presenter> {
+        void showIndicator(boolean active);
 
-        void setLoadingIndicator(boolean active);
-        void showReplies(List<Reply> replies);
-        void showNoReplies();
+        void showRefresh(List<Reply> replies);
+
+        void showLoad(List<Reply> data);
     }
 }
