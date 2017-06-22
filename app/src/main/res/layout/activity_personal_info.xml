@@ -45,8 +45,6 @@
             android:layout_height="wrap_content"
             app:tabBackground="@color/theme_primary"
             app:tabIndicatorColor="@color/white"
-            app:tabTextColor="@color/divider_color"
-            app:tabSelectedTextColor="@color/white"
             android:layout_gravity="top"/>
 
     </android.support.v4.view.ViewPager>
