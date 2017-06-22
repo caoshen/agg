@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
@@ -32,31 +31,4 @@
             android:visibility="gone"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/default_padding"
-        android:paddingEnd="@dimen/default_padding"
-        android:paddingStart="@dimen/default_padding"
-        android:paddingTop="@dimen/default_padding">
-
-        <xyz.dcme.agg.widget.AvatarView
-            android:id="@+id/my_avatar"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            android:contentDescription="@string/my_avatar"
-            app:avatar="@drawable/ic_default_avatar"/>
-
-        <TextView
-            android:id="@+id/send_comment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_16"
-            android:gravity="center_vertical"
-            android:text="@string/send_comment_hint"
-            android:textSize="14sp"/>
-    </LinearLayout>
 </LinearLayout>

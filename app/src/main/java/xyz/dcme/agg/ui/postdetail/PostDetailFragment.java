@@ -72,12 +72,6 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         PostMyCommentDelegate myCommentDelegate = new PostMyCommentDelegate(getActivity());
         mBottomBar = BottomSheetBar.delegation(getActivity());
         mBottomBar.setSendCommentListener(this);
-        myCommentDelegate.setOnMyCommentClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBottomBar.show();
-            }
-        });
         mAdapter.addItemViewDelegate(myCommentDelegate);
         mAdapter.addItemViewDelegate(new PostCommentDelegate(getActivity()));
 
@@ -86,6 +80,12 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         mLoadingProgressBar = (ProgressBar) mRootView.findViewById(R.id.loading);
 
         initToolbar(mRootView);
+        initBottomBar(mRootView);
+    }
+
+    private void initBottomBar(View rootView) {
+        View commentBar = rootView.findViewById(R.id.item_send_comment);
+        commentBar.setOnClickListener(this);
     }
 
     @Override
@@ -197,6 +197,8 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
             if (!TextUtils.isEmpty(comment)) {
                 mPresenter.sendReply(comment, mUrl);
             }
+        } else if (v.getId() == R.id.item_send_comment) {
+            mBottomBar.show();
         }
     }
 }
