@@ -1,129 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/progress"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-
-    <LinearLayout
-        android:id="@+id/content"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
         <LinearLayout
+            android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_8"
-            android:layout_marginTop="@dimen/margin_8"
-            android:background="@color/white"
-            android:elevation="2dp"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin_16">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/topics"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_marginBottom="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@color/white"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_16">
 
-                <TextView
-                    android:id="@+id/topic_count"
-                    style="@style/AppTheme.MeItemText.Small.Black"
-                    android:text="@string/zero"/>
+                <LinearLayout
+                    android:id="@+id/topics"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <TextView
-                    style="@style/AppTheme.MeItemText.Small"
-                    android:text="@string/count_topic"/>
+                    <TextView
+                        android:id="@+id/topic_count"
+                        style="@style/AppTheme.MeItemText.Small.Black"
+                        android:text="@string/zero"/>
+
+                    <TextView
+                        style="@style/AppTheme.MeItemText.Small"
+                        android:text="@string/count_topic"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/replies"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reply_count"
+                        style="@style/AppTheme.MeItemText.Small.Black"
+                        android:text="@string/zero"/>
+
+                    <TextView
+                        style="@style/AppTheme.MeItemText.Small"
+                        android:text="@string/count_reply"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/favourites"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/favourite_count"
+                        style="@style/AppTheme.MeItemText.Small.Black"
+                        android:text="@string/zero"/>
+
+                    <TextView
+                        style="@style/AppTheme.MeItemText.Small"
+                        android:text="@string/count_favourite"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reputation_count"
+                        style="@style/AppTheme.MeItemText.Small.Black"
+                        android:text="@string/zero"/>
+
+                    <TextView
+                        style="@style/AppTheme.MeItemText.Small"
+                        android:text="@string/count_credit"/>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/replies"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_marginBottom="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@color/white"
+                android:divider="@drawable/bg_divider"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:showDividers="middle">
 
                 <TextView
-                    android:id="@+id/reply_count"
-                    style="@style/AppTheme.MeItemText.Small.Black"
-                    android:text="@string/zero"/>
+                    android:id="@+id/my_topic"
+                    style="@style/AppTheme.MeItemText"
+                    android:drawableStart="@drawable/ic_chat"
+                    android:text="@string/topic"/>
 
                 <TextView
-                    style="@style/AppTheme.MeItemText.Small"
-                    android:text="@string/count_reply"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/favourites"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                    android:id="@+id/my_reply"
+                    style="@style/AppTheme.MeItemText"
+                    android:drawableStart="@drawable/ic_comment"
+                    android:text="@string/reply"/>
 
                 <TextView
-                    android:id="@+id/favourite_count"
-                    style="@style/AppTheme.MeItemText.Small.Black"
-                    android:text="@string/zero"/>
+                    android:id="@+id/my_focus"
+                    style="@style/AppTheme.MeItemText"
+                    android:drawableStart="@drawable/ic_favourite"
+                    android:text="@string/favourite"/>
 
-                <TextView
-                    style="@style/AppTheme.MeItemText.Small"
-                    android:text="@string/count_favourite"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/reputation_count"
-                    style="@style/AppTheme.MeItemText.Small.Black"
-                    android:text="@string/zero"/>
-
-                <TextView
-                    style="@style/AppTheme.MeItemText.Small"
-                    android:text="@string/count_credit"/>
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_8"
-            android:layout_marginTop="@dimen/margin_8"
-            android:background="@color/white"
-            android:divider="@drawable/bg_divider"
-            android:elevation="2dp"
-            android:orientation="vertical"
-            android:showDividers="middle">
-
-            <TextView
-                android:id="@+id/my_topic"
-                style="@style/AppTheme.MeItemText"
-                android:drawableStart="@drawable/ic_chat"
-                android:text="@string/topic"/>
-
-            <TextView
-                android:id="@+id/my_reply"
-                style="@style/AppTheme.MeItemText"
-                android:drawableStart="@drawable/ic_comment"
-                android:text="@string/reply"/>
-
-            <TextView
-                android:id="@+id/my_focus"
-                style="@style/AppTheme.MeItemText"
-                android:drawableStart="@drawable/ic_favourite"
-                android:text="@string/favourite"/>
-
-        </LinearLayout>
-    </LinearLayout>
-</FrameLayout>
+    </FrameLayout>
+</android.support.v4.widget.NestedScrollView>
