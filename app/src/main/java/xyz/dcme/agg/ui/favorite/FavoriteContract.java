@@ -9,13 +9,20 @@ import xyz.dcme.agg.model.Post;
 public interface FavoriteContract {
 
     interface Presenter extends BasePresenter {
-        void load(String name);
+
+        void start(String name);
+
+        void refresh(String name);
+
+        void load(String name, int page);
     }
 
     interface View extends BaseView<Presenter> {
 
-        void setLoadingIndicator(boolean active);
-        void showFav(List<Post> posts);
-        void showNoData();
+        void showIndicator(boolean active);
+
+        void showRefresh(List<Post> data);
+
+        void showLoad(List<Post> data);
     }
 }
