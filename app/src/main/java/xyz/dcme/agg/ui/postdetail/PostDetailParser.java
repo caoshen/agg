@@ -57,8 +57,8 @@ public class PostDetailParser {
         if (replyHeaders != null && !replyHeaders.isEmpty()) {
             String totalCommentCount = replyHeaders.first().text();
             myComment.setTotalCount(totalCommentCount);
+            data.add(myComment);
         }
-        data.add(myComment);
 
         Elements replyItems = doc.select("div.reply-item");
         for (Element replyItem : replyItems) {
