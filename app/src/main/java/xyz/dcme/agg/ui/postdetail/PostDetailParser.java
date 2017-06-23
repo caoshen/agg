@@ -27,9 +27,14 @@ public class PostDetailParser {
 
         Document doc = Jsoup.parse(response);
         Elements images = doc.getElementsByTag("img");
-        for (Element image : images) {
-            image.attr("width", "100%");
-            image.attr("height", "auto");
+
+        int imageCount = images == null ? 0 : images.size();
+
+        if (images != null) {
+            for (Element image : images) {
+                image.attr("width", "100%");
+                image.attr("height", "auto");
+            }
         }
 
         String title = doc.select("h3.title").first().text();
@@ -40,10 +45,11 @@ public class PostDetailParser {
         String clickCount = doc.select("span.hits.fr.mr10").text();
         String content = "";
         Elements items = doc.select("div.ui-content");
-        if (!images.isEmpty()) {
+        if (items != null && !items.isEmpty()) {
             content = items.get(0).html();
         }
         PostContent postContent = new PostContent(name, avatar, content, createTime, title, clickCount, node);
+        postContent.setImageCount(imageCount);
         data.add(postContent);
 
         PostMyComment myComment = new PostMyComment(null, null, null, null);
@@ -56,11 +62,16 @@ public class PostDetailParser {
 
         Elements replyItems = doc.select("div.reply-item");
         for (Element replyItem : replyItems) {
+            Elements commentImages = replyItem.getElementsByTag("img");
+            int commentImageCount = commentImages == null ? 0 : commentImages.size();
+
             String replyUserName = replyItem.select("a.reply-username").text();
-            String replyContent = replyItem.select("span.content").text();
+            String replyContent = replyItem.select("span.content p").html();
             String replyAvatar = replyItem.select("img").attr("src");
             String replyTime = replyItem.select("span.time").text();
-            data.add(new PostComment(replyUserName, replyAvatar, replyContent, replyTime));
+            PostComment postComment = new PostComment(replyUserName, replyAvatar, replyContent, replyTime);
+            postContent.setImageCount(commentImageCount);
+            data.add(postComment);
             LogUtils.d(TAG, "name: " + replyUserName + " content: " + replyContent + " avatar: " + replyAvatar);
         }
         return data;

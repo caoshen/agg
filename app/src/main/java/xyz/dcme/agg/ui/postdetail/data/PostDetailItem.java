@@ -19,6 +19,7 @@ public class PostDetailItem implements Parcelable {
     protected String avatar;
     protected String content;
     protected String createTime;
+    protected int imageCount;
 
     public PostDetailItem(String userName, String avatar, String content, String createTime) {
         this.userName = userName;
@@ -77,5 +78,13 @@ public class PostDetailItem implements Parcelable {
         parcel.writeString(avatar);
         parcel.writeString(content);
         parcel.writeString(createTime);
+    }
+
+    public int getImageCount() {
+        return imageCount;
+    }
+
+    public void setImageCount(int imageCount) {
+        this.imageCount = imageCount;
     }
 }

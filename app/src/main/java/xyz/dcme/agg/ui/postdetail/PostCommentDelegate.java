@@ -2,7 +2,9 @@ package xyz.dcme.agg.ui.postdetail;
 
 
 import android.content.Context;
+import android.text.Html;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
@@ -13,6 +15,7 @@ import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.account.OnAccountClickListener;
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
+import xyz.dcme.agg.util.URLImageGetter;
 import xyz.dcme.agg.util.transformation.CircleTransformation;
 
 public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
@@ -36,7 +39,11 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
     @Override
     public void convert(ViewHolder holder, PostDetailItem item, int position) {
         holder.setText(R.id.comment_name, item.getUserName());
-        holder.setText(R.id.comment_content, item.getContent());
+
+        TextView tv = holder.getView(R.id.comment_content);
+        URLImageGetter imgGetter = new URLImageGetter(tv, item.getContent(), item.getImageCount());
+        tv.setText(Html.fromHtml(item.getContent(), imgGetter, null));
+
         holder.setText(R.id.comment_number, mContext.getString(R.string.x_floor, (position - 1) + ""));
         holder.setText(R.id.comment_create_time, item.getCreateTime());
         ImageView avatar = holder.getView(R.id.comment_avatar);
