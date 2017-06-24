@@ -58,6 +58,9 @@ public class PostDetailParser {
             String totalCommentCount = replyHeaders.first().text();
             myComment.setTotalCount(totalCommentCount);
             data.add(myComment);
+        } else {
+            myComment.setTotalCount("共收到0条回复");
+            data.add(myComment);
         }
 
         Elements replyItems = doc.select("div.reply-item");
