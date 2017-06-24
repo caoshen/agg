@@ -16,6 +16,12 @@ public class PostDetailActivity extends BaseActivity {
     private static final String KEY_POST_DETAIL_URL = "key_post_detail_url";
     private String mUrl;
 
+    public static void startActivity(Context context, String url) {
+        Intent intent = new Intent(context, PostDetailActivity.class);
+        intent.putExtra(KEY_POST_DETAIL_URL, url);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +53,5 @@ public class PostDetailActivity extends BaseActivity {
             postFragment = PostDetailFragment.newInstance(mUrl);
             ActivityUtils.addFragmentToActivity(fm, postFragment, R.id.post_detail_main);
         }
-    }
-
-    public static void startActivity(Context context, String url) {
-        Intent intent = new Intent(context, PostDetailActivity.class);
-        intent.putExtra(KEY_POST_DETAIL_URL, url);
-        context.startActivity(intent);
     }
 }

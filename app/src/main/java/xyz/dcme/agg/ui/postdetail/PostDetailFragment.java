@@ -12,6 +12,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -23,7 +26,10 @@ import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
+import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
+import xyz.dcme.agg.util.Constants;
+import xyz.dcme.agg.util.ShareUtils;
 import xyz.dcme.agg.widget.BottomSheetBar;
 
 public class PostDetailFragment extends BaseFragment implements PostDetailContract.View,
@@ -58,6 +64,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         if (args != null) {
             mUrl = args.getString(KEY_ARG_URL);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -199,6 +206,32 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
             }
         } else if (v.getId() == R.id.item_send_comment) {
             mBottomBar.show();
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_post_detail, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_post_share) {
+            startShare();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void startShare() {
+        List<PostDetailItem> datas = mAdapter.getDatas();
+        if (datas != null && !datas.isEmpty()) {
+            PostDetailItem postDetailItem = datas.get(0);
+            if (postDetailItem instanceof PostContent) {
+                String title = ((PostContent) postDetailItem).getTitle();
+                ShareUtils.shareText(getActivity(), title, Constants.HOME_URL + mUrl);
+            }
         }
     }
 }
