@@ -57,7 +57,7 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
         commentView.loadDataWithBaseURL(null, HtmlUtils.makeHtml(detail), "text/html", "UTF-8", null);
         commentView.setDrawingCacheEnabled(true);
 
-        holder.setText(R.id.comment_number, mContext.getString(R.string.x_floor, (position - 1) + ""));
+        holder.setText(R.id.comment_number, item.getFloor());
         holder.setText(R.id.comment_create_time, item.getCreateTime());
         ImageView avatar = holder.getView(R.id.comment_avatar);
 

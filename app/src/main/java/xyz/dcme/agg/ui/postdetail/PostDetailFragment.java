@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.common.irecyclerview.IRecyclerView;
+import xyz.dcme.agg.common.irecyclerview.OnLoadMoreListener;
 import xyz.dcme.agg.ui.BaseFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
@@ -33,16 +36,18 @@ import xyz.dcme.agg.util.ShareUtils;
 import xyz.dcme.agg.widget.BottomSheetBar;
 
 public class PostDetailFragment extends BaseFragment implements PostDetailContract.View,
-        View.OnClickListener {
+        View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, OnLoadMoreListener {
     public static final String KEY_ARG_URL = "arg_url";
     private static final int REQUEST_LOGIN = 1000;
     private PostDetailContract.Presenter mPresenter;
     private PostDetailAdapter mAdapter;
     private List<PostDetailItem> mData = new ArrayList<>();
-    private RecyclerView mRecycler;
+    private IRecyclerView mRecycler;
     private String mUrl;
     private ProgressBar mLoadingProgressBar;
     private BottomSheetBar mBottomBar;
+    private SwipeRefreshLayout mRefreshLayout;
+    private int mNextPage = 2;
 
     public static PostDetailFragment newInstance(String url) {
         PostDetailFragment fragment = new PostDetailFragment();
@@ -69,10 +74,11 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
 
     @Override
     protected void initView() {
-        mRecycler = (RecyclerView) mRootView.findViewById(R.id.post_detail);
+        mRecycler = (IRecyclerView) mRootView.findViewById(R.id.post_detail);
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(lm);
         mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+        mRecycler.setOnLoadMoreListener(this);
 
         mAdapter = new PostDetailAdapter(getActivity(), mData);
         mAdapter.addItemViewDelegate(new PostContentDelegate(getActivity()));
@@ -82,12 +88,19 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         mAdapter.addItemViewDelegate(myCommentDelegate);
         mAdapter.addItemViewDelegate(new PostCommentDelegate(getActivity()));
 
-
         mRecycler.setAdapter(mAdapter);
         mLoadingProgressBar = (ProgressBar) mRootView.findViewById(R.id.loading);
 
         initToolbar(mRootView);
         initBottomBar(mRootView);
+        initRefresh(mRootView);
+
+        mPresenter.start(mUrl);
+    }
+
+    private void initRefresh(View rootView) {
+        mRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.post_detail_refresh);
+        mRefreshLayout.setOnRefreshListener(this);
     }
 
     private void initBottomBar(View rootView) {
@@ -124,25 +137,21 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if (!TextUtils.isEmpty(mUrl)) {
-            mPresenter.loadDetail(mUrl);
-        }
-    }
-
-    @Override
     public void showIndicator(boolean isActive) {
         if (isActive) {
             mLoadingProgressBar.setVisibility(View.VISIBLE);
         } else {
             mLoadingProgressBar.setVisibility(View.GONE);
-
         }
     }
 
     @Override
-    public void onRefresh(List<PostDetailItem> data) {
+    public void showRefreshingIndicator(boolean isActive) {
+        mRefreshLayout.setRefreshing(isActive);
+    }
+
+    @Override
+    public void showRefresh(List<PostDetailItem> data) {
         mAdapter.getDatas().clear();
         mAdapter.getDatas().addAll(data);
         mAdapter.notifyDataSetChanged();
@@ -150,7 +159,9 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
 
     @Override
     public void onLoadMore(List<PostDetailItem> data) {
-
+        mAdapter.getDatas().addAll(data);
+        mAdapter.notifyDataSetChanged();
+        mNextPage++;
     }
 
     @Override
@@ -233,5 +244,15 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
                 ShareUtils.shareText(getActivity(), title, Constants.HOME_URL + mUrl);
             }
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        mPresenter.refresh(mUrl);
+    }
+
+    @Override
+    public void onLoadMore(View view) {
+        mPresenter.load(mUrl, mNextPage);
     }
 }

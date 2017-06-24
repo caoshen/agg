@@ -28,8 +28,6 @@ public class PostDetailParser {
         Document doc = Jsoup.parse(response);
         Elements images = doc.getElementsByTag("img");
 
-        int imageCount = images == null ? 0 : images.size();
-
         if (images != null) {
             for (Element image : images) {
                 image.attr("width", "100%");
@@ -49,7 +47,6 @@ public class PostDetailParser {
             content = items.get(0).html();
         }
         PostContent postContent = new PostContent(name, avatar, content, createTime, title, clickCount, node);
-        postContent.setImageCount(imageCount);
         data.add(postContent);
 
         PostMyComment myComment = new PostMyComment(null, null, null, null);
@@ -65,15 +62,13 @@ public class PostDetailParser {
 
         Elements replyItems = doc.select("div.reply-item");
         for (Element replyItem : replyItems) {
-            Elements commentImages = replyItem.getElementsByTag("img");
-            int commentImageCount = commentImages == null ? 0 : commentImages.size();
-
             String replyUserName = replyItem.select("a.reply-username").text();
             String replyContent = replyItem.select("span.content").html();
             String replyAvatar = replyItem.select("img").attr("src");
             String replyTime = replyItem.select("span.time").text();
+            String floor = replyItem.select("span.fr.floor").text();
             PostComment postComment = new PostComment(replyUserName, replyAvatar, replyContent, replyTime);
-            postContent.setImageCount(commentImageCount);
+            postComment.setFloor(floor);
             data.add(postComment);
             LogUtils.d(TAG, "name: " + replyUserName + " content: " + replyContent + " avatar: " + replyAvatar);
         }
@@ -101,7 +96,46 @@ public class PostDetailParser {
         } catch (IOException e) {
             LogUtils.e(TAG, e.getMessage());
         }
-        return new HashMap<String, String>();
+        return new HashMap<>();
     }
 
+    public static List<PostDetailItem> parseComments(String response) {
+        List<PostDetailItem> data = new ArrayList<>();
+
+        Document doc = Jsoup.parse(response);
+        Elements replyItems = doc.select("div.reply-item");
+        for (Element replyItem : replyItems) {
+            String replyUserName = replyItem.select("a.reply-username").text();
+            String replyContent = replyItem.select("span.content").html();
+            String replyAvatar = replyItem.select("img").attr("src");
+            String replyTime = replyItem.select("span.time").text();
+            String floor = replyItem.select("span.fr.floor").text();
+            PostComment postComment = new PostComment(replyUserName, replyAvatar, replyContent, replyTime);
+            postComment.setFloor(floor);
+            data.add(postComment);
+            LogUtils.d(TAG, "name: " + replyUserName + " content: " + replyContent + " avatar: " + replyAvatar);
+        }
+        return data;
+    }
+
+    public static int parseTotalCount(String response) {
+        Document doc = Jsoup.parse(response);
+
+        try {
+            Elements items = doc.select("div.pagination-wap div");
+            if (items != null && !items.isEmpty()) {
+                String counts = items.first().text();
+                LogUtils.d(TAG, "parseTotalCount -> counts: " + counts);
+                if (counts.contains("/")) {
+                    String[] split = counts.split("/");
+                    if (split.length == 2) {
+                        return Integer.valueOf(split[1]);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            LogUtils.e(TAG, e.toString());
+        }
+        return 0;
+    }
 }

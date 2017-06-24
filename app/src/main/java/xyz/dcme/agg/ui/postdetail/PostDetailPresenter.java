@@ -15,6 +15,7 @@ import xyz.dcme.agg.util.LogUtils;
 import xyz.dcme.agg.util.LoginUtils;
 
 public class PostDetailPresenter implements PostDetailContract.Presenter {
+    public static final String LOG_TAG = "PostDetailPresenter";
     private static final String TAG = LogUtils.makeLogTag("PostDetailPresenter");
 
     private final PostDetailContract.View mView;
@@ -27,7 +28,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
     }
 
     @Override
-    public void loadDetail(String url) {
+    public void start(String url) {
         mView.showIndicator(true);
 
         if (!url.startsWith(Constants.HOME_URL)) {
@@ -38,6 +39,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
             @Override
             public void onError(Call call, Exception e, int id) {
                 mView.showIndicator(false);
+                LogUtils.e(LOG_TAG, e.toString());
             }
 
             @Override
@@ -47,8 +49,79 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
                 if (LoginUtils.needLogin(response)) {
                     mView.startLogin();
                 } else {
-                    mView.onRefresh(PostDetailParser.parseResponse(response));
+                    mView.showRefresh(PostDetailParser.parseResponse(response));
                 }
+            }
+        });
+    }
+
+    @Override
+    public void load(String url, final int page) {
+        if (!url.startsWith(Constants.HOME_URL)) {
+            url = Constants.HOME_URL + url;
+        }
+        String realUrl = url;
+        if (url.contains("#")) {
+            realUrl = url.split("#")[0];
+        }
+
+        final String finalUrl = realUrl;
+        HttpUtils.get(url, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                int total = PostDetailParser.parseTotalCount(response);
+                int nextPage = total - (page - 1);
+
+                if (nextPage <= 0) {
+                    LogUtils.d(LOG_TAG, "load -> total page: " + total + " next page: " + nextPage);
+                    return;
+                }
+                String nextUrl = finalUrl +  "?p=" + nextPage;
+                LogUtils.d(LOG_TAG, "load -> nextUrl: " + nextUrl);
+                load(nextUrl);
+            }
+        });
+    }
+
+    @Override
+    public void load(String url) {
+        HttpUtils.get(url, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                mView.onLoadMore(PostDetailParser.parseComments(response));
+            }
+        });
+    }
+
+    @Override
+    public void refresh(String url) {
+        mView.showRefreshingIndicator(true);
+
+        if (!url.startsWith(Constants.HOME_URL)) {
+            url = Constants.HOME_URL + url;
+        }
+
+        HttpUtils.get(url, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                mView.showRefreshingIndicator(false);
+                LogUtils.e(LOG_TAG, e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                mView.showRefreshingIndicator(false);
+                mView.showRefresh(PostDetailParser.parseResponse(response));
             }
         });
     }

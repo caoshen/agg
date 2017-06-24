@@ -10,7 +10,13 @@ import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 
 public interface PostDetailContract {
     interface Presenter extends BasePresenter {
-        void loadDetail(String url);
+        void start(String url);
+
+        void load(String url, int page);
+
+        void load(String url);
+
+        void refresh(String url);
 
         void sendReply(String comment, String url);
     }
@@ -18,7 +24,9 @@ public interface PostDetailContract {
     interface View extends BaseView<Presenter> {
         void showIndicator(boolean isActive);
 
-        void onRefresh(List<PostDetailItem> data);
+        void showRefreshingIndicator(boolean isActive);
+
+        void showRefresh(List<PostDetailItem> data);
 
         void onLoadMore(List<PostDetailItem> data);
 
