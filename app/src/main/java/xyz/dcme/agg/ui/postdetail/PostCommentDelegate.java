@@ -2,9 +2,10 @@ package xyz.dcme.agg.ui.postdetail;
 
 
 import android.content.Context;
-import android.text.Html;
+import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
@@ -15,7 +16,7 @@ import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.account.OnAccountClickListener;
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
-import xyz.dcme.agg.util.URLImageGetter;
+import xyz.dcme.agg.util.HtmlUtils;
 import xyz.dcme.agg.util.transformation.CircleTransformation;
 
 public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
@@ -38,11 +39,23 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
 
     @Override
     public void convert(ViewHolder holder, PostDetailItem item, int position) {
+        LinearLayout container = holder.getView(R.id.post_comment_container);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        container.setLayoutParams(params);
+
         holder.setText(R.id.comment_name, item.getUserName());
 
-        TextView tv = holder.getView(R.id.comment_content);
-        URLImageGetter imgGetter = new URLImageGetter(tv, item.getContent(), item.getImageCount());
-        tv.setText(Html.fromHtml(item.getContent(), imgGetter, null));
+        WebView commentView = holder.getView(R.id.post_comment_content);
+        HtmlUtils.initWebSettings(commentView);
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        commentView.setLayoutParams(lp);
+
+        String detail = item.getContent();
+        commentView.loadDataWithBaseURL(null, HtmlUtils.makeHtml(detail), "text/html", "UTF-8", null);
+        commentView.setDrawingCacheEnabled(true);
 
         holder.setText(R.id.comment_number, mContext.getString(R.string.x_floor, (position - 1) + ""));
         holder.setText(R.id.comment_create_time, item.getCreateTime());

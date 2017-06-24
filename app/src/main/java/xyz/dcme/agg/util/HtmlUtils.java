@@ -1,5 +1,8 @@
 package xyz.dcme.agg.util;
 
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+
 public class HtmlUtils {
     public static String makeHtml(String body) {
         String html = "<!DOCTYPE html>"
@@ -7,7 +10,8 @@ public class HtmlUtils {
                 + "<head>"
                 + "<meta charset=\"utf-8\">"
                 + "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">"
-                + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+                + "<meta id = \"viewport\" name = \"viewport\"\n" +
+                " content = \"width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no\" >"
                 + "<link href=\"file:///android_asset/style.css\" rel=\"stylesheet\">"
                 + "</head>"
                 + "<body>"
@@ -15,5 +19,27 @@ public class HtmlUtils {
                 + "</body>"
                 + "</html>";
         return html;
+    }
+
+    public static void initWebSettings(WebView webView) {
+        WebSettings ws = webView.getSettings();
+
+        ws.setJavaScriptEnabled(true);
+
+        ws.setAllowFileAccess(true);
+
+        ws.setDatabaseEnabled(true);
+
+        ws.setDomStorageEnabled(true);
+
+        ws.setSaveFormData(false);
+
+        ws.setAppCacheEnabled(true);
+
+        ws.setCacheMode(WebSettings.LOAD_DEFAULT);
+
+        ws.setLoadWithOverviewMode(false);//<==== 一定要设置为false，不然有声音没图像
+
+        ws.setUseWideViewPort(true);
     }
 }

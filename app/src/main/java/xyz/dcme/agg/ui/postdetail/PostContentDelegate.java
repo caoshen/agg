@@ -50,13 +50,16 @@ public class PostContentDelegate implements ItemViewDelegate<PostDetailItem> {
         holder.setText(R.id.post_detail_create_time, postDetailItem.getCreateTime());
 
         WebView webView = holder.getView(R.id.post_detail_content);
+        HtmlUtils.initWebSettings(webView);
+
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         webView.setLayoutParams(lp);
 
         String detail = postDetailItem.getContent();
-        webView.loadDataWithBaseURL(null, HtmlUtils.makeHtml(detail), "text/html", "UTF-8", null);
         webView.setDrawingCacheEnabled(true);
+
+        webView.loadDataWithBaseURL(null, HtmlUtils.makeHtml(detail), "text/html", "UTF-8", null);
 
         if (postDetailItem instanceof PostContent) {
             holder.setText(R.id.post_detail_title, ((PostContent) postDetailItem).getTitle());
