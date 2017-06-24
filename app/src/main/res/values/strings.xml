@@ -20,7 +20,7 @@
     <string name="close_and_go_back">关闭并且回退</string>
     <string name="post_click_count">%1$s次点击</string>
     <string name="city_construction">城市建设</string>
-    <string name="x_floor">%1$s楼</string>
+    <string name="x_floor">#1</string>
     <string name="id">ID: %1$s</string>
     <string name="email">Email: %1$s</string>
     <string name="topic">我的主题</string>
@@ -96,4 +96,5 @@
     <string name="node_choose">节点选择</string>
 
     <string name="login_tips">需要先登录账号</string>
+    <string name="like">赞</string>
 </resources>

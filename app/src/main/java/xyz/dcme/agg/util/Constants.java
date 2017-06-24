@@ -20,4 +20,6 @@ public class Constants {
     public static final String HOME_PAGE = "http://www.guanggoo.com/?p=";
     public static final String ACTION_LOGIN_SUCCESS = "xyz.dcme.agg.action.LOGIN_SUCCESS";
     public static final String FAVORITES = "/favorites";
+    public static final String AT = "@";
+    public static final String SPACE = " ";
 }

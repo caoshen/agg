@@ -122,6 +122,14 @@ public class BottomSheetBar {
         }
     }
 
+    public void setComment(String comment) {
+        if (mComment != null) {
+            mComment.setText(comment);
+            int length = mComment.getText().length();
+            mComment.setSelection(length);
+        }
+    }
+
     public void sendingComment(boolean isSending) {
         if (isSending) {
             mSend.setVisibility(View.GONE);

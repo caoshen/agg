@@ -22,9 +22,15 @@ import xyz.dcme.agg.util.transformation.CircleTransformation;
 public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
 
     private final Context mContext;
+    private OnCommentListener mCommentListener = null;
 
     public PostCommentDelegate(Context context) {
         mContext = context;
+    }
+
+    public PostCommentDelegate(Context context, OnCommentListener listener) {
+        mContext = context;
+        mCommentListener = listener;
     }
 
     @Override
@@ -71,9 +77,12 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
         info.setUserName(item.getUserName());
         info.setAvatarUrl(item.getAvatar());
         OnAccountClickListener listener = new OnAccountClickListener(mContext, info);
-
         holder.setOnClickListener(R.id.comment_avatar, listener);
         holder.setOnClickListener(R.id.comment_name, listener);
+
+        OnCommentIconClickListener commentIconClickListener =
+                new OnCommentIconClickListener(item.getUserName(), mCommentListener);
+        holder.setOnClickListener(R.id.post_comment_to, commentIconClickListener);
     }
 
 }

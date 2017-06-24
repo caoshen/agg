@@ -66,7 +66,7 @@ public class PostDetailParser {
             String replyContent = replyItem.select("span.content").html();
             String replyAvatar = replyItem.select("img").attr("src");
             String replyTime = replyItem.select("span.time").text();
-            String floor = replyItem.select("span.fr.floor").text();
+            String floor = replyItem.select("span.fr.floor").first().text();
             PostComment postComment = new PostComment(replyUserName, replyAvatar, replyContent, replyTime);
             postComment.setFloor(floor);
             data.add(postComment);
@@ -109,7 +109,7 @@ public class PostDetailParser {
             String replyContent = replyItem.select("span.content").html();
             String replyAvatar = replyItem.select("img").attr("src");
             String replyTime = replyItem.select("span.time").text();
-            String floor = replyItem.select("span.fr.floor").text();
+            String floor = replyItem.select("span.fr.floor").first().text();
             PostComment postComment = new PostComment(replyUserName, replyAvatar, replyContent, replyTime);
             postComment.setFloor(floor);
             data.add(postComment);

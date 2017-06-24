@@ -36,7 +36,8 @@ import xyz.dcme.agg.util.ShareUtils;
 import xyz.dcme.agg.widget.BottomSheetBar;
 
 public class PostDetailFragment extends BaseFragment implements PostDetailContract.View,
-        View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, OnLoadMoreListener {
+        View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, OnLoadMoreListener,
+        OnCommentListener {
     public static final String KEY_ARG_URL = "arg_url";
     private static final int REQUEST_LOGIN = 1000;
     private PostDetailContract.Presenter mPresenter;
@@ -86,7 +87,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         mBottomBar = BottomSheetBar.delegation(getActivity());
         mBottomBar.setSendCommentListener(this);
         mAdapter.addItemViewDelegate(myCommentDelegate);
-        mAdapter.addItemViewDelegate(new PostCommentDelegate(getActivity()));
+        mAdapter.addItemViewDelegate(new PostCommentDelegate(getActivity(), this));
 
         mRecycler.setAdapter(mAdapter);
         mLoadingProgressBar = (ProgressBar) mRootView.findViewById(R.id.loading);
@@ -254,5 +255,11 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     @Override
     public void onLoadMore(View view) {
         mPresenter.load(mUrl, mNextPage);
+    }
+
+    @Override
+    public void onCommentToFloor(String comment) {
+        mBottomBar.show();
+        mBottomBar.setComment(comment);
     }
 }
