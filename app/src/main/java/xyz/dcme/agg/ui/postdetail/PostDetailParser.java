@@ -41,12 +41,15 @@ public class PostDetailParser {
         String createTime = doc.select("span.created-time").text();
         String node = doc.select("span.node").text();
         String clickCount = doc.select("span.hits.fr.mr10").text();
+        String favCnt = doc.select("span.favorited.fr.mr10").text();
+        String likeCnt = doc.select("span.up_vote.fr.mr10").text();
         String content = "";
         Elements items = doc.select("div.ui-content");
         if (items != null && !items.isEmpty()) {
             content = items.get(0).html();
         }
-        PostContent postContent = new PostContent(name, avatar, content, createTime, title, clickCount, node);
+        PostContent postContent = new PostContent(name, avatar, content, createTime, title,
+                clickCount, favCnt, likeCnt, node);
         data.add(postContent);
 
         PostMyComment myComment = new PostMyComment(null, null, null, null);
@@ -60,18 +63,8 @@ public class PostDetailParser {
             data.add(myComment);
         }
 
-        Elements replyItems = doc.select("div.reply-item");
-        for (Element replyItem : replyItems) {
-            String replyUserName = replyItem.select("a.reply-username").text();
-            String replyContent = replyItem.select("span.content").html();
-            String replyAvatar = replyItem.select("img").attr("src");
-            String replyTime = replyItem.select("span.time").text();
-            String floor = replyItem.select("span.fr.floor").first().text();
-            PostComment postComment = new PostComment(replyUserName, replyAvatar, replyContent, replyTime);
-            postComment.setFloor(floor);
-            data.add(postComment);
-            LogUtils.d(TAG, "name: " + replyUserName + " content: " + replyContent + " avatar: " + replyAvatar);
-        }
+        List<PostDetailItem> postComments = parseComments(response);
+        data.addAll(postComments);
         return data;
     }
 
@@ -110,8 +103,11 @@ public class PostDetailParser {
             String replyAvatar = replyItem.select("img").attr("src");
             String replyTime = replyItem.select("span.time").text();
             String floor = replyItem.select("span.fr.floor").first().text();
+            String likeCount = replyItem.select("a.J_replyVote").attr("data-count");
             PostComment postComment = new PostComment(replyUserName, replyAvatar, replyContent, replyTime);
             postComment.setFloor(floor);
+            postComment.setLikeCount(likeCount);
+
             data.add(postComment);
             LogUtils.d(TAG, "name: " + replyUserName + " content: " + replyContent + " avatar: " + replyAvatar);
         }

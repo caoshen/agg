@@ -2,10 +2,12 @@ package xyz.dcme.agg.ui.postdetail;
 
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
@@ -51,6 +53,11 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
         container.setLayoutParams(params);
 
         holder.setText(R.id.comment_name, item.getUserName());
+        if (Integer.valueOf(item.getLikeCount()) > 0) {
+            TextView like = holder.getView(R.id.post_comment_like_count);
+            like.setVisibility(View.VISIBLE);
+            like.setText(item.getLikeCount());
+        }
 
         WebView commentView = holder.getView(R.id.post_comment_content);
         HtmlUtils.initWebSettings(commentView);

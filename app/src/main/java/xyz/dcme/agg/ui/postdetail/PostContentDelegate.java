@@ -64,6 +64,8 @@ public class PostContentDelegate implements ItemViewDelegate<PostDetailItem> {
         if (postDetailItem instanceof PostContent) {
             holder.setText(R.id.post_detail_title, ((PostContent) postDetailItem).getTitle());
             holder.setText(R.id.post_detail_click_count, ((PostContent) postDetailItem).getClickCount());
+            holder.setText(R.id.post_detail_fav_count, ((PostContent) postDetailItem).getFavCount());
+            holder.setText(R.id.post_detail_like_count, ((PostContent) postDetailItem).getLikeCount());
             holder.setText(R.id.post_detail_node, ((PostContent) postDetailItem).getNode());
         }
         ImageView avatar = holder.getView(R.id.post_detail_avatar);

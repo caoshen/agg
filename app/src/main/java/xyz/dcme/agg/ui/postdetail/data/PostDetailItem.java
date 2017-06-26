@@ -20,6 +20,7 @@ public class PostDetailItem implements Parcelable {
     protected String content;
     protected String createTime;
     protected String floor;
+    protected String likeCount;
 
     public PostDetailItem(String userName, String avatar, String content, String createTime) {
         this.userName = userName;
@@ -34,6 +35,15 @@ public class PostDetailItem implements Parcelable {
         content = in.readString();
         createTime = in.readString();
         floor = in.readString();
+        likeCount = in.readString();
+    }
+
+    public String getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(String likeCount) {
+        this.likeCount = likeCount;
     }
 
     public String getFloor() {
@@ -88,5 +98,6 @@ public class PostDetailItem implements Parcelable {
         parcel.writeString(content);
         parcel.writeString(createTime);
         parcel.writeString(floor);
+        parcel.writeString(likeCount);
     }
 }

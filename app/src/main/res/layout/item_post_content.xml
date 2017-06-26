@@ -59,8 +59,26 @@
             android:id="@+id/post_detail_click_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="@string/post_click_count"
             android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/post_detail_fav_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_8"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/post_detail_like_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_8"
+            android:textSize="12sp"/>
+
     </LinearLayout>
 
     <WebView
