@@ -3,6 +3,7 @@
           package="xyz.dcme.agg">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
@@ -35,6 +36,8 @@
         <activity android:name=".ui.favorite.FavoriteActivity"/>
         <activity android:name=".ui.settings.SettingsActivity"/>
         <activity android:name=".ui.node.NodeChooseActivity"/>
+        <activity android:name=".ui.publish.PublishActivity">
+        </activity>
     </application>
 
 </manifest>

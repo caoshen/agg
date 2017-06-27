@@ -97,4 +97,5 @@
 
     <string name="login_tips">需要先登录账号</string>
     <string name="like">赞</string>
+    <string name="select_image">选择图片</string>
 </resources>
