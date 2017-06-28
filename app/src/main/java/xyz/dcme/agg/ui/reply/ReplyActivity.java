@@ -40,7 +40,7 @@ public class ReplyActivity extends BaseActivity {
     private void initFragment() {
         Fragment fragment = ReplyFragment.newInstance(mUserName);
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().add(R.id.reply_container, fragment).commit();
+        fm.beginTransaction().replace(R.id.reply_container, fragment).commit();
     }
 
     public static void start(Context context, String userName) {

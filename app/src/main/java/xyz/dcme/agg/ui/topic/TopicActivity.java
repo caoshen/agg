@@ -29,7 +29,7 @@ public class TopicActivity extends BaseActivity {
     private void initFragment() {
         Fragment fragment = TopicFragment.newInstance(mUserName);
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().add(R.id.topic_container, fragment).commit();
+        fm.beginTransaction().replace(R.id.topic_container, fragment).commit();
     }
 
     public static void start(Context context, String userName) {

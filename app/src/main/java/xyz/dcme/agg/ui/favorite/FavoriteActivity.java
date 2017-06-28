@@ -40,7 +40,7 @@ public class FavoriteActivity extends BaseActivity {
     private void initFragment() {
         Fragment fragment = FavoriteFragment.newInstance(mUserName);
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().add(R.id.fav_container, fragment).commit();
+        fm.beginTransaction().replace(R.id.fav_container, fragment).commit();
     }
 
     public static void start(Context context, String userName) {
