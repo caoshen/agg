@@ -36,8 +36,7 @@
         <activity android:name=".ui.favorite.FavoriteActivity"/>
         <activity android:name=".ui.settings.SettingsActivity"/>
         <activity android:name=".ui.node.NodeChooseActivity"/>
-        <activity android:name=".ui.publish.PublishActivity">
-        </activity>
+        <activity android:name=".ui.publish.PublishActivity"/>
     </application>
 
 </manifest>

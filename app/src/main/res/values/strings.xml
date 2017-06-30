@@ -98,4 +98,6 @@
     <string name="login_tips">需要先登录账号</string>
     <string name="like">赞</string>
     <string name="select_image">选择图片</string>
+    <string name="please_input_content">请输入内容</string>
+    <string name="publish">发帖</string>
 </resources>

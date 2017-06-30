@@ -1,19 +1,25 @@
 package xyz.dcme.agg.ui.publish;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 
+import jp.wasabeef.richeditor.RichEditor;
 import okhttp3.Call;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseActivity;
@@ -25,7 +31,13 @@ public class PublishActivity extends BaseActivity {
     private static final int REQ_CODE_ALBUM = 100;
     private static final String LOG_TAG = "PublishActivity";
     private TextView mResponse;
-    private Button mBtn;
+    private ImageButton mImgButton;
+    private RichEditor mEditor;
+
+    public static void startPublish(Context context) {
+        Intent intent = new Intent(context, PublishActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     public int getLayoutId() {
@@ -35,14 +47,19 @@ public class PublishActivity extends BaseActivity {
     @Override
     public void initView() {
         mResponse = (TextView) findViewById(R.id.publish_response);
-        mBtn = (Button) findViewById(R.id.publish_image);
+        mImgButton = (ImageButton) findViewById(R.id.publish_image);
 
-        mBtn.setOnClickListener(new View.OnClickListener() {
+        mImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getImageFromAlbum();
             }
         });
+        mEditor = (RichEditor) findViewById(R.id.editor);
+        mEditor.setEditorFontSize(16);
+        mEditor.setPadding(10, 10, 10, 10);
+        mEditor.setPlaceholder(getString(R.string.please_input_content));
+        mEditor.loadCSS("file:///android_asset/publish_image.css");
     }
 
     @Override
@@ -57,9 +74,10 @@ public class PublishActivity extends BaseActivity {
 
     public String getRealPathFromURI(Uri contentUri) {
         String res = null;
-        String[] proj = { MediaStore.Images.Media.DATA };
+        String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        if(cursor.moveToFirst()){;
+        if (cursor.moveToFirst()) {
+            ;
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             res = cursor.getString(column_index);
         }
@@ -69,7 +87,7 @@ public class PublishActivity extends BaseActivity {
 
     private void uploadImage(File file) {
         String filePath = file.getAbsolutePath();
-        String fileName = filePath.substring(filePath.lastIndexOf("/")+1);
+        String fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
         String url = "http://www.guanggoo.com/image_upload";
         OkHttpUtils.post()
                 .addFile("files", fileName, file)
@@ -86,6 +104,21 @@ public class PublishActivity extends BaseActivity {
                     public void onResponse(String response, int id) {
                         mResponse.setText("response: " + response);
                         LogUtils.d(LOG_TAG, "response: " + response);
+                        String imageUrl = null;
+                        String imageName = null;
+                        try {
+                            JSONObject resp = new JSONObject(response);
+                            JSONArray files = resp.getJSONArray("files");
+                            if (files != null && files.length() > 0) {
+                                JSONObject file = files.getJSONObject(0);
+                                imageUrl = file.getString("url");
+                                imageName = file.getString("name");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        mEditor.insertImage(imageUrl, imageName);
                     }
                 });
     }

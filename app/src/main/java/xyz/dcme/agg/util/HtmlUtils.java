@@ -12,7 +12,7 @@ public class HtmlUtils {
                 + "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">"
                 + "<meta id = \"viewport\" name = \"viewport\"\n" +
                 " content = \"width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no\" >"
-                + "<link href=\"file:///android_asset/style.css\" rel=\"stylesheet\">"
+                + "<link href=\"file:///android_asset/agg_detail_style.css\" rel=\"stylesheet\">"
                 + "</head>"
                 + "<body>"
                 + body
