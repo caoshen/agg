@@ -3,10 +3,9 @@ package xyz.dcme.agg.ui.publish;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -23,6 +22,7 @@ import jp.wasabeef.richeditor.RichEditor;
 import okhttp3.Call;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseActivity;
+import xyz.dcme.agg.util.ImageUtils;
 import xyz.dcme.agg.util.LogUtils;
 
 
@@ -33,6 +33,7 @@ public class PublishActivity extends BaseActivity {
     private TextView mResponse;
     private ImageButton mImgButton;
     private RichEditor mEditor;
+    private EditText mTitle;
 
     public static void startPublish(Context context) {
         Intent intent = new Intent(context, PublishActivity.class);
@@ -52,7 +53,7 @@ public class PublishActivity extends BaseActivity {
         mImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getImageFromAlbum();
+                ImageUtils.getImageFromAlbum(PublishActivity.this, REQ_CODE_ALBUM);
             }
         });
         mEditor = (RichEditor) findViewById(R.id.editor);
@@ -60,6 +61,8 @@ public class PublishActivity extends BaseActivity {
         mEditor.setPadding(10, 10, 10, 10);
         mEditor.setPlaceholder(getString(R.string.please_input_content));
         mEditor.loadCSS("file:///android_asset/publish_image.css");
+
+        mTitle = (EditText) findViewById(R.id.publish_title);
     }
 
     @Override
@@ -67,22 +70,9 @@ public class PublishActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQ_CODE_ALBUM && resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
-            File file = new File(getRealPathFromURI(uri));
+            File file = new File(ImageUtils.getImagePathFromURI(this, uri));
             uploadImage(file);
         }
-    }
-
-    public String getRealPathFromURI(Uri contentUri) {
-        String res = null;
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        if (cursor.moveToFirst()) {
-            ;
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            res = cursor.getString(column_index);
-        }
-        cursor.close();
-        return res;
     }
 
     private void uploadImage(File file) {
@@ -123,10 +113,5 @@ public class PublishActivity extends BaseActivity {
                 });
     }
 
-    private void getImageFromAlbum() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, REQ_CODE_ALBUM);
-    }
+
 }

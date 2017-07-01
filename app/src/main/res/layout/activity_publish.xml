@@ -7,6 +7,19 @@
 
     <include layout="@layout/toolbar_back"/>
 
+    <EditText
+        android:id="@+id/publish_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginEnd="@dimen/margin_8"
+        android:layout_marginStart="@dimen/margin_8"
+        android:background="@null"
+        android:hint="@string/please_input_title"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
     <jp.wasabeef.richeditor.RichEditor
         android:id="@+id/editor"
         android:layout_width="match_parent"
