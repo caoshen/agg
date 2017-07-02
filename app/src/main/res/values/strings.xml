@@ -100,6 +100,6 @@
     <string name="select_image">选择图片</string>
     <string name="please_input_content">请输入内容</string>
     <string name="publish">发帖</string>
-    <string name="please_input_title">This is TITLE</string>
+    <string name="please_input_title">Please input title</string>
     <string name="preview">Preview</string>
 </resources>
