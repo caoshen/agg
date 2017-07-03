@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 
 public class ImageUtils {
 
@@ -41,5 +42,12 @@ public class ImageUtils {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         activity.startActivityForResult(intent, requestCode);
+    }
+
+    public static void getImageFromAlbum(Fragment fragment, int requestCode) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        fragment.startActivityForResult(intent, requestCode);
     }
 }

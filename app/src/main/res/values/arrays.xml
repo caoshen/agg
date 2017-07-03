@@ -37,4 +37,17 @@
         <item>startup</item>
         <item>city</item>
     </string-array>
+
+    <string-array name="publish_nodes">
+        <item>IT技术</item>
+        <item>创业创客</item>
+        <item>城市建设</item>
+        <item>金融财经</item>
+        <item>汤逊湖</item>
+        <item>找工作</item>
+        <item>非诚勿扰</item>
+        <item>你问我答</item>
+        <item>同城活动</item>
+        <item>二手交易</item>
+    </string-array>
 </resources>
