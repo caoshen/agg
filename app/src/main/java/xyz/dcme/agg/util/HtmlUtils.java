@@ -42,4 +42,11 @@ public class HtmlUtils {
 
         ws.setUseWideViewPort(true);
     }
+
+    public static String transformHtml(String html) {
+        html = StringUtils.replace(html, "&", "&amp;");
+        html = StringUtils.replace(html, "<", "&lt;");
+        html = StringUtils.replace(html, ">", "&gt;");
+        return html;
+    }
 }

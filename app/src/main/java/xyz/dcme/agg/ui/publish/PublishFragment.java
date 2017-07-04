@@ -6,13 +6,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatSpinner;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -35,7 +34,6 @@ public class PublishFragment extends BaseFragment
     private ImageButton mImgButton;
     private RichEditor mEditor;
     private EditText mTitle;
-    private AppCompatSpinner mNodeSpinner;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,18 +58,6 @@ public class PublishFragment extends BaseFragment
         mEditor.loadCSS("file:///android_asset/publish_image.css");
 
         mTitle = (EditText) mRootView.findViewById(R.id.publish_title);
-        mNodeSpinner = (AppCompatSpinner) mRootView.findViewById(R.id.publish_nodes);
-        mNodeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     @Override
@@ -117,7 +103,11 @@ public class PublishFragment extends BaseFragment
     }
 
     private void startPreview() {
-
+        String title = mTitle.getText().toString();
+        String content = mEditor.getHtml();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.publish_container, PreviewFragment.newInstance(title, content))
+                .commit();
     }
 
     @Override
@@ -149,5 +139,9 @@ public class PublishFragment extends BaseFragment
     @Override
     public void startLogin() {
         LoginUtils.startLogin(this, REQ_CODE_LOGIN);
+    }
+
+    public static Fragment newInstance() {
+        return new PublishFragment();
     }
 }

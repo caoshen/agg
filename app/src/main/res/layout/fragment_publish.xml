@@ -62,15 +62,5 @@
 
             </LinearLayout>
         </HorizontalScrollView>
-
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/publish_nodes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:entries="@array/publish_nodes"
-            android:spinnerMode="dropdown">
-
-        </android.support.v7.widget.AppCompatSpinner>
     </LinearLayout>
 </LinearLayout>

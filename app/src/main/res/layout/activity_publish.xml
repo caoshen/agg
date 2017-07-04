@@ -7,9 +7,9 @@
 
     <include layout="@layout/toolbar_back"/>
 
-    <fragment
-        android:id="@+id/fragment_publish"
-        android:name="xyz.dcme.agg.ui.publish.PublishFragment"
+    <FrameLayout
+        android:id="@+id/publish_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+    </FrameLayout>
 </LinearLayout>

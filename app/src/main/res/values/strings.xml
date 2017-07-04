@@ -14,11 +14,12 @@
     <string name="form_username">请输入账号</string>
     <string name="read_count">阅读%1$s</string>
     <string name="comment_count">评论%1$s</string>
-    <string name="like_count">喜欢%1$s</string>
+    <string name="like_count">%1$s 人赞</string>
+    <string name="fav_count">%1$s 人收藏</string>
     <string name="right_now">刚刚</string>
     <string name="welcome_to_gg_community">欢迎来到光谷社区 Guanggoo.com—源自光谷的交流分享社区</string>
     <string name="close_and_go_back">关闭并且回退</string>
-    <string name="post_click_count">%1$s次点击</string>
+    <string name="post_click_count">%1$s 次点击</string>
     <string name="city_construction">城市建设</string>
     <string name="x_floor">#1</string>
     <string name="id">ID: %1$s</string>
@@ -102,4 +103,6 @@
     <string name="publish">发帖</string>
     <string name="please_input_title">请输入标题</string>
     <string name="preview">预览</string>
+    <string name="preview_date">%1$s年%2$s月%3$s日</string>
+    <string name="publish_rightnow">发表于１分钟前</string>
 </resources>

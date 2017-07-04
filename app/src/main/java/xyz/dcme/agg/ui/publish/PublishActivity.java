@@ -23,6 +23,11 @@ public class PublishActivity extends BaseActivity {
     @Override
     public void initView() {
         getToolbar();
+
+        findViewById(R.id.publish_container);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.publish_container, PublishFragment.newInstance())
+                .commit();
     }
 
 }
