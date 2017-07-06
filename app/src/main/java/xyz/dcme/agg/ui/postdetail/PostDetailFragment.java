@@ -28,7 +28,6 @@ import xyz.dcme.agg.common.irecyclerview.IRecyclerView;
 import xyz.dcme.agg.common.irecyclerview.OnLoadMoreListener;
 import xyz.dcme.agg.ui.BaseFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
-import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.util.Constants;
@@ -166,16 +165,6 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     }
 
     @Override
-    public void addComment(String comment) {
-        String rightNow = getString(R.string.right_now);
-        PostDetailItem item = new PostComment("visitor", "", comment, rightNow);
-        int size = mAdapter.getItemCount();
-        mAdapter.getDatas().add(item);
-        mAdapter.notifyItemInserted(size);
-        mRecycler.scrollToPosition(size);
-    }
-
-    @Override
     public void sendCommentFailed() {
         mBottomBar.hide();
         FragmentActivity activity = getActivity();
@@ -196,6 +185,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         if (activity != null) {
             Toast.makeText(activity, R.string.send_comment_success, Toast.LENGTH_SHORT).show();
         }
+        onRefresh();
     }
 
     @Override

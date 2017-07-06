@@ -30,8 +30,6 @@ public interface PostDetailContract {
 
         void onLoadMore(List<PostDetailItem> data);
 
-        void addComment(String comment);
-
         void sendCommentFailed();
 
         void showCommentIndicator(boolean b);

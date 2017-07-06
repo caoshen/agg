@@ -187,7 +187,6 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
             @Override
             public void onResponse(String response, int id) {
                 mView.setCommentSuccess();
-                mView.addComment(comment);
             }
         });
     }
