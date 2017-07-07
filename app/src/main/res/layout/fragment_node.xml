@@ -31,11 +31,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_8"
                 android:contentDescription="@string/add_node"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/margin_8"
-                android:textColor="@color/white"
-                android:text="@string/more"/>
+                android:text="@string/more"
+                android:textColor="@color/white"/>
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>
 
