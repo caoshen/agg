@@ -22,6 +22,7 @@ import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseFragment;
 import xyz.dcme.agg.util.ImageUtils;
 import xyz.dcme.agg.util.LoginUtils;
+import xyz.dcme.agg.util.StringUtils;
 
 public class PublishFragment extends BaseFragment
         implements PublishContract.View {
@@ -85,15 +86,33 @@ public class PublishFragment extends BaseFragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_publish_preview: {
-                startPreview();
+                if (checkValid()) {
+                    startPreview();
+                }
                 break;
             }
             case R.id.item_publish_send: {
-                startSend();
+                if (checkValid()) {
+                    startSend();
+                }
                 break;
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean checkValid() {
+        String title = mTitle.getText().toString();
+        String content = mEditor.getHtml();
+        if (StringUtils.isBlank(title)) {
+            mTitle.setError(getString(R.string.tips_title_is_empty));
+            return false;
+        }
+        if (StringUtils.isBlank(content)) {
+            mEditor.setPlaceholder(getString(R.string.tips_content_is_empty));
+            return false;
+        }
+        return true;
     }
 
     private void startSend() {
@@ -105,9 +124,7 @@ public class PublishFragment extends BaseFragment
     private void startPreview() {
         String title = mTitle.getText().toString();
         String content = mEditor.getHtml();
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.publish_container, PreviewFragment.newInstance(title, content))
-                .commit();
+        PreviewActivity.startPreview(getActivity(), title, content);
     }
 
     @Override

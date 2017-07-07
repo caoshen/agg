@@ -36,7 +36,12 @@
         <activity android:name=".ui.favorite.FavoriteActivity"/>
         <activity android:name=".ui.settings.SettingsActivity"/>
         <activity android:name=".ui.node.NodeChooseActivity"/>
-        <activity android:name=".ui.publish.PublishActivity"/>
+        <activity
+            android:label="@string/publish"
+            android:name=".ui.publish.PublishActivity"/>
+        <activity
+            android:name=".ui.publish.PreviewActivity"
+            android:label="@string/preview"/>
     </application>
 
 </manifest>

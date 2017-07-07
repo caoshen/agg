@@ -1,6 +1,10 @@
 package xyz.dcme.agg.util;
 
+import android.text.TextUtils;
+
 public class StringUtils {
+
+    private static final String EMPTY = "";
 
     /**
      * Tests if a string is blank: null, empty, or only whitespace (" ", \r\n, \t, etc)
@@ -51,5 +55,13 @@ public class StringUtils {
 
     public static boolean hasLength(CharSequence str) {
         return (str != null && str.length() > 0);
+    }
+
+    public static String checkNull(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return EMPTY;
+        } else {
+            return str;
+        }
     }
 }

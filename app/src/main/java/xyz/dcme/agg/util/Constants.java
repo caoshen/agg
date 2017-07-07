@@ -26,4 +26,5 @@ public class Constants {
     public static final String SPACE = " ";
     public static final String UPLOAD_IMAGE_URL = HOME_URL + "/image_upload";
     public static final String ONE = "1";
+    public static final String EMPTY_STR = "";
 }

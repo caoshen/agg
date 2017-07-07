@@ -15,12 +15,13 @@ import xyz.dcme.agg.ui.BaseFragment;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HtmlUtils;
+import xyz.dcme.agg.util.StringUtils;
 import xyz.dcme.agg.util.transformation.CircleTransformation;
 
 public class PreviewFragment extends BaseFragment {
     public static final String LOG_TAG = "PreviewFragment";
-    private static final String KEY_TITLE = "preview_title";
-    private static final String KEY_CONTENT = "preview_content";
+    public static final String KEY_TITLE = "preview_title";
+    public static final String KEY_CONTENT = "preview_content";
     private String mTitle;
     private String mContent;
     private String mUserName;
@@ -47,6 +48,8 @@ public class PreviewFragment extends BaseFragment {
         if (args != null) {
             mTitle = args.getString(KEY_TITLE);
             mContent = args.getString(KEY_CONTENT);
+            mTitle = StringUtils.checkNull(mTitle);
+            mContent = StringUtils.checkNull(mContent);
         }
     }
 

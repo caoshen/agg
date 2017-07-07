@@ -105,4 +105,6 @@
     <string name="preview">预览</string>
     <string name="preview_date">%1$s年%2$s月%3$s日</string>
     <string name="publish_rightnow">发表于１分钟前</string>
+    <string name="tips_title_is_empty">标题不能为空</string>
+    <string name="tips_content_is_empty">内容不能为空</string>
 </resources>

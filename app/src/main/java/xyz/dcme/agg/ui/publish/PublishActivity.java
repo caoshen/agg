@@ -24,7 +24,6 @@ public class PublishActivity extends BaseActivity {
     public void initView() {
         getToolbar();
 
-        findViewById(R.id.publish_container);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.publish_container, PublishFragment.newInstance())
                 .commit();
