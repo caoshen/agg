@@ -49,4 +49,10 @@ public class HtmlUtils {
         html = StringUtils.replace(html, ">", "&gt;");
         return html;
     }
+
+    public static String stripHtml(String str) {
+        String content = str.replaceAll("</?[^>]+>", "");
+        content = content.replaceAll("<a>\\s*|\t|\r|\n</a>", "");
+        return content;
+    }
 }

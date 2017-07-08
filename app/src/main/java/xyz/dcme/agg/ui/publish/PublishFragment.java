@@ -17,10 +17,10 @@ import android.widget.ImageButton;
 
 import java.io.File;
 
-import jp.wasabeef.richeditor.RichEditor;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseFragment;
 import xyz.dcme.agg.util.ImageUtils;
+import xyz.dcme.agg.util.LogUtils;
 import xyz.dcme.agg.util.LoginUtils;
 import xyz.dcme.agg.util.StringUtils;
 
@@ -33,8 +33,9 @@ public class PublishFragment extends BaseFragment
 
     private PublishContract.Presenter mPresenter;
     private ImageButton mImgButton;
-    private RichEditor mEditor;
+//    private RichEditor mEditor;
     private EditText mTitle;
+    private EditText mContent;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,13 +53,8 @@ public class PublishFragment extends BaseFragment
             }
         });
 
-        mEditor = (RichEditor) mRootView.findViewById(R.id.editor);
-        mEditor.setEditorFontSize(16);
-        mEditor.setPadding(10, 10, 10, 10);
-        mEditor.setPlaceholder(getString(R.string.please_input_content));
-        mEditor.loadCSS("file:///android_asset/publish_image.css");
-
         mTitle = (EditText) mRootView.findViewById(R.id.publish_title);
+        mContent = (EditText) mRootView.findViewById(R.id.publish_content);
     }
 
     @Override
@@ -103,13 +99,13 @@ public class PublishFragment extends BaseFragment
 
     private boolean checkValid() {
         String title = mTitle.getText().toString();
-        String content = mEditor.getHtml();
+        String content = mContent.getText().toString();
         if (StringUtils.isBlank(title)) {
             mTitle.setError(getString(R.string.tips_title_is_empty));
             return false;
         }
         if (StringUtils.isBlank(content)) {
-            mEditor.setPlaceholder(getString(R.string.tips_content_is_empty));
+            mContent.setError(getString(R.string.tips_content_is_empty));
             return false;
         }
         return true;
@@ -117,13 +113,14 @@ public class PublishFragment extends BaseFragment
 
     private void startSend() {
         String title = mTitle.getText().toString();
-        String content = mEditor.getHtml();
-        mPresenter.publishArticle(title, content, "water");
+        String content = mContent.getText().toString();
+        LogUtils.d(LOG_TAG, "startSend -> title: " + title + " content: " + content);
+        mPresenter.publishArticle(title, content, "IT");
     }
 
     private void startPreview() {
         String title = mTitle.getText().toString();
-        String content = mEditor.getHtml();
+        String content = mContent.getText().toString();
         PreviewActivity.startPreview(getActivity(), title, content);
     }
 
@@ -143,8 +140,8 @@ public class PublishFragment extends BaseFragment
 
     @Override
     public void insertImage(String imageUrl, String imageName) {
-        if (mEditor != null && !TextUtils.isEmpty(imageUrl) && !TextUtils.isEmpty(imageName)) {
-            mEditor.insertImage(imageUrl, imageName);
+        if (mContent != null && !TextUtils.isEmpty(imageUrl) && !TextUtils.isEmpty(imageName)) {
+            mContent.append(imageUrl);
         }
     }
 
