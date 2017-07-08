@@ -4,6 +4,7 @@
     <item
         android:id="@+id/item_publish_preview"
         android:title="@string/preview"
+        android:visible="false"
         app:showAsAction="ifRoom"/>
 
     <item
