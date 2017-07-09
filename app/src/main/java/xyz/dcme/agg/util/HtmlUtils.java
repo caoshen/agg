@@ -55,4 +55,8 @@ public class HtmlUtils {
         content = content.replaceAll("<a>\\s*|\t|\r|\n</a>", "");
         return content;
     }
+
+    public static String replaceStaticEmoji(String str) {
+        return str.replaceAll("src=\"/static/emoji/", "src=\"" + Constants.HOME_URL + "/static/emoji/");
+    }
 }
