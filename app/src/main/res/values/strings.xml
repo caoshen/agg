@@ -107,4 +107,5 @@
     <string name="publish_rightnow">发表于１分钟前</string>
     <string name="tips_title_is_empty">标题不能为空</string>
     <string name="tips_content_is_empty">内容不能为空</string>
+    <string name="post_detail">帖子详情</string>
 </resources>

@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:label="@string/post_detail"
             android:name=".ui.postdetail.PostDetailActivity"
             android:parentActivityName=".ui.MainActivity"
             android:theme="@style/PostDetailTheme">
