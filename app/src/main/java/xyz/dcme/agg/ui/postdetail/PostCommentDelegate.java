@@ -67,7 +67,7 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
         commentView.setLayoutParams(lp);
 
         String detail = item.getContent();
-        detail = HtmlUtils.replaceStaticEmoji(detail);
+        detail = HtmlUtils.replaceSiteLink(detail);
         commentView.loadDataWithBaseURL(null, HtmlUtils.makeHtml(detail), "text/html", "UTF-8", null);
         commentView.setDrawingCacheEnabled(true);
 

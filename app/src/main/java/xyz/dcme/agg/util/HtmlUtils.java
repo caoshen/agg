@@ -59,4 +59,13 @@ public class HtmlUtils {
     public static String replaceStaticEmoji(String str) {
         return str.replaceAll("src=\"/static/emoji/", "src=\"" + Constants.HOME_URL + "/static/emoji/");
     }
+
+    public static String replaceAtUser(String str) {
+        return str.replaceAll("href=\"/u/", "href=\"" + Constants.HOME_URL + "/u/");
+    }
+
+    public static String replaceSiteLink(String str) {
+        String tmp = replaceStaticEmoji(str);
+        return replaceAtUser(tmp);
+    }
 }
