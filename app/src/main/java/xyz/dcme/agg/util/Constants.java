@@ -14,6 +14,8 @@ public class Constants {
     public static final String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 " +
             "(KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36";
     public static final String EXTRA_ACCOUNT_INFO = "extra_account_info";
+    public static final String EXTRA_ACCOUNT_NAME = "extra_account_name";
+
     public static final int HTTP_OK = 200;
     public static final String CUR_FRAG = "current_fragment";
     public static final String NODE_NAME = "node_name";
@@ -27,4 +29,5 @@ public class Constants {
     public static final String UPLOAD_IMAGE_URL = HOME_URL + "/image_upload";
     public static final String ONE = "1";
     public static final String EMPTY_STR = "";
+    public static final String ACTION_USER_PAGE = "xyz.dcme.agg.intent.action.USER_PAGE";
 }

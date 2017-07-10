@@ -2,6 +2,7 @@ package xyz.dcme.agg.ui.personal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -15,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
@@ -63,7 +66,9 @@ public class PersonalInfoActivity extends BaseActivity {
         Intent intent = getIntent();
         if (intent != null) {
             mAccountInfo = intent.getParcelableExtra(Constants.EXTRA_ACCOUNT_INFO);
-
+            Uri data = intent.getData();
+            List<String> params = data.getPathSegments();
+            mUserName = params.get(1);
         }
         if (mAccountInfo != null) {
             mUserName = mAccountInfo.getUserName();

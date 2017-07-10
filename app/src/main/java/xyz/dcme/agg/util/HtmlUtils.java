@@ -22,6 +22,7 @@ public class HtmlUtils {
     }
 
     public static void initWebSettings(WebView webView) {
+//        webView.setWebViewClient(new MyWebViewClient());
         WebSettings ws = webView.getSettings();
 
         ws.setJavaScriptEnabled(true);
