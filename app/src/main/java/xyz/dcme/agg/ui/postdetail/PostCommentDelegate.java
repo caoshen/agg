@@ -14,7 +14,6 @@ import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.account.OnAccountClickListener;
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
@@ -81,10 +80,7 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
                 .transform(new CircleTransformation(mContext))
                 .into(avatar);
 
-        AccountInfo info = new AccountInfo();
-        info.setUserName(item.getUserName());
-        info.setAvatarUrl(item.getAvatar());
-        OnAccountClickListener listener = new OnAccountClickListener(mContext, info);
+        OnAccountClickListener listener = new OnAccountClickListener(mContext, item.getUserName());
         holder.setOnClickListener(R.id.comment_avatar, listener);
         holder.setOnClickListener(R.id.comment_name, listener);
 

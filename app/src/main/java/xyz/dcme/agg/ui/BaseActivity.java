@@ -20,7 +20,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         mContext = this;
+        getIntentData();
         initView();
+    }
+
+    protected void getIntentData() {
+
     }
 
     public abstract int getLayoutId();

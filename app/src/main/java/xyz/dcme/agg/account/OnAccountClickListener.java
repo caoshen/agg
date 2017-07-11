@@ -7,15 +7,15 @@ import xyz.dcme.agg.ui.personal.PersonalInfoActivity;
 
 public class OnAccountClickListener implements View.OnClickListener {
     private Context mContext;
-    private AccountInfo mInfo;
+    private String mUserName;
 
-    public OnAccountClickListener(Context context, AccountInfo info) {
-        mInfo = info;
+    public OnAccountClickListener(Context context, String userName) {
+        mUserName = userName;
         mContext = context;
     }
 
     @Override
     public void onClick(View v) {
-        PersonalInfoActivity.start(mContext, mInfo);
+        PersonalInfoActivity.start(mContext, mUserName);
     }
 }

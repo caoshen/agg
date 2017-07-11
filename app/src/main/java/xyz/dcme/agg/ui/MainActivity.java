@@ -141,9 +141,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 boolean hasActiveAccount = AccountUtils.hasActiveAccount(this);
                 if (hasActiveAccount) {
                     AccountInfo accountInfo = AccountUtils.getActiveAccountInfo(this);
-                    Intent intent = new Intent(this, PersonalInfoActivity.class);
-                    intent.putExtra(Constants.EXTRA_ACCOUNT_INFO, accountInfo);
-                    startActivity(intent);
+                    PersonalInfoActivity.start(this, accountInfo.getUserName());
                 } else {
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivityForResult(intent, REQUEST_LOGIN);

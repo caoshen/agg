@@ -3,9 +3,7 @@ package xyz.dcme.agg.ui.personal;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -21,35 +19,26 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.ui.BaseActivity;
+import xyz.dcme.agg.ui.personal.page.PersonalInfoContract;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 
-public class PersonalInfoActivity extends BaseActivity {
+public class PersonalInfoActivity extends BaseActivity implements PersonalInfoContract.View {
 
     private static final String LOG_TAG = "PersonalInfoActivity";
     private Toolbar mToolbar;
-    private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private String mUserName;
-    private String mAvatar;
-    private AccountInfo mAccountInfo;
     private CircleImageView mImage;
     private ViewPager mPager;
     private TabLayout mTab;
     private AppBarLayout mAppBarLayout;
+    private PersonalInfoContract.Presenter mPresenter;
 
-    public static void start(Context context, AccountInfo info) {
+    public static void start(Context context, String userName) {
         Intent intent = new Intent(context, PersonalInfoActivity.class);
-        intent.putExtra(Constants.EXTRA_ACCOUNT_INFO, info);
+        intent.putExtra(Constants.EXTRA_ACCOUNT_NAME, userName);
         context.startActivity(intent);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getIntentData();
-        initViews();
     }
 
     @Override
@@ -58,20 +47,19 @@ public class PersonalInfoActivity extends BaseActivity {
     }
 
     @Override
-    public void initView() {
-
-    }
-
-    private void getIntentData() {
+    protected void getIntentData() {
+        super.getIntentData();
         Intent intent = getIntent();
         if (intent != null) {
-            mAccountInfo = intent.getParcelableExtra(Constants.EXTRA_ACCOUNT_INFO);
             mUserName = getUserName(intent);
         }
-        if (mAccountInfo != null) {
-            mUserName = mAccountInfo.getUserName();
-            mAvatar = mAccountInfo.getAvatarUrl();
-        }
+    }
+
+    @Override
+    public void initView() {
+        initViews();
+        mPresenter = new PersonalInfoPresenter(this);
+        mPresenter.loadDetail(mUserName);
     }
 
     private String getUserName(Intent intent) {
@@ -81,14 +69,13 @@ public class PersonalInfoActivity extends BaseActivity {
             if (params != null && params.size() > 1) {
                 return params.get(1);
             }
+        } else {
+            return intent.getStringExtra(Constants.EXTRA_ACCOUNT_NAME);
         }
         return null;
     }
 
     private void initViews() {
-
-        mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing);
-
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -103,9 +90,6 @@ public class PersonalInfoActivity extends BaseActivity {
         }
 
         mImage = (CircleImageView) findViewById(R.id.avatar);
-        if (!TextUtils.isEmpty(mAvatar)) {
-            Glide.with(this).load(mAvatar).into(mImage);
-        }
 
         mPager = (ViewPager) findViewById(R.id.pager);
         FragmentManager fm = getSupportFragmentManager();
@@ -140,5 +124,17 @@ public class PersonalInfoActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setPresenter(PersonalInfoContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void showImage(String imageUrl) {
+        if (!TextUtils.isEmpty(imageUrl)) {
+            Glide.with(this).load(imageUrl).into(mImage);
+        }
     }
 }
