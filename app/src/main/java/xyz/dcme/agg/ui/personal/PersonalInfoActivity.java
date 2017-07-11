@@ -66,14 +66,23 @@ public class PersonalInfoActivity extends BaseActivity {
         Intent intent = getIntent();
         if (intent != null) {
             mAccountInfo = intent.getParcelableExtra(Constants.EXTRA_ACCOUNT_INFO);
-            Uri data = intent.getData();
-            List<String> params = data.getPathSegments();
-            mUserName = params.get(1);
+            mUserName = getUserName(intent);
         }
         if (mAccountInfo != null) {
             mUserName = mAccountInfo.getUserName();
             mAvatar = mAccountInfo.getAvatarUrl();
         }
+    }
+
+    private String getUserName(Intent intent) {
+        Uri data = intent.getData();
+        if (data != null) {
+            List<String> params = data.getPathSegments();
+            if (params != null && params.size() > 1) {
+                return params.get(1);
+            }
+        }
+        return null;
     }
 
     private void initViews() {
