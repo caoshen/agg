@@ -16,8 +16,10 @@
         android:layout_marginTop="@dimen/margin_8"
         android:background="@null"
         android:hint="@string/please_input_title"
+        android:imeOptions="actionNext"
         android:textSize="22sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:singleLine="true"/>
 
     <View
         android:layout_width="match_parent"
