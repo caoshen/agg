@@ -25,18 +25,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="@string/post_detail"
             android:name=".ui.postdetail.PostDetailActivity"
+            android:label="@string/post_detail"
             android:parentActivityName=".ui.MainActivity"
             android:theme="@style/PostDetailTheme">
         </activity>
         <activity android:name=".ui.login.LoginActivity"/>
         <activity android:name=".ui.personal.PersonalInfoActivity">
             <intent-filter>
-                <data android:scheme="http" android:host="www.guanggoo.com" android:pathPrefix="/u"/>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="www.guanggoo.com"
+                    android:pathPrefix="/u"
+                    android:scheme="http"/>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
             </intent-filter>
         </activity>
         <activity android:name=".ui.topic.TopicActivity"/>
@@ -45,8 +49,9 @@
         <activity android:name=".ui.settings.SettingsActivity"/>
         <activity android:name=".ui.node.NodeChooseActivity"/>
         <activity
+            android:name=".ui.publish.PublishActivity"
             android:label="@string/publish"
-            android:name=".ui.publish.PublishActivity"/>
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
             android:name=".ui.publish.PreviewActivity"
             android:label="@string/preview"/>
