@@ -25,5 +25,9 @@ public interface PublishContract {
         Context getViewContext();
 
         void startLogin();
+
+        void showUploadImageError(String response);
+
+        void showUploadTips(boolean active);
     }
 }

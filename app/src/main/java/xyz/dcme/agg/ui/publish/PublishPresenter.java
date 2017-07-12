@@ -116,6 +116,8 @@ public class PublishPresenter implements PublishContract.Presenter {
         String filePath = file.getAbsolutePath();
         String fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
         String url = "http://www.guanggoo.com/image_upload";
+
+        mView.showUploadTips(true);
         OkHttpUtils.post()
                 .addFile("files", fileName, file)
                 .url(url)
@@ -124,6 +126,7 @@ public class PublishPresenter implements PublishContract.Presenter {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         LogUtils.e(LOG_TAG, "error: " + e.toString());
+                        mView.showUploadImageError(e.toString());
                     }
 
                     @Override
@@ -141,9 +144,18 @@ public class PublishPresenter implements PublishContract.Presenter {
                             }
                         } catch (JSONException e) {
                             LogUtils.e(LOG_TAG, e.toString());
+                            mView.showUploadImageError(response);
                         }
+
                         if (!TextUtils.isEmpty(imageUrl) && !TextUtils.isEmpty(imageName)) {
                             mView.insertImage(imageUrl, imageName);
+                            mView.showUploadTips(false);
+                        } else {
+                            if (TextUtils.isEmpty(imageUrl)) {
+                                String errorMessage = ImageUploadError.getErrorMessage(imageName);
+                                LogUtils.e(LOG_TAG, errorMessage);
+                                mView.showUploadImageError(errorMessage);
+                            }
                         }
                     }
                 });

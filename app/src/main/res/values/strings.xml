@@ -108,4 +108,5 @@
     <string name="tips_title_is_empty">标题不能为空</string>
     <string name="tips_content_is_empty">内容不能为空</string>
     <string name="post_detail">帖子详情</string>
+    <string name="uploading_image">图片上传中&#8230;</string>
 </resources>

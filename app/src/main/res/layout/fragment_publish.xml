@@ -68,6 +68,13 @@
                     android:contentDescription="@string/select_image"
                     android:src="@drawable/ic_select_image"/>
 
+                <TextView
+                    android:id="@+id/upload_response"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:gravity="center"/>
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>

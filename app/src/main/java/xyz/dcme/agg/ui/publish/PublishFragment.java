@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.io.File;
 
@@ -36,6 +37,7 @@ public class PublishFragment extends BaseFragment
 //    private RichEditor mEditor;
     private EditText mTitle;
     private EditText mContent;
+    private TextView mUploadResponse;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,12 +51,14 @@ public class PublishFragment extends BaseFragment
         mImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mUploadResponse.setText("");
                 ImageUtils.getImageFromAlbum(PublishFragment.this, REQ_CODE_ALBUM);
             }
         });
 
         mTitle = (EditText) mRootView.findViewById(R.id.publish_title);
         mContent = (EditText) mRootView.findViewById(R.id.publish_content);
+        mUploadResponse = (TextView) mRootView.findViewById(R.id.upload_response);
     }
 
     @Override
@@ -142,6 +146,8 @@ public class PublishFragment extends BaseFragment
     public void insertImage(String imageUrl, String imageName) {
         if (mContent != null && !TextUtils.isEmpty(imageUrl) && !TextUtils.isEmpty(imageName)) {
             mContent.append(imageUrl);
+            int len = mContent.getText().length();
+            mContent.setSelection(len);
         }
     }
 
@@ -153,6 +159,20 @@ public class PublishFragment extends BaseFragment
     @Override
     public void startLogin() {
         LoginUtils.startLogin(this, REQ_CODE_LOGIN);
+    }
+
+    @Override
+    public void showUploadImageError(String response) {
+        mUploadResponse.setText(response);
+    }
+
+    @Override
+    public void showUploadTips(boolean active) {
+        if (active) {
+            mUploadResponse.setText(R.string.uploading_image);
+        } else {
+            mUploadResponse.setText("");
+        }
     }
 
     public static Fragment newInstance() {
