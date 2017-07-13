@@ -2,6 +2,7 @@ package xyz.dcme.agg.ui.postdetail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -222,8 +223,17 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         if (item.getItemId() == R.id.item_post_share) {
             startShare();
             return true;
+        } else if (item.getItemId() == R.id.item_post_browser) {
+            startBrowser();
+            return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void startBrowser() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(Constants.HOME_URL + mUrl));
+        startActivity(intent);
     }
 
     private void startShare() {
