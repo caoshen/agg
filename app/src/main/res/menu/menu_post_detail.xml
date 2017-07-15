@@ -11,4 +11,9 @@
         android:id="@+id/item_post_browser"
         android:title="@string/open_browser"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/item_test_crash"
+        android:title="@string/test_crash"
+        app:showAsAction="never"/>
 </menu>
