@@ -159,38 +159,6 @@ ol {
   display: block;
   padding: 20px 45px 20px 20px !important;
 }
-.icon-arrow-right {
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  background-image: url(http://static.daily.zhihu.com/img/share-icons.png);
-  background-repeat: no-repeat;
-  display: inline-block;
-  vertical-align: middle;
-  background-position: -70px -20px;
-  width: 10px;
-  height: 15px;
-  margin-top: -7.5px;
-}
-.headline-background .heading {
-  color: #999;
-  font-size: 15px!important;
-  margin-bottom: 8px;
-  line-height: 1em;
-}
-.headline-background .heading-content {
-  color: #444;
-  font-size: 17px!important;
-  line-height: 1.2em;
-}
-.headline-title {
-  line-height: 1.2em;
-  color: #000;
-  font-size: 22px;
-  margin: 20px 0 10px;
-  padding: 0 20px!important;
-  font-weight: bold;
-}
 .meta {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -233,40 +201,9 @@ ol {
 .content a:hover {
   text-decoration: underline;
 }
-.view-more {
-  margin-bottom: 25px;
-  text-align: center;
-}
-.view-more a {
-  font-size: 16px;
-  display: inline-block;
-  width: 125px;
-  height: 30px;
-  line-height: 30px;
-  background: #f0f0f0;
-  color: #B8B8B8;
-}
-.question {
-  overflow: hidden;
-  padding: 0 20px!important;
-}
-.question + .question {
-  border-top: 5px solid #f6f6f6;
-}
-.question-title {
-  line-height: 1.4em;
-  color: #000;
-  font-weight: 700;
-  font-size: 18px;
-  margin: 20px 0;
-}
 .meta .author {
   color: #444;
   font-weight: 700;
-}
-.answer + .answer {
-  border-top: 2px solid #f6f6f6;
-  padding-top: 20px;
 }
 .footer {
   text-align: center;
@@ -277,70 +214,11 @@ ol {
 .footer a {
   color: #b8b8b8;
 }
-.question .view-more a {
-  width: 100%;
-  display: block;
-}
-.hot-comment {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-.comment-label {
-  font-size: 16px;
-  color: #333;
-  line-height: 1.5em;
-  font-weight: 700;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  margin: 0;
-  padding: 9px 20px;
-}
-.comment-list {
-  margin-bottom: 20px;
-}
 .comment-item {
   font-size: 15px;
   color: #666;
   border-bottom: 1px solid #eee;
   padding: 15px 20px;
-}
-.comment-meta {
-  position: relative;
-  margin-bottom: 10px;
-}
-.comment-meta .author {
-  vertical-align: middle;
-  color: #444;
-}
-.comment-meta .vote {
-  position: absolute;
-  color: #b8b8b8;
-  font-size: 12px;
-  right: 0;
-}
-.night .comment-label {
-  color: #b8b8b8;
-  border-top: 1px solid #303030;
-  border-bottom: 1px solid #303030;
-}
-.night .comment-item {
-  color: #7f7f7f;
-  border-bottom: 1px solid #303030;
-}
-.icon-vote,
-.icon-voted {
-  background-repeat: no-repeat;
-  display: inline-block;
-  vertical-align: 0;
-  width: 11px;
-  height: 12px;
-  margin-right: 4px;
-  background-image: url(http://static.daily.zhihu.com/img/app/Comment_Vote.png) !important;
-}
-.icon-voted {
-  background-image: url(http://static.daily.zhihu.com/img/app/Comment_Voted.png) !important;
-}
-.night .icon-vote {
-  background-image: url(http://static.daily.zhihu.com/img/app/Dark_Comment_Vote.png) !important;
 }
 .img-wrap .headline-title {
   bottom: 5px;
@@ -348,9 +226,6 @@ ol {
 .img-wrap .img-source {
   right: 10px!important;
   font-size: 9px;
-}
-.global-header {
-  position: static;
 }
 .button {
   width: 60px;
@@ -360,85 +235,6 @@ ol {
 }
 .headline .img-place-holder {
   height: 200px;
-}
-.from-column {
-  width: 280px;
-  line-height: 30px;
-  height: 30px;
-  padding-left: 90px;
-  color: #2aacec;
-  background-image: url(http://static.daily.zhihu.com/img/News_Column_Entrance.png);
-  box-sizing: border-box;
-  margin: 0 20px 20px;
-}
-.from-column:active {
-  background-image: url(http://static.daily.zhihu.com/img/News_Column_Entrance_Highlight.png);
-}
-.night .headline {
-  border-bottom: 4px solid #303030;
-}
-.night img {
-  -webkit-mask-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7)));
-}
-body.night,
-.night .content-wrap {
-  background: #343434;
-}
-.night .answer + .answer {
-  border-top: 2px solid #303030;
-}
-.night .question + .question {
-  border-top: 4px solid #303030;
-}
-.night .view-more a {
-  background: #292929;
-  color: #666;
-}
-.night .icon-arrow-right {
-  background-image: url(http://static.daily.zhihu.com/img/share-icons.png);
-  background-repeat: no-repeat;
-  display: inline-block;
-  vertical-align: middle;
-  background-position: -70px -35px;
-  width: 10px;
-  height: 15px;
-}
-.night blockquote,
-.night sup {
-  border-left: 3px solid #666;
-}
-.night .content a {
-  color: #698ebf;
-}
-.night .from-column {
-  color: #2b82ac;
-  background-image: url(http://static.daily.zhihu.com/img/Dark_News_Column_Entrance.png);
-}
-.night .from-column:active {
-  background-image: url(http://static.daily.zhihu.com/img/Dark_News_Column_Entrance_Highlight.png);
-}
-.large .question-title {
-  font-size: 24px;
-}
-.large .meta {
-  font-size: 18px;
-}
-.large .content {
-  font-size: 20px;
-}
-.large blockquote,
-.large sup {
-  line-height: 1.6;
-}
-.meta .meta-item {
-  -o-text-overflow: ellipsis;
-  width: 39%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: inline-block;
-  color: #929292;
-  margin-right: 7px;
 }
 .headline .meta {
   white-space: nowrap;
