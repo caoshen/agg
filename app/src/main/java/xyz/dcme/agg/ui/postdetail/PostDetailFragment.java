@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import xyz.dcme.agg.ui.BaseFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
+import xyz.dcme.agg.ui.publish.PublishActivity;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.ShareUtils;
 import xyz.dcme.agg.widget.BottomSheetBar;
@@ -51,6 +53,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     private BottomSheetBar mBottomBar;
     private SwipeRefreshLayout mRefreshLayout;
     private int mNextPage = 2;
+    private ImageButton mInsertImage;
 
     public static PostDetailFragment newInstance(String url) {
         PostDetailFragment fragment = new PostDetailFragment();
@@ -97,8 +100,14 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         initToolbar(mRootView);
         initBottomBar(mRootView);
         initRefresh(mRootView);
+        initAddImage(mRootView);
 
         mPresenter.start(mUrl);
+    }
+
+    private void initAddImage(View rootView) {
+        mInsertImage = (ImageButton) rootView.findViewById(R.id.post_insert_photo);
+        mInsertImage.setOnClickListener(this);
     }
 
     private void initRefresh(View rootView) {
@@ -211,6 +220,8 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
             }
         } else if (v.getId() == R.id.item_send_comment) {
             mBottomBar.show();
+        } else if (v.getId() == R.id.post_insert_photo) {
+            PublishActivity.startPublish(getActivity(), mUrl);
         }
     }
 

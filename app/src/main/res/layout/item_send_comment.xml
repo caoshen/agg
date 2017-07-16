@@ -19,7 +19,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/post_comment_insert_photo"
+            android:id="@+id/post_insert_photo"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center_vertical"
