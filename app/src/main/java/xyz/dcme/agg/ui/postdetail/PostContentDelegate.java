@@ -12,6 +12,7 @@ import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.account.OnAccountClickListener;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.util.HtmlUtils;
@@ -61,6 +62,17 @@ public class PostContentDelegate implements ItemViewDelegate<PostDetailItem> {
 
         webView.loadDataWithBaseURL(null, HtmlUtils.makeHtml(detail), "text/html", "UTF-8", null);
 
+        ImageView avatar = holder.getView(R.id.post_detail_avatar);
+        OnAccountClickListener listener = new OnAccountClickListener(mContext, postDetailItem.getUserName());
+        holder.setOnClickListener(R.id.post_detail_user, listener);
+        holder.setOnClickListener(R.id.post_detail_avatar, listener);
+
+        Glide.with(mContext)
+                .load(postDetailItem.getAvatar())
+                .placeholder(R.drawable.ic_default_avatar)
+                .transform(new CircleTransformation(mContext))
+                .into(avatar);
+
         if (postDetailItem instanceof PostContent) {
             holder.setText(R.id.post_detail_title, ((PostContent) postDetailItem).getTitle());
             holder.setText(R.id.post_detail_click_count, ((PostContent) postDetailItem).getClickCount());
@@ -68,12 +80,5 @@ public class PostContentDelegate implements ItemViewDelegate<PostDetailItem> {
             holder.setText(R.id.post_detail_like_count, ((PostContent) postDetailItem).getLikeCount());
             holder.setText(R.id.post_detail_node, ((PostContent) postDetailItem).getNode());
         }
-        ImageView avatar = holder.getView(R.id.post_detail_avatar);
-
-        Glide.with(mContext)
-                .load(postDetailItem.getAvatar())
-                .placeholder(R.drawable.ic_default_avatar)
-                .transform(new CircleTransformation(mContext))
-                .into(avatar);
     }
 }
