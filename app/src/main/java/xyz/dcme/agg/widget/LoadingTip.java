@@ -32,11 +32,6 @@ public class LoadingTip extends LinearLayout {
         initView(context);
     }
 
-    public LoadingTip(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        initView(context);
-    }
-
     private void initView(Context context) {
         View.inflate(context, R.layout.loading_tip, this);
         mProgressBar = (ProgressBar) findViewById(R.id.progress);
@@ -98,8 +93,6 @@ public class LoadingTip extends LinearLayout {
             }
             case LOADING: {
                 setVisibility(View.VISIBLE);
-                mProgressBar.setVisibility(View.VISIBLE);
-                mTips.setText(R.string.loading);
                 break;
             }
             case NEED_LOGIN: {

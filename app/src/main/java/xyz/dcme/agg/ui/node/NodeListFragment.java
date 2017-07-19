@@ -1,5 +1,7 @@
 package xyz.dcme.agg.ui.node;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -121,12 +123,26 @@ public class NodeListFragment extends BaseFragment
 
     @Override
     public void showIndicator(final boolean isActive) {
-        final LoadingTip.LoadStatus status = isActive ? LoadingTip.LoadStatus.LOADING
-                : LoadingTip.LoadStatus.FINISH;
-
-        mSwipeRefresh.setVisibility(isActive ? View.GONE : View.VISIBLE);
-
-        mLoadingTips.setLoadingTip(status);
+        mLoadingTips.setVisibility(isActive ? View.VISIBLE : View.GONE);
+        mLoadingTips.animate()
+                .setDuration(200)
+                .alpha(isActive ? 1 : 0)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mLoadingTips.setVisibility(isActive ? View.VISIBLE : View.GONE);
+                    }
+                });
+        mNodeList.setVisibility(!isActive ? View.VISIBLE : View.GONE);
+        mNodeList.animate()
+                .setDuration(200)
+                .alpha(!isActive ? 1 : 0)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mNodeList.setVisibility(!isActive ? View.VISIBLE : View.GONE);
+                    }
+                });
     }
 
     @Override

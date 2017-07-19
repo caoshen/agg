@@ -1,5 +1,7 @@
 package xyz.dcme.agg.ui.postdetail;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -149,12 +151,27 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     }
 
     @Override
-    public void showIndicator(boolean isActive) {
-        if (isActive) {
-            mLoadingProgressBar.setVisibility(View.VISIBLE);
-        } else {
-            mLoadingProgressBar.setVisibility(View.GONE);
-        }
+    public void showIndicator(final boolean isActive) {
+        mLoadingProgressBar.setVisibility(isActive ? View.VISIBLE : View.GONE);
+        mLoadingProgressBar.animate()
+                .setDuration(200)
+                .alpha(isActive ? 1 : 0)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mLoadingProgressBar.setVisibility(isActive ? View.VISIBLE : View.GONE);
+                    }
+                });
+        mRecycler.setVisibility(!isActive ? View.VISIBLE : View.GONE);
+        mRecycler.animate()
+                .setDuration(200)
+                .alpha(!isActive ? 1 : 0)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mRecycler.setVisibility(!isActive ? View.VISIBLE : View.GONE);
+                    }
+                });
     }
 
     @Override
