@@ -7,6 +7,8 @@ import android.view.animation.AlphaAnimation;
 
 public class AnimationUtils {
 
+    public static final int DURATION = 200;
+
     private AnimationUtils() {
 
     }
@@ -31,7 +33,7 @@ public class AnimationUtils {
     private static void showSmoothView(final View view, final boolean active) {
         view.setVisibility(active ? View.VISIBLE : View.GONE);
         view.animate()
-                .setDuration(200)
+                .setDuration(DURATION)
                 .alpha(active ? 1 : 0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override

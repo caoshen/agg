@@ -1,7 +1,5 @@
 package xyz.dcme.agg.ui.postdetail;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -37,6 +35,7 @@ import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.ui.publish.PublishActivity;
+import xyz.dcme.agg.util.AnimationUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.ShareUtils;
 import xyz.dcme.agg.widget.BottomSheetBar;
@@ -51,7 +50,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     private List<PostDetailItem> mData = new ArrayList<>();
     private IRecyclerView mRecycler;
     private String mUrl;
-    private ProgressBar mLoadingProgressBar;
+    private ProgressBar mProgressBar;
     private BottomSheetBar mBottomBar;
     private SwipeRefreshLayout mRefreshLayout;
     private int mNextPage = 2;
@@ -97,7 +96,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         mAdapter.addItemViewDelegate(new PostCommentDelegate(getActivity(), this));
 
         mRecycler.setAdapter(mAdapter);
-        mLoadingProgressBar = (ProgressBar) mRootView.findViewById(R.id.loading);
+        mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progressbar);
 
         initToolbar(mRootView);
         initBottomBar(mRootView);
@@ -152,26 +151,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
 
     @Override
     public void showIndicator(final boolean isActive) {
-        mLoadingProgressBar.setVisibility(isActive ? View.VISIBLE : View.GONE);
-        mLoadingProgressBar.animate()
-                .setDuration(200)
-                .alpha(isActive ? 1 : 0)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mLoadingProgressBar.setVisibility(isActive ? View.VISIBLE : View.GONE);
-                    }
-                });
-        mRecycler.setVisibility(!isActive ? View.VISIBLE : View.GONE);
-        mRecycler.animate()
-                .setDuration(200)
-                .alpha(!isActive ? 1 : 0)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mRecycler.setVisibility(!isActive ? View.VISIBLE : View.GONE);
-                    }
-                });
+        AnimationUtils.showProgress(mProgressBar, mRecycler,isActive);
     }
 
     @Override
