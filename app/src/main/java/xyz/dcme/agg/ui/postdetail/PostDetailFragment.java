@@ -151,7 +151,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
 
     @Override
     public void showIndicator(final boolean isActive) {
-        AnimationUtils.showProgress(mProgressBar, mRecycler,isActive);
+        AnimationUtils.showProgress(mProgressBar, mRefreshLayout, isActive);
     }
 
     @Override

@@ -38,19 +38,18 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
         HttpUtils.get(url, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                mView.showIndicator(false);
                 LogUtils.e(LOG_TAG, e.toString());
+                mView.showIndicator(false);
             }
 
             @Override
             public void onResponse(String response, int id) {
-                mView.showIndicator(false);
-
                 if (LoginUtils.needLogin(response)) {
                     mView.startLogin();
                 } else {
                     mView.showRefresh(PostDetailParser.parseResponse(response));
                 }
+                mView.showIndicator(false);
             }
         });
     }
