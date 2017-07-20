@@ -68,30 +68,6 @@ public class PostDetailParser {
         return data;
     }
 
-    public static Map<String, String> mockLogin() {
-        try {
-            final String url = Constants.LOGIN_URL;
-            Map<String, String> loginCookies = Jsoup.connect(url)
-                    .method(Connection.Method.GET)
-                    .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
-                    .execute().cookies();
-
-            String email = "cshenn@163.com";//"1012504657@qq.com";
-            String password = "x1234567";//"x1234567X";
-
-            Connection.Response res = Jsoup.connect(url)
-                    .data("email", email, "password", password, "_xsrf", loginCookies.get("_xsrf"))
-                    .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36")
-                    .cookies(loginCookies)
-                    .method(Connection.Method.POST).execute();
-
-            return res.cookies();
-        } catch (IOException e) {
-            LogUtils.e(TAG, e.getMessage());
-        }
-        return new HashMap<>();
-    }
-
     public static List<PostDetailItem> parseComments(String response) {
         List<PostDetailItem> data = new ArrayList<>();
 
