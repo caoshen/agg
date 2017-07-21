@@ -112,4 +112,6 @@
     <string name="uploading_image">图片上传中&#8230;</string>
     <string name="open_browser">浏览器打开</string>
     <string name="test_crash">测试Crash</string>
+    <string name="reply_to">回复</string>
+
 </resources>

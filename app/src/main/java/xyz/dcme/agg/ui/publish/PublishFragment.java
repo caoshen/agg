@@ -31,6 +31,7 @@ public class PublishFragment extends BaseFragment
 
     private static final int REQ_CODE_ALBUM = 100;
     private static final int REQ_CODE_LOGIN = 200;
+    private static final String ARG_URL = "argument_comment_url";
 
     private PublishContract.Presenter mPresenter;
     private ImageButton mImgButton;
@@ -38,11 +39,23 @@ public class PublishFragment extends BaseFragment
     private EditText mTitle;
     private EditText mContent;
     private TextView mUploadResponse;
+    private String mCommentUrl;
+    private boolean isSendingComment = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    protected void getArgs() {
+        super.getArgs();
+        Bundle args = getArguments();
+        if (args != null) {
+            mCommentUrl = args.getString(ARG_URL);
+            isSendingComment = !TextUtils.isEmpty(mCommentUrl);
+        }
     }
 
     @Override
@@ -59,6 +72,11 @@ public class PublishFragment extends BaseFragment
         mTitle = (EditText) mRootView.findViewById(R.id.publish_title);
         mContent = (EditText) mRootView.findViewById(R.id.publish_content);
         mUploadResponse = (TextView) mRootView.findViewById(R.id.upload_response);
+
+        if (isSendingComment) {
+            mTitle.setVisibility(View.GONE);
+            getActivity().setTitle(R.string.reply_to);
+        }
     }
 
     @Override
@@ -93,7 +111,11 @@ public class PublishFragment extends BaseFragment
             }
             case R.id.item_publish_send: {
                 if (checkValid()) {
-                    startSend();
+                    if (isSendingComment) {
+                        startComment();
+                    } else {
+                        startSend();
+                    }
                 }
                 break;
             }
@@ -101,10 +123,16 @@ public class PublishFragment extends BaseFragment
         return super.onOptionsItemSelected(item);
     }
 
+    private void startComment() {
+        String content = mContent.getText().toString();
+        LogUtils.d(LOG_TAG, "startComment -> content: " + content);
+        mPresenter.publishComment(content, mCommentUrl);
+    }
+
     private boolean checkValid() {
         String title = mTitle.getText().toString();
         String content = mContent.getText().toString();
-        if (StringUtils.isBlank(title)) {
+        if (!isSendingComment && StringUtils.isBlank(title)) {
             mTitle.setError(getString(R.string.tips_title_is_empty));
             return false;
         }
@@ -175,7 +203,31 @@ public class PublishFragment extends BaseFragment
         }
     }
 
-    public static Fragment newInstance() {
-        return new PublishFragment();
+    @Override
+    public void sendArticleSuccess() {
+        getActivity().finish();
+    }
+
+    @Override
+    public void sendArticleFail() {
+
+    }
+
+    @Override
+    public void sendCommentSuccess() {
+        getActivity().finish();
+    }
+
+    @Override
+    public void sendCommentFail() {
+
+    }
+
+    public static Fragment newInstance(String commentUrl) {
+        Fragment fragment = new PublishFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_URL, commentUrl);
+        fragment.setArguments(args);
+        return fragment;
     }
 }

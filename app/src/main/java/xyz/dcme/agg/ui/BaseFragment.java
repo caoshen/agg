@@ -11,6 +11,16 @@ public abstract class BaseFragment extends Fragment {
 
     protected View mRootView;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getArgs();
+    }
+
+    protected void getArgs() {
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

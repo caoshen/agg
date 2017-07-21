@@ -151,7 +151,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
 
     @Override
     public void showIndicator(final boolean isActive) {
-        AnimationUtils.showProgress(mProgressBar, mRefreshLayout, isActive);
+        AnimationUtils.showProgress(mProgressBar, mRecycler, isActive);
     }
 
     @Override
@@ -213,12 +213,12 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         if (v.getId() == R.id.send_button) {
             String comment = mBottomBar.getComment();
             if (!TextUtils.isEmpty(comment)) {
-                mPresenter.sendReply(comment, mUrl);
+                mPresenter.sendComment(comment, mUrl);
             }
         } else if (v.getId() == R.id.item_send_comment) {
             mBottomBar.show();
         } else if (v.getId() == R.id.post_insert_photo) {
-            PublishActivity.startPublish(getActivity(), mUrl);
+            PublishActivity.startPublish(getActivity(), Constants.HOME_URL + mUrl);
         }
     }
 

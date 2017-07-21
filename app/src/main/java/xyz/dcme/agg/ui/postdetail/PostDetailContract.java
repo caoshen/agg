@@ -18,7 +18,7 @@ public interface PostDetailContract {
 
         void refresh(String url);
 
-        void sendReply(String comment, String url);
+        void sendComment(String comment, String url);
     }
 
     interface View extends BaseView<Presenter> {

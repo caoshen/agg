@@ -12,7 +12,7 @@ public interface PublishContract {
     interface Presenter extends BasePresenter {
         void publishArticle(String title, String content, String node);
 
-        void publishComment(String content, String id);
+        void publishComment(String content, String url);
 
         void preview();
 
@@ -29,5 +29,13 @@ public interface PublishContract {
         void showUploadImageError(String response);
 
         void showUploadTips(boolean active);
+
+        void sendArticleSuccess();
+
+        void sendArticleFail();
+
+        void sendCommentSuccess();
+
+        void sendCommentFail();
     }
 }

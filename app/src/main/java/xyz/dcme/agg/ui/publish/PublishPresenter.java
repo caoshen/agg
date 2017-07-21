@@ -11,17 +11,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.Call;
+import xyz.dcme.agg.ui.publish.helper.CommentHelper;
+import xyz.dcme.agg.ui.publish.helper.PostHelper;
 import xyz.dcme.agg.util.AccountUtils;
-import xyz.dcme.agg.util.Constants;
-import xyz.dcme.agg.util.HttpUtils;
 import xyz.dcme.agg.util.LogUtils;
 
 public class PublishPresenter implements PublishContract.Presenter {
     private static final String LOG_TAG = "PublishPresenter";
+    private PostHelper mPostHelper;
+    private CommentHelper mCommentHelper;
     private PublishContract.View mView;
     private Context mContext;
 
@@ -30,6 +30,8 @@ public class PublishPresenter implements PublishContract.Presenter {
         mView = view;
         mView.setPresenter(this);
         mContext = mView.getViewContext();
+        mPostHelper = new PostHelper();
+        mCommentHelper = new CommentHelper();
     }
 
     @Override
@@ -40,70 +42,63 @@ public class PublishPresenter implements PublishContract.Presenter {
     @Override
     public void publishArticle(String title, String content, String node) {
         if (mContext == null) {
-            LogUtils.e(LOG_TAG, "sendReply -> context is null");
+            LogUtils.e(LOG_TAG, "publishArticle -> context is null");
             return;
         }
+        if (TextUtils.isEmpty(title) || TextUtils.isEmpty(content)) {
+            LogUtils.e(LOG_TAG, "publishComment -> title or content is null");
+            return;
+        }
+
         if (!AccountUtils.hasActiveAccount(mContext)) {
             mView.startLogin();
             return;
         }
 
-        String url = getNodeUrl(node);
-        publish(title, content, url);
-    }
-
-    private String getNodeUrl(String node) {
-        return Constants.CREATE_POST_URL + node;
-    }
-
-    private void publish(final String title, final String content, final String url) {
-        HttpUtils.get(url, new StringCallback() {
+        mPostHelper.sendPost(title, content, node, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                LogUtils.e(LOG_TAG, e.toString());
+                LogUtils.e(LOG_TAG, "publishArticle -> send error: " + e);
+                mView.sendArticleFail();
             }
 
             @Override
             public void onResponse(String response, int id) {
-                Map<String, String> params = getParams(response, title, content);
-                postArticle(url, params);
+                LogUtils.d(LOG_TAG, "publishArticle -> send success: " + response);
+                mView.sendArticleSuccess();
             }
         });
-    }
-
-    private void postArticle(String url, Map<String, String> params) {
-        if (params == null) {
-            return;
-        }
-
-        HttpUtils.post(url, params, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                LogUtils.e(LOG_TAG, e.toString());
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                LogUtils.d(LOG_TAG, response);
-            }
-        });
-    }
-
-    private Map<String, String> getParams(String response, String title, String content) {
-        Map<String, String> params = new HashMap<>();
-        String xsrf = HttpUtils.findXsrf(response);
-
-        params.put("title", title);
-        params.put("content", content);
-        params.put("_xsrf", xsrf);
-
-        LogUtils.d(LOG_TAG, "getParams -> title: " + title + " content: " + content + " xsrf: " + xsrf);
-        return params;
     }
 
     @Override
-    public void publishComment(String content, String id) {
+    public void publishComment(String content, String url) {
+        if (mContext == null) {
+            LogUtils.e(LOG_TAG, "publishComment -> context is null");
+            return;
+        }
+        if (TextUtils.isEmpty(url)) {
+            LogUtils.e(LOG_TAG, "publishComment -> url is null");
+            return;
+        }
 
+        if (!AccountUtils.hasActiveAccount(mContext)) {
+            mView.startLogin();
+            return;
+        }
+
+        mCommentHelper.sendComment(content, url, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, "publishComment -> send error: " + e);
+                mView.sendCommentFail();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                LogUtils.d(LOG_TAG, "publishComment -> send success: " + response);
+                mView.sendCommentSuccess();
+            }
+        });
     }
 
     @Override

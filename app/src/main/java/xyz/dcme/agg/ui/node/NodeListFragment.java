@@ -1,7 +1,5 @@
 package xyz.dcme.agg.ui.node;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +22,7 @@ import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.ui.BaseFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.post.PostCommonAdapter;
+import xyz.dcme.agg.util.AnimationUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 import xyz.dcme.agg.widget.LoadingTip;
@@ -123,26 +122,7 @@ public class NodeListFragment extends BaseFragment
 
     @Override
     public void showIndicator(final boolean isActive) {
-        mLoadingTips.setVisibility(isActive ? View.VISIBLE : View.GONE);
-        mLoadingTips.animate()
-                .setDuration(200)
-                .alpha(isActive ? 1 : 0)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mLoadingTips.setVisibility(isActive ? View.VISIBLE : View.GONE);
-                    }
-                });
-        mNodeList.setVisibility(!isActive ? View.VISIBLE : View.GONE);
-        mNodeList.animate()
-                .setDuration(200)
-                .alpha(!isActive ? 1 : 0)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mNodeList.setVisibility(!isActive ? View.VISIBLE : View.GONE);
-                    }
-                });
+        AnimationUtils.showProgress(mLoadingTips, mNodeList, isActive);
     }
 
     @Override
