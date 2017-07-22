@@ -3,23 +3,21 @@ package xyz.dcme.agg.ui.publish;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 
 import okhttp3.Call;
 import xyz.dcme.agg.ui.publish.helper.CommentHelper;
+import xyz.dcme.agg.ui.publish.helper.ImageUpLoadListener;
+import xyz.dcme.agg.ui.publish.helper.ImageUploadHelper;
 import xyz.dcme.agg.ui.publish.helper.PostHelper;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.LogUtils;
 
 public class PublishPresenter implements PublishContract.Presenter {
     private static final String LOG_TAG = "PublishPresenter";
+    private ImageUploadHelper mUploadHelper;
     private PostHelper mPostHelper;
     private CommentHelper mCommentHelper;
     private PublishContract.View mView;
@@ -32,6 +30,7 @@ public class PublishPresenter implements PublishContract.Presenter {
         mContext = mView.getViewContext();
         mPostHelper = new PostHelper();
         mCommentHelper = new CommentHelper();
+        mUploadHelper = new ImageUploadHelper();
     }
 
     @Override
@@ -108,51 +107,19 @@ public class PublishPresenter implements PublishContract.Presenter {
 
     @Override
     public void uploadImage(File file) {
-        String filePath = file.getAbsolutePath();
-        String fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
-        String url = "http://www.guanggoo.com/image_upload";
-
         mView.showUploadTips(true);
-        OkHttpUtils.post()
-                .addFile("files", fileName, file)
-                .url(url)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        LogUtils.e(LOG_TAG, "error: " + e.toString());
-                        mView.showUploadImageError(e.toString());
-                    }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        LogUtils.d(LOG_TAG, "response: " + response);
-                        String imageUrl = null;
-                        String imageName = null;
-                        try {
-                            JSONObject resp = new JSONObject(response);
-                            JSONArray files = resp.getJSONArray("files");
-                            if (files != null && files.length() > 0) {
-                                JSONObject file = files.getJSONObject(0);
-                                imageUrl = file.getString("url");
-                                imageName = file.getString("name");
-                            }
-                        } catch (JSONException e) {
-                            LogUtils.e(LOG_TAG, e.toString());
-                            mView.showUploadImageError(response);
-                        }
+        mUploadHelper.uploadImage(file, new ImageUpLoadListener() {
+            @Override
+            public void onError(String err) {
+                mView.showUploadImageError(err);
+            }
 
-                        if (!TextUtils.isEmpty(imageUrl) && !TextUtils.isEmpty(imageName)) {
-                            mView.insertImage(imageUrl, imageName);
-                            mView.showUploadTips(false);
-                        } else {
-                            if (TextUtils.isEmpty(imageUrl)) {
-                                String errorMessage = ImageUploadError.getErrorMessage(imageName);
-                                LogUtils.e(LOG_TAG, errorMessage);
-                                mView.showUploadImageError(errorMessage);
-                            }
-                        }
-                    }
-                });
+            @Override
+            public void onResponse(String imageName, String imageUrl) {
+                mView.insertImage(imageUrl, imageName);
+                mView.showUploadTips(false);
+            }
+        });
     }
 }

@@ -1,12 +1,14 @@
-package xyz.dcme.agg.ui.publish;
+package xyz.dcme.agg.ui.publish.helper;
 
 import java.io.UnsupportedEncodingException;
 
 public class ImageUploadError {
 
+    private static final String UTF_8 = "UTF-8";
+
     public static String getErrorMessage(String error) {
         try {
-            return new String(error.getBytes("UTF-8"));
+            return new String(error.getBytes(UTF_8));
         } catch (UnsupportedEncodingException e) {
             return error;
         }

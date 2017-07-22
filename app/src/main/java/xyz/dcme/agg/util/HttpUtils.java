@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.File;
 import java.util.Map;
 
 import okhttp3.CookieJar;
@@ -41,6 +42,14 @@ public class HttpUtils {
         OkHttpUtils.post()
                 .url(url)
                 .params(params)
+                .build()
+                .execute(callback);
+    }
+
+    public static void post(String url, String fileName, File file, StringCallback callback) {
+        OkHttpUtils.post()
+                .addFile("files", fileName, file)
+                .url(url)
                 .build()
                 .execute(callback);
     }
