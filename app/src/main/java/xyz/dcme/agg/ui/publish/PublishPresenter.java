@@ -1,6 +1,5 @@
 package xyz.dcme.agg.ui.publish;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -12,7 +11,6 @@ import xyz.dcme.agg.ui.publish.helper.CommentHelper;
 import xyz.dcme.agg.ui.publish.helper.ImageUpLoadListener;
 import xyz.dcme.agg.ui.publish.helper.ImageUploadHelper;
 import xyz.dcme.agg.ui.publish.helper.PostHelper;
-import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.LogUtils;
 
 public class PublishPresenter implements PublishContract.Presenter {
@@ -21,13 +19,11 @@ public class PublishPresenter implements PublishContract.Presenter {
     private PostHelper mPostHelper;
     private CommentHelper mCommentHelper;
     private PublishContract.View mView;
-    private Context mContext;
 
 
     public PublishPresenter(PublishContract.View view) {
         mView = view;
         mView.setPresenter(this);
-        mContext = mView.getViewContext();
         mPostHelper = new PostHelper();
         mCommentHelper = new CommentHelper();
         mUploadHelper = new ImageUploadHelper();
@@ -40,17 +36,8 @@ public class PublishPresenter implements PublishContract.Presenter {
 
     @Override
     public void publishArticle(String title, String content, String node) {
-        if (mContext == null) {
-            LogUtils.e(LOG_TAG, "publishArticle -> context is null");
-            return;
-        }
         if (TextUtils.isEmpty(title) || TextUtils.isEmpty(content)) {
             LogUtils.e(LOG_TAG, "publishComment -> title or content is null");
-            return;
-        }
-
-        if (!AccountUtils.hasActiveAccount(mContext)) {
-            mView.startLogin();
             return;
         }
 
@@ -71,17 +58,8 @@ public class PublishPresenter implements PublishContract.Presenter {
 
     @Override
     public void publishComment(String content, String url) {
-        if (mContext == null) {
-            LogUtils.e(LOG_TAG, "publishComment -> context is null");
-            return;
-        }
         if (TextUtils.isEmpty(url)) {
             LogUtils.e(LOG_TAG, "publishComment -> url is null");
-            return;
-        }
-
-        if (!AccountUtils.hasActiveAccount(mContext)) {
-            mView.startLogin();
             return;
         }
 

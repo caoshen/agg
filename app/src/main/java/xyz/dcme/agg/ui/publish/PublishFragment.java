@@ -1,7 +1,6 @@
 package xyz.dcme.agg.ui.publish;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,10 +19,9 @@ import java.io.File;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.BaseFragment;
+import xyz.dcme.agg.util.EditUtils;
 import xyz.dcme.agg.util.ImageUtils;
-import xyz.dcme.agg.util.LogUtils;
 import xyz.dcme.agg.util.LoginUtils;
-import xyz.dcme.agg.util.StringUtils;
 
 public class PublishFragment extends BaseFragment
         implements PublishContract.View {
@@ -35,12 +33,20 @@ public class PublishFragment extends BaseFragment
 
     private PublishContract.Presenter mPresenter;
     private ImageButton mImgButton;
-//    private RichEditor mEditor;
+    //    private RichEditor mEditor;
     private EditText mTitle;
     private EditText mContent;
     private TextView mUploadResponse;
     private String mCommentUrl;
     private boolean isSendingComment = false;
+
+    public static Fragment newInstance(String commentUrl) {
+        Fragment fragment = new PublishFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_URL, commentUrl);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,50 +110,36 @@ public class PublishFragment extends BaseFragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_publish_preview: {
-                if (checkValid()) {
-                    startPreview();
-                }
+                startPreview();
                 break;
             }
             case R.id.item_publish_send: {
-                if (checkValid()) {
-                    if (isSendingComment) {
-                        startComment();
-                    } else {
-                        startSend();
-                    }
+                if (!LoginUtils.checkLogin(this, REQ_CODE_LOGIN)) {
+                    break;
                 }
+                startSend();
                 break;
             }
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void startComment() {
-        String content = mContent.getText().toString();
-        LogUtils.d(LOG_TAG, "startComment -> content: " + content);
-        mPresenter.publishComment(content, mCommentUrl);
-    }
-
-    private boolean checkValid() {
-        String title = mTitle.getText().toString();
-        String content = mContent.getText().toString();
-        if (!isSendingComment && StringUtils.isBlank(title)) {
-            mTitle.setError(getString(R.string.tips_title_is_empty));
-            return false;
-        }
-        if (StringUtils.isBlank(content)) {
-            mContent.setError(getString(R.string.tips_content_is_empty));
-            return false;
-        }
-        return true;
-    }
-
     private void startSend() {
-        String title = mTitle.getText().toString();
-        String content = mContent.getText().toString();
-        LogUtils.d(LOG_TAG, "startSend -> title: " + title + " content: " + content);
-        mPresenter.publishArticle(title, content, "IT");
+        boolean isValid;
+        if (isSendingComment) {
+            isValid = EditUtils.checkContentValid(getContext(), mContent);
+            if (isValid) {
+                String content = mContent.getText().toString();
+                mPresenter.publishComment(content, mCommentUrl);
+            }
+        } else {
+            isValid = EditUtils.checkContentValid(getContext(), mTitle, mContent);
+            if (isValid) {
+                String title = mTitle.getText().toString();
+                String content = mContent.getText().toString();
+                mPresenter.publishArticle(title, content, "IT");
+            }
+        }
     }
 
     private void startPreview() {
@@ -177,16 +169,6 @@ public class PublishFragment extends BaseFragment
             int len = mContent.getText().length();
             mContent.setSelection(len);
         }
-    }
-
-    @Override
-    public Context getViewContext() {
-        return getContext();
-    }
-
-    @Override
-    public void startLogin() {
-        LoginUtils.startLogin(this, REQ_CODE_LOGIN);
     }
 
     @Override
@@ -221,13 +203,5 @@ public class PublishFragment extends BaseFragment
     @Override
     public void sendCommentFail() {
 
-    }
-
-    public static Fragment newInstance(String commentUrl) {
-        Fragment fragment = new PublishFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_URL, commentUrl);
-        fragment.setArguments(args);
-        return fragment;
     }
 }

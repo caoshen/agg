@@ -1,7 +1,5 @@
 package xyz.dcme.agg.ui.publish;
 
-import android.content.Context;
-
 import java.io.File;
 
 import xyz.dcme.agg.BasePresenter;
@@ -21,10 +19,6 @@ public interface PublishContract {
 
     interface View extends BaseView<Presenter> {
         void insertImage(String imageUrl, String imageName);
-
-        Context getViewContext();
-
-        void startLogin();
 
         void showUploadImageError(String response);
 

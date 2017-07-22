@@ -33,4 +33,15 @@ public class LoginUtils {
         Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
         fragment.startActivityForResult(intent, requestCode);
     }
+
+    public static boolean checkLogin(Fragment fragment, int requestCode) {
+        if (fragment == null) {
+            return false;
+        }
+        if (!AccountUtils.hasActiveAccount(fragment.getContext())) {
+            startLogin(fragment, requestCode);
+            return false;
+        }
+        return true;
+    }
 }
