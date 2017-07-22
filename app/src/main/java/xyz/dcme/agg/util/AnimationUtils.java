@@ -6,7 +6,7 @@ import android.view.View;
 
 public class AnimationUtils {
 
-    private static final int DURATION = 200;
+    private static final int DURATION = 300;
 
     private AnimationUtils() {
 
@@ -21,7 +21,6 @@ public class AnimationUtils {
     }
 
     private static void showSmoothView(final View view, final boolean active) {
-        view.setVisibility(active ? View.VISIBLE : View.GONE);
         view.animate()
                 .setDuration(DURATION)
                 .alpha(active ? 1 : 0)

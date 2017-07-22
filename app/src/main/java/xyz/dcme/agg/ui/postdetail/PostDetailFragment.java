@@ -117,7 +117,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     }
 
     private void initBottomBar(View rootView) {
-        View commentBar = rootView.findViewById(R.id.item_send_comment);
+        View commentBar = rootView.findViewById(R.id.comment_bar);
         commentBar.setOnClickListener(this);
     }
 
@@ -151,7 +151,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
 
     @Override
     public void showIndicator(final boolean isActive) {
-        AnimationUtils.showProgress(mProgressBar, mRecycler, isActive);
+        AnimationUtils.showProgress(mProgressBar, mRefreshLayout, isActive);
     }
 
     @Override
@@ -215,7 +215,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
             if (!TextUtils.isEmpty(comment)) {
                 mPresenter.sendComment(comment, mUrl);
             }
-        } else if (v.getId() == R.id.item_send_comment) {
+        } else if (v.getId() == R.id.comment_bar) {
             mBottomBar.show();
         } else if (v.getId() == R.id.post_insert_photo) {
             PublishActivity.startPublish(getActivity(), Constants.HOME_URL + mUrl);

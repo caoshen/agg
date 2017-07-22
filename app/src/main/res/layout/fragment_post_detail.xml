@@ -6,38 +6,39 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/item_send_comment"
-        layout="@layout/item_send_comment"/>
+        layout="@layout/progressbar"/>
 
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/item_send_comment">
+    <include
+        android:id="@+id/comment_bar"
+        layout="@layout/comment_bar"/>
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:theme="@style/AppTheme.AppBarOverlay">
-
-            <include layout="@layout/toolbar_auto_hide"/>
-
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/post_detail_refresh"
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_above="@id/comment_bar">
 
-            <xyz.dcme.agg.common.irecyclerview.IRecyclerView
-                android:id="@+id/post_detail"
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </xyz.dcme.agg.common.irecyclerview.IRecyclerView>
+                android:layout_height="wrap_content"
+                app:theme="@style/AppTheme.AppBarOverlay">
 
-        </android.support.v4.widget.SwipeRefreshLayout>
-    </android.support.design.widget.CoordinatorLayout>
+                <include layout="@layout/toolbar"/>
 
-    <include layout="@layout/progressbar"/>
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/post_detail_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <xyz.dcme.agg.common.irecyclerview.IRecyclerView
+                    android:id="@+id/post_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </xyz.dcme.agg.common.irecyclerview.IRecyclerView>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </android.support.design.widget.CoordinatorLayout>
 
 </RelativeLayout>
