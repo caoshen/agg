@@ -22,7 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.tencent.bugly.crashreport.CrashReport;
+//import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -235,9 +235,6 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
             return true;
         } else if (item.getItemId() == R.id.item_post_browser) {
             startBrowser();
-            return true;
-        } else if (item.getItemId() == R.id.item_test_crash) {
-            CrashReport.testJavaCrash();
             return true;
         }
         return super.onOptionsItemSelected(item);

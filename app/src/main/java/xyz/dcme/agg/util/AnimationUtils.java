@@ -6,7 +6,7 @@ import android.view.View;
 
 public class AnimationUtils {
 
-    private static final int DURATION = 300;
+    private static final int DURATION = 200;
 
     private AnimationUtils() {
 
