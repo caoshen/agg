@@ -92,7 +92,9 @@ public class PersonalInfoPageFragment extends Fragment
     @Override
     public void onStart() {
         super.onStart();
-        mPresenter.load(mUserName);
+        if (isAdded()) {
+            mPresenter.load(mUserName);
+        }
     }
 
     @Override
