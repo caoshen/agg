@@ -1,7 +1,5 @@
 package xyz.dcme.agg.ui.reply;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,6 +22,7 @@ import xyz.dcme.agg.common.irecyclerview.IRecyclerView;
 import xyz.dcme.agg.common.irecyclerview.OnLoadMoreListener;
 import xyz.dcme.agg.ui.BaseFragment;
 import xyz.dcme.agg.util.AccountUtils;
+import xyz.dcme.agg.util.AnimationUtils;
 
 public class ReplyFragment extends BaseFragment implements ReplyContract.View,
         SwipeRefreshLayout.OnRefreshListener, OnLoadMoreListener {
@@ -65,7 +64,11 @@ public class ReplyFragment extends BaseFragment implements ReplyContract.View,
         mSwipeRefresh.setOnRefreshListener(this);
         initToolbar();
         initRecycle();
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
         mPresenter.start(mUserName);
     }
 
@@ -105,23 +108,7 @@ public class ReplyFragment extends BaseFragment implements ReplyContract.View,
 
     @Override
     public void showIndicator(final boolean active) {
-        int time = getResources().getInteger(android.R.integer.config_shortAnimTime);
-        mProgressBar.setVisibility(active ? View.VISIBLE : View.GONE);
-        mProgressBar.animate().setDuration(time).alpha(active ? 1 : 0)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mProgressBar.setVisibility(active ? View.VISIBLE : View.GONE);
-                    }
-                });
-        mReplyList.setVisibility(!active ? View.VISIBLE : View.GONE);
-        mReplyList.animate().setDuration(time).alpha(!active ? 1 : 0)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mReplyList.setVisibility(!active ? View.VISIBLE : View.GONE);
-                    }
-                });
+        AnimationUtils.showProgress(mProgressBar, mReplyList, active);
     }
 
     @Override
