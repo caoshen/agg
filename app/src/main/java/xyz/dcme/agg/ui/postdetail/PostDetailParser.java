@@ -1,22 +1,17 @@
 package xyz.dcme.agg.ui.postdetail;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.ui.postdetail.data.PostMyComment;
-import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.LogUtils;
 
 public class PostDetailParser {
@@ -35,7 +30,12 @@ public class PostDetailParser {
             }
         }
 
-        String title = doc.select("h3.title").first().text();
+        Element first = doc.select("h3.title").first();
+        if (first == null) {
+            LogUtils.e(TAG, "parseResponse -> no post detail.");
+            return data;
+        }
+        String title = first.text();
         String avatar = doc.select("div.ui-header img").attr("src");
         String name = doc.select("span.username a").text();
         String createTime = doc.select("span.created-time").text();
