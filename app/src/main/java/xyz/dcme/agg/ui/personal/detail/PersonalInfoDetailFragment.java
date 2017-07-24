@@ -1,7 +1,5 @@
 package xyz.dcme.agg.ui.personal.detail;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.util.AnimationUtils;
 
 public class PersonalInfoDetailFragment extends Fragment
         implements PersonalInfoDetailContract.View {
@@ -47,8 +46,8 @@ public class PersonalInfoDetailFragment extends Fragment
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         mPresenter.load(mUserName);
     }
 
@@ -87,23 +86,7 @@ public class PersonalInfoDetailFragment extends Fragment
 
     @Override
     public void setLoadingIndicator(final boolean active) {
-        int time = getResources().getInteger(android.R.integer.config_shortAnimTime);
-        mProgressView.setVisibility(active ? View.VISIBLE : View.GONE);
-        mProgressView.animate().setDuration(time).alpha(active ? 1 : 0)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mProgressView.setVisibility(active ? View.VISIBLE : View.GONE);
-                    }
-                });
-        mDetailList.setVisibility(!active ? View.VISIBLE : View.GONE);
-        mDetailList.animate().setDuration(time).alpha(!active ? 1 : 0)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mDetailList.setVisibility(!active ? View.VISIBLE : View.GONE);
-                    }
-                });
+        AnimationUtils.showProgress(mProgressView, mDetailList, active);
     }
 
     @Override

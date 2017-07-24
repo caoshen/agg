@@ -90,8 +90,8 @@ public class PersonalInfoPageFragment extends Fragment
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         mPresenter.load(mUserName);
     }
 
