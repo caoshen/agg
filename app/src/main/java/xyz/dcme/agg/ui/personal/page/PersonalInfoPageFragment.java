@@ -1,7 +1,5 @@
 package xyz.dcme.agg.ui.personal.page;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +15,7 @@ import xyz.dcme.agg.ui.favorite.FavoriteActivity;
 import xyz.dcme.agg.ui.reply.ReplyActivity;
 import xyz.dcme.agg.ui.topic.TopicActivity;
 import xyz.dcme.agg.util.AccountUtils;
+import xyz.dcme.agg.util.AnimationUtils;
 
 public class PersonalInfoPageFragment extends Fragment
     implements PersonalInfoPageContract.View, View.OnClickListener {
@@ -103,23 +102,7 @@ public class PersonalInfoPageFragment extends Fragment
 
     @Override
     public void setLoadingIndicator(final boolean active) {
-        int time = getResources().getInteger(android.R.integer.config_shortAnimTime);
-        mProgressBar.setVisibility(active ? View.VISIBLE : View.GONE);
-        mProgressBar.animate().setDuration(time).alpha(active ? 1 : 0)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mProgressBar.setVisibility(active ? View.VISIBLE : View.GONE);
-                    }
-                });
-        mContent.setVisibility(!active ? View.VISIBLE : View.GONE);
-        mContent.animate().setDuration(time).alpha(!active ? 1 : 0)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mContent.setVisibility(!active ? View.VISIBLE : View.GONE);
-                    }
-                });
+        AnimationUtils.showProgress(mProgressBar, mContent, active);
     }
 
     @Override

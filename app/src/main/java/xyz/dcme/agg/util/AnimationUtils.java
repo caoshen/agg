@@ -6,7 +6,7 @@ import android.view.View;
 
 public class AnimationUtils {
 
-    private static final int DURATION = 200;
+    private static final long DURATION = 200L;
 
     private AnimationUtils() {
 
@@ -16,18 +16,34 @@ public class AnimationUtils {
         if (progress == null || content == null) {
             return;
         }
-        showSmoothView(progress, active);
-        showSmoothView(content, !active);
+
+        if (active) {
+            showView(progress, content);
+        } else {
+            showView(content, progress);
+        }
     }
 
-    private static void showSmoothView(final View view, final boolean active) {
-        view.animate()
+    private static void showView(final View showView, final View hideView) {
+        showView.setVisibility(View.VISIBLE);
+        showView.animate()
                 .setDuration(DURATION)
-                .alpha(active ? 1 : 0)
+                .alpha(1)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        view.setVisibility(active ? View.VISIBLE : View.GONE);
+                        showView.setVisibility(View.VISIBLE);
+                    }
+                });
+
+        hideView.setVisibility(View.GONE);
+        hideView.animate()
+                .setDuration(DURATION)
+                .alpha(0)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        hideView.setVisibility(View.GONE);
                     }
                 });
     }
