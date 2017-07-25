@@ -69,9 +69,7 @@ public class ReplyFragment extends BaseFragment implements ReplyContract.View,
     @Override
     public void onStart() {
         super.onStart();
-        if (isAdded()) {
-            mPresenter.start(mUserName);
-        }
+        mPresenter.start(mUserName);
     }
 
     @Override

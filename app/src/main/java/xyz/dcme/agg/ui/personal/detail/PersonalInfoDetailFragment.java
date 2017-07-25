@@ -48,9 +48,7 @@ public class PersonalInfoDetailFragment extends Fragment
     @Override
     public void onStart() {
         super.onStart();
-        if (isAdded()) {
-            mPresenter.load(mUserName);
-        }
+        mPresenter.load(mUserName);
     }
 
     @Nullable

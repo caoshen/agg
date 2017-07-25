@@ -6,6 +6,7 @@ import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -33,6 +34,6 @@ public class AggApplication extends Application {
     }
 
     private void initBugly() {
-//        CrashReport.initCrashReport(getApplicationContext());
+        CrashReport.initCrashReport(getApplicationContext());
     }
 }
