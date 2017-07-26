@@ -4,6 +4,15 @@
         <attr name="actionBarInsetStart" format="dimension"/>
     </declare-styleable>
     
+    <!--FlowLayout custom attributes-->
+    <declare-styleable name="FlowLayout">
+        <attr name="gravity">
+            <enum name="left">-1</enum>
+            <enum name="center">0</enum>
+            <enum name="right">1</enum>
+        </attr>
+    </declare-styleable>
+    
     <declare-styleable name="AvatarImageBehavior">
         <attr name="startXPosition" format="dimension"/>
         <attr name="finalYPosition" format="dimension"/>
