@@ -32,8 +32,8 @@ public class FlowLayout extends ViewGroup {
 
     public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FlowLayout);
-        mGravity = typedArray.getInt(R.styleable.FlowLayout_gravity, LEFT);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TagFlowLayout);
+        mGravity = typedArray.getInt(R.styleable.TagFlowLayout_gravity, LEFT);
         typedArray.recycle();
     }
 
