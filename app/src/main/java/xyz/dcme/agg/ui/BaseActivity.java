@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.topic.AppManager;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -28,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void doBeforeSetContentView() {
+        AppManager.getInstance().addActivity(this);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
@@ -69,5 +71,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppManager.getInstance().finishActivity(this);
     }
 }
