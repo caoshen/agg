@@ -27,11 +27,11 @@ public class FlowActivity extends BaseActivity {
     public void initView() {
         mFlexBoxLayout = (FlexboxLayout) findViewById(R.id.flex);
         for (String tag : tags) {
-            mFlexBoxLayout.addView(createNewFlexItemTextView(tag));
+            mFlexBoxLayout.addView(createItemView(tag));
         }
     }
 
-    private View createNewFlexItemTextView(final String tag) {
+    private View createItemView(final String tag) {
         TextView textView = new TextView(this);
         textView.setGravity(Gravity.CENTER);
         textView.setText(tag);
