@@ -1,12 +1,14 @@
 package xyz.dcme.agg.ui;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
 import xyz.dcme.agg.R;
 
@@ -18,10 +20,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        doBeforeSetContentView();
         setContentView(getLayoutId());
         mContext = this;
         getIntentData();
         initView();
+    }
+
+    private void doBeforeSetContentView() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     protected void getIntentData() {
