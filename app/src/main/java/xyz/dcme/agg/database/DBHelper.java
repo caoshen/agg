@@ -13,7 +13,7 @@ import xyz.dcme.agg.database.table.CurNodeTable;
 import xyz.dcme.agg.database.table.MoreNodeTable;
 import xyz.dcme.agg.ui.node.Node;
 import xyz.dcme.agg.util.Constants;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";

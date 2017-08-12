@@ -30,7 +30,7 @@ import java.util.List;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.common.irecyclerview.IRecyclerView;
 import xyz.dcme.agg.common.irecyclerview.OnLoadMoreListener;
-import xyz.dcme.agg.ui.BaseFragment;
+import xyz.dcme.library.base.BaseFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;

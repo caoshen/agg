@@ -11,7 +11,7 @@ import xyz.dcme.agg.ui.publish.helper.CommentHelper;
 import xyz.dcme.agg.ui.publish.helper.ImageUpLoadListener;
 import xyz.dcme.agg.ui.publish.helper.ImageUploadHelper;
 import xyz.dcme.agg.ui.publish.helper.PostHelper;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class PublishPresenter implements PublishContract.Presenter {
     private static final String LOG_TAG = "PublishPresenter";

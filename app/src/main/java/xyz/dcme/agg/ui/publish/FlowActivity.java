@@ -10,8 +10,8 @@ import android.widget.Toast;
 import com.google.android.flexbox.FlexboxLayout;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.BaseActivity;
-import xyz.dcme.agg.util.UIUtil;
+import xyz.dcme.library.base.BaseActivity;
+import xyz.dcme.library.util.DisplayUtils;
 
 
 public class FlowActivity extends BaseActivity {
@@ -43,11 +43,11 @@ public class FlowActivity extends BaseActivity {
                 Toast.makeText(FlowActivity.this, "click " + tag, Toast.LENGTH_LONG).show();
             }
         });
-        int padding = UIUtil.dp2px(this, 4);
+        int padding = DisplayUtils.dp2px(this, 4);
         ViewCompat.setPaddingRelative(textView, padding, padding, padding, padding);
         FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        int margin = UIUtil.dp2px(this, 6);
+        int margin = DisplayUtils.dp2px(this, 6);
         lp.setMargins(margin, margin, margin, 0);
         textView.setLayoutParams(lp);
         return textView;

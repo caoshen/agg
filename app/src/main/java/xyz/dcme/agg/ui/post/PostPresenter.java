@@ -9,7 +9,7 @@ import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.parser.PostParser;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HttpUtils;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class PostPresenter implements PostContract.Presenter {
     private static final String FIRST_PAGE = "1";

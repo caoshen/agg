@@ -11,7 +11,7 @@ import java.util.List;
 import xyz.dcme.agg.database.table.CurNodeTable;
 import xyz.dcme.agg.database.table.MoreNodeTable;
 import xyz.dcme.agg.ui.node.Node;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class NodeLocalData {
     private static final String TAG = "NodeLocalData";

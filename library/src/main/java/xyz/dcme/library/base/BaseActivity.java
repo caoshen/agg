@@ -1,21 +1,16 @@
-package xyz.dcme.agg.ui;
+package xyz.dcme.library.base;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
-import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.topic.AppManager;
+import xyz.dcme.library.baseapp.AppManager;
 
 public abstract class BaseActivity extends AppCompatActivity {
-
-    private Toolbar mToolbar;
     protected Context mContext;
 
     @Override
@@ -24,7 +19,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         doBeforeSetContentView();
         setContentView(getLayoutId());
         mContext = this;
-        getIntentData();
+        getData();
         initView();
     }
 
@@ -34,28 +29,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
-    protected void getIntentData() {
+    protected void getData() {
 
     }
 
     public abstract int getLayoutId();
 
     public abstract void initView();
-
-    public Toolbar getToolbar() {
-        if (mToolbar == null) {
-            mToolbar = (Toolbar) findViewById(R.id.toolbar);
-            if (mToolbar != null) {
-                setSupportActionBar(mToolbar);
-            }
-        }
-
-        ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setDisplayHomeAsUpEnabled(true);
-        }
-        return mToolbar;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home : {
+            case android.R.id.home: {
                 finish();
                 break;
             }

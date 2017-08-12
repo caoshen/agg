@@ -26,8 +26,9 @@ import xyz.dcme.agg.ui.personal.PersonalInfoActivity;
 import xyz.dcme.agg.ui.settings.SettingsActivity;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.Constants;
-import xyz.dcme.agg.util.ImageLoader;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.ImageLoader;
+import xyz.dcme.library.util.LogUtils;
+import xyz.dcme.library.base.BaseActivity;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener {
@@ -100,7 +101,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             String name = accountInfo.getUserName();
             String avatarUrl = accountInfo.getAvatarUrl();
             mUsername.setText(name);
-            ImageLoader.loadAvatar(this, avatarUrl, mAvatar);
+            ImageLoader.display(this, mAvatar, avatarUrl);
         } else {
             mUsername.setText(R.string.login_please);
             mAvatar.setImageResource(R.drawable.ic_me);

@@ -5,9 +5,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import okhttp3.Call;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HttpUtils;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
-import static xyz.dcme.agg.util.LogUtils.makeLogTag;
+import static xyz.dcme.library.util.LogUtils.makeLogTag;
 
 public class PersonalInfoDetailPresenter implements PersonalInfoDetailContract.Presenter {
     private static final String TAG = makeLogTag("PersonalInfoDetailPresenter");

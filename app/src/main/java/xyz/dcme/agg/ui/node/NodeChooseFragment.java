@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.BaseFragment;
+import xyz.dcme.library.base.BaseFragment;
 import xyz.dcme.agg.widget.ItemDragHelperCallback;
 
 public class NodeChooseFragment extends BaseFragment

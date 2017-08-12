@@ -4,7 +4,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.BaseActivity;
+import xyz.dcme.library.base.BaseActivity;
 
 public class SettingsActivity extends BaseActivity {
 

@@ -10,7 +10,7 @@ import xyz.dcme.agg.ui.publish.helper.CommentHelper;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HttpUtils;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 import xyz.dcme.agg.util.LoginUtils;
 
 public class PostDetailPresenter implements PostDetailContract.Presenter {

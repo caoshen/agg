@@ -1,4 +1,4 @@
-package xyz.dcme.agg.util.transformation;
+package xyz.dcme.library.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;

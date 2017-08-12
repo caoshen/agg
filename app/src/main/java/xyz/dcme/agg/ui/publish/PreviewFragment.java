@@ -11,12 +11,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.BaseFragment;
+import xyz.dcme.library.base.BaseFragment;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HtmlUtils;
-import xyz.dcme.agg.util.StringUtils;
-import xyz.dcme.agg.util.transformation.CircleTransformation;
+import xyz.dcme.library.util.StringUtils;
+import xyz.dcme.library.util.CircleTransformation;
 
 public class PreviewFragment extends BaseFragment {
     public static final String LOG_TAG = "PreviewFragment";

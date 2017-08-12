@@ -12,7 +12,7 @@ import java.io.File;
 
 import okhttp3.Call;
 import xyz.dcme.agg.util.HttpUtils;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class ImageUploadHelper {
     private static final String LOG_TAG = "ImageUploadHelper";

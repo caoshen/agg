@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.EditText;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.library.util.StringUtils;
 
 public class EditUtils {
 

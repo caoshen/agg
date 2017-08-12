@@ -16,7 +16,7 @@ import xyz.dcme.agg.account.OnAccountClickListener;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.util.HtmlUtils;
-import xyz.dcme.agg.util.transformation.CircleTransformation;
+import xyz.dcme.library.util.CircleTransformation;
 
 
 public class PostContentDelegate implements ItemViewDelegate<PostDetailItem> {

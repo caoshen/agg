@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import xyz.dcme.agg.account.AccountInfo;
+import xyz.dcme.library.util.LogUtils;
 
 public class AccountUtils {
     private static final String TAG = LogUtils.makeLogTag("AccountUtils");

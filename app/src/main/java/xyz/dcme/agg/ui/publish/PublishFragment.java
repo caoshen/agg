@@ -18,7 +18,7 @@ import android.widget.TextView;
 import java.io.File;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.BaseFragment;
+import xyz.dcme.library.base.BaseFragment;
 import xyz.dcme.agg.util.EditUtils;
 import xyz.dcme.agg.util.ImageUtils;
 import xyz.dcme.agg.util.LoginUtils;

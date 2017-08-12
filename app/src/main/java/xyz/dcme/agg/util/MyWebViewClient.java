@@ -8,6 +8,8 @@ import android.webkit.WebViewClient;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import xyz.dcme.library.util.LogUtils;
+
 public class MyWebViewClient extends WebViewClient {
     private static final String LOG_TAG = "MyWebViewClient";
 

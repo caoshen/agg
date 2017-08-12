@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.BaseActivity;
+import xyz.dcme.library.base.BaseActivity;
 
 public class PreviewActivity extends BaseActivity {
     private static final String LOG_TAG = "PreviewActivity";
@@ -27,14 +27,9 @@ public class PreviewActivity extends BaseActivity {
     @Override
     public void initView() {
         getExtraString();
-        initToolbar();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.preview_container, PreviewFragment.newInstance(mTitle, mContent))
                 .commit();
-    }
-
-    private void initToolbar() {
-        Toolbar toolbar = getToolbar();
     }
 
     private void getExtraString() {

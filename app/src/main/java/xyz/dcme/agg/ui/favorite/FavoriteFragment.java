@@ -23,7 +23,7 @@ import xyz.dcme.agg.R;
 import xyz.dcme.agg.common.irecyclerview.IRecyclerView;
 import xyz.dcme.agg.common.irecyclerview.OnLoadMoreListener;
 import xyz.dcme.agg.model.Post;
-import xyz.dcme.agg.ui.BaseFragment;
+import xyz.dcme.library.base.BaseFragment;
 import xyz.dcme.agg.util.AccountUtils;
 
 public class FavoriteFragment extends BaseFragment

@@ -19,10 +19,10 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.BaseActivity;
+import xyz.dcme.library.base.BaseActivity;
 import xyz.dcme.agg.ui.personal.page.PersonalInfoContract;
 import xyz.dcme.agg.util.Constants;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class PersonalInfoActivity extends BaseActivity implements PersonalInfoContract.View {
 
@@ -47,8 +47,8 @@ public class PersonalInfoActivity extends BaseActivity implements PersonalInfoCo
     }
 
     @Override
-    protected void getIntentData() {
-        super.getIntentData();
+    protected void getData() {
+        super.getData();
         Intent intent = getIntent();
         if (intent != null) {
             mUserName = getUserName(intent);

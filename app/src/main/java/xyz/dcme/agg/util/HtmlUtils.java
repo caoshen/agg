@@ -3,6 +3,8 @@ package xyz.dcme.agg.util;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import xyz.dcme.library.util.StringUtils;
+
 public class HtmlUtils {
     public static String makeHtml(String body) {
         String html = "<!DOCTYPE html>"

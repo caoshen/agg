@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.BaseActivity;
+import xyz.dcme.library.base.BaseActivity;
 import xyz.dcme.agg.util.ActivityUtils;
 
 

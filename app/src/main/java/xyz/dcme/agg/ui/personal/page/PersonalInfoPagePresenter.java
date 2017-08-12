@@ -5,7 +5,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import okhttp3.Call;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HttpUtils;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class PersonalInfoPagePresenter implements PersonalInfoPageContract.Presenter {
 

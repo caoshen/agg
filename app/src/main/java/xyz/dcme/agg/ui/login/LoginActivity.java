@@ -37,12 +37,12 @@ import java.util.Map;
 import okhttp3.Call;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.account.AccountInfo;
-import xyz.dcme.agg.ui.BaseActivity;
+import xyz.dcme.library.base.BaseActivity;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.AnimationUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HttpUtils;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
 

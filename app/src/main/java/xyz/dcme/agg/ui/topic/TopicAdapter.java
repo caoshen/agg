@@ -9,7 +9,7 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 import java.util.List;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.util.ImageLoader;
+import xyz.dcme.library.util.ImageLoader;
 
 public class TopicAdapter extends CommonAdapter<Topic> {
     public TopicAdapter(Context context, int layoutId, List<Topic> data) {
@@ -25,7 +25,7 @@ public class TopicAdapter extends CommonAdapter<Topic> {
         holder.setText(R.id.topic_reply_count, reply);
 
         ImageView avatar = holder.getView(R.id.topic_author_avatar);
-        ImageLoader.loadAvatar(mContext, topic.authorAvatar, avatar);
+        ImageLoader.display(mContext, avatar, topic.authorAvatar);
 
         holder.setOnClickListener(R.id.topic_item, new OnTopicClickListener(mContext, topic.detailUrl));
     }

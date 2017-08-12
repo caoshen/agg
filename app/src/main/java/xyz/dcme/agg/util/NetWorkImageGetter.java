@@ -14,6 +14,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import xyz.dcme.library.util.LogUtils;
+
 public class NetWorkImageGetter implements Html.ImageGetter {
     private final TextView mTextView;
     private final int mPicWidth;

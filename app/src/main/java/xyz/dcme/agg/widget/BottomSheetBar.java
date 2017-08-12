@@ -13,8 +13,8 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.util.StringUtils;
-import xyz.dcme.agg.util.TDevice;
+import xyz.dcme.library.util.StringUtils;
+import xyz.dcme.library.util.DeviceUtils;
 
 public class BottomSheetBar {
 
@@ -70,7 +70,7 @@ public class BottomSheetBar {
         mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                TDevice.closeKeyboard(mComment);
+                DeviceUtils.closeKeyboard(mComment);
             }
         });
     }
@@ -83,7 +83,7 @@ public class BottomSheetBar {
         mRootView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                TDevice.showSoftKeyboard(mComment);
+                DeviceUtils.showSoftKeyboard(mComment);
             }
         }, 50);
     }
@@ -103,7 +103,7 @@ public class BottomSheetBar {
         mRootView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                TDevice.hideSoftKeyboard(mComment);
+                DeviceUtils.hideSoftKeyboard(mComment);
             }
         }, 50);
     }

@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class TagFlowLayout extends FlowLayout implements OnDataChangeListener {
     private static final String LOG_TAG = "TagFlowLayout";

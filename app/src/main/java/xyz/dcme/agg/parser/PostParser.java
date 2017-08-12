@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.model.Post;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class PostParser {
     private static final String TAG = "PostParser";

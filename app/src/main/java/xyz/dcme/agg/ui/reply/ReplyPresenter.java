@@ -6,7 +6,7 @@ import okhttp3.Call;
 import xyz.dcme.agg.parser.PostParser;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HttpUtils;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class ReplyPresenter implements ReplyContract.Presenter {
 

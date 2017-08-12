@@ -1,4 +1,4 @@
-package xyz.dcme.agg.util;
+package xyz.dcme.library.util;
 
 import android.text.TextUtils;
 
@@ -30,7 +30,7 @@ public class StringUtils {
      * @param c code point to test
      * @return true if code point is whitespace, false otherwise
      */
-    public static boolean isWhitespace(int c) {
+    private static boolean isWhitespace(int c) {
         return c == ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r';
     }
 
@@ -53,7 +53,7 @@ public class StringUtils {
         return sb.toString();
     }
 
-    public static boolean hasLength(CharSequence str) {
+    private static boolean hasLength(CharSequence str) {
         return (str != null && str.length() > 0);
     }
 
@@ -63,25 +63,6 @@ public class StringUtils {
         } else {
             return str;
         }
-    }
-
-    public static String decodeUnicode(final String dataStr) {
-        int start = 0;
-        int end = 0;
-        final StringBuffer buffer = new StringBuffer();
-        while (start > -1) {
-            end = dataStr.indexOf("\\u", start + 2);
-            String charStr = "";
-            if (end == -1) {
-                charStr = dataStr.substring(start + 2, dataStr.length());
-            } else {
-                charStr = dataStr.substring(start + 2, end);
-            }
-            char letter = (char) Integer.parseInt(charStr, 16); // 16进制parse整形字符串。
-            buffer.append(new Character(letter).toString());
-            start = end;
-        }
-        return buffer.toString();
     }
 
 }

@@ -1,4 +1,4 @@
-package xyz.dcme.agg.util;
+package xyz.dcme.library.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-public class TDevice {
+public class DeviceUtils {
 
-    private TDevice() {
+    private DeviceUtils() {
 
     }
 

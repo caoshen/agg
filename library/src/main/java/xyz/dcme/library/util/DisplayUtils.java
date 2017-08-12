@@ -1,9 +1,13 @@
-package xyz.dcme.agg.util;
+package xyz.dcme.library.util;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
 
-public class UIUtil {
+public class DisplayUtils {
+    private DisplayUtils() {
+
+    }
+
     public static int dp2px(Context context, int dp) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         int px = (int) ((dp * metrics.density) + 0.5F);

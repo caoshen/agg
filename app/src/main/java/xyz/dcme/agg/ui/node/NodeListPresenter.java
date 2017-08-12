@@ -7,7 +7,7 @@ import java.util.Arrays;
 import okhttp3.Call;
 import xyz.dcme.agg.parser.PostParser;
 import xyz.dcme.agg.util.HttpUtils;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 import xyz.dcme.agg.util.LoginUtils;
 
 public class NodeListPresenter implements NodeListContract.Presenter {

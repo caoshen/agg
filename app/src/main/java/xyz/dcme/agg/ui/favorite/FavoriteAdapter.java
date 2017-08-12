@@ -12,7 +12,7 @@ import java.util.List;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.ui.post.PostCommonAdapter;
-import xyz.dcme.agg.util.transformation.CircleTransformation;
+import xyz.dcme.library.util.CircleTransformation;
 
 class FavoriteAdapter extends CommonAdapter<Post> {
     public FavoriteAdapter(Context context, int layoutId, List<Post> data) {

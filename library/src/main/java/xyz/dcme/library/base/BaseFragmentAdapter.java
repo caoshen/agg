@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui;
+package xyz.dcme.library.base;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

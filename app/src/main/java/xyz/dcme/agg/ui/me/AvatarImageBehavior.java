@@ -9,9 +9,9 @@ import android.view.View;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
-import static xyz.dcme.agg.util.LogUtils.makeLogTag;
+import static xyz.dcme.library.util.LogUtils.makeLogTag;
 
 
 public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageView> {

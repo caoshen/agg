@@ -12,7 +12,7 @@ import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.ui.postdetail.data.PostMyComment;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class PostDetailParser {
     private static final String TAG = LogUtils.makeLogTag("PostDetailParser");

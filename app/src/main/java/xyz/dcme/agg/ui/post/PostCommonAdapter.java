@@ -13,7 +13,7 @@ import java.util.List;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.ui.postdetail.PostDetailActivity;
-import xyz.dcme.agg.util.transformation.CircleTransformation;
+import xyz.dcme.library.util.CircleTransformation;
 
 public class PostCommonAdapter extends CommonAdapter<Post> {
     public PostCommonAdapter(Context context, int layoutId, List<Post> datas) {

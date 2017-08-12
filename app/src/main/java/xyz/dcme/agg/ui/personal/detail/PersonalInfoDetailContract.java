@@ -2,8 +2,8 @@ package xyz.dcme.agg.ui.personal.detail;
 
 import java.util.List;
 
-import xyz.dcme.agg.BasePresenter;
-import xyz.dcme.agg.BaseView;
+import xyz.dcme.library.base.BasePresenter;
+import xyz.dcme.library.base.BaseView;
 
 public interface PersonalInfoDetailContract {
 

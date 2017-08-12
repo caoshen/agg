@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.BaseActivity;
+import xyz.dcme.library.base.BaseActivity;
 
 
 public class PublishActivity extends BaseActivity {
@@ -13,8 +13,8 @@ public class PublishActivity extends BaseActivity {
     private String mCommentUrl;
 
     @Override
-    protected void getIntentData() {
-        super.getIntentData();
+    protected void getData() {
+        super.getData();
         Intent intent = getIntent();
         if (intent != null) {
             mCommentUrl = intent.getStringExtra(EXTRA_COMMENT_URL);
@@ -28,7 +28,6 @@ public class PublishActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        getToolbar();
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.publish_container, PublishFragment.newInstance(mCommentUrl))

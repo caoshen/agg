@@ -20,10 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.BaseFragment;
-import xyz.dcme.agg.ui.BaseFragmentAdapter;
+import xyz.dcme.library.base.BaseFragment;
+import xyz.dcme.library.base.BaseFragmentAdapter;
 import xyz.dcme.agg.ui.publish.PublishActivity;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class NodeMainFragment extends BaseFragment
         implements NodeMainContract.View, View.OnClickListener {

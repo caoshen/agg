@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 
+import xyz.dcme.library.util.LogUtils;
+
 public class ImageUtils {
 
     private static final String LOG_TAG = "ImageUtils";

@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
-import static xyz.dcme.agg.util.LogUtils.makeLogTag;
+import static xyz.dcme.library.util.LogUtils.makeLogTag;
 
 public class ReplyParser {
 

@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui.topic;
+package xyz.dcme.library.baseapp;
 
 import android.app.Activity;
 

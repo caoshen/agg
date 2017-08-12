@@ -1,4 +1,4 @@
-package xyz.dcme.agg.util;
+package xyz.dcme.library.util;
 
 import android.util.Log;
 

@@ -12,7 +12,7 @@ import java.util.Map;
 
 import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.util.Constants;
-import xyz.dcme.agg.util.LogUtils;
+import xyz.dcme.library.util.LogUtils;
 
 public class AccountParser {
 

@@ -2,9 +2,9 @@ package xyz.dcme.agg.ui.post;
 
 import java.util.List;
 
-import xyz.dcme.agg.BaseView;
+import xyz.dcme.library.base.BaseView;
 import xyz.dcme.agg.model.Post;
-import xyz.dcme.agg.BasePresenter;
+import xyz.dcme.library.base.BasePresenter;
 
 public interface PostContract {
 

@@ -10,7 +10,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import static xyz.dcme.agg.util.LogUtils.makeLogTag;
+import static xyz.dcme.library.util.LogUtils.makeLogTag;
 
 public class PersonalInfoDetailParser {
     private static final String TAG = makeLogTag("PersonalInfoDetailParser");

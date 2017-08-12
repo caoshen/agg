@@ -4,7 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import static xyz.dcme.agg.util.LogUtils.makeLogTag;
+import static xyz.dcme.library.util.LogUtils.makeLogTag;
 
 public class PersonalInfoPageParser {
     private static final String TAG = makeLogTag("PersonalInfoPageParser");
