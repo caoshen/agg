@@ -1,4 +1,4 @@
-package xyz.dcme.agg.ui;
+package xyz.dcme.agg.ui.main;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
