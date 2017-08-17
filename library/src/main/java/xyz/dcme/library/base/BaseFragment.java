@@ -33,6 +33,11 @@ public abstract class BaseFragment extends Fragment {
         return mRootView;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
     protected abstract void initView();
 
     protected abstract void initPresenter();

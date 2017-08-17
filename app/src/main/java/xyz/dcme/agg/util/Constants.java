@@ -30,4 +30,18 @@ public class Constants {
     public static final String ONE = "1";
     public static final String EMPTY_STR = "";
     public static final String ACTION_USER_PAGE = "xyz.dcme.agg.intent.action.USER_PAGE";
+
+    // website url
+    public static final String HOME = "home";
+    public static final String PREFIX_HOME = HOME_URL + "/?p=";
+    public static final String PREFIX_TAB = HOME_URL + "/?tab=";
+    public static final String PREFIX_NODE = HOME_URL + "/node/";
+
+    // website tab
+    public static final String TAB_LATEST = "latest";
+    public static final String TAB_ELITE = "elite";
+    public static final String TAB_INTEREST = "interest";
+    public static final String TAB_FOLLOWS = "follows";
+    public static final String[] TABS = {TAB_LATEST, TAB_ELITE, TAB_INTEREST, TAB_FOLLOWS};
+    public static final String TAB_NAME = "tab_name";
 }

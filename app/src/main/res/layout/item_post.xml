@@ -27,8 +27,7 @@
             <ImageView
                 android:id="@+id/post_avatar"
                 android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_default_avatar"/>
+                android:layout_height="24dp"/>
 
             <TextView
                 android:id="@+id/post_user_name"
@@ -47,8 +46,41 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/post_item_inner_margin"
+                android:layout_marginEnd="@dimen/post_item_inner_margin"
                 android:text="@string/right_now"
                 android:textSize="12sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/post_comment_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/comment_count"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/post_read_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/post_item_inner_margin"
+                    android:text="@string/read_count"
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/post_like_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/post_item_inner_margin"
+                    android:text="@string/like_count"
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
@@ -61,36 +93,6 @@
             android:textColor="@color/black"
             android:textSize="18sp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/post_item_inner_margin"
-            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/post_comment_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/comment_count"
-                android:textSize="12sp"/>
-
-            <TextView
-                android:id="@+id/post_read_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/post_item_inner_margin"
-                android:text="@string/read_count"
-                android:textSize="12sp"
-                android:visibility="gone"/>
-
-            <TextView
-                android:id="@+id/post_like_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/post_item_inner_margin"
-                android:text="@string/like_count"
-                android:textSize="12sp"
-                android:visibility="gone"/>
-        </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -21,14 +21,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.ui.login.LoginActivity;
+import xyz.dcme.agg.ui.news.NewsMainFragment;
 import xyz.dcme.agg.ui.node.NodeMainFragment;
 import xyz.dcme.agg.ui.personal.PersonalInfoActivity;
 import xyz.dcme.agg.ui.settings.SettingsActivity;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.Constants;
+import xyz.dcme.library.base.BaseActivity;
 import xyz.dcme.library.util.ImageLoader;
 import xyz.dcme.library.util.LogUtils;
-import xyz.dcme.library.base.BaseActivity;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener {
@@ -41,6 +42,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private TextView mUsername;
     private CircleImageView mAvatar;
     private BroadcastReceiver mReceiver;
+    private NewsMainFragment mNewsMainFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             mNodeMainFragment = NodeMainFragment.newInstance();
         }
         transaction.replace(R.id.main_content, mNodeMainFragment, NodeMainFragment.LOG_TAG);
+        transaction.commit();
+    }
+
+    private void switchFragment(int id) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+
+        if (id == R.id.action_front) {
+            mNodeMainFragment = (NodeMainFragment) fm.findFragmentByTag(NodeMainFragment.LOG_TAG);
+            if (mNodeMainFragment == null) {
+                mNodeMainFragment = NodeMainFragment.newInstance();
+            }
+            transaction.replace(R.id.main_content, mNodeMainFragment, NodeMainFragment.LOG_TAG);
+        } else if (id == R.id.action_explore) {
+            mNewsMainFragment = (NewsMainFragment) fm.findFragmentByTag(NewsMainFragment.LOG_TAG);
+            if (mNewsMainFragment == null) {
+                mNewsMainFragment = new NewsMainFragment();
+            }
+            transaction.replace(R.id.main_content, mNewsMainFragment, mNewsMainFragment.LOG_TAG);
+        }
         transaction.commit();
     }
 
@@ -126,7 +148,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 startActivityForResult(intent, REQUEST_SETTINGS);
                 break;
             }
-            case R.id.action_node: {
+            case R.id.action_explore: {
+                switchFragment(R.id.action_explore);
+                break;
+            }
+            case R.id.action_front: {
+                switchFragment(R.id.action_front);
                 break;
             }
         }

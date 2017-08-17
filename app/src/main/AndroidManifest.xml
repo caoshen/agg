@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Light">
 
-        <!-- Tencent Bugly begin -->
+        <!-- Tencent Bugly begin a-->
         <meta-data
             android:name="BUGLY_APPID"
             android:value="2d0424a759"/>
