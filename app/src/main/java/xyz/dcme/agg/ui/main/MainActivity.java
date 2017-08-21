@@ -21,6 +21,7 @@ import android.widget.TextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.account.AccountInfo;
+import xyz.dcme.agg.ui.hot.HotFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.news.NewsMainFragment;
 import xyz.dcme.agg.ui.node.NodeMainFragment;
@@ -44,6 +45,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private CircleImageView mAvatar;
     private BroadcastReceiver mReceiver;
     private NewsMainFragment mNewsMainFragment;
+    private HotFragment mHotFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 mNewsMainFragment = new NewsMainFragment();
             }
             transaction.replace(R.id.main_content, mNewsMainFragment, NewsMainFragment.LOG_TAG);
+        } else if (id == R.id.action_hot) {
+            mHotFragment = (HotFragment) fm.findFragmentByTag(HotFragment.LOG_TAG);
+            if (mHotFragment == null) {
+                mHotFragment = HotFragment.newInstance();
+            }
+            transaction.replace(R.id.main_content, mHotFragment, HotFragment.LOG_TAG);
         } else if (id == R.id.action_explore) {
             mNodeMainFragment = (NodeMainFragment) fm.findFragmentByTag(NodeMainFragment.LOG_TAG);
             if (mNodeMainFragment == null) {
@@ -143,6 +151,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
             case R.id.action_explore: {
                 switchFragment(R.id.action_explore);
+                break;
+            }
+            case R.id.action_hot: {
+                switchFragment(R.id.action_hot);
                 break;
             }
             case R.id.action_front: {

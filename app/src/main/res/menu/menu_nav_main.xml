@@ -9,8 +9,13 @@
             android:title="@string/menu_home_page"/>
 
         <item
+            android:id="@+id/action_hot"
+            android:icon="@drawable/ic_hot"
+            android:title="@string/whats_hot"/>
+
+        <item
             android:id="@+id/action_explore"
-            android:icon="@drawable/ic_node"
+            android:icon="@drawable/ic_explore"
             android:title="@string/explore"/>
     </group>
 

@@ -47,7 +47,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/post_item_inner_margin"
                 android:layout_marginEnd="@dimen/post_item_inner_margin"
-                android:text="@string/right_now"
                 android:textSize="12sp"/>
 
             <LinearLayout
@@ -60,7 +59,6 @@
                     android:id="@+id/post_comment_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/comment_count"
                     android:textSize="12sp"/>
 
                 <TextView
