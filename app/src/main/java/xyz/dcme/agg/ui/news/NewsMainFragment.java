@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,15 +32,20 @@ public class NewsMainFragment extends BaseFragment {
     }
 
     private List<String> makeTitles() {
-        List<String> titles = new ArrayList<>();
-        titles.add(Constants.HOME);
-        Collections.addAll(titles, Constants.TABS);
-        return titles;
+        String[] titles = getResources().getStringArray(R.array.tab_titles);
+        return Arrays.asList(titles);
+    }
+
+    private List<String> makeTabs() {
+        List<String> tabs = new ArrayList<>();
+        tabs.add(Constants.HOME);
+        Collections.addAll(tabs, Constants.TABS);
+        return tabs;
     }
 
     private List<Fragment> makeFrags() {
         ArrayList<Fragment> fragments = new ArrayList<>();
-        List<String> titles = makeTitles();
+        List<String> titles = makeTabs();
         for (String t : titles) {
             NewsFragment fragment = NewsFragment.newInstance(t);
             fragments.add(fragment);
