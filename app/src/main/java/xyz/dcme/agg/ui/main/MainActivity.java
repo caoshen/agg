@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -204,6 +205,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
+    public void toggleDrawer() {
+        if (mDrawer == null) {
+            return;
+        }
+        if (mDrawer.isDrawerOpen(Gravity.START)) {
+            mDrawer.closeDrawer(Gravity.START);
+        } else {
+            mDrawer.openDrawer(Gravity.START);
+        }
+    }
+
     private class MainReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -213,6 +225,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             if (Constants.ACTION_LOGIN_SUCCESS.equals(action)) {
                 updateAccountInfo();
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawer != null && (mDrawer.isDrawerOpen(Gravity.START))) {
+            mDrawer.closeDrawers();
+        } else {
+            super.onBackPressed();
         }
     }
 }

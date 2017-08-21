@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,9 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.main.MainActivity;
+import xyz.dcme.agg.ui.publish.PublishActivity;
 import xyz.dcme.library.base.BaseFragment;
 import xyz.dcme.library.base.BaseFragmentAdapter;
-import xyz.dcme.agg.ui.publish.PublishActivity;
 import xyz.dcme.library.util.LogUtils;
 
 public class NodeMainFragment extends BaseFragment
@@ -53,19 +52,14 @@ public class NodeMainFragment extends BaseFragment
         mAdd = (TextView) mRootView.findViewById(R.id.add_node);
         mAdd.setOnClickListener(this);
         Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.explore);
-        getToolbar(toolbar);
+        initToolbar(toolbar, R.string.explore, R.drawable.ic_menu, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).toggleDrawer();
+            }
+        });
 
         mPresenter.load();
-    }
-
-    private void getToolbar(Toolbar toolbar) {
-        if (toolbar != null) {
-            FragmentActivity activity = getActivity();
-            if (activity instanceof AppCompatActivity) {
-                ((AppCompatActivity) activity).setSupportActionBar(toolbar);
-            }
-        }
     }
 
     @Override
