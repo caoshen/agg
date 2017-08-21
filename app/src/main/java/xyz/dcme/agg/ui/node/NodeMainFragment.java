@@ -53,7 +53,7 @@ public class NodeMainFragment extends BaseFragment
         mAdd = (TextView) mRootView.findViewById(R.id.add_node);
         mAdd.setOnClickListener(this);
         Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.app_name);
+        toolbar.setTitle(R.string.explore);
         getToolbar(toolbar);
 
         mPresenter.load();

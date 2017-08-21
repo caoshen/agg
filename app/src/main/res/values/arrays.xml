@@ -1,39 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="fixed_node_title">
-        <item>全部</item>
-    </string-array>
-
-    <string-array name="all_node_title">
-        <item>最新话题</item>
-        <item>精华主题</item>
-        <item>兴趣节点</item>
-        <item>关注的人</item>
-
         <item>你问我答</item>
         <item>同城活动</item>
         <item>找工作</item>
         <item>IT技术</item>
         <item>金融财经</item>
+    </string-array>
+
+    <string-array name="all_node_title">
         <item>创业创客</item>
         <item>城市建设</item>
     </string-array>
 
     <string-array name="fixed_node_name">
-        <item>home</item>
-    </string-array>
-
-    <string-array name="all_node_name">
-        <item>latest</item>
-        <item>elite</item>
-        <item>interest</item>
-        <item>follows</item>
-
         <item>qna</item>
         <item>lowshine</item>
         <item>job</item>
         <item>IT</item>
         <item>finance</item>
+    </string-array>
+
+    <string-array name="all_node_name">
         <item>startup</item>
         <item>city</item>
     </string-array>

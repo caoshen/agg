@@ -4,6 +4,7 @@ package xyz.dcme.agg.ui.news;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +25,8 @@ public class NewsMainFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.menu_home_page);
         mTabLayout = (TabLayout) mRootView.findViewById(R.id.news_tab);
         mViewPager = (ViewPager) mRootView.findViewById(R.id.news_pager);
         mAdapter = new BaseFragmentAdapter(getChildFragmentManager(), makeFrags(), makeTitles());

@@ -10,6 +10,8 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+        <include layout="@layout/toolbar_auto_hide"/>
+
         <android.support.design.widget.TabLayout
             android:id="@+id/news_tab"
             android:layout_width="match_parent"

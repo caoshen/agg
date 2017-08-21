@@ -58,15 +58,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void initFragment() {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-
-        mNodeMainFragment = (NodeMainFragment) fm.findFragmentByTag(NodeMainFragment.LOG_TAG);
-        if (mNodeMainFragment == null) {
-            mNodeMainFragment = NodeMainFragment.newInstance();
-        }
-        transaction.replace(R.id.main_content, mNodeMainFragment, NodeMainFragment.LOG_TAG);
-        transaction.commit();
+        switchFragment(R.id.action_front);
     }
 
     private void switchFragment(int id) {
@@ -74,17 +66,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         FragmentTransaction transaction = fm.beginTransaction();
 
         if (id == R.id.action_front) {
+            mNewsMainFragment = (NewsMainFragment) fm.findFragmentByTag(NewsMainFragment.LOG_TAG);
+            if (mNewsMainFragment == null) {
+                mNewsMainFragment = new NewsMainFragment();
+            }
+            transaction.replace(R.id.main_content, mNewsMainFragment, NewsMainFragment.LOG_TAG);
+        } else if (id == R.id.action_explore) {
             mNodeMainFragment = (NodeMainFragment) fm.findFragmentByTag(NodeMainFragment.LOG_TAG);
             if (mNodeMainFragment == null) {
                 mNodeMainFragment = NodeMainFragment.newInstance();
             }
             transaction.replace(R.id.main_content, mNodeMainFragment, NodeMainFragment.LOG_TAG);
-        } else if (id == R.id.action_explore) {
-            mNewsMainFragment = (NewsMainFragment) fm.findFragmentByTag(NewsMainFragment.LOG_TAG);
-            if (mNewsMainFragment == null) {
-                mNewsMainFragment = new NewsMainFragment();
-            }
-            transaction.replace(R.id.main_content, mNewsMainFragment, mNewsMainFragment.LOG_TAG);
         }
         transaction.commit();
     }
