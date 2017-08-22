@@ -79,7 +79,7 @@
 
                     <TextView
                         style="@style/AppTheme.MeItemText.Small"
-                        android:text="@string/count_favourite"/>
+                        android:text="@string/fav"/>
                 </LinearLayout>
 
                 <LinearLayout

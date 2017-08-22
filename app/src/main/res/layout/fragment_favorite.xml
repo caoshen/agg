@@ -20,11 +20,12 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <xyz.dcme.agg.common.irecyclerview.IRecyclerView
+        <com.aspsine.irecyclerview.IRecyclerView
             android:id="@+id/fav_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </xyz.dcme.agg.common.irecyclerview.IRecyclerView>
+            android:layout_height="match_parent"
+            app:loadMoreEnabled="true">
+        </com.aspsine.irecyclerview.IRecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <ProgressBar

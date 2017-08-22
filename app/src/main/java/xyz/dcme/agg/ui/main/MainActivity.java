@@ -21,6 +21,7 @@ import android.widget.TextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.account.AccountInfo;
+import xyz.dcme.agg.ui.favorite.FavoriteFragment;
 import xyz.dcme.agg.ui.hot.HotFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.news.NewsMainFragment;
@@ -46,6 +47,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private BroadcastReceiver mReceiver;
     private NewsMainFragment mNewsMainFragment;
     private HotFragment mHotFragment;
+    private FavoriteFragment mFavFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 mNodeMainFragment = NodeMainFragment.newInstance();
             }
             transaction.replace(R.id.main_content, mNodeMainFragment, NodeMainFragment.LOG_TAG);
+        }  else if (id == R.id.action_fav) {
+            mFavFragment = (FavoriteFragment) fm.findFragmentByTag(FavoriteFragment.LOG_TAG);
+            if (mFavFragment == null) {
+                mFavFragment = FavoriteFragment.newInstance(AccountUtils.getUserName(this), true);
+            }
+            transaction.replace(R.id.main_content, mFavFragment, FavoriteFragment.LOG_TAG);
         }
         transaction.commit();
     }
@@ -147,6 +155,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.action_settings: {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivityForResult(intent, REQUEST_SETTINGS);
+                break;
+            }
+            case R.id.action_fav: {
+                switchFragment(R.id.action_fav);
                 break;
             }
             case R.id.action_explore: {

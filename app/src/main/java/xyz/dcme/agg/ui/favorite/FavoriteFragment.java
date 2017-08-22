@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -14,22 +13,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.aspsine.irecyclerview.IRecyclerView;
+import com.aspsine.irecyclerview.OnLoadMoreListener;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.common.irecyclerview.IRecyclerView;
-import xyz.dcme.agg.common.irecyclerview.OnLoadMoreListener;
 import xyz.dcme.agg.model.Post;
-import xyz.dcme.library.base.BaseFragment;
+import xyz.dcme.agg.ui.main.MainActivity;
 import xyz.dcme.agg.util.AccountUtils;
+import xyz.dcme.library.base.BaseFragment;
 
 public class FavoriteFragment extends BaseFragment
         implements FavoriteContract.View, SwipeRefreshLayout.OnRefreshListener, OnLoadMoreListener {
 
     private static final String KEY_USER_NAME = "key_username";
+    public static final String LOG_TAG = "FavoriteFragment";
+    private static final String KEY_NAV = "key_nav";
 
     private IRecyclerView mFavList;
     private SwipeRefreshLayout mSwipeRefresh;
@@ -40,11 +42,13 @@ public class FavoriteFragment extends BaseFragment
     private FavoriteContract.Presenter mPresenter;
     private List<Post> mData;
     private int mNextPage = 2;
+    private boolean mIsNav = false;
 
-    public static Fragment newInstance(String userName) {
-        Fragment fragment = new FavoriteFragment();
+    public static FavoriteFragment newInstance(String userName, boolean isNav) {
+        FavoriteFragment fragment = new FavoriteFragment();
         Bundle args = new Bundle();
         args.putString(KEY_USER_NAME, userName);
+        args.putBoolean(KEY_NAV, isNav);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,6 +59,7 @@ public class FavoriteFragment extends BaseFragment
         Bundle args = getArguments();
         if (args != null) {
             mUserName = args.getString(KEY_USER_NAME);
+            mIsNav = args.getBoolean(KEY_NAV);
         }
     }
 
@@ -93,15 +98,24 @@ public class FavoriteFragment extends BaseFragment
     }
 
     private void initToolbar() {
-        FragmentActivity activity = getActivity();
-        if (activity != null && activity instanceof AppCompatActivity) {
-            ((AppCompatActivity) activity).setSupportActionBar(mToolbar);
-            ActionBar ab = ((AppCompatActivity) activity).getSupportActionBar();
-            if (ab != null) {
-                ab.setDisplayHomeAsUpEnabled(true);
-                int titleResId = AccountUtils.isCurrentAccount(activity, mUserName)
-                        ? R.string.favourite : R.string.his_fav;
-                ab.setTitle(titleResId);
+        if (mIsNav) {
+            initToolbar(mToolbar, R.string.fav, R.drawable.ic_menu, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((MainActivity) getActivity()).toggleDrawer();
+                }
+            });
+        } else {
+            FragmentActivity activity = getActivity();
+            if (activity != null && activity instanceof AppCompatActivity) {
+                ((AppCompatActivity) activity).setSupportActionBar(mToolbar);
+                ActionBar ab = ((AppCompatActivity) activity).getSupportActionBar();
+                if (ab != null) {
+                    ab.setDisplayHomeAsUpEnabled(true);
+                    int titleResId = AccountUtils.isCurrentAccount(activity, mUserName)
+                            ? R.string.favourite : R.string.his_fav;
+                    ab.setTitle(titleResId);
+                }
             }
         }
     }
@@ -154,7 +168,7 @@ public class FavoriteFragment extends BaseFragment
     }
 
     @Override
-    public void onLoadMore(View view) {
+    public void onLoadMore() {
         mPresenter.load(mUserName, mNextPage);
     }
 }
