@@ -1,13 +1,7 @@
 <resources>
     <string name="app_name">光谷社区</string>
     <string name="menu_home_page">首页</string>
-    <string name="menu_search">搜索</string>
-    <string name="menu_me">我</string>
     <string name="loading">加载中&#8230;</string>
-    <string name="post_title">标题</string>
-    <string name="post_content">内容</string>
-    <string name="name">姓名</string>
-    <string name="comment_content">评论内容</string>
     <string name="welcome">欢迎</string>
     <string name="login">登录</string>
     <string name="form_password">请输入密码</string>
@@ -18,18 +12,13 @@
     <string name="fav_count">%1$s 人收藏</string>
     <string name="right_now">刚刚</string>
     <string name="welcome_to_gg_community">欢迎来到光谷社区 Guanggoo.com—源自光谷的交流分享社区</string>
-    <string name="close_and_go_back">关闭并且回退</string>
     <string name="post_click_count">%1$s 次点击</string>
     <string name="city_construction">城市建设</string>
     <string name="x_floor">#1</string>
-    <string name="id">ID: %1$s</string>
-    <string name="email">Email: %1$s</string>
     <string name="topic">我的主题</string>
     <string name="reply">我的回复</string>
     <string name="favourite">我的收藏</string>
-    <string name="credit">我的信用</string>
     <string name="settings">设置</string>
-    <string name="title_activity_login">登录</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">邮箱</string>
@@ -40,20 +29,10 @@
     <string name="error_invalid_password">密码不少于４位数</string>
     <string name="error_incorrect_password">账号或密码不正确</string>
     <string name="error_field_required">必填</string>
-    <string name="permission_rationale">邮箱自动填写需要开启"通讯录"权限</string>
     <string name="login_please">请登录账号</string>
     <string name="send">发送</string>
-    <string name="reply_to_author">回复</string>
-    <string name="photo">头像</string>
-    <string name="username">用户名</string>
-    <string name="email_address">邮箱</string>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="app_tag_line">欢迎来到光谷社区</string>
-    <string name="app_name_2">agg</string>
     <string name="share">分享</string>
     <string name="my_avatar">我的头像</string>
-    <string name="history">最近浏览</string>
     <string name="info_page">个人主页</string>
     <string name="info_detail">详细信息</string>
     <string name="zero">0</string>
@@ -61,11 +40,6 @@
     <string name="count_reply">回复</string>
     <string name="count_favourite">收藏</string>
     <string name="count_credit">信用</string>
-    <string name="detail_id">Id</string>
-    <string name="detail_id_content">guanggoo</string>
-    <string name="detail_email">邮箱</string>
-    <string name="detail_reg">注册时间</string>
-    <string name="join_time">加入时间%1$s，第%2$s位成员．</string>
     <string name="his_topic">Ta 的主题</string>
     <string name="his_reply">Ta 的回复</string>
     <string name="his_fav">Ta 的收藏</string>
@@ -79,8 +53,6 @@
     <string name="server_error">服务器出错了</string>
     <string name="network_error">网络出错了</string>
     <string name="no_data">没有数据</string>
-    <string name="menu_node">节点</string>
-    <string name="node">节点</string>
     <string name="cache">缓存</string>
     <string name="clean_cache">清除缓存</string>
     <string name="double_click_exit">双击退出</string>
@@ -104,9 +76,7 @@
     <string name="publish">发帖</string>
     <string name="please_input_title">请输入标题</string>
     <string name="preview">预览</string>
-    <string name="preview_date">%1$s年%2$s月%3$s日</string>
     <string name="publish_rightnow">发表于１分钟前</string>
-    <string name="tips_title_is_empty">标题不能为空</string>
     <string name="tips_content_is_empty">内容不能为空</string>
     <string name="post_detail">帖子详情</string>
     <string name="uploading_image">图片上传中&#8230;</string>

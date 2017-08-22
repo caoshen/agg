@@ -1,32 +1,17 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="default_padding">16dp</dimen>
     <dimen name="default_inner_margin">16dp</dimen>
     <dimen name="post_item_inner_margin">8dp</dimen>
-    <dimen name="about_me_margin">24dp</dimen>
-    <dimen name="reply_margin_bottom">8dp</dimen>
     <dimen name="keyline_2">72dp</dimen>
-    <dimen name="app_bar_height">180dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
     <dimen name="margin_16">16dp</dimen>
     <dimen name="margin_8">8dp</dimen>
-    <dimen name="margin_32">32dp</dimen>
-    <dimen name="margin_72">72dp</dimen>
-    <dimen name="margin_56">56dp</dimen>
     <dimen name="padding_16">16dp</dimen>
-    <dimen name="padding_8">8dp</dimen>
-    <dimen name="image_final_width">32dp</dimen>
-    <dimen name="image_final_height">32dp</dimen>
     <dimen name="image_width">120dp</dimen>
-    <dimen name="image_height">120dp</dimen>
     <dimen name="spacing_normail">16dp</dimen>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="card_radius">2dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
-    <dimen name="margin_2">2dp</dimen>
     <dimen name="margin_4">4dp</dimen>
     <dimen name="margin_24">24dp</dimen>
     <dimen name="margin_12">12dp</dimen>

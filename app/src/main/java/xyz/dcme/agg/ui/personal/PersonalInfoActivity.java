@@ -120,9 +120,6 @@ public class PersonalInfoActivity extends BaseActivity implements PersonalInfoCo
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.item_share) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 

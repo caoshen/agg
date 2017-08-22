@@ -28,7 +28,6 @@
             android:src="@drawable/ic_insert_photo"/>
 
         <TextView
-            android:id="@+id/send_comment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"

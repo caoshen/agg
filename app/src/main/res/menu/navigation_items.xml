@@ -1,8 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_node"
-          android:title="@string/menu_node"
-          android:icon="@drawable/ic_search" />
-    <item android:id="@+id/action_me"
-          android:title="@string/menu_me"
-          android:icon="@drawable/ic_me" />
-</menu>
