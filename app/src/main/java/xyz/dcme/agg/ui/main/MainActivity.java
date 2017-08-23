@@ -26,6 +26,7 @@ import xyz.dcme.agg.ui.hot.HotFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.news.NewsMainFragment;
 import xyz.dcme.agg.ui.node.NodeMainFragment;
+import xyz.dcme.agg.ui.notify.MessageFragment;
 import xyz.dcme.agg.ui.personal.PersonalInfoActivity;
 import xyz.dcme.agg.ui.settings.SettingsActivity;
 import xyz.dcme.agg.util.AccountUtils;
@@ -48,6 +49,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private NewsMainFragment mNewsMainFragment;
     private HotFragment mHotFragment;
     private FavoriteFragment mFavFragment;
+    private MessageFragment mMessageFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 mNewsMainFragment = new NewsMainFragment();
             }
             transaction.replace(R.id.main_content, mNewsMainFragment, NewsMainFragment.LOG_TAG);
-        } else if (id == R.id.action_hot) {
+        } else if (id == R.id.action_message) {
+            mMessageFragment = (MessageFragment) fm.findFragmentByTag(MessageFragment.LOG_TAG);
+            if (mMessageFragment == null) {
+                mMessageFragment = MessageFragment.newInstance();
+            }
+            transaction.replace(R.id.main_content, mMessageFragment, MessageFragment.LOG_TAG);
+        }  else if (id == R.id.action_hot) {
             mHotFragment = (HotFragment) fm.findFragmentByTag(HotFragment.LOG_TAG);
             if (mHotFragment == null) {
                 mHotFragment = HotFragment.newInstance();
@@ -167,6 +175,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
             case R.id.action_hot: {
                 switchFragment(R.id.action_hot);
+                break;
+            }
+            case R.id.action_message: {
+                switchFragment(R.id.action_message);
                 break;
             }
             case R.id.action_front: {

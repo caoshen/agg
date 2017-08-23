@@ -44,4 +44,7 @@ public class Constants {
     public static final String TAB_FOLLOWS = "follows";
     public static final String[] TABS = {TAB_LATEST, TAB_ELITE, TAB_INTEREST, TAB_FOLLOWS};
     public static final String TAB_NAME = "tab_name";
+
+    // notifications
+    public static final String NOTIFICATION_URL = HOME_URL + "/notifications";
 }
