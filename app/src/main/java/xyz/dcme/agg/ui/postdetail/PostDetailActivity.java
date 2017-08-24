@@ -13,7 +13,7 @@ import xyz.dcme.agg.util.ActivityUtils;
 
 public class PostDetailActivity extends BaseActivity {
 
-    private static final String KEY_POST_DETAIL_URL = "key_post_detail_url";
+    public static final String KEY_POST_DETAIL_URL = "key_post_detail_url";
     private String mUrl;
 
     public static void startActivity(Context context, String url) {

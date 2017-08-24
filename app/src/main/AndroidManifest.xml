@@ -80,6 +80,7 @@
             android:label="@string/publish"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
+        <service android:name=".service.NotificationService"/>
     </application>
 
 </manifest>

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.account.AccountInfo;
+import xyz.dcme.agg.service.NotificationService;
 import xyz.dcme.agg.ui.favorite.FavoriteFragment;
 import xyz.dcme.agg.ui.hot.HotFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
@@ -56,6 +57,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         initFragment();
         registerBroadcast();
+        startNotify();
+    }
+
+    private void startNotify() {
+        Intent intent = new Intent(this, NotificationService.class);
+        startService(intent);
     }
 
     @Override
