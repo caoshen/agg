@@ -20,7 +20,7 @@ import xyz.dcme.agg.util.NotificationFactory;
 
 public class NotificationService extends IntentService {
     private static final String LOG_TAG = "NotificationService";
-    private static final int MAX_NOTIFY = 3;
+    private static final int MAX_NOTIFY = 0;
 
     public NotificationService() {
         super(LOG_TAG);
