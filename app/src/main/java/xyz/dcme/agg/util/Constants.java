@@ -47,4 +47,7 @@ public class Constants {
 
     // notifications
     public static final String NOTIFICATION_URL = HOME_URL + "/notifications";
+    public static final String PACKAGE_NAME = "xyz.dcme.agg";
+    public static final String PROVIDER_AUTH = PACKAGE_NAME + ".provider";
+
 }

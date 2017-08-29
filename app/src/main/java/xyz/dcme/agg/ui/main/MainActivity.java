@@ -23,6 +23,7 @@ import xyz.dcme.agg.R;
 import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.service.NotificationService;
 import xyz.dcme.agg.ui.favorite.FavoriteFragment;
+import xyz.dcme.agg.ui.history.HistoryFragment;
 import xyz.dcme.agg.ui.hot.HotFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.news.NewsMainFragment;
@@ -51,6 +52,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private HotFragment mHotFragment;
     private FavoriteFragment mFavFragment;
     private MessageFragment mMessageFragment;
+    private HistoryFragment mHistoryFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +111,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 mFavFragment = FavoriteFragment.newInstance(AccountUtils.getUserName(this), true);
             }
             transaction.replace(R.id.main_content, mFavFragment, FavoriteFragment.LOG_TAG);
+        }   else if (id == R.id.action_history) {
+            mHistoryFragment = (HistoryFragment) fm.findFragmentByTag(HistoryFragment.LOG_TAG);
+            if (mHistoryFragment == null) {
+                mHistoryFragment = HistoryFragment.newInstance();
+            }
+            transaction.replace(R.id.main_content, mHistoryFragment, HistoryFragment.LOG_TAG);
         }
         transaction.commit();
     }
@@ -170,6 +178,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.action_settings: {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivityForResult(intent, REQUEST_SETTINGS);
+                break;
+            }
+            case R.id.action_history: {
+                switchFragment(R.id.action_history);
                 break;
             }
             case R.id.action_fav: {

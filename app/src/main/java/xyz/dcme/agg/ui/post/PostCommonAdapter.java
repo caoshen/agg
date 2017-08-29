@@ -49,7 +49,7 @@ public class PostCommonAdapter extends CommonAdapter<Post> {
 
         @Override
         public void onClick(View view) {
-            PostDetailActivity.startActivity(mContext, mPost.link);
+            PostDetailActivity.startActivity(mContext, mPost);
         }
     }
 }

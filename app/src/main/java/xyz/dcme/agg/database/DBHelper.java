@@ -10,6 +10,7 @@ import java.util.List;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.database.table.CurNodeTable;
+import xyz.dcme.agg.database.table.HistoryTable;
 import xyz.dcme.agg.database.table.MoreNodeTable;
 import xyz.dcme.agg.ui.node.Node;
 import xyz.dcme.agg.util.Constants;
@@ -31,6 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CurNodeTable.CREATE_TABLE);
         db.execSQL(MoreNodeTable.CREATE_TABLE);
+        db.execSQL(HistoryTable.CREATE_TABLE);
         initTables(db);
     }
 

@@ -81,6 +81,10 @@
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <service android:name=".service.NotificationService"/>
+
+        <provider
+            android:authorities="xyz.dcme.agg.provider"
+            android:name=".database.ContentProviders"/>
     </application>
 
 </manifest>

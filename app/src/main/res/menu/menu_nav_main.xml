@@ -27,6 +27,11 @@
             android:id="@+id/action_fav"
             android:icon="@drawable/ic_favourite"
             android:title="@string/fav"/>
+
+        <item
+            android:id="@+id/action_history"
+            android:icon="@drawable/ic_history"
+            android:title="@string/history"/>
     </group>
 
     <item
