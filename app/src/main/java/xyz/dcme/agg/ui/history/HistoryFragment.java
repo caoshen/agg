@@ -1,7 +1,14 @@
 package xyz.dcme.agg.ui.history;
 
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.aspsine.irecyclerview.IRecyclerView;
@@ -23,6 +30,16 @@ public class HistoryFragment extends BaseFragment implements OnLoadMoreListener 
     private Toolbar mToolbar;
     private List<HistoryInfo> mData = new ArrayList<>();
     private HistoryAdapter mAdapter;
+
+    public static HistoryFragment newInstance() {
+        return new HistoryFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     protected void initView() {
@@ -69,7 +86,36 @@ public class HistoryFragment extends BaseFragment implements OnLoadMoreListener 
 
     }
 
-    public static HistoryFragment newInstance() {
-        return new HistoryFragment();
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_history, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.clear_history) {
+            showDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                .setMessage(R.string.clear_history)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        clearAllHistory();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null);
+        builder.show();
+    }
+
+    private void clearAllHistory() {
+        HistoryDbHelper.getInstance().deleteAllHistory(getContext());
+        mData.clear();
+        mAdapter.notifyDataSetChanged();
     }
 }
