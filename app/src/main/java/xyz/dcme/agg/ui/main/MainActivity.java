@@ -16,9 +16,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.account.AccountInfo;
 import xyz.dcme.agg.service.NotificationService;
@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private NavigationView mNavigationView;
     private DrawerLayout mDrawer;
     private TextView mUsername;
-    private CircleImageView mAvatar;
+    private ImageView mAvatar;
     private BroadcastReceiver mReceiver;
     private NewsMainFragment mNewsMainFragment;
     private HotFragment mHotFragment;
@@ -140,7 +140,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void initAccount() {
         View navHeader = mNavigationView.getHeaderView(0);
-        mAvatar = (CircleImageView) navHeader.findViewById(R.id.nav_avatar);
+        mAvatar = (ImageView) navHeader.findViewById(R.id.nav_avatar);
         mUsername = (TextView) navHeader.findViewById(R.id.nav_user_name);
         mAvatar.setOnClickListener(this);
         mUsername.setOnClickListener(this);
@@ -155,7 +155,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             String name = accountInfo.getUserName();
             String avatarUrl = accountInfo.getAvatarUrl();
             mUsername.setText(name);
-            ImageLoader.display(this, mAvatar, avatarUrl);
+            ImageLoader.displayCircle(this, mAvatar, avatarUrl);
         } else {
             mUsername.setText(R.string.login_please);
             mAvatar.setImageResource(R.drawable.ic_me);

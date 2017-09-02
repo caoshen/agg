@@ -9,11 +9,6 @@
             android:title="@string/menu_home_page"/>
 
         <item
-            android:id="@+id/action_message"
-            android:icon="@drawable/ic_notifications"
-            android:title="@string/message"/>
-
-        <item
             android:id="@+id/action_hot"
             android:icon="@drawable/ic_hot"
             android:title="@string/whats_hot"/>
@@ -22,6 +17,11 @@
             android:id="@+id/action_explore"
             android:icon="@drawable/ic_explore"
             android:title="@string/explore"/>
+
+        <item
+            android:id="@+id/action_message"
+            android:icon="@drawable/ic_notifications"
+            android:title="@string/message"/>
 
         <item
             android:id="@+id/action_fav"
@@ -34,8 +34,10 @@
             android:title="@string/history"/>
     </group>
 
-    <item
-        android:id="@+id/action_settings"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/settings"/>
+    <group>
+        <item
+            android:id="@+id/action_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings"/>
+    </group>
 </menu>
