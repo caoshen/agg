@@ -36,6 +36,7 @@ import xyz.dcme.agg.util.Constants;
 import xyz.dcme.library.base.BaseActivity;
 import xyz.dcme.library.util.ImageLoader;
 import xyz.dcme.library.util.LogUtils;
+import xyz.dcme.library.util.StatusBarUtil;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener {
@@ -57,9 +58,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStatusBar();
         initFragment();
         registerBroadcast();
         startNotify();
+    }
+
+    private void setStatusBar() {
+        StatusBarUtil.setTranslucentDrawer(this, mDrawer);
     }
 
     private void startNotify() {
@@ -93,7 +99,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 mMessageFragment = MessageFragment.newInstance();
             }
             transaction.replace(R.id.main_content, mMessageFragment, MessageFragment.LOG_TAG);
-        }  else if (id == R.id.action_hot) {
+        } else if (id == R.id.action_hot) {
             mHotFragment = (HotFragment) fm.findFragmentByTag(HotFragment.LOG_TAG);
             if (mHotFragment == null) {
                 mHotFragment = HotFragment.newInstance();
@@ -105,13 +111,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 mNodeMainFragment = NodeMainFragment.newInstance();
             }
             transaction.replace(R.id.main_content, mNodeMainFragment, NodeMainFragment.LOG_TAG);
-        }  else if (id == R.id.action_fav) {
+        } else if (id == R.id.action_fav) {
             mFavFragment = (FavoriteFragment) fm.findFragmentByTag(FavoriteFragment.LOG_TAG);
             if (mFavFragment == null) {
                 mFavFragment = FavoriteFragment.newInstance(AccountUtils.getUserName(this), true);
             }
             transaction.replace(R.id.main_content, mFavFragment, FavoriteFragment.LOG_TAG);
-        }   else if (id == R.id.action_history) {
+        } else if (id == R.id.action_history) {
             mHistoryFragment = (HistoryFragment) fm.findFragmentByTag(HistoryFragment.LOG_TAG);
             if (mHistoryFragment == null) {
                 mHistoryFragment = HistoryFragment.newInstance();
@@ -271,6 +277,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mDrawer != null && (mDrawer.isDrawerOpen(Gravity.START))) {
+            mDrawer.closeDrawers();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     private class MainReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -280,15 +295,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             if (Constants.ACTION_LOGIN_SUCCESS.equals(action)) {
                 updateAccountInfo();
             }
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mDrawer != null && (mDrawer.isDrawerOpen(Gravity.START))) {
-            mDrawer.closeDrawers();
-        } else {
-            super.onBackPressed();
         }
     }
 }

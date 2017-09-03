@@ -29,7 +29,6 @@ class FavoriteAdapter extends CommonAdapter<Post> {
         ImageView avatar = holder.getView(R.id.post_avatar);
         Glide.with(mContext)
                 .load(post.avatarUrl)
-                .placeholder(R.drawable.ic_default_avatar)
                 .transform(new CircleTransformation(mContext))
                 .into(avatar);
         holder.setOnClickListener(R.id.post_item, new PostCommonAdapter.OnRvItemListener(mContext, post));

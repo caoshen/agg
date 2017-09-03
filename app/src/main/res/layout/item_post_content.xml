@@ -15,8 +15,7 @@
         <ImageView
             android:id="@+id/post_detail_avatar"
             android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_default_avatar"/>
+            android:layout_height="32dp"/>
 
         <TextView
             android:id="@+id/post_detail_user"

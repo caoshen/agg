@@ -27,9 +27,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    // AppCompat: Activity
     compile 'com.android.support:appcompat-v7:25.3.1'
-    // Glide: display images
+    compile 'com.android.support:design:25.3.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     testCompile 'junit:junit:4.12'

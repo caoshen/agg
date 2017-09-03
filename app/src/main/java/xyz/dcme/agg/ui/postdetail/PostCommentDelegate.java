@@ -76,7 +76,6 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
 
         Glide.with(mContext)
                 .load(item.getAvatar())
-                .placeholder(R.drawable.ic_default_avatar)
                 .transform(new CircleTransformation(mContext))
                 .into(avatar);
 

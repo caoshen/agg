@@ -12,8 +12,7 @@
     <ImageView
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_default_avatar"/>
+        android:layout_gravity="center_vertical"/>
 
     <EditText
         android:layout_width="0dp"

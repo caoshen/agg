@@ -12,33 +12,33 @@
         android:id="@+id/comment_bar"
         layout="@layout/comment_bar"/>
 
-        <android.support.design.widget.CoordinatorLayout
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/comment_bar">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:theme="@style/AppTheme.AppBarOverlay">
+
+            <include layout="@layout/toolbar"/>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/post_detail_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/comment_bar">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <android.support.design.widget.AppBarLayout
+            <xyz.dcme.agg.common.irecyclerview.IRecyclerView
+                android:id="@+id/post_detail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:theme="@style/AppTheme.AppBarOverlay">
+                android:layout_height="match_parent">
+            </xyz.dcme.agg.common.irecyclerview.IRecyclerView>
 
-                <include layout="@layout/toolbar"/>
-
-            </android.support.design.widget.AppBarLayout>
-
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/post_detail_refresh"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <xyz.dcme.agg.common.irecyclerview.IRecyclerView
-                    android:id="@+id/post_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </xyz.dcme.agg.common.irecyclerview.IRecyclerView>
-
-            </android.support.v4.widget.SwipeRefreshLayout>
-        </android.support.design.widget.CoordinatorLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
 </RelativeLayout>

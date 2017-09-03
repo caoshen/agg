@@ -69,7 +69,6 @@ public class PostContentDelegate implements ItemViewDelegate<PostDetailItem> {
 
         Glide.with(mContext)
                 .load(postDetailItem.getAvatar())
-                .placeholder(R.drawable.ic_default_avatar)
                 .transform(new CircleTransformation(mContext))
                 .into(avatar);
 
