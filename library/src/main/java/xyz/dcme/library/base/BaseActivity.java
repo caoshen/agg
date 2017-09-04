@@ -1,12 +1,10 @@
 package xyz.dcme.library.base;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 
 import xyz.dcme.library.baseapp.AppManager;
 
@@ -25,8 +23,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private void doBeforeSetContentView() {
         AppManager.getInstance().addActivity(this);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     protected void getData() {
