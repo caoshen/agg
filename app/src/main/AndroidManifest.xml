@@ -80,6 +80,8 @@
             android:label="@string/publish"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
+        <activity android:name=".ui.node.NodeManagerActivity"/>
+
         <service android:name=".service.NotificationService"/>
 
         <provider

@@ -124,7 +124,7 @@ public class NodeMainFragment extends BaseFragment
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add_node: {
-                Intent intent = new Intent(getActivity(), NodeChooseActivity.class);
+                Intent intent = new Intent(getActivity(), NodeManagerActivity.class);
                 startActivityForResult(intent, REQUEST_CHOOSE_NODE);
                 break;
             }

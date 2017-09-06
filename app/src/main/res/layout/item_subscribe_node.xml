@@ -1,32 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:padding="4dp">
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="5dp"
+          android:background="@drawable/tag_states"
+          android:gravity="center"
+          android:paddingBottom="6dp"
+          android:paddingEnd="12dp"
+          android:paddingStart="12dp"
+          android:paddingTop="6dp"
+          android:textColor="@color/black_50">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tag_states"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingEnd="12dp"
-        android:paddingStart="12dp"
-        android:paddingTop="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="4dp"
-            android:gravity="center"
-            android:text="窗帘"
-            android:textColor="@color/theme_primary"/>
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_check"/>
-    </LinearLayout>
-</FrameLayout>
+</TextView>
