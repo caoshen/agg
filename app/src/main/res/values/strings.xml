@@ -66,7 +66,7 @@
     <string name="node_choose_operation">点击可以增加/删除节点，长按拖曳可以重新排序</string>
     <string name="current_node">当前节点</string>
     <string name="more_node">更多节点</string>
-    <string name="node_choose">节点选择</string>
+    <string name="node_choose">节点管理</string>
 
     <string name="login_tips">需要先登录账号</string>
     <string name="like">赞</string>

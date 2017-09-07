@@ -33,4 +33,111 @@
         <item>兴趣节点</item>
         <item>关注的人</item>
     </string-array>
+
+    <string-array name="life_nodes_title">
+        <item>楼市房产</item>
+        <item>城市建设</item>
+        <item>我爱我家</item>
+    </string-array>
+
+    <string-array name="life_nodes_name">
+        <item>house</item>
+        <item>city</item>
+        <item>home</item>
+    </string-array>
+
+    <string-array name="social_nodes_title">
+        <item>购物</item>
+        <item>找工作</item>
+        <item>非诚勿扰</item>
+        <item>二手交易</item>
+        <item>教育</item>
+        <item>公益</item>
+    </string-array>
+
+    <string-array name="social_nodes_name">
+        <item>shopping</item>
+        <item>job</item>
+        <item>date</item>
+        <item>2ndhand</item>
+        <item>education</item>
+        <item>commonweal</item>
+    </string-array>
+
+    <string-array name="science_nodes_title">
+        <item>IT技术</item>
+        <item>汽车</item>
+        <item>硬件数码</item>
+        <item>金融财经</item>
+        <item>生命科学</item>
+        <item>法律法规</item>
+        <item>创业创客</item>
+    </string-array>
+
+    <string-array name="science_nodes_name">
+        <item>IT</item>
+        <item>auto</item>
+        <item>digital</item>
+        <item>finance</item>
+        <item>life</item>
+        <item>law</item>
+        <item>startup</item>
+    </string-array>
+
+    <string-array name="culture_nodes_title">
+        <item>美食</item>
+        <item>影视剧</item>
+        <item>阅读</item>
+        <item>旅行</item>
+        <item>运动</item>
+        <item>二次元</item>
+    </string-array>
+
+    <string-array name="culture_nodes_name">
+        <item>food</item>
+        <item>movie</item>
+        <item>book</item>
+        <item>travel</item>
+        <item>sport</item>
+        <item>ACG</item>
+    </string-array>
+
+    <string-array name="art_nodes_title">
+        <item>摄影</item>
+        <item>音乐</item>
+        <item>设计创意</item>
+        <item>爱美丽</item>
+    </string-array>
+
+    <string-array name="art_nodes_name">
+        <item>photo</item>
+        <item>music</item>
+        <item>design</item>
+        <item>beauty</item>
+    </string-array>
+
+    <string-array name="leisure_nodes_title">
+        <item>你问我答</item>
+        <item>同城活动</item>
+        <item>汤逊湖</item>
+    </string-array>
+
+    <string-array name="leisure_nodes_name">
+        <item>qna</item>
+        <item>lowshine</item>
+        <item>water</item>
+    </string-array>
+
+    <string-array name="community_nodes_title">
+        <item>公告</item>
+        <item>帮助</item>
+        <item>意见建议</item>
+    </string-array>
+
+    <string-array name="community_nodes_name">
+        <item>notice</item>
+        <item>guide</item>
+        <item>feedback</item>
+    </string-array>
+
 </resources>
