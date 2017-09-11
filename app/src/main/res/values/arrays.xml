@@ -21,6 +21,16 @@
         <item>finance</item>
     </string-array>
 
+    <string-array name="default_node_name">
+        <item>qna</item>
+        <item>lowshine</item>
+        <item>job</item>
+        <item>IT</item>
+        <item>finance</item>
+        <item>startup</item>
+        <item>city</item>
+    </string-array>
+
     <string-array name="all_node_name">
         <item>startup</item>
         <item>city</item>

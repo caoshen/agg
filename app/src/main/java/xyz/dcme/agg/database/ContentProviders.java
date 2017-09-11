@@ -11,18 +11,22 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import xyz.dcme.agg.database.table.HistoryTable;
+import xyz.dcme.agg.database.table.NodeTable;
 import xyz.dcme.agg.util.Constants;
 
 
 public class ContentProviders extends ContentProvider {
 
     public static final String ERROR_TABLE_MATCH = "No table matched";
+    public static final String MIME_HISTORY = "vnd.android.cursor.dir/" + HistoryTable.TABLE_NAME;
+    public static final String MIME_NODE = "vnd.android.cursor.dir/" + NodeTable.TABLE_NAME;
     private static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
     private static final int CODE_HISTORY = 1;
-    public static final String MIME_HISTORY = "vnd.android.cursor.dir/" + HistoryTable.TABLE_NAME;
+    private static final int CODE_NODE = 2;
 
     static {
         URI_MATCHER.addURI(Constants.PROVIDER_AUTH, HistoryTable.PATH, CODE_HISTORY);
+        URI_MATCHER.addURI(Constants.PROVIDER_AUTH, NodeTable.PATH, CODE_NODE);
     }
 
     private DBHelper mDBHelper;
@@ -32,6 +36,9 @@ public class ContentProviders extends ContentProvider {
         switch (URI_MATCHER.match(uri)) {
             case CODE_HISTORY: {
                 return HistoryTable.TABLE_NAME;
+            }
+            case CODE_NODE: {
+                return NodeTable.TABLE_NAME;
             }
             default: {
                 return ERROR_TABLE_MATCH;
@@ -59,6 +66,9 @@ public class ContentProviders extends ContentProvider {
         switch (URI_MATCHER.match(uri)) {
             case CODE_HISTORY: {
                 return MIME_HISTORY;
+            }
+            case CODE_NODE: {
+                return MIME_NODE;
             }
         }
         return null;

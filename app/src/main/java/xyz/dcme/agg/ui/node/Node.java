@@ -20,6 +20,9 @@ public class Node implements Parcelable {
     private int mFixed;
     private int mCurrent;
     private int mPosition;
+    private String mCategory;
+    private int mSelected;
+    private int mFix;
 
     protected Node(Parcel in) {
         mName = in.readString();
@@ -27,6 +30,21 @@ public class Node implements Parcelable {
         mFixed = in.readInt();
         mCurrent = in.readInt();
         mPosition = in.readInt();
+        mCategory = in.readString();
+        mSelected = in.readInt();
+
+        mFix = in.readInt();
+    }
+
+    public Node(String name, String title, String category, int position, int selected, int isDefault) {
+        mName = name;
+        mTitle = title;
+        mFixed = 0;
+        mCurrent = 0;
+        mPosition = position;
+        mCategory = category;
+        mSelected = selected;
+        mFix = isDefault;
     }
 
     public Node(String name, String title) {
@@ -35,6 +53,33 @@ public class Node implements Parcelable {
         mFixed = 0;
         mCurrent = 0;
         mPosition = 0;
+        mCategory = null;
+        mSelected = 0;
+        mFix = 0;
+    }
+
+    public String getCategory() {
+        return mCategory;
+    }
+
+    public void setCategory(String category) {
+        mCategory = category;
+    }
+
+    public int getSelected() {
+        return mSelected;
+    }
+
+    public void setSelected(int selected) {
+        mSelected = selected;
+    }
+
+    public int getFix() {
+        return mFix;
+    }
+
+    public void setFix(int fix) {
+        mFix = fix;
     }
 
     public int getFixed() {
@@ -89,5 +134,8 @@ public class Node implements Parcelable {
         dest.writeInt(mFixed);
         dest.writeInt(mCurrent);
         dest.writeInt(mPosition);
+        dest.writeString(mCategory);
+        dest.writeInt(mSelected);
+        dest.writeInt(mFix);
     }
 }

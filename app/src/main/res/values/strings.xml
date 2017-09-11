@@ -90,5 +90,12 @@
     <string name="clear_history">清除历史记录</string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
+    <string name="life">生活百科</string>
+    <string name="social">社会信息</string>
+    <string name="science">科学技术</string>
+    <string name="culture">文化人文</string>
+    <string name="art">艺术时尚</string>
+    <string name="leisure">休闲娱乐</string>
+    <string name="community">社区管理</string>
 
 </resources>

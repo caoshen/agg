@@ -29,6 +29,9 @@ public class NodeCategoryAdapter extends CommonAdapter<NodeCategory> {
             tv.setText(n.getTitle());
             tv.setDuplicateParentStateEnabled(true);
             tagView.addView(tv);
+            tagView.setChecked(n.getSelected() == 1);
+            tv.setTextColor(mContext.getResources().getColor(n.getSelected() == 1 ? R.color.theme_primary
+                : R.color.black_50));
             tagView.setOnClickListener(new View.OnClickListener() {
                 @SuppressWarnings("deprecation")
                 @Override

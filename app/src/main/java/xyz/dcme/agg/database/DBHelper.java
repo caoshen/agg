@@ -12,6 +12,7 @@ import xyz.dcme.agg.R;
 import xyz.dcme.agg.database.table.CurNodeTable;
 import xyz.dcme.agg.database.table.HistoryTable;
 import xyz.dcme.agg.database.table.MoreNodeTable;
+import xyz.dcme.agg.database.table.NodeTable;
 import xyz.dcme.agg.ui.node.Node;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.library.util.LogUtils;
@@ -33,7 +34,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CurNodeTable.CREATE_TABLE);
         db.execSQL(MoreNodeTable.CREATE_TABLE);
         db.execSQL(HistoryTable.CREATE_TABLE);
-        initTables(db);
+        db.execSQL(NodeTable.CREATE_TABLE);
+//        initTables(db);
+        initNodeTable(db);
     }
 
     private void initTables(SQLiteDatabase db) {
@@ -50,6 +53,18 @@ public class DBHelper extends SQLiteOpenHelper {
             for (Node node : allNodes) {
                 db.insert(MoreNodeTable.TABLE_NAME, null, makeContentValues(node));
             }
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            LogUtils.e(TAG, e.toString());
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    private void initNodeTable(SQLiteDatabase db) {
+        db.beginTransaction();
+        try {
+            NodeDbHelper.getInstance().init(mContext, db);
             db.setTransactionSuccessful();
         } catch (Exception e) {
             LogUtils.e(TAG, e.toString());
@@ -77,7 +92,9 @@ public class DBHelper extends SQLiteOpenHelper {
             return nodes;
         }
         for (int i = 0; i < names.length; ++i) {
-            nodes.add(new Node(names[i] , titles[i]));
+            Node n = new Node(names[i], titles[i]);
+            n.setFix(1);
+            nodes.add(n);
         }
         return nodes;
     }
