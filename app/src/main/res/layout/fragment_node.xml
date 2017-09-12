@@ -33,6 +33,8 @@
                 android:layout_gravity="center_vertical"
                 android:contentDescription="@string/add_node"
                 android:foreground="?android:attr/selectableItemBackground"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
                 android:paddingStart="@dimen/margin_8"
                 android:paddingEnd="@dimen/margin_12"
                 android:text="@string/more"
