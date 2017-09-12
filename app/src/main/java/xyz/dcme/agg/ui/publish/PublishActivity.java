@@ -2,6 +2,9 @@ package xyz.dcme.agg.ui.publish;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.library.base.BaseActivity;
@@ -28,7 +31,7 @@ public class PublishActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        initToolbar();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.publish_container, PublishFragment.newInstance(mCommentUrl))
                 .commit();
@@ -43,5 +46,15 @@ public class PublishActivity extends BaseActivity {
     public static void startPublish(Context context) {
         Intent intent = new Intent(context, PublishActivity.class);
         context.startActivity(intent);
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle(TextUtils.isEmpty(mCommentUrl) ? R.string.publish : R.string.comment);
+        }
     }
 }

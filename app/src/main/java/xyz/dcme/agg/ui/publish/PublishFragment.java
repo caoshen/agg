@@ -81,7 +81,6 @@ public class PublishFragment extends BaseFragment
 
         if (isSendingComment) {
             mTitle.setVisibility(View.GONE);
-            getActivity().setTitle(R.string.reply_to);
         }
     }
 
