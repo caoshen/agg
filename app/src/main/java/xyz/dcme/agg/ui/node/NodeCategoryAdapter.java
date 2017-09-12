@@ -11,6 +11,7 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 import java.util.List;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.database.NodeDbHelper;
 import xyz.dcme.agg.widget.flowlayout.TagView;
 
 
@@ -23,7 +24,7 @@ public class NodeCategoryAdapter extends CommonAdapter<NodeCategory> {
     protected void convert(ViewHolder holder, NodeCategory nodeCategory, int position) {
         holder.setText(R.id.category_text, nodeCategory.getName());
         FlexboxLayout flexBox = holder.getView(R.id.item_category);
-        for (Node n : nodeCategory.getNodeList()) {
+        for (final Node n : nodeCategory.getNodeList()) {
             final TagView tagView = new TagView(mContext);
             final TextView tv = (TextView) mInflater.inflate(R.layout.item_subscribe_node, tagView, false);
             tv.setText(n.getTitle());
@@ -42,6 +43,8 @@ public class NodeCategoryAdapter extends CommonAdapter<NodeCategory> {
                     } else {
                         tv.setTextColor(mContext.getResources().getColor(R.color.black_50));
                     }
+                    n.setSelected(tagView.isChecked() ? 1 : 0);
+                    NodeDbHelper.getInstance().updateNode(mContext, n);
                 }
             });
 

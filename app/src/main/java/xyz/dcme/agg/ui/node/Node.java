@@ -36,7 +36,7 @@ public class Node implements Parcelable {
         mFix = in.readInt();
     }
 
-    public Node(String name, String title, String category, int position, int selected, int isDefault) {
+    public Node(String name, String title, String category, int position, int selected, int fix) {
         mName = name;
         mTitle = title;
         mFixed = 0;
@@ -44,7 +44,7 @@ public class Node implements Parcelable {
         mPosition = position;
         mCategory = category;
         mSelected = selected;
-        mFix = isDefault;
+        mFix = fix;
     }
 
     public Node(String name, String title) {

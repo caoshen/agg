@@ -5,7 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-import xyz.dcme.agg.database.NodeLocalData;
+import xyz.dcme.agg.database.NodeDbHelper;
 
 public class NodeMainPresenter implements NodeMainContract.Presenter {
 
@@ -20,7 +20,7 @@ public class NodeMainPresenter implements NodeMainContract.Presenter {
     }
 
     private void initNode() {
-        mNodes = NodeLocalData.getInstance(mContext).getCurNode();
+        mNodes = NodeDbHelper.getInstance().querySelectedNodes(mContext);
     }
 
     @Override

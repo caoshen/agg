@@ -63,14 +63,14 @@ public class NodeDbHelper {
     private void addNodes(Context context, SQLiteDatabase db, int nodeNameArray, int nodeTitleArray, int category) {
         String[] names = context.getResources().getStringArray(nodeNameArray);
         String[] titles = context.getResources().getStringArray(nodeTitleArray);
-        String[] defaultTypes = context.getResources().getStringArray(R.array.default_node_name);
+        String[] fixs = context.getResources().getStringArray(R.array.default_node_name);
         String cate = context.getString(category);
 
         if (names.length != titles.length) {
             return;
         }
         for (int i = 0; i < names.length; ++i) {
-            int selected = Arrays.asList(defaultTypes).contains(names[i]) ? 1 : 0;
+            int selected = Arrays.asList(fixs).contains(names[i]) ? 1 : 0;
             Node e = new Node(names[i], titles[i], cate, i, selected, 0);
             insertNode(db, e);
         }
@@ -95,8 +95,36 @@ public class NodeDbHelper {
                     String cate = cursor.getString(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_CATEGORY));
                     int pos = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_POSITION));
                     int selected = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_SELECTED));
-                    int defaultType = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_FIX));
-                    Node n = new Node(name, title, cate, pos, selected, defaultType);
+                    int fix = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_FIX));
+                    Node n = new Node(name, title, cate, pos, selected, fix);
+                    nodes.add(n);
+                }
+            }
+        } catch (Exception e) {
+            LogUtils.e(LOG_TAG, "queryAllHistory -> exception: " + e);
+        }
+        if (null != cursor) {
+            cursor.close();
+        }
+        return nodes;
+    }
+
+    public List<Node> querySelectedNodes(Context context) {
+        List<Node> nodes = new ArrayList<>();
+        String selection = NodeTable.COLUMN_SELECTED + "=1";
+        String sortOrder = NodeTable.COLUMN_POSITION;
+
+        Cursor cursor = context.getContentResolver().query(getUri(), null, selection, null, sortOrder);
+        try {
+            if (null != cursor) {
+                while (cursor.moveToNext()) {
+                    String name = cursor.getString(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_NAME));
+                    String title = cursor.getString(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_TITLE));
+                    String cate = cursor.getString(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_CATEGORY));
+                    int pos = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_POSITION));
+                    int selected = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_SELECTED));
+                    int fix = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_FIX));
+                    Node n = new Node(name, title, cate, pos, selected, fix);
                     nodes.add(n);
                 }
             }
@@ -118,5 +146,13 @@ public class NodeDbHelper {
         cv.put(NodeTable.COLUMN_SELECTED, node.getSelected());
         cv.put(NodeTable.COLUMN_FIX, node.getFix());
         return cv;
+    }
+
+    public void updateNode(Context context, Node node) {
+        ContentValues values = makeContentValues(node);
+        String selection = NodeTable.COLUMN_NAME + "=?";
+        String[] args = new String[]{node.getName()};
+        int count = context.getContentResolver().update(getUri(), values, selection, args);
+        LogUtils.d(LOG_TAG, "updateNode -> update count: " + count);
     }
 }
