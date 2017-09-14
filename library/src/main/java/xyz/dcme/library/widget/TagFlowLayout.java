@@ -10,8 +10,8 @@ import xyz.dcme.library.R;
 
 public class TagFlowLayout extends FlexboxLayout {
 
-    private static final int MODE_MULTI_SELECT = 0;
-    private static final int MODE_MULTI_SINGLE = 1;
+    public static final int MODE_MULTI_SELECT = 0;
+    public static final int MODE_SINGLE_SELECT = 1;
     private int mMode = MODE_MULTI_SELECT;
     private int mMaxSelection;
     private boolean mShowHighlight = true;
