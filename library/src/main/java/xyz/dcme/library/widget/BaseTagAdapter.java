@@ -10,13 +10,13 @@ import java.util.Map;
 public abstract class BaseTagAdapter<V extends BaseTagView<T>, T> {
     private final Context mContext;
     private final List<T> mData;
-    private int mMode;
-    private int mMaxSelection;
-    private boolean mShowHighlight = true;
     protected int mDefaultDrawable;
     protected int mSelectedDrawable;
     protected int mDefaultTextColor;
     protected int mSelectedTextColor;
+    private int mMode;
+    private int mMaxSelection;
+    private boolean mShowHighlight = true;
     private List<T> mSelection;
     private TagFlowLayout mTagFlowLayout;
     private Map<V, T> mViewMap;
@@ -31,6 +31,10 @@ public abstract class BaseTagAdapter<V extends BaseTagView<T>, T> {
         mContext = context;
         mData = data;
         mSelection = selection;
+    }
+
+    public void setSelectedListener(IItemSelectedListener selectedListener) {
+        mSelectedListener = selectedListener;
     }
 
     public Context getContext() {

@@ -87,4 +87,13 @@ public class TagFlowLayout extends FlexboxLayout {
     public void setSelectedTextColor(int selectedTextColor) {
         mSelectedTextColor = selectedTextColor;
     }
+
+    public void setAdapter(BaseTagAdapter adapter) {
+        if (null == adapter) {
+            removeAllViews();
+            return;
+        }
+        adapter.bindView(this);
+        adapter.addTags();
+    }
 }
