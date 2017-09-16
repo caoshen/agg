@@ -1,6 +1,7 @@
 package xyz.dcme.library.widget;
 
 import android.content.Context;
+import android.util.ArrayMap;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public abstract class BaseTagAdapter<V extends BaseTagView<T>, T> {
     private boolean mShowHighlight = true;
     private List<T> mSelection;
     private TagFlowLayout mTagFlowLayout;
-    private Map<V, T> mViewMap;
+    private Map<V, T> mViewMap = new ArrayMap<>();
     private IItemSelectedListener mSelectedListener;
 
     public BaseTagAdapter(Context context, List<T> data) {
@@ -74,7 +75,7 @@ public abstract class BaseTagAdapter<V extends BaseTagView<T>, T> {
             tagView.setListener(new BaseTagView.ITagSelectedListener<T>() {
                 @Override
                 public void onItemSelected(T item) {
-                    if (mMode == TagFlowLayout.MODE_SINGLE_SELECT) {
+                    if (mMode == TagFlowLayout.SINGLE_SELECT) {
                         enterSingleMode(item);
                     } else {
                         List<T> selectItems = getSelectItems();
@@ -84,9 +85,9 @@ public abstract class BaseTagAdapter<V extends BaseTagView<T>, T> {
                             Toast.makeText(getContext(), tips, Toast.LENGTH_SHORT).show();
                             return;
                         }
-                    }
-                    if (mShowHighlight) {
-                        tagView.toggle();
+                        if (mShowHighlight) {
+                            tagView.toggle();
+                        }
                     }
                     if (null != mSelectedListener) {
                         mSelectedListener.onItemSelect(getSelectItems());

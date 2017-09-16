@@ -18,10 +18,12 @@ import android.widget.TextView;
 import java.io.File;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.library.base.BaseFragment;
+import xyz.dcme.agg.ui.node.Node;
+import xyz.dcme.agg.ui.node.TagSelectActivity;
 import xyz.dcme.agg.util.EditUtils;
 import xyz.dcme.agg.util.ImageUtils;
 import xyz.dcme.agg.util.LoginUtils;
+import xyz.dcme.library.base.BaseFragment;
 
 public class PublishFragment extends BaseFragment
         implements PublishContract.View {
@@ -30,6 +32,7 @@ public class PublishFragment extends BaseFragment
     private static final int REQ_CODE_ALBUM = 100;
     private static final int REQ_CODE_LOGIN = 200;
     private static final String ARG_URL = "argument_comment_url";
+    private static final int REQ_CODE_TAG = 300;
 
     private PublishContract.Presenter mPresenter;
     private ImageButton mImgButton;
@@ -39,6 +42,8 @@ public class PublishFragment extends BaseFragment
     private TextView mUploadResponse;
     private String mCommentUrl;
     private boolean isSendingComment = false;
+    private TextView mNodeText;
+    private Node mSelectedNode;
 
     public static Fragment newInstance(String commentUrl) {
         Fragment fragment = new PublishFragment();
@@ -82,6 +87,15 @@ public class PublishFragment extends BaseFragment
         if (isSendingComment) {
             mTitle.setVisibility(View.GONE);
         }
+
+        mNodeText = (TextView) mRootView.findViewById(R.id.node_selection);
+        mNodeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), TagSelectActivity.class);
+                startActivityForResult(intent, REQ_CODE_TAG);
+            }
+        });
     }
 
     @Override
@@ -154,6 +168,11 @@ public class PublishFragment extends BaseFragment
             Uri uri = data.getData();
             File file = new File(ImageUtils.getImagePathFromURI(getActivity(), uri));
             uploadImage(file);
+        } else if (requestCode == REQ_CODE_TAG && resultCode == Activity.RESULT_OK) {
+            mSelectedNode = data.getParcelableExtra(TagSelectActivity.KEY_SELECTED_TAG);
+            if (null != mSelectedNode) {
+                mNodeText.setText(mSelectedNode.getTitle());
+            }
         }
     }
 

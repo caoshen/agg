@@ -81,12 +81,14 @@
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <activity android:name=".ui.node.NodeManagerActivity"/>
+        <activity android:name=".ui.node.TagSelectActivity"/>
 
         <service android:name=".service.NotificationService"/>
 
         <provider
+            android:name=".database.ContentProviders"
             android:authorities="xyz.dcme.agg.provider"
-            android:name=".database.ContentProviders"/>
+            android:exported="false"/>
     </application>
 
 </manifest>

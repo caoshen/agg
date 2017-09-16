@@ -6,6 +6,8 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.TextView;
 
+import com.google.android.flexbox.FlexboxLayout;
+
 import java.util.List;
 
 import xyz.dcme.library.widget.BaseTagAdapter;
@@ -40,9 +42,14 @@ public class NodeTagAdapter extends BaseTagAdapter<NodeTagView, Node> {
     protected BaseTagView<Node> addTag(Node node) {
         NodeTagView nodeTagView = new NodeTagView(getContext());
         nodeTagView.setPadding(25, 10, 25, 10);
+        FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT,
+                FlexboxLayout.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(20, 10, 20, 10);
+        nodeTagView.setLayoutParams(lp);
         TextView textView = nodeTagView.getTextView();
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         textView.setGravity(Gravity.CENTER);
+        textView.setText(node.getTitle());
         nodeTagView.setDefaultDrawable(mDefaultDrawable);
         nodeTagView.setSelectedDrawable(mSelectedDrawable);
         nodeTagView.setDefaultTextColor(mDefaultTextColor);

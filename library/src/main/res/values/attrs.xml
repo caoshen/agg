@@ -6,9 +6,9 @@
         <attr name="selectedDrawable" format="reference"/>
         <attr name="defaultTextColor" format="color|reference"/>
         <attr name="selectedTextColor" format="color|reference"/>
-        <attr name="mode">
-            <enum name="MULTI" value="0"/>
-            <enum name="SINGLE" value="1"/>
+        <attr name="selectMode">
+            <enum name="multi" value="0"/>
+            <enum name="single" value="1"/>
         </attr>
         <attr name="maxSelectionCount" format="integer"/>
     </declare-styleable>

@@ -21,9 +21,4 @@ public class NodeTagView extends BaseTagView<Node> {
     public NodeTagView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
-    @Override
-    public void setItem(Node item) {
-        getTextView().setText(item.getTitle());
-    }
 }

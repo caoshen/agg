@@ -90,7 +90,7 @@ public class BaseTagView<T> extends FrameLayout implements Checkable, View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (mListener != null && mItem != null) {
+        if (mListener != null) {
             mListener.onItemSelected(mItem);
         }
     }

@@ -97,5 +97,6 @@
     <string name="art">艺术时尚</string>
     <string name="leisure">休闲娱乐</string>
     <string name="community">社区管理</string>
+    <string name="pls_select_node">请选择版块</string>
 
 </resources>

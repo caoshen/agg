@@ -12,7 +12,7 @@
     app:flexDirection="row"
     app:flexWrap="wrap"
     app:justifyContent="flex_start"
-    app:mode="SINGLE"
+    app:selectMode="single"
     app:selectedDrawable="@drawable/item_subscribe_selected"
     app:selectedTextColor="@color/theme_primary"
     app:showDivider="beginning|end|middle">
