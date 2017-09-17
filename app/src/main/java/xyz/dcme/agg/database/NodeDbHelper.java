@@ -109,6 +109,31 @@ public class NodeDbHelper {
         return nodes;
     }
 
+    public List<Node> queryAllNodes(Context context) {
+        List<Node> nodes = new ArrayList<>();
+        Cursor cursor = context.getContentResolver().query(getUri(), null, null, null, null);
+        try {
+            if (null != cursor) {
+                while (cursor.moveToNext()) {
+                    String name = cursor.getString(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_NAME));
+                    String title = cursor.getString(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_TITLE));
+                    String cate = cursor.getString(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_CATEGORY));
+                    int pos = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_POSITION));
+                    int selected = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_SELECTED));
+                    int fix = cursor.getInt(cursor.getColumnIndexOrThrow(NodeTable.COLUMN_FIX));
+                    Node n = new Node(name, title, cate, pos, selected, fix);
+                    nodes.add(n);
+                }
+            }
+        } catch (Exception e) {
+            LogUtils.e(LOG_TAG, "queryAllHistory -> exception: " + e);
+        }
+        if (null != cursor) {
+            cursor.close();
+        }
+        return nodes;
+    }
+
     public List<Node> querySelectedNodes(Context context) {
         List<Node> nodes = new ArrayList<>();
         String selection = NodeTable.COLUMN_SELECTED + "=1";
@@ -129,7 +154,7 @@ public class NodeDbHelper {
                 }
             }
         } catch (Exception e) {
-            LogUtils.e(LOG_TAG, "queryAllHistory -> exception: " + e);
+            LogUtils.e(LOG_TAG, "querySelectedNodes -> exception: " + e);
         }
         if (null != cursor) {
             cursor.close();

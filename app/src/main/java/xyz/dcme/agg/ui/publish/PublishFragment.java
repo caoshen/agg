@@ -146,11 +146,12 @@ public class PublishFragment extends BaseFragment
                 mPresenter.publishComment(content, mCommentUrl);
             }
         } else {
-            isValid = EditUtils.checkContentValid(getContext(), mTitle, mContent);
+            isValid = EditUtils.checkContentValid(getContext(), mTitle, mContent)
+                && mSelectedNode != null;
             if (isValid) {
                 String title = mTitle.getText().toString();
                 String content = mContent.getText().toString();
-                mPresenter.publishArticle(title, content, "IT");
+                mPresenter.publishArticle(title, content, mSelectedNode.getName());
             }
         }
     }
