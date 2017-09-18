@@ -84,10 +84,6 @@ public class PublishFragment extends BaseFragment
         mContent = (EditText) mRootView.findViewById(R.id.publish_content);
         mUploadResponse = (TextView) mRootView.findViewById(R.id.upload_response);
 
-        if (isSendingComment) {
-            mTitle.setVisibility(View.GONE);
-        }
-
         mNodeText = (TextView) mRootView.findViewById(R.id.node_selection);
         mNodeText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +92,11 @@ public class PublishFragment extends BaseFragment
                 startActivityForResult(intent, REQ_CODE_TAG);
             }
         });
+
+        if (isSendingComment) {
+            mTitle.setVisibility(View.GONE);
+            mNodeText.setVisibility(View.GONE);
+        }
     }
 
     @Override
