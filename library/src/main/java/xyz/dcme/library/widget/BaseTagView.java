@@ -68,7 +68,7 @@ public class BaseTagView<T> extends FrameLayout implements Checkable, View.OnCli
 
     public void setDefaultTextColor(int defaultTextColor) {
         mDefaultTextColor = defaultTextColor;
-        mTextView.setTextColor(defaultTextColor);
+        mTextView.setTextColor(getResources().getColor(defaultTextColor));
     }
 
     public int getSelectedTextColor() {
@@ -105,7 +105,7 @@ public class BaseTagView<T> extends FrameLayout implements Checkable, View.OnCli
         if (mChecked != checked) {
             mChecked = checked;
             setBackgroundResource(mChecked ? mSelectedDrawable : mDefaultDrawable);
-            mTextView.setTextColor(mChecked ? mSelectedTextColor : mDefaultTextColor);
+            mTextView.setTextColor(getResources().getColor(mChecked ? mSelectedTextColor : mDefaultTextColor));
             refreshDrawableState();
         }
     }

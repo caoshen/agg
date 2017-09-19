@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xyz.dcme.library.widget.TagFlowLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/flow"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:alignContent="flex_start"
-    app:alignItems="center"
-    app:defaultDrawable="@drawable/item_subscribe_unselected"
-    app:defaultTextColor="@color/black_50"
-    app:flexDirection="row"
-    app:flexWrap="wrap"
-    app:justifyContent="flex_start"
-    app:selectMode="single"
-    app:selectedDrawable="@drawable/item_subscribe_selected"
-    app:selectedTextColor="@color/theme_primary"
-    app:showDivider="beginning|end|middle">
+    android:orientation="vertical">
 
-</xyz.dcme.library.widget.TagFlowLayout>
+    <include layout="@layout/toolbar_back"/>
+
+    <xyz.dcme.library.widget.TagFlowLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/flow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_16"
+        app:alignContent="flex_start"
+        app:alignItems="center"
+        app:defaultDrawable="@color/white"
+        app:defaultTextColor="@color/theme_primary"
+        app:flexDirection="row"
+        app:flexWrap="wrap"
+        app:justifyContent="flex_start"
+        app:selectMode="single"
+        app:selectedDrawable="@color/theme_primary"
+        app:selectedTextColor="@color/white"
+        app:showDivider="beginning|end|middle">
+    </xyz.dcme.library.widget.TagFlowLayout>
+</LinearLayout>
