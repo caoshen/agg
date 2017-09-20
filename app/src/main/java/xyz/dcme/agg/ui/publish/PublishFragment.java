@@ -89,6 +89,7 @@ public class PublishFragment extends BaseFragment
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), TagSelectActivity.class);
+                intent.putExtra(TagSelectActivity.KEY_SELECTED_TAG, mSelectedNode);
                 startActivityForResult(intent, REQ_CODE_TAG);
             }
         });

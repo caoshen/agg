@@ -21,6 +21,7 @@ public class TagSelectActivity extends BaseActivity {
     private TagFlowLayout mTagFlowLayout;
     private NodeTagAdapter mTagAdapter;
     private List<Node> mData = new ArrayList<>();
+    private Node mSelection;
 
     @Override
     public int getLayoutId() {
@@ -37,13 +38,17 @@ public class TagSelectActivity extends BaseActivity {
             public void onItemSelect(List<Node> data) {
                 if (!data.isEmpty()) {
                     Intent args = new Intent();
-                    args.putExtra(KEY_SELECTED_TAG, data.get(0));
+                    mSelection = data.get(0);
+                    args.putExtra(KEY_SELECTED_TAG, mSelection);
                     setResult(Activity.RESULT_OK, args);
                 }
             }
         });
         mTagFlowLayout.setAdapter(mTagAdapter);
 
+        if (null != mSelection) {
+            mTagAdapter.enterSingleMode(mSelection);
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.tag_select);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -54,4 +59,9 @@ public class TagSelectActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void getData() {
+        Intent intent = getIntent();
+        mSelection = intent.getParcelableExtra(KEY_SELECTED_TAG);
+    }
 }

@@ -110,7 +110,7 @@ public abstract class BaseTagAdapter<V extends BaseTagView<T>, T> {
         return selected;
     }
 
-    private void enterSingleMode(T item) {
+    public void enterSingleMode(T item) {
         if (!mShowHighlight) {
             return;
         }
