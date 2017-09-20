@@ -41,7 +41,7 @@ public class NodeTagAdapter extends BaseTagAdapter<NodeTagView, Node> {
     @Override
     protected BaseTagView<Node> addTag(Node node) {
         NodeTagView nodeTagView = new NodeTagView(getContext());
-        nodeTagView.setPadding(25, 10, 25, 10);
+        nodeTagView.setPadding(25, 25, 25, 25);
         FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT,
                 FlexboxLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(20, 20, 20, 20);

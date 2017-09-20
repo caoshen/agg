@@ -15,13 +15,13 @@
         android:padding="@dimen/padding_16"
         app:alignContent="flex_start"
         app:alignItems="center"
-        app:defaultDrawable="@color/white"
+        app:defaultDrawable="@drawable/bg_tag_normal"
         app:defaultTextColor="@color/theme_primary"
         app:flexDirection="row"
         app:flexWrap="wrap"
         app:justifyContent="flex_start"
         app:selectMode="single"
-        app:selectedDrawable="@color/theme_primary"
+        app:selectedDrawable="@drawable/bg_tag_selected"
         app:selectedTextColor="@color/white"
         app:showDivider="beginning|end|middle">
     </xyz.dcme.library.widget.TagFlowLayout>
