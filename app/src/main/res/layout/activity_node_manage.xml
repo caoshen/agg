@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         app:theme="@style/AppTheme.AppBarOverlay">
 
-        <include layout="@layout/toolbar_auto_hide"/>
+        <include layout="@layout/toolbar_back"/>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
