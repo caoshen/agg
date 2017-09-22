@@ -39,7 +39,6 @@
         <activity
             android:name=".ui.postdetail.PostDetailActivity"
             android:label="@string/post_detail"
-            android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/PostDetailTheme">
         </activity>
 
