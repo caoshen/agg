@@ -1,6 +1,7 @@
 package xyz.dcme.agg.ui.news;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.zhy.adapter.recyclerview.CommonAdapter;
@@ -28,6 +29,9 @@ public class NewsListAdapter extends CommonAdapter<Post> {
         holder.setText(R.id.post_user_name, post.userName);
         holder.setText(R.id.post_last_visit_time, post.lastVisitTime);
 
+        if (TextUtils.isEmpty(post.commentCount)) {
+            post.commentCount = "0";
+        }
         String commentCount = mContext.getString(R.string.comment_count, post.commentCount);
         holder.setText(R.id.post_comment_count, commentCount);
 
