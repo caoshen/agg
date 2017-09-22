@@ -34,6 +34,7 @@ public class NodeMainFragment extends BaseFragment
     private TextView mAdd;
     private NodeMainContract.Presenter mPresenter;
     private BaseFragmentAdapter mAdapter;
+    private Node mSelectNode;
 
     public static NodeMainFragment newInstance() {
         return new NodeMainFragment();
@@ -78,7 +79,7 @@ public class NodeMainFragment extends BaseFragment
     }
 
     @Override
-    public void showNodes(List<Node> nodes) {
+    public void showNodes(final List<Node> nodes) {
         if (nodes == null || nodes.isEmpty()) {
             LogUtils.d(LOG_TAG, "showNodes -> nodes is empty");
             return;
@@ -99,6 +100,17 @@ public class NodeMainFragment extends BaseFragment
         }
         mPager.setAdapter(mAdapter);
         mTab.setupWithViewPager(mPager);
+
+        mSelectNode = nodes.get(0);
+        mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (position < 0 || position >= nodes.size()) {
+                    return;
+                }
+                mSelectNode = nodes.get(position);
+            }
+        });
     }
 
     @Override
@@ -148,7 +160,7 @@ public class NodeMainFragment extends BaseFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.item_publish) {
-            PublishActivity.startPublish(getActivity());
+            PublishActivity.startPublish(getActivity(), mSelectNode);
             return true;
         }
         return super.onOptionsItemSelected(item);

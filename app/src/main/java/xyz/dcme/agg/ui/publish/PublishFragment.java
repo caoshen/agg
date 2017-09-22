@@ -32,6 +32,7 @@ public class PublishFragment extends BaseFragment
     private static final int REQ_CODE_ALBUM = 100;
     private static final int REQ_CODE_LOGIN = 200;
     private static final String ARG_URL = "argument_comment_url";
+    private static final String ARG_NODE = "argument_selected_node";
     private static final int REQ_CODE_TAG = 300;
 
     private PublishContract.Presenter mPresenter;
@@ -45,10 +46,11 @@ public class PublishFragment extends BaseFragment
     private TextView mNodeText;
     private Node mSelectedNode;
 
-    public static Fragment newInstance(String commentUrl) {
+    public static Fragment newInstance(String commentUrl, Node node) {
         Fragment fragment = new PublishFragment();
         Bundle args = new Bundle();
         args.putString(ARG_URL, commentUrl);
+        args.putParcelable(ARG_NODE, node);
         fragment.setArguments(args);
         return fragment;
     }
@@ -66,6 +68,7 @@ public class PublishFragment extends BaseFragment
         if (args != null) {
             mCommentUrl = args.getString(ARG_URL);
             isSendingComment = !TextUtils.isEmpty(mCommentUrl);
+            mSelectedNode = args.getParcelable(ARG_NODE);
         }
     }
 
@@ -85,6 +88,9 @@ public class PublishFragment extends BaseFragment
         mUploadResponse = (TextView) mRootView.findViewById(R.id.upload_response);
 
         mNodeText = (TextView) mRootView.findViewById(R.id.node_selection);
+        if (mSelectedNode != null) {
+            mNodeText.setText(mSelectedNode.getTitle());
+        }
         mNodeText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
