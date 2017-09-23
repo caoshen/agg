@@ -12,7 +12,4 @@
         android:title="@string/open_browser"
         app:showAsAction="never"/>
 
-    <item
-        android:title="@string/test_crash"
-        app:showAsAction="never"/>
 </menu>
