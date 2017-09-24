@@ -99,5 +99,6 @@
     <string name="pls_select_node">请选择版块</string>
     <string name="tag_select">选择版块</string>
     <string name="copy_link">复制链接</string>
+    <string name="has_copy">已复制到剪贴板</string>
 
 </resources>

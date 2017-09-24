@@ -16,6 +16,7 @@ public class BottomMenu implements View.OnClickListener {
     private LinearLayout mShareItem;
     private LinearLayout mFavItem;
     private LinearLayout mBrowserItem;
+    private LinearLayout mCopyLinkItem;
 
     private BottomMenu(Context context) {
         mContext = context;
@@ -45,6 +46,8 @@ public class BottomMenu implements View.OnClickListener {
         mFavItem.setOnClickListener(this);
         mBrowserItem = (LinearLayout) mRootView.findViewById(R.id.item_open_browser);
         mBrowserItem.setOnClickListener(this);
+        mCopyLinkItem = (LinearLayout) mRootView.findViewById(R.id.item_copy_link);
+        mCopyLinkItem.setOnClickListener(this);
     }
 
     @Override
@@ -71,6 +74,13 @@ public class BottomMenu implements View.OnClickListener {
                 }
                 break;
             }
+            case R.id.item_copy_link: {
+                if (null != mListener) {
+                    mListener.onCopyLink();
+                    mBottomDialog.dismiss();
+                }
+                break;
+            }
         }
     }
 
@@ -87,5 +97,7 @@ public class BottomMenu implements View.OnClickListener {
         void onFavourite();
 
         void onOpenInBrowser();
+
+        void onCopyLink();
     }
 }

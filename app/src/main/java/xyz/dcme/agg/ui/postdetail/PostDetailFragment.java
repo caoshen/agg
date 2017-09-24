@@ -33,6 +33,7 @@ import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.ui.publish.PublishActivity;
 import xyz.dcme.agg.util.AnimationUtils;
+import xyz.dcme.agg.util.ClipBoardUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.ShareUtils;
 import xyz.dcme.agg.widget.BottomMenu;
@@ -274,7 +275,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
 
     @Override
     public void onFavourite() {
-        // TODO add to favourite, copy link, font size
+        // TODO add to favourite, font size
     }
 
     @Override
@@ -282,5 +283,11 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(Constants.HOME_URL + mUrl));
         startActivity(intent);
+    }
+
+    @Override
+    public void onCopyLink() {
+        ClipBoardUtils.copyText(getActivity(), Constants.HOME_URL + mUrl);
+        Toast.makeText(getActivity(), R.string.has_copy, Toast.LENGTH_SHORT).show();
     }
 }
