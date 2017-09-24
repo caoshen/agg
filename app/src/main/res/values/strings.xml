@@ -98,5 +98,6 @@
     <string name="community">社区管理</string>
     <string name="pls_select_node">请选择版块</string>
     <string name="tag_select">选择版块</string>
+    <string name="copy_link">复制链接</string>
 
 </resources>

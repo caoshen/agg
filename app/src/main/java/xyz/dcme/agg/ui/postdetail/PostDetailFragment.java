@@ -22,15 +22,12 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-//import com.tencent.bugly.crashreport.CrashReport;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.common.irecyclerview.IRecyclerView;
 import xyz.dcme.agg.common.irecyclerview.OnLoadMoreListener;
-import xyz.dcme.library.base.BaseFragment;
 import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
@@ -38,11 +35,15 @@ import xyz.dcme.agg.ui.publish.PublishActivity;
 import xyz.dcme.agg.util.AnimationUtils;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.ShareUtils;
+import xyz.dcme.agg.widget.BottomMenu;
 import xyz.dcme.agg.widget.BottomSheetBar;
+import xyz.dcme.library.base.BaseFragment;
+
+//import com.tencent.bugly.crashreport.CrashReport;
 
 public class PostDetailFragment extends BaseFragment implements PostDetailContract.View,
         View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, OnLoadMoreListener,
-        OnCommentListener {
+        OnCommentListener, BottomMenu.OnMenuItemSelectCallback {
     public static final String KEY_ARG_URL = "arg_url";
     private static final int REQUEST_LOGIN = 1000;
     private PostDetailContract.Presenter mPresenter;
@@ -230,31 +231,17 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.item_post_share) {
-            startShare();
-            return true;
-        } else if (item.getItemId() == R.id.item_post_browser) {
-            startBrowser();
+        if (item.getItemId() == R.id.item_bottom_menu) {
+            popMenu();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void startBrowser() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(Constants.HOME_URL + mUrl));
-        startActivity(intent);
-    }
-
-    private void startShare() {
-        List<PostDetailItem> datas = mAdapter.getDatas();
-        if (datas != null && !datas.isEmpty()) {
-            PostDetailItem postDetailItem = datas.get(0);
-            if (postDetailItem instanceof PostContent) {
-                String title = ((PostContent) postDetailItem).getTitle();
-                ShareUtils.shareText(getActivity(), title, Constants.HOME_URL + mUrl);
-            }
-        }
+    private void popMenu() {
+        BottomMenu menu = BottomMenu.delegation(getActivity());
+        menu.setMenuListener(this);
+        menu.show();
     }
 
     @Override
@@ -271,5 +258,29 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     public void onCommentToFloor(String comment) {
         mBottomBar.show();
         mBottomBar.setComment(comment);
+    }
+
+    @Override
+    public void onShare() {
+        List<PostDetailItem> datas = mAdapter.getDatas();
+        if (datas != null && !datas.isEmpty()) {
+            PostDetailItem postDetailItem = datas.get(0);
+            if (postDetailItem instanceof PostContent) {
+                String title = ((PostContent) postDetailItem).getTitle();
+                ShareUtils.shareText(getActivity(), title, Constants.HOME_URL + mUrl);
+            }
+        }
+    }
+
+    @Override
+    public void onFavourite() {
+        // TODO add to favourite, copy link, font size
+    }
+
+    @Override
+    public void onOpenInBrowser() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(Constants.HOME_URL + mUrl));
+        startActivity(intent);
     }
 }
