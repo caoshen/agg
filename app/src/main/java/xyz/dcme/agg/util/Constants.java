@@ -50,4 +50,6 @@ public class Constants {
     public static final String PACKAGE_NAME = "xyz.dcme.agg";
     public static final String PROVIDER_AUTH = PACKAGE_NAME + ".provider";
 
+    // favourite
+    public static final String ADD_FAVOURITE = HOME_URL +"/favorite?topic_id=";
 }

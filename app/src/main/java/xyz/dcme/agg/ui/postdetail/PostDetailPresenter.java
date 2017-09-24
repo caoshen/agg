@@ -159,6 +159,22 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
     }
 
     @Override
+    public void addFavourite(String url) {
+        HttpUtils.get(url, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                AddFavouriteResp resp = AddFavouriteParser.parseResponse(response);
+                mView.showFavouriteAddTips(resp.getTips());
+            }
+        });
+    }
+
+    @Override
     public void start() {
 
     }

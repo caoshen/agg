@@ -35,6 +35,7 @@ import xyz.dcme.agg.ui.publish.PublishActivity;
 import xyz.dcme.agg.util.AnimationUtils;
 import xyz.dcme.agg.util.ClipBoardUtils;
 import xyz.dcme.agg.util.Constants;
+import xyz.dcme.agg.util.PostUtils;
 import xyz.dcme.agg.util.ShareUtils;
 import xyz.dcme.agg.widget.BottomMenu;
 import xyz.dcme.agg.widget.BottomSheetBar;
@@ -211,6 +212,11 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     }
 
     @Override
+    public void showFavouriteAddTips(String tips) {
+        Toast.makeText(getActivity(), tips, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.send_button) {
             String comment = mBottomBar.getComment();
@@ -275,7 +281,9 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
 
     @Override
     public void onFavourite() {
-        // TODO add to favourite, font size
+        // TODO font size
+        String url = Constants.ADD_FAVOURITE + PostUtils.getUid(mUrl);
+        mPresenter.addFavourite(url);
     }
 
     @Override
