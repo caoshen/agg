@@ -113,19 +113,16 @@
                 <TextView
                     android:id="@+id/my_topic"
                     style="@style/AppTheme.MeItemText"
-                    android:drawableStart="@drawable/ic_chat"
                     android:text="@string/topic"/>
 
                 <TextView
                     android:id="@+id/my_reply"
                     style="@style/AppTheme.MeItemText"
-                    android:drawableStart="@drawable/ic_comment"
                     android:text="@string/reply"/>
 
                 <TextView
                     android:id="@+id/my_focus"
                     style="@style/AppTheme.MeItemText"
-                    android:drawableStart="@drawable/ic_favourite"
                     android:text="@string/favourite"/>
 
             </LinearLayout>
