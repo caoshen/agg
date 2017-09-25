@@ -24,6 +24,11 @@ public class PublishActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    public static void startPublish(Context context) {
+        Intent intent = new Intent(context, PublishActivity.class);
+        context.startActivity(intent);
+    }
+
     public static void startPublish(Context context, Node node) {
         Intent intent = new Intent(context, PublishActivity.class);
         intent.putExtra(EXTRA_SELECTED_NODE, node);

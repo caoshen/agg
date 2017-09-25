@@ -1,10 +1,15 @@
 package xyz.dcme.agg.ui.news;
 
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -14,6 +19,7 @@ import java.util.List;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.main.MainActivity;
+import xyz.dcme.agg.ui.publish.PublishActivity;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.library.base.BaseFragment;
 import xyz.dcme.library.base.BaseFragmentAdapter;
@@ -24,6 +30,12 @@ public class NewsMainFragment extends BaseFragment {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private BaseFragmentAdapter mAdapter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     protected void initView() {
@@ -76,5 +88,20 @@ public class NewsMainFragment extends BaseFragment {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_news_main;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_node_main, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_publish) {
+            PublishActivity.startPublish(getActivity());
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
