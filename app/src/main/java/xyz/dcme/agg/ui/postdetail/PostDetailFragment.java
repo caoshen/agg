@@ -18,7 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -41,8 +41,6 @@ import xyz.dcme.agg.widget.BottomMenu;
 import xyz.dcme.agg.widget.BottomSheetBar;
 import xyz.dcme.library.base.BaseFragment;
 
-//import com.tencent.bugly.crashreport.CrashReport;
-
 public class PostDetailFragment extends BaseFragment implements PostDetailContract.View,
         View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, OnLoadMoreListener,
         OnCommentListener, BottomMenu.OnMenuItemSelectCallback {
@@ -57,7 +55,8 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     private BottomSheetBar mBottomBar;
     private SwipeRefreshLayout mRefreshLayout;
     private int mNextPage = 2;
-    private ImageButton mInsertImage;
+    private FrameLayout mInsertImage;
+    private FrameLayout mLikeImage;
 
     public static PostDetailFragment newInstance(String url) {
         PostDetailFragment fragment = new PostDetailFragment();
@@ -105,12 +104,18 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         initBottomBar(mRootView);
         initRefresh(mRootView);
         initAddImage(mRootView);
+        initLike(mRootView);
 
         mPresenter.start(mUrl);
     }
 
+    private void initLike(View rootView) {
+        mLikeImage = (FrameLayout) rootView.findViewById(R.id.like_button);
+        mLikeImage.setOnClickListener(this);
+    }
+
     private void initAddImage(View rootView) {
-        mInsertImage = (ImageButton) rootView.findViewById(R.id.post_insert_photo);
+        mInsertImage = (FrameLayout) rootView.findViewById(R.id.post_insert_photo);
         mInsertImage.setOnClickListener(this);
     }
 
@@ -217,6 +222,11 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     }
 
     @Override
+    public void showPostLike(String tips) {
+        Toast.makeText(getActivity(), tips, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.send_button) {
             String comment = mBottomBar.getComment();
@@ -227,6 +237,9 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
             mBottomBar.show();
         } else if (v.getId() == R.id.post_insert_photo) {
             PublishActivity.startPublish(getActivity(), Constants.HOME_URL + mUrl);
+        } else if (v.getId() == R.id.like_button) {
+            String url = Constants.VOTE + PostUtils.getUid(mUrl);
+            mPresenter.like(url);
         }
     }
 

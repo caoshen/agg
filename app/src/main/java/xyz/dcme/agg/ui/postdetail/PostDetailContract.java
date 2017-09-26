@@ -21,6 +21,8 @@ public interface PostDetailContract {
         void sendComment(String comment, String url);
 
         void addFavourite(String url);
+
+        void like(String url);
     }
 
     interface View extends BaseView<Presenter> {
@@ -43,5 +45,7 @@ public interface PostDetailContract {
         Context getViewContext();
 
         void showFavouriteAddTips(String tips);
+
+        void showPostLike(String tips);
     }
 }

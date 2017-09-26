@@ -175,6 +175,22 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
     }
 
     @Override
+    public void like(String url) {
+        HttpUtils.get(url, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.e(LOG_TAG, e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                VoteResp resp = VoteParser.parseResponse(response);
+                mView.showPostLike(resp.getTips());
+            }
+        });
+    }
+
+    @Override
     public void start() {
 
     }

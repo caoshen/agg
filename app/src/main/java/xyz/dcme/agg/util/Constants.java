@@ -52,4 +52,7 @@ public class Constants {
 
     // favourite
     public static final String ADD_FAVOURITE = HOME_URL +"/favorite?topic_id=";
+
+    // vote
+    public static final String VOTE = HOME_URL +"/vote?topic_id=";
 }
