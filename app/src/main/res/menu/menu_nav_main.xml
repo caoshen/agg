@@ -25,7 +25,7 @@
 
         <item
             android:id="@+id/action_fav"
-            android:icon="@drawable/ic_star_border"
+            android:icon="@drawable/ic_favor"
             android:title="@string/fav"/>
 
         <item

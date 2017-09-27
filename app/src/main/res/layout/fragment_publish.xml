@@ -78,7 +78,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:contentDescription="@string/select_image"
-                    android:src="@drawable/ic_select_image"/>
+                    android:src="@drawable/ic_pic"/>
 
                 <TextView
                     android:id="@+id/upload_response"

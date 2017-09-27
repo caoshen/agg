@@ -69,7 +69,7 @@
                 android:layout_height="16dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/comment"
-                android:src="@drawable/ic_comment_to"/>
+                android:src="@drawable/ic_comment"/>
         </FrameLayout>
 
         <LinearLayout
@@ -87,7 +87,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/margin_8"
                 android:contentDescription="@string/like"
-                android:src="@drawable/ic_like"/>
+                android:src="@drawable/ic_appreciate"/>
 
             <TextView
                 android:id="@+id/post_comment_like_count"
