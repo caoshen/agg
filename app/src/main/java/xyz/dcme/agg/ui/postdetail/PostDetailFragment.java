@@ -39,6 +39,7 @@ import xyz.dcme.agg.util.PostUtils;
 import xyz.dcme.agg.util.ShareUtils;
 import xyz.dcme.agg.widget.BottomMenu;
 import xyz.dcme.agg.widget.BottomSheetBar;
+import xyz.dcme.library.anim.AnimUtils;
 import xyz.dcme.library.base.BaseFragment;
 
 public class PostDetailFragment extends BaseFragment implements PostDetailContract.View,
@@ -240,6 +241,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         } else if (v.getId() == R.id.like_button) {
             String url = Constants.VOTE + PostUtils.getUid(mUrl);
             mPresenter.like(url);
+            AnimUtils.startPulseAnim(v);
         }
     }
 
