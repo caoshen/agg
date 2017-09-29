@@ -15,7 +15,7 @@ public class AnimUtils {
         ObjectAnimator animatorY = ObjectAnimator.ofFloat(view, "scaleY", 1f, 1.2f, 1f);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.play(animatorX).with(animatorY);
-        animatorSet.setDuration(1000);
+        animatorSet.setDuration(500);
         animatorSet.start();
     }
 }
