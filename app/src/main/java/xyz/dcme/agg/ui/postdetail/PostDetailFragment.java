@@ -41,6 +41,7 @@ import xyz.dcme.agg.widget.BottomMenu;
 import xyz.dcme.agg.widget.BottomSheetBar;
 import xyz.dcme.library.anim.AnimUtils;
 import xyz.dcme.library.base.BaseFragment;
+import xyz.dcme.library.widget.CheckableImageView;
 
 public class PostDetailFragment extends BaseFragment implements PostDetailContract.View,
         View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, OnLoadMoreListener,
@@ -58,6 +59,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     private int mNextPage = 2;
     private FrameLayout mInsertImage;
     private FrameLayout mLikeImage;
+    private CheckableImageView mAppreciateImage;
 
     public static PostDetailFragment newInstance(String url) {
         PostDetailFragment fragment = new PostDetailFragment();
@@ -112,6 +114,7 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
 
     private void initLike(View rootView) {
         mLikeImage = (FrameLayout) rootView.findViewById(R.id.like_button);
+        mAppreciateImage = (CheckableImageView) rootView.findViewById(R.id.appreciate_image);
         mLikeImage.setOnClickListener(this);
     }
 
@@ -241,7 +244,8 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         } else if (v.getId() == R.id.like_button) {
             String url = Constants.VOTE + PostUtils.getUid(mUrl);
             mPresenter.like(url);
-            AnimUtils.startPulseAnim(v);
+            AnimUtils.startPulseAnim(mAppreciateImage);
+            mAppreciateImage.setChecked(true);
         }
     }
 

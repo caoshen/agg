@@ -34,12 +34,13 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical">
 
-            <ImageView
+            <xyz.dcme.library.widget.CheckableImageView
+                android:id="@+id/appreciate_image"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:contentDescription="@string/like"
-                android:src="@drawable/ic_appreciate"/>
+                android:background="@drawable/bg_favor"
+                android:contentDescription="@string/like"/>
         </FrameLayout>
 
         <FrameLayout
