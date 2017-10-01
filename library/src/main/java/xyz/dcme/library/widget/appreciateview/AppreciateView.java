@@ -1,12 +1,11 @@
-package xyz.dcme.library.widget;
+package xyz.dcme.library.widget.appreciateview;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.res.TypedArray;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Checkable;
@@ -19,9 +18,16 @@ import xyz.dcme.library.anim.AnimUtils;
 
 public class AppreciateView extends FrameLayout implements Checkable {
     private static final int[] CHECK_STATE = {android.R.attr.state_checked};
+    public static final float DEFAULT_IMAGE_SIZE = 20F;
+    private static final float DEFAULT_TEXT_SIZE = 10F;
+    private float mTextSize;
+    private int mTextColor;
+    private float mImageSize;
+    private String mText;
     private boolean mIsChecked;
     private CheckableImageView mCheckableImageView;
     private TextView mTextView;
+    private int mImageBackground;
 
     public void setOnCheckedChangeListener(OnCheckedChangeListener onCheckedChangeListener) {
         mOnCheckedChangeListener = onCheckedChangeListener;
@@ -39,22 +45,31 @@ public class AppreciateView extends FrameLayout implements Checkable {
 
     public AppreciateView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.AppreciateView);
+        mImageBackground = typedArray.getResourceId(R.styleable.AppreciateView_image_background, R.drawable.bg_appreciate);
+        mImageSize = typedArray.getDimension(R.styleable.AppreciateView_image_size, DEFAULT_IMAGE_SIZE);
+        mText = typedArray.getString(R.styleable.AppreciateView_text);
+        mTextColor = typedArray.getColor(R.styleable.AppreciateView_text_color, getResources().getColor(R.color.checked_color));
+        mTextSize = typedArray.getDimension(R.styleable.AppreciateView_text_size, DEFAULT_TEXT_SIZE);
+        typedArray.recycle();
         initViews();
     }
 
     private void initViews() {
         setClickable(true);
         mCheckableImageView = new CheckableImageView(getContext());
-        mCheckableImageView.setBackgroundResource(R.drawable.bg_appreciate);
+        mCheckableImageView.setBackgroundResource(mImageBackground);
         mCheckableImageView.setDuplicateParentStateEnabled(true);
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT);
+        int width = (int) mImageSize;
+        int height = (int) mImageSize;
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(width, height);
+        lp.gravity = Gravity.CENTER;
         addView(mCheckableImageView, lp);
 
         mTextView = new TextView(getContext());
-        mTextView.setText("+1");
-        mTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
-        mTextView.setTextColor(Color.parseColor("#2196F3"));
+        mTextView.setText(mText);
+        mTextView.setTextSize(mTextSize);
+        mTextView.setTextColor(mTextColor);
         mTextView.setGravity(Gravity.CENTER);
         mTextView.setVisibility(View.GONE);
         addView(mTextView, lp);

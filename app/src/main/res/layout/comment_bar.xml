@@ -28,20 +28,20 @@
             android:text="@string/send_comment_hint"
             android:textSize="16sp"/>
 
-        <FrameLayout
+        <xyz.dcme.library.widget.appreciateview.AppreciateView
             android:id="@+id/like_button"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical">
 
-            <xyz.dcme.library.widget.CheckableImageView
-                android:id="@+id/appreciate_image"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:background="@drawable/bg_appreciate"
-                android:contentDescription="@string/like"/>
-        </FrameLayout>
+            <!--<xyz.dcme.library.widget.appreciateview.CheckableImageView-->
+                <!--android:id="@+id/appreciate_image"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:background="@drawable/bg_appreciate"-->
+                <!--android:contentDescription="@string/like"/>-->
+        </xyz.dcme.library.widget.appreciateview.AppreciateView>
 
         <FrameLayout
             android:id="@+id/post_insert_photo"

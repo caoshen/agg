@@ -12,4 +12,12 @@
         </attr>
         <attr name="maxSelectionCount" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="AppreciateView">
+        <attr name="image_size" format="dimension"/>
+        <attr name="image_background" format="reference"/>
+        <attr name="text_color" format="color"/>
+        <attr name="text_size" format="dimension"/>
+        <attr name="text" format="string"/>
+    </declare-styleable>
 </resources>
