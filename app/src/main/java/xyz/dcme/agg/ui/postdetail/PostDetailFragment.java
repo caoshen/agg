@@ -122,8 +122,6 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
                 }
             }
         });
-//        mAppreciateImage = (CheckableImageView) rootView.findViewById(R.id.appreciate_image);
-        mLikeImage.setOnClickListener(this);
     }
 
     private void initAddImage(View rootView) {
