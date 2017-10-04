@@ -31,6 +31,7 @@ public class AppreciateView extends FrameLayout implements Checkable {
     private CheckableImageView mCheckableImageView;
     private TextView mTextView;
     private int mImageBackground;
+    private boolean mUnCheckDisable;
 
     public void setOnCheckedChangeListener(OnCheckedChangeListener onCheckedChangeListener) {
         mOnCheckedChangeListener = onCheckedChangeListener;
@@ -54,6 +55,7 @@ public class AppreciateView extends FrameLayout implements Checkable {
         mText = typedArray.getString(R.styleable.AppreciateView_text);
         mTextColor = typedArray.getColor(R.styleable.AppreciateView_text_color, getResources().getColor(R.color.checked_color));
         mTextSize = typedArray.getDimension(R.styleable.AppreciateView_text_size, 0);
+        mUnCheckDisable = typedArray.getBoolean(R.styleable.AppreciateView_uncheck_disable, false);
         typedArray.recycle();
         initViews();
     }
@@ -99,9 +101,6 @@ public class AppreciateView extends FrameLayout implements Checkable {
         if (mIsChecked != checked) {
             mIsChecked = checked;
             refreshDrawableState();
-            if (null != mOnCheckedChangeListener) {
-                mOnCheckedChangeListener.onCheckedChange(this, mIsChecked);
-            }
         }
     }
 
@@ -112,11 +111,17 @@ public class AppreciateView extends FrameLayout implements Checkable {
 
     @Override
     public void toggle() {
+        if (mUnCheckDisable) {
+            mIsChecked = false;
+        }
         setChecked(!mIsChecked);
         if (mIsChecked) {
             AnimUtils.startPulseAnim(mCheckableImageView);
             mTextView.setVisibility(View.VISIBLE);
             AnimUtils.startSlideUpAnim(mTextView);
+        }
+        if (null != mOnCheckedChangeListener) {
+            mOnCheckedChangeListener.onCheckedChange(this, mIsChecked);
         }
     }
 

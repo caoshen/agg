@@ -43,6 +43,11 @@ public class PostDetailParser {
         String clickCount = doc.select("span.hits.fr.mr10").text();
         String favCnt = doc.select("span.favorited.fr.mr10").text();
         String likeCnt = doc.select("span.up_vote.fr.mr10").text();
+        String appreciateTips = doc.select("a.J_topicVote").text();
+        int appreciate = 0;
+        if (!appreciateTips.contains("赞") && appreciateTips.contains("感谢已表示")) {
+            appreciate = 1;
+        }
         String content = "";
         Elements items = doc.select("div.ui-content");
         if (items != null && !items.isEmpty()) {
@@ -50,6 +55,7 @@ public class PostDetailParser {
         }
         PostContent postContent = new PostContent(name, avatar, content, createTime, title,
                 clickCount, favCnt, likeCnt, node);
+        postContent.setAppreciated(appreciate);
         data.add(postContent);
 
         PostMyComment myComment = new PostMyComment(null, null, null, null);

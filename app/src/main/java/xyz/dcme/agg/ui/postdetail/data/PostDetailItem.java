@@ -21,6 +21,7 @@ public class PostDetailItem implements Parcelable {
     protected String createTime;
     protected String floor;
     protected String likeCount;
+    protected int appreciated;
 
     public PostDetailItem(String userName, String avatar, String content, String createTime) {
         this.userName = userName;
@@ -36,6 +37,7 @@ public class PostDetailItem implements Parcelable {
         createTime = in.readString();
         floor = in.readString();
         likeCount = in.readString();
+        appreciated = in.readInt();
     }
 
     public String getLikeCount() {
@@ -86,6 +88,14 @@ public class PostDetailItem implements Parcelable {
         this.content = content;
     }
 
+    public int getAppreciated() {
+        return appreciated;
+    }
+
+    public void setAppreciated(int appreciated) {
+        this.appreciated = appreciated;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -99,5 +109,6 @@ public class PostDetailItem implements Parcelable {
         parcel.writeString(createTime);
         parcel.writeString(floor);
         parcel.writeString(likeCount);
+        parcel.writeInt(appreciated);
     }
 }

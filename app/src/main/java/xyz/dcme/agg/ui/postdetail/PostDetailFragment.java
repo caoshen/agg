@@ -58,7 +58,6 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     private int mNextPage = 2;
     private FrameLayout mInsertImage;
     private AppreciateView mLikeImage;
-//    private CheckableImageView mAppreciateImage;
 
     public static PostDetailFragment newInstance(String url) {
         PostDetailFragment fragment = new PostDetailFragment();
@@ -182,6 +181,11 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
         mAdapter.getDatas().clear();
         mAdapter.getDatas().addAll(data);
         mAdapter.notifyDataSetChanged();
+
+        if (!data.isEmpty()) {
+            PostDetailItem postDetailItem = data.get(0);
+            mLikeImage.setChecked(postDetailItem.getAppreciated() == 1);
+        }
     }
 
     @Override
