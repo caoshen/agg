@@ -292,6 +292,11 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     }
 
     @Override
+    public void onReplyVote(String url) {
+        mPresenter.like(url);
+    }
+
+    @Override
     public void onShare() {
         List<PostDetailItem> datas = mAdapter.getDatas();
         if (datas != null && !datas.isEmpty()) {

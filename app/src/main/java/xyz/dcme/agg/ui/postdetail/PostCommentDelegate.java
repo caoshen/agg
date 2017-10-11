@@ -17,8 +17,10 @@ import xyz.dcme.agg.R;
 import xyz.dcme.agg.account.OnAccountClickListener;
 import xyz.dcme.agg.ui.postdetail.data.PostComment;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
+import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HtmlUtils;
 import xyz.dcme.library.util.CircleTransformation;
+import xyz.dcme.library.widget.appreciateview.AppreciateView;
 
 public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
 
@@ -45,7 +47,7 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
     }
 
     @Override
-    public void convert(ViewHolder holder, PostDetailItem item, int position) {
+    public void convert(ViewHolder holder, final PostDetailItem item, int position) {
         LinearLayout container = holder.getView(R.id.post_comment_container);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -86,6 +88,19 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
         OnCommentIconClickListener commentIconClickListener =
                 new OnCommentIconClickListener(item.getUserName(), mCommentListener);
         holder.setOnClickListener(R.id.post_comment_to, commentIconClickListener);
+
+        AppreciateView appreciate = holder.getView(R.id.appreciate_view);
+        appreciate.setOnCheckedChangeListener(new AppreciateView.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChange(View view, boolean isChecked) {
+                if (isChecked) {
+                    if (item instanceof PostComment) {
+                        String url = Constants.REPLY_VOTE + ((PostComment) item).getReplyId();
+                        mCommentListener.onReplyVote(url);
+                    }
+                }
+            }
+        });
     }
 
 }

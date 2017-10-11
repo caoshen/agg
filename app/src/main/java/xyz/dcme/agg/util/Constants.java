@@ -55,4 +55,7 @@ public class Constants {
 
     // vote
     public static final String VOTE = HOME_URL +"/vote?topic_id=";
+
+    // Reply vote
+    public static final String REPLY_VOTE = HOME_URL +"/replyVote?reply_id=";
 }
