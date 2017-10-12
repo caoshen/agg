@@ -95,7 +95,7 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
             public void onCheckedChange(View view, boolean isChecked) {
                 if (isChecked) {
                     if (item instanceof PostComment) {
-                        String url = Constants.REPLY_VOTE + ((PostComment) item).getReplyId();
+                        String url = Constants.HOME_URL + ((PostComment) item).getVoteUrl();
                         mCommentListener.onReplyVote(url);
                     }
                 }

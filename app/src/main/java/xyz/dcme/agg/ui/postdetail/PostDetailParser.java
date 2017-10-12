@@ -86,9 +86,11 @@ public class PostDetailParser {
             String replyTime = replyItem.select("span.time").text();
             String floor = replyItem.select("span.fr.floor").first().text();
             String likeCount = replyItem.select("a.J_replyVote").attr("data-count");
+            String voteUrl = replyItem.select("a.J_replyVote").attr("href");
             PostComment postComment = new PostComment(replyUserName, replyAvatar, replyContent, replyTime);
             postComment.setFloor(floor);
             postComment.setLikeCount(likeCount);
+            postComment.setVoteUrl(voteUrl);
 
             data.add(postComment);
             LogUtils.d(TAG, "name: " + replyUserName + " content: " + replyContent + " avatar: " + replyAvatar);
