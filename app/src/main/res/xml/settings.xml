@@ -2,39 +2,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="@string/cache">
-
-        <Preference
-            android:key="clean"
-            android:title="@string/clean_cache">
-        </Preference>
-
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="double_click"
-            android:title="@string/double_click_exit">
-        </SwitchPreference>
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/advice">
-
-        <Preference
-            android:key="send_advice"
-            android:title="@string/send_advice">
-        </Preference>
-
-        <Preference
-            android:key="about_us"
-            android:title="@string/about_us">
-        </Preference>
-
-        <Preference
-            android:key="update"
-            android:title="@string/check_update">
-        </Preference>
-    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="account"

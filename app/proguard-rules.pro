@@ -19,3 +19,11 @@
 # Tencent Bugly
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
+
+# Alibaba fastjson
+-dontwarn com.alibaba.fastjson.**
+-keep public class com.alibaba.fastjson.**{*;}
+
+# Okio
+-dontwarn org.codehaus.**
+-keep public class org.codehaus.**{*;}

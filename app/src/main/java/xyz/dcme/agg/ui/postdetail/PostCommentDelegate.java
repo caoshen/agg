@@ -47,7 +47,7 @@ public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
     }
 
     @Override
-    public void convert(ViewHolder holder, final PostDetailItem item, int position) {
+    public void convert(final ViewHolder holder, final PostDetailItem item, int position) {
         LinearLayout container = holder.getView(R.id.post_comment_container);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
