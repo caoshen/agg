@@ -53,13 +53,6 @@
     <string name="server_error">服务器出错了</string>
     <string name="network_error">网络出错了</string>
     <string name="no_data">没有数据</string>
-    <string name="cache">缓存</string>
-    <string name="clean_cache">清除缓存</string>
-    <string name="double_click_exit">双击退出</string>
-    <string name="advice">建议</string>
-    <string name="send_advice">意见反馈</string>
-    <string name="about_us">关于我们</string>
-    <string name="check_update">检查更新</string>
     <string name="logout">退出</string>
     <string name="account">账号</string>
     <string name="more">更多</string>
@@ -69,7 +62,6 @@
     <string name="node_choose">节点管理</string>
 
     <string name="login_tips">需要先登录账号</string>
-    <string name="like">赞</string>
     <string name="select_image">选择图片</string>
     <string name="insert_photo">插入图片</string>
     <string name="please_input_content">请输入内容</string>
