@@ -22,8 +22,13 @@
 
 # Alibaba fastjson
 -dontwarn com.alibaba.fastjson.**
--keep public class com.alibaba.fastjson.**{*;}
+-keep class com.alibaba.fastjson.** { *; }
+-keepattributes Signature
+-keepattributes Annotation
 
 # Okio
+-dontwarn okio.**
 -dontwarn org.codehaus.**
 -keep public class org.codehaus.**{*;}
+
+-keep class xyz.dcme.agg.ui.postdetail.data.**{*;}
