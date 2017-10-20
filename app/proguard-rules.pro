@@ -19,6 +19,10 @@
 # Keep file name and line no
 -keepattributes SourceFile,LineNumberTable
 
+# Jsoup
+-dontwarn org.jsoup.**
+-keep class org.jsoup.**{*;}
+
 # Tencent Bugly
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
