@@ -16,6 +16,9 @@
 #   public *;
 #}
 
+# Keep file name and line no
+-keepattributes SourceFile,LineNumberTable
+
 # Tencent Bugly
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
