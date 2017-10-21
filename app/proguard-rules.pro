@@ -38,4 +38,4 @@
 -dontwarn org.codehaus.**
 -keep public class org.codehaus.**{*;}
 
--keep class xyz.dcme.agg.ui.postdetail.data.**{*;}
+-keep class xyz.dcme.agg.ui.postdetail.**{*;}
