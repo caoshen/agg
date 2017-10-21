@@ -63,4 +63,8 @@ public class AddFavouriteResp {
         return mSuccess == ADD_SUCCESS;
     }
 
+    @Override
+    public String toString() {
+        return "favourite resp, message:" + mMessage + ", success:" + mSuccess;
+    }
 }

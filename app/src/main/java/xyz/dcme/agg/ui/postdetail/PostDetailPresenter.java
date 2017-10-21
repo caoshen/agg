@@ -2,6 +2,7 @@ package xyz.dcme.agg.ui.postdetail;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -169,6 +170,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
             @Override
             public void onResponse(String response, int id) {
                 AddFavouriteResp resp = AddFavouriteParser.parseResponse(response);
+                Log.d(TAG, "like -> favourite resp:" + resp.toString());
                 mView.showFavouriteAddTips(resp.getTips());
             }
         });
@@ -185,6 +187,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
             @Override
             public void onResponse(String response, int id) {
                 VoteResp resp = VoteParser.parseResponse(response);
+                Log.d(TAG, "like -> vote resp:" + resp.toString());
                 mView.showPostLike(resp.getTips());
             }
         });

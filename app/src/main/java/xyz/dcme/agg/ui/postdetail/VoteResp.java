@@ -59,4 +59,8 @@ public class VoteResp {
         return mSuccess == VOTE_SUCCESS;
     }
 
+    @Override
+    public String toString() {
+        return "vote resp, message:" + mMessage + ", success:" + mSuccess;
+    }
 }
