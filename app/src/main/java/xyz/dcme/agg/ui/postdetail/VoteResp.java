@@ -15,6 +15,7 @@ public class VoteResp {
         ERROR_MAP.put("can_not_vote_your_topic", "不能喜欢自己的主题");
         ERROR_MAP.put("already_voted", "感谢已经表示过");
         ERROR_MAP.put("user_not_login", "请先登录再进行评价");
+        ERROR_MAP.put("can_not_vote_your_reply", "不能喜欢自己的赞");
     }
 
     private String mMessage;
