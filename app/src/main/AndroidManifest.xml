@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Light">
 
-        <!-- Tencent Bugly begin a-->
+        <!-- Tencent Bugly begin -->
         <meta-data
             android:name="BUGLY_APPID"
             android:value="2d0424a759"/>
@@ -82,12 +82,30 @@
         <activity android:name=".ui.node.NodeManagerActivity"/>
         <activity android:name=".ui.node.TagSelectActivity"/>
 
+
         <service android:name=".service.NotificationService"/>
 
         <provider
             android:name=".database.ContentProviders"
             android:authorities="xyz.dcme.agg.provider"
             android:exported="false"/>
+
+        <!-- Tencent Bugly upgrade begin -->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent"/>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+        <!-- Tencent Bugly upgrade end -->
+
     </application>
 
 </manifest>
