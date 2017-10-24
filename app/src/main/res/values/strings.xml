@@ -91,5 +91,7 @@
     <string name="tag_select">选择版块</string>
     <string name="copy_link">复制链接</string>
     <string name="has_copy">已复制到剪贴板</string>
+    <string name="admin">管理</string>
+    <string name="version_upgrade">版本更新</string>
 
 </resources>
