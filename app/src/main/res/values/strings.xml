@@ -93,5 +93,6 @@
     <string name="has_copy">已复制到剪贴板</string>
     <string name="admin">管理</string>
     <string name="version_upgrade">版本更新</string>
+    <string name="about">关于</string>
 
 </resources>

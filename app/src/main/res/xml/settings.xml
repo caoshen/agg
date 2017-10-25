@@ -16,5 +16,9 @@
             android:key="version"
             android:title="@string/version_upgrade">
         </Preference>
+        <Preference
+            android:key="about"
+            android:title="@string/about">
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
