@@ -94,5 +94,6 @@
     <string name="admin">管理</string>
     <string name="version_upgrade">版本更新</string>
     <string name="about">关于</string>
+    <string name="clear_cache">清除缓存</string>
 
 </resources>
