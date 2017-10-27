@@ -13,6 +13,10 @@
         android:key="admin"
         android:title="@string/admin">
         <Preference
+            android:key="advice"
+            android:title="@string/advice">
+        </Preference>
+        <Preference
             android:key="clear_cache"
             android:title="@string/clear_cache">
         </Preference>
