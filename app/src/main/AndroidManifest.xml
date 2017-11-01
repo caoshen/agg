@@ -81,7 +81,9 @@
 
         <activity android:name=".ui.node.NodeManagerActivity"/>
         <activity android:name=".ui.node.TagSelectActivity"/>
-
+        <activity
+            android:name=".ui.about.AboutActivity"
+            android:label="@string/about"/>
 
         <service android:name=".service.NotificationService"/>
 

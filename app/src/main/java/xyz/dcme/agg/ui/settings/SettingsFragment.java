@@ -1,6 +1,7 @@
 package xyz.dcme.agg.ui.settings;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
@@ -9,6 +10,7 @@ import android.preference.PreferenceScreen;
 import android.support.annotation.Nullable;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.ui.about.AboutActivity;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.HttpUtils;
 
@@ -17,6 +19,7 @@ public class SettingsFragment extends PreferenceFragment {
 
     public static final String LOG_TAG = "SettingsFragment";
     private static final String PREF_LOGOUT = "logout";
+    private static final String PREF_ABOUT = "about";
     private static final String PREF_CAT_ACCOUNT = "account";
 
     @Override
@@ -41,15 +44,23 @@ public class SettingsFragment extends PreferenceFragment {
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         String key = preference.getKey();
+        Activity activity = getActivity();
+        if (activity == null) {
+            return false;
+        }
         switch (key) {
             case PREF_LOGOUT: {
-                Activity activity = getActivity();
-                if (activity != null && !activity.isFinishing()) {
+                if (!activity.isFinishing()) {
                     AccountUtils.clearAccount(activity);
                     cleanCookie();
                     activity.setResult(Activity.RESULT_OK);
                     activity.finish();
                 }
+                break;
+            }
+            case PREF_ABOUT: {
+                Intent intent = new Intent(activity, AboutActivity.class);
+                startActivity(intent);
                 break;
             }
             default:
