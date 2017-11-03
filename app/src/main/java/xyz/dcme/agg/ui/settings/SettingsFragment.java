@@ -9,6 +9,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.support.annotation.Nullable;
 
+import com.tencent.bugly.beta.Beta;
+
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.about.AboutActivity;
 import xyz.dcme.agg.util.AccountUtils;
@@ -21,6 +23,8 @@ public class SettingsFragment extends PreferenceFragment {
     private static final String PREF_LOGOUT = "logout";
     private static final String PREF_ABOUT = "about";
     private static final String PREF_CAT_ACCOUNT = "account";
+    private static final String PREF_VERSION = "version";
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +60,10 @@ public class SettingsFragment extends PreferenceFragment {
                     activity.setResult(Activity.RESULT_OK);
                     activity.finish();
                 }
+                break;
+            }
+            case PREF_VERSION: {
+                Beta.checkUpgrade();
                 break;
             }
             case PREF_ABOUT: {
