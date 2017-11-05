@@ -2,6 +2,7 @@ package xyz.dcme.agg.ui.settings;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
@@ -24,6 +25,7 @@ public class SettingsFragment extends PreferenceFragment {
     private static final String PREF_ABOUT = "about";
     private static final String PREF_CAT_ACCOUNT = "account";
     private static final String PREF_VERSION = "version";
+    private static final String PREF_ADVICE = "advice";
 
 
     @Override
@@ -60,6 +62,13 @@ public class SettingsFragment extends PreferenceFragment {
                     activity.setResult(Activity.RESULT_OK);
                     activity.finish();
                 }
+                break;
+            }
+            case PREF_ADVICE: {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:cshenn@163.com"));
+                intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.advice_title));
+                startActivity(intent);
                 break;
             }
             case PREF_VERSION: {
