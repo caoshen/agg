@@ -26,6 +26,7 @@ public class SettingsFragment extends PreferenceFragment {
     private static final String PREF_CAT_ACCOUNT = "account";
     private static final String PREF_VERSION = "version";
     private static final String PREF_ADVICE = "advice";
+    private static final String SEND_MAIL = "mailto:cshenn@163.com";
 
 
     @Override
@@ -66,7 +67,7 @@ public class SettingsFragment extends PreferenceFragment {
             }
             case PREF_ADVICE: {
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:cshenn@163.com"));
+                intent.setData(Uri.parse(SEND_MAIL));
                 intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.advice_title));
                 startActivity(intent);
                 break;
