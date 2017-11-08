@@ -17,10 +17,6 @@
             android:title="@string/advice">
         </Preference>
         <Preference
-            android:key="clear_cache"
-            android:title="@string/clear_cache">
-        </Preference>
-        <Preference
             android:key="version"
             android:title="@string/version_upgrade">
         </Preference>
