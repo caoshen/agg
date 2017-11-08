@@ -58,4 +58,7 @@ public class Constants {
 
     // Reply vote
     public static final String REPLY_VOTE = HOME_URL +"/replyVote?reply_id=";
+
+    // Register
+    public static final String REGISTER_URL = "http://www.guanggoo.com/register";
 }
