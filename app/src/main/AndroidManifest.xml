@@ -29,7 +29,8 @@
         <!-- Tencent Bugly end -->
 
         <activity
-            android:name=".ui.main.MainActivity">
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -39,14 +40,17 @@
         <activity
             android:name=".ui.postdetail.PostDetailActivity"
             android:label="@string/post_detail"
+            android:screenOrientation="portrait"
             android:theme="@style/PostDetailTheme">
         </activity>
 
         <activity
-            android:name=".ui.login.LoginActivity"/>
+            android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.personal.PersonalInfoActivity">
+            android:name=".ui.personal.PersonalInfoActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <data
                     android:host="www.guanggoo.com"
@@ -60,30 +64,41 @@
         </activity>
 
         <activity
-            android:name=".ui.topic.TopicActivity"/>
+            android:name=".ui.topic.TopicActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.reply.ReplyActivity"/>
+            android:name=".ui.reply.ReplyActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.favorite.FavoriteActivity"/>
+            android:name=".ui.favorite.FavoriteActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.settings.SettingsActivity"/>
+            android:name=".ui.settings.SettingsActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.node.NodeChooseActivity"/>
+            android:name=".ui.node.NodeChooseActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.publish.PublishActivity"
             android:label="@string/publish"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
-        <activity android:name=".ui.node.NodeManagerActivity"/>
-        <activity android:name=".ui.node.TagSelectActivity"/>
+        <activity
+            android:name=".ui.node.NodeManagerActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.node.TagSelectActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.about.AboutActivity"
-            android:label="@string/about"/>
+            android:label="@string/about"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".service.NotificationService"/>
 
