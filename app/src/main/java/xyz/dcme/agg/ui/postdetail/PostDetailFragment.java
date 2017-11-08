@@ -1,5 +1,6 @@
 package xyz.dcme.agg.ui.postdetail;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -326,5 +327,16 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
     public void onCopyLink() {
         ClipBoardUtils.copyText(getActivity(), Constants.HOME_URL + mUrl);
         Toast.makeText(getActivity(), R.string.has_copy, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_LOGIN && resultCode == Activity.RESULT_CANCELED) {
+            FragmentActivity activity = getActivity();
+            if (activity != null && !activity.isFinishing()) {
+                activity.finish();
+            }
+        }
     }
 }
