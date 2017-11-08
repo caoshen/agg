@@ -26,7 +26,7 @@ public class SettingsFragment extends PreferenceFragment {
     private static final String PREF_CAT_ACCOUNT = "account";
     private static final String PREF_VERSION = "version";
     private static final String PREF_ADVICE = "advice";
-    private static final String SEND_MAIL = "mailto:cshenn@163.com";
+    private static final String SEND_MAIL = "mailto:guanggooandroid@163.com";
 
 
     @Override
