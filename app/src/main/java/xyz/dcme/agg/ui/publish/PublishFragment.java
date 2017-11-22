@@ -1,9 +1,11 @@
 package xyz.dcme.agg.ui.publish;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -16,7 +18,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.List;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.node.Node;
 import xyz.dcme.agg.ui.node.TagSelectActivity;
@@ -24,9 +30,10 @@ import xyz.dcme.agg.util.EditUtils;
 import xyz.dcme.agg.util.ImageUtils;
 import xyz.dcme.agg.util.LoginUtils;
 import xyz.dcme.library.base.BaseFragment;
+import xyz.dcme.library.util.LogUtils;
 
 public class PublishFragment extends BaseFragment
-        implements PublishContract.View {
+        implements PublishContract.View, EasyPermissions.PermissionCallbacks {
     private static final String LOG_TAG = "PublishFragment";
 
     private static final int REQ_CODE_ALBUM = 100;
@@ -34,6 +41,7 @@ public class PublishFragment extends BaseFragment
     private static final String ARG_URL = "argument_comment_url";
     private static final String ARG_NODE = "argument_selected_node";
     private static final int REQ_CODE_TAG = 300;
+    private static final int RC_READ_EXTERNAL_STORAGE_PERM = 1000;
 
     private PublishContract.Presenter mPresenter;
     private ImageButton mImgButton;
@@ -78,8 +86,7 @@ public class PublishFragment extends BaseFragment
         mImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mUploadResponse.setText("");
-                ImageUtils.getImageFromAlbum(PublishFragment.this, REQ_CODE_ALBUM);
+                selectImages();
             }
         });
 
@@ -103,6 +110,21 @@ public class PublishFragment extends BaseFragment
         if (isSendingComment) {
             mTitle.setVisibility(View.GONE);
             mNodeText.setVisibility(View.GONE);
+        }
+    }
+
+    @AfterPermissionGranted(RC_READ_EXTERNAL_STORAGE_PERM)
+    private void selectImages() {
+        String[] perms = {Manifest.permission.READ_EXTERNAL_STORAGE};
+        if (EasyPermissions.hasPermissions(getContext(), perms)) {
+            // Have permission, do the thing!
+            mUploadResponse.setText("");
+            ImageUtils.getImageFromAlbum(PublishFragment.this, REQ_CODE_ALBUM);
+        } else {
+            LogUtils.e(LOG_TAG, "selectImages -> storage permissions denied.");
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, getString(R.string.upload_image_permission),
+                    RC_READ_EXTERNAL_STORAGE_PERM, perms);
         }
     }
 
@@ -155,7 +177,7 @@ public class PublishFragment extends BaseFragment
             }
         } else {
             isValid = EditUtils.checkContentValid(getContext(), mTitle, mContent)
-                && mSelectedNode != null;
+                    && mSelectedNode != null;
             if (isValid) {
                 String title = mTitle.getText().toString();
                 String content = mContent.getText().toString();
@@ -175,8 +197,8 @@ public class PublishFragment extends BaseFragment
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQ_CODE_ALBUM && resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
-            File file = new File(ImageUtils.getImagePathFromURI(getActivity(), uri));
-            uploadImage(file);
+            File imageFile = new File(ImageUtils.getImagePathFromURI(getActivity(), uri));
+            uploadImage(imageFile);
         } else if (requestCode == REQ_CODE_TAG && resultCode == Activity.RESULT_OK) {
             mSelectedNode = data.getParcelableExtra(TagSelectActivity.KEY_SELECTED_TAG);
             if (null != mSelectedNode) {
@@ -230,5 +252,30 @@ public class PublishFragment extends BaseFragment
     @Override
     public void sendCommentFail() {
 
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        LogUtils.d(LOG_TAG, "onPermissionsGranted:" + requestCode + ":" + perms.size());
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        LogUtils.d(LOG_TAG, "onPermissionsDenied:" + requestCode + ":" + perms.size());
+        // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
+        // This will display a dialog directing them to enable the permission in app settings.
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this)
+                    .setTitle(R.string.need_storage_permission)
+                    .setRationale(R.string.storage_permission_rational)
+                    .build().show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 }
