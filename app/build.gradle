@@ -18,10 +18,10 @@ android {
             InputStream inputStream = project.rootProject.file('signing.properties').newDataInputStream() ;
             properties.load(inputStream)
 
-            def keyStoreProperty = properties.getProperty('KEY_STORE')
-            def keyAliasProperty = properties.getProperty('KEY_ALIAS')
-            def keyStorePasswordProperty = properties.getProperty('KEY_STORE_PASSWORD') ;
-            def keyAliasPasswordProperty = properties.getProperty('KEY_ALIAS_PASSWORD')
+            def keyStoreProperty = hasProperty('KEY_STORE') ? properties.getProperty('KEY_STORE') : "debug.keystore"
+            def keyAliasProperty = hasProperty('KEY_ALIAS') ? properties.getProperty('KEY_ALIAS') : "alias"
+            def keyStorePasswordProperty = hasProperty('KEY_STORE_PASSWORD') ? properties.getProperty('KEY_STORE_PASSWORD') : "storepwd"
+            def keyAliasPasswordProperty = hasProperty('KEY_ALIAS_PASSWORD') ? properties.getProperty('KEY_ALIAS_PASSWORD') : "aliaspwd"
             storeFile file(keyStoreProperty)
             keyAlias keyAliasProperty
             storePassword keyStorePasswordProperty
