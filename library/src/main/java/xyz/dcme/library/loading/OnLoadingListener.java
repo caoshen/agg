@@ -17,7 +17,7 @@ public abstract class OnLoadingListener {
         return LoadingManager.NO_LAYOUT_ID;
     }
 
-    public int generateRetryLayoutId() {
+    public int generateErrorLayoutId() {
         return LoadingManager.NO_LAYOUT_ID;
     }
 
@@ -29,7 +29,7 @@ public abstract class OnLoadingListener {
         return null;
     }
 
-    public View generateRetryLayout() {
+    public View generateErrorLayout() {
         return null;
     }
 
@@ -43,8 +43,8 @@ public abstract class OnLoadingListener {
         return false;
     }
 
-    public boolean isSetRetryLayout() {
-        if (generateRetryLayoutId() != LoadingManager.NO_LAYOUT_ID || generateRetryLayout() != null)
+    public boolean isSetErrorLayout() {
+        if (generateErrorLayoutId() != LoadingManager.NO_LAYOUT_ID || generateErrorLayout() != null)
             return true;
         return false;
     }

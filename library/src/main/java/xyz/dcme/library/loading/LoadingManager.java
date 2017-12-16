@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 
 public class LoadingManager {
     public static final int NO_LAYOUT_ID = 0;
+    public static final int NO_EMPTY_ID = NO_LAYOUT_ID;
+    public static final int NO_ERROR_ID = NO_LAYOUT_ID;
+    public static final int NO_LOADING_ID = NO_LAYOUT_ID;
+
     private static final OnLoadingListener DEFAULT_LOADING_LISTENER = new OnLoadingListener() {
         @Override
         public void setRetryEvent(View retryEvent) {
@@ -67,10 +71,78 @@ public class LoadingManager {
         mLoadingLayout.setContent(oldView);
         parentView.addView(mLoadingLayout, oldViewIndex, lp);
 
+        setupLoadingLayout(listener, mLoadingLayout);
+        setupErrorLayout(listener, mLoadingLayout);
+        setupEmptyLayout(listener, mLoadingLayout);
         // Set callback
         listener.setEmptyEvent(mLoadingLayout.getEmpty());
         listener.setRetryEvent(mLoadingLayout.getError());
         listener.setLoadingEvent(mLoadingLayout.getLoading());
 
+    }
+
+    private void setupEmptyLayout(OnLoadingListener listener, LoadingLayout loadingLayout) {
+        if (listener.isSetEmptyLayout()) {
+            int id = listener.generateEmptyLayoutId();
+            if (id != NO_LAYOUT_ID) {
+                loadingLayout.setEmpty(id);
+            } else {
+                loadingLayout.setEmpty(listener.generateEmptyLayout());
+            }
+        } else {
+            if (NO_EMPTY_ID != NO_LAYOUT_ID) {
+                loadingLayout.setEmpty(NO_EMPTY_ID);
+            }
+        }
+    }
+
+    private void setupErrorLayout(OnLoadingListener listener, LoadingLayout loadingLayout) {
+        if (listener.isSetErrorLayout()) {
+            int id = listener.generateErrorLayoutId();
+            if (id != NO_LAYOUT_ID) {
+                loadingLayout.setError(id);
+            } else {
+                loadingLayout.setError(listener.generateErrorLayout());
+            }
+        } else {
+            if (NO_ERROR_ID != NO_LAYOUT_ID) {
+                loadingLayout.setError(NO_ERROR_ID);
+            }
+        }
+    }
+
+    private void setupLoadingLayout(OnLoadingListener listener, LoadingLayout loadingLayout) {
+        if (listener.isSetLoadingLayout()) {
+            int id = listener.generateLoadingLayoutId();
+            if (id != NO_LAYOUT_ID) {
+                loadingLayout.setLoading(id);
+            } else {
+                loadingLayout.setLoading(listener.generateLoadingLayout());
+            }
+        } else {
+            if (NO_LOADING_ID != NO_LAYOUT_ID) {
+                loadingLayout.setLoading(NO_LOADING_ID);
+            }
+        }
+    }
+
+    public void showLoading() {
+        mLoadingLayout.showLoading();
+    }
+
+    public void showContent() {
+        mLoadingLayout.showContent();
+    }
+
+    public void showError() {
+        mLoadingLayout.showError();
+    }
+
+    public void showEmpty() {
+        mLoadingLayout.showError();
+    }
+
+    public static LoadingManager generate(Object activityOrFragmentOrView, OnLoadingListener listener) {
+        return new LoadingManager(activityOrFragmentOrView, listener);
     }
 }
