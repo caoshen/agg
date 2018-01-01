@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import xyz.dcme.agg.util.HttpConfig;
+import xyz.dcme.library.loading.LoadingManager;
 
 
 public class AggApplication extends Application {
@@ -31,6 +32,11 @@ public class AggApplication extends Application {
         OkHttpUtils.initClient(client);
 
         initBugly();
+        initBaseLayout();
+    }
+
+    private void initBaseLayout() {
+        LoadingManager.NO_EMPTY_ID = R.layout.base_empty;
     }
 
     private void initBugly() {

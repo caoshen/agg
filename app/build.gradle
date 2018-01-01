@@ -65,8 +65,9 @@ dependencies {
     compile 'com.github.Aspsine:IRecyclerView:0.0.5'
     compile 'pub.devrel:easypermissions:1.0.1'
     compile 'com.meituan.android.walle:library:1.1.5'
-
+    compile 'com.qmuiteam:qmui:1.0.6'
     compile project(':library')
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
 }
 
 walle {

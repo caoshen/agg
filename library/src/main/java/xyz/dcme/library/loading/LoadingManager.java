@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 public class LoadingManager {
     public static final int NO_LAYOUT_ID = 0;
-    public static final int NO_EMPTY_ID = NO_LAYOUT_ID;
-    public static final int NO_ERROR_ID = NO_LAYOUT_ID;
-    public static final int NO_LOADING_ID = NO_LAYOUT_ID;
+    public static int NO_EMPTY_ID = NO_LAYOUT_ID;
+    public static int NO_ERROR_ID = NO_LAYOUT_ID;
+    public static int NO_LOADING_ID = NO_LAYOUT_ID;
 
     private static final OnLoadingListener DEFAULT_LOADING_LISTENER = new OnLoadingListener() {
         @Override
