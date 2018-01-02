@@ -103,4 +103,7 @@
     <string name="need_storage_permission">请开启存储权限</string>
     <string name="storage_permission_rational">上传图片需要访问你的相册．请在＂权限管理＂中打开＂读写手机存储＂权限.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
