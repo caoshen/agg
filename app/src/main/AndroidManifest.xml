@@ -30,13 +30,20 @@
         <!-- Tencent Bugly end -->
 
         <activity
-            android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait">
+            android:name=".ui.activity.LauncherActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
 
         <activity
             android:name=".ui.postdetail.PostDetailActivity"
