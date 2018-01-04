@@ -10,7 +10,7 @@ public class LauncherActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, HomeActivity.class));
+        startActivity(new Intent(this, AggMainActivity.class));
         finish();
     }
 }
