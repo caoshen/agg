@@ -2,7 +2,8 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="xyz.dcme.agg.ui.fragment.HomeFragment">
+             android:background="?attr/app_content_bg_color"
+             tools:context="xyz.dcme.agg.frag.home.HomeFragment">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/home_pager"
@@ -15,7 +16,8 @@
         android:id="@+id/home_tabs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tab_height"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:background="?attr/qmui_list_item_bg_with_border_top">
     </com.qmuiteam.qmui.widget.QMUITabSegment>
 
 </FrameLayout>

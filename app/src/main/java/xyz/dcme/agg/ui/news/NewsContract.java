@@ -19,5 +19,7 @@ public interface NewsContract {
         void showLoad(List<Post> data);
 
         void showIndicator(boolean isActive);
+
+        void showError();
     }
 }

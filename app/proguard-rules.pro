@@ -19,6 +19,10 @@
 # Keep file name and line no
 -keepattributes SourceFile,LineNumberTable
 
+# Support v4
+-dontwarn android.support.v4.**
+-keep class android.support.v4.**{*;}
+
 # Jsoup
 -dontwarn org.jsoup.**
 -keep class org.jsoup.**{*;}
@@ -26,6 +30,10 @@
 # Tencent Bugly
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
+
+# QMUI
+-dontwarn com.qmuiteam.qmui.**
+-keep public class com.qmuiteam.qmui.**{*;}
 
 # Alibaba fastjson
 -dontwarn com.alibaba.fastjson.**

@@ -44,6 +44,12 @@
         <item>关注的人</item>
     </string-array>
 
+    <string-array name="tab_titles_not_login">
+        <item>全部</item>
+        <item>最新话题</item>
+        <item>精华主题</item>
+    </string-array>
+
     <string-array name="life_nodes_title">
         <item>楼市房产</item>
         <item>城市建设</item>

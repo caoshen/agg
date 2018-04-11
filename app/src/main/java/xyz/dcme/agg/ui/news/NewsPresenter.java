@@ -32,7 +32,7 @@ public class NewsPresenter implements NewsContract.Presenter {
         HttpUtils.get(url, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                mView.showIndicator(false);
+                mView.showError();
             }
 
             @Override
@@ -51,7 +51,7 @@ public class NewsPresenter implements NewsContract.Presenter {
         HttpUtils.get(url, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                mView.showIndicator(false);
+                mView.showError();
             }
 
             @Override

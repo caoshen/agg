@@ -46,7 +46,7 @@ public class NodeListPresenter implements NodeListContract.Presenter {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtils.e(LOG_TAG, e.toString());
-                mView.showIndicator(false);
+                mView.showError();
             }
 
             @Override
@@ -70,6 +70,7 @@ public class NodeListPresenter implements NodeListContract.Presenter {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtils.e(LOG_TAG, e.toString());
+                mView.showError();
             }
 
             @Override
@@ -98,6 +99,7 @@ public class NodeListPresenter implements NodeListContract.Presenter {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtils.e(LOG_TAG, e.toString());
+                mView.showError();
             }
 
             @Override

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--top bar-->
+    <attr name="app_primary_color" format="color"/>
+    <!--content-->
+    <attr name="app_content_bg_color" format="color"/>
+
     <declare-styleable name="BaseTheme">
         <attr name="actionBarInsetStart" format="dimension"/>
     </declare-styleable>

@@ -101,6 +101,11 @@ public class NewsFragment extends BaseFragment implements
         swipe.setRefreshing(isActive);
     }
 
+    @Override
+    public void showError() {
+
+    }
+
     public static NewsFragment newInstance(String name) {
         NewsFragment fragment = new NewsFragment();
         Bundle args = new Bundle();

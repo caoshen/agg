@@ -17,4 +17,7 @@
     <dimen name="margin_12">12dp</dimen>
     <dimen name="padding_8">8dp</dimen>
     <dimen name="home_tab_height">49dp</dimen>
+    <dimen name="list_divider_height_negative">-1px</dimen>
+    <dimen name="list_divider_height">1px</dimen>
+    <dimen name="padding_4">4dp</dimen>
 </resources>
