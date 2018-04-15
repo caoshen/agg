@@ -15,16 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.base.BaseFragment;
+import xyz.dcme.agg.frag.home.HomeControllerFragment;
+import xyz.dcme.agg.frag.node.NodeAllCategoryActivity;
 import xyz.dcme.agg.ui.node.Node;
 import xyz.dcme.agg.ui.node.NodeMainContract;
 import xyz.dcme.agg.ui.node.NodeMainPresenter;
-import xyz.dcme.agg.ui.node.NodeManagerActivity;
 import xyz.dcme.library.base.BaseFragmentAdapter;
 import xyz.dcme.library.util.LogUtils;
 
 
-public class ExploreTabFragment extends BaseFragment implements View.OnClickListener, NodeMainContract.View {
+public class ExploreTabFragment extends HomeControllerFragment implements View.OnClickListener, NodeMainContract.View {
     private static final int REQUEST_CHOOSE_NODE = 1000;
     private static final String LOG_TAG = "ExploreTabFragment";
     private NodeMainContract.Presenter mPresenter;
@@ -65,7 +65,7 @@ public class ExploreTabFragment extends BaseFragment implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.more: {
-                Intent intent = new Intent(getActivity(), NodeManagerActivity.class);
+                Intent intent = new Intent(getActivity(), NodeAllCategoryActivity.class);
                 startActivityForResult(intent, REQUEST_CHOOSE_NODE);
                 break;
             }

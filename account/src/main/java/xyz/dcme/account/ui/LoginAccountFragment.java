@@ -1,5 +1,6 @@
 package xyz.dcme.account.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.content.LocalBroadcastManager;
@@ -31,8 +32,6 @@ import xyz.dcme.library.util.HttpUtils;
 
 
 public class LoginAccountFragment extends QMUIFragment {
-    public static final String KEY_EXTRA_LOGIN_ACCOUNT = "key_login_account";
-
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
@@ -49,7 +48,13 @@ public class LoginAccountFragment extends QMUIFragment {
     private void initViews(View rootView) {
         QMUITopBar topBar = rootView.findViewById(R.id.topbar);
         topBar.setTitle(R.string.login);
-        topBar.addLeftBackImageButton();
+        topBar.addLeftImageButton(R.drawable.ic_topbar_back_blue, com.qmuiteam.qmui.R.id.qmui_topbar_item_left_back)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().finish();
+                    }
+                });
 
         mEmailView = (AutoCompleteTextView) rootView.findViewById(R.id.email);
 
@@ -95,6 +100,7 @@ public class LoginAccountFragment extends QMUIFragment {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
+
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -184,6 +190,9 @@ public class LoginAccountFragment extends QMUIFragment {
                 if (!TextUtils.isEmpty(username)) {
                     AccountManager.setActiveAccountInfo(getActivity(), accountInfo);
                     sendLoginBroadcast();
+                    Intent data = new Intent();
+                    data.putExtra(LoginConstants.KEY_EXTRA_LOGIN_ACCOUNT, accountInfo);
+                    getActivity().setResult(Activity.RESULT_OK, data);
                     getActivity().finish();
                 } else {
                     mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -227,6 +236,13 @@ public class LoginAccountFragment extends QMUIFragment {
      */
     private void showProgress(final boolean show) {
 //        AnimationUtils.showProgress(mProgressView, mLoginFormView, show);
+        if (show) {
+            mEmailSignInButton.setVisibility(View.GONE);
+            mProgressView.setVisibility(View.VISIBLE);
+        } else {
+            mEmailSignInButton.setVisibility(View.VISIBLE);
+            mProgressView.setVisibility(View.GONE);
+        }
     }
 
 }

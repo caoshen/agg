@@ -22,9 +22,10 @@ import xyz.dcme.agg.frag.explore.ExploreTabFragment;
 import xyz.dcme.agg.frag.myself.MySelfFragment;
 import xyz.dcme.agg.frag.recommend.RecommendTabFragment;
 import xyz.dcme.agg.frag.whatshot.WhatsHotFragment;
+import xyz.dcme.arch.QMUIFragment;
 
 public class HomeFragment extends BaseFragment {
-
+    private static final String TAG = HomeFragment.class.getSimpleName();
     private ViewPager mViewPager;
     private QMUITabSegment mTabs;
     private PagerAdapter mAdapter;
@@ -51,10 +52,25 @@ public class HomeFragment extends BaseFragment {
     private void initPagers(View view) {
         mViewPager = view.findViewById(R.id.home_pager);
         mPages = new HashMap<>();
-        mPages.put(Pager.HOME, new RecommendTabFragment());
-        mPages.put(Pager.HOT, new WhatsHotFragment());
-        mPages.put(Pager.DISCOVER, new ExploreTabFragment());
-        mPages.put(Pager.ME, new MySelfFragment());
+        HomeControllerFragment.HomeControllerListener listener = new HomeControllerFragment.HomeControllerListener() {
+            @Override
+            public void startFragment(QMUIFragment fragment) {
+                HomeFragment.this.startFragment(fragment);
+            }
+        };
+        RecommendTabFragment recommendTabFragment = new RecommendTabFragment();
+        recommendTabFragment.setHomeControllerListener(listener);
+        WhatsHotFragment whatsHotFragment = new WhatsHotFragment();
+        whatsHotFragment.setHomeControllerListener(listener);
+        ExploreTabFragment exploreTabFragment = new ExploreTabFragment();
+        exploreTabFragment.setHomeControllerListener(listener);
+        MySelfFragment mySelfFragment = new MySelfFragment();
+        mySelfFragment.setHomeControllerListener(listener);
+
+        mPages.put(Pager.HOME, recommendTabFragment);
+        mPages.put(Pager.HOT, whatsHotFragment);
+        mPages.put(Pager.DISCOVER, exploreTabFragment);
+        mPages.put(Pager.ME, mySelfFragment);
 
         mAdapter = new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override

@@ -1,4 +1,4 @@
-package xyz.dcme.agg.base;
+package xyz.dcme.agg.frag.home;
 
 import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,20 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.aspsine.irecyclerview.IRecyclerView;
-import com.aspsine.irecyclerview.OnLoadMoreListener;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import xyz.dcme.agg.R;
+import xyz.dcme.agg.base.BaseRecycleFragment;
+import xyz.dcme.agg.base.BaseRecyclerAdapter;
+import xyz.dcme.agg.base.NetworkUtils;
 
-public abstract class BaseRecycleTopBarFragment extends BaseFragment implements
-        QMUIPullRefreshLayout.OnPullListener, OnLoadMoreListener {
+public abstract class HomeControllerTopBarFragment extends HomeControllerFragment implements QMUIPullRefreshLayout.OnPullListener {
     protected QMUIPullRefreshLayout mPullRefreshLayout;
     protected IRecyclerView mIRecyclerView;
-    protected QMUIEmptyView mEmptyView;
     private QMUITopBar mTopbar;
+    protected QMUIEmptyView mEmptyView;
 
     @Override
     protected View onCreateView() {
@@ -36,16 +37,6 @@ public abstract class BaseRecycleTopBarFragment extends BaseFragment implements
         mTopbar = rootView.findViewById(R.id.topbar);
         mTopbar.setTitle(getTopBarTitleStrId());
 
-        if (isTopBarBack()) {
-            mTopbar.addLeftImageButton(xyz.dcme.account.R.drawable.ic_topbar_back_blue, com.qmuiteam.qmui.R.id.qmui_topbar_item_left_back)
-                    .setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            popBackStack();
-                        }
-                    });
-        }
-
         mPullRefreshLayout = rootView.findViewById(R.id.pull_to_refresh);
         mPullRefreshLayout.setOnPullListener(this);
 
@@ -57,11 +48,6 @@ public abstract class BaseRecycleTopBarFragment extends BaseFragment implements
         mEmptyView = rootView.findViewById(R.id.emptyView);
 
 //        checkNetwork();
-    }
-
-    // Back icon is not
-    protected boolean isTopBarBack() {
-        return false;
     }
 
     protected void showEmptyView(BaseRecycleFragment.EMPTY_VIEW_TYPE type) {
@@ -76,7 +62,7 @@ public abstract class BaseRecycleTopBarFragment extends BaseFragment implements
                         });
             }
             mPullRefreshLayout.setVisibility(View.GONE);
-        } else if (type == BaseRecycleFragment.EMPTY_VIEW_TYPE.LOADING) {
+        } else if (type == BaseRecycleFragment.EMPTY_VIEW_TYPE.LOADING){
             mEmptyView.show(true);
             mPullRefreshLayout.setVisibility(View.GONE);
         } else if (type == BaseRecycleFragment.EMPTY_VIEW_TYPE.NORMAL) {
@@ -128,11 +114,6 @@ public abstract class BaseRecycleTopBarFragment extends BaseFragment implements
 
     @Override
     public void onRefresh() {
-
-    }
-
-    @Override
-    public void onLoadMore() {
 
     }
 

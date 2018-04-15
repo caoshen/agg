@@ -118,4 +118,5 @@ public class HistoryFragment extends BaseFragment implements OnLoadMoreListener 
         mData.clear();
         mAdapter.notifyDataSetChanged();
     }
+
 }

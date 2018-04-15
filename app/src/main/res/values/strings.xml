@@ -109,5 +109,6 @@
     <string name="load_fail">加载失败</string>
     <string name="error_network">请检测网络能否正常连接</string>
     <string name="retry">点击重试</string>
+    <string name="logout_current">退出当前账号</string>
 
 </resources>

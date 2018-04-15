@@ -9,4 +9,9 @@ public class LoginConstants {
     public static final String LOGIN_URL = HOME_URL + "/login";
     public static final String ACTION_LOGIN_SUCCESS = "xyz.dcme.agg.action.LOGIN_SUCCESS";
 
+    public static final String KEY_EXTRA_LOGIN_ACCOUNT = "key_login_account";
+
+    // Action
+    public static final String ACTION_LOGIN_ACCOUNT = "com.dcme.agg.action.LOGIN_ACCOUNT";
+    public static final String ACTION_LOGOUT_ACCOUNT = "com.dcme.agg.action.LOGOUT_ACCOUNT";
 }

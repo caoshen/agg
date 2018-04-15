@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="agg_main_activity" type="id"/>
+    <item name="id_node_all_category_activity" type="id"/>
 </resources>

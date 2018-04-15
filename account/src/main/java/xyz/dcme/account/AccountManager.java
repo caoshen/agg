@@ -17,6 +17,14 @@ public class AccountManager {
         return !TextUtils.isEmpty(getActiveAccountName(context));
     }
 
+    public static AccountInfo checkLocalLoginAccount(Context context) {
+        if (hasLoginAccount(context)) {
+            return getActiveAccountInfo(context);
+        } else {
+            return null;
+        }
+    }
+
     public static void getAccount(Context context, LoginHandler handler) {
         if (hasLoginAccount(context)) {
             handler.onLogin(getActiveAccountInfo(context));
@@ -51,7 +59,7 @@ public class AccountManager {
         if (TextUtils.isEmpty(chosenAccount)) {
             return null;
         } else {
-            return addKeyPrefix(prefix, chosenAccount);
+            return addKeyPrefix(chosenAccount, prefix);
         }
     }
 
@@ -89,5 +97,9 @@ public class AccountManager {
     private static void setActiveAccount(Context context, String name) {
         SharedPreferences sp = getSharedPreferences(context);
         sp.edit().putString(PREF_ACTIVE_ACCOUNT, name).apply();
+    }
+
+    public static void clearAccount(Context context) {
+        setActiveAccount(context, null);
     }
 }

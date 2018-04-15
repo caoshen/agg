@@ -56,7 +56,9 @@ public abstract class QMUIFragmentActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(transitionConfig.enter, transitionConfig.exit, transitionConfig.popenter, transitionConfig.popout)
-                .replace(getContextViewId(), fragment, tagName)
+//                .replace(getContextViewId(), fragment, tagName)
+                // if use replace, when swipe back, home fragment is white
+                .add(getContextViewId(), fragment, tagName)
                 .addToBackStack(tagName)
                 .commit();
     }

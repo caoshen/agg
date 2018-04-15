@@ -8,13 +8,12 @@ import android.support.annotation.Nullable;
 
 import xyz.dcme.account.AccountInfo;
 import xyz.dcme.account.ErrorStatus;
+import xyz.dcme.account.LoginConstants;
 import xyz.dcme.account.LoginHandler;
 
 
 public class AccountDummyActivity extends Activity {
-
     private static final int REQ_CODE_LOGIN = 1;
-    private static final String KEY_ACCOUNT_INFO = "key_account_info";
     private static LoginHandler mCallback;
 
     public static void startLogin(Context context, LoginHandler handler) {
@@ -40,7 +39,7 @@ public class AccountDummyActivity extends Activity {
         }
         if (requestCode == REQ_CODE_LOGIN) {
             if (resultCode == RESULT_OK) {
-                AccountInfo accountInfo = data.getParcelableExtra(KEY_ACCOUNT_INFO);
+                AccountInfo accountInfo = data.getParcelableExtra(LoginConstants.KEY_EXTRA_LOGIN_ACCOUNT);
                 mCallback.onLogin(accountInfo);
             } else {
                 ErrorStatus errorStatus = new ErrorStatus(ErrorStatus.LOGIN_CANCEL,

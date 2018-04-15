@@ -9,16 +9,16 @@ import java.util.List;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.base.BaseRecycleFragment;
-import xyz.dcme.agg.base.BaseRecycleTopBarFragment;
 import xyz.dcme.agg.base.BaseRecyclerAdapter;
 import xyz.dcme.agg.base.RecyclerViewHolder;
+import xyz.dcme.agg.frag.home.HomeControllerTopBarFragment;
 import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.ui.hot.HotContract;
 import xyz.dcme.agg.ui.hot.HotPresenter;
 import xyz.dcme.agg.ui.post.PostCommonAdapter;
 import xyz.dcme.library.util.ImageLoader;
 
-public class WhatsHotFragment extends BaseRecycleTopBarFragment implements HotContract.View {
+public class WhatsHotFragment extends HomeControllerTopBarFragment implements HotContract.View {
     private List<Post> mData = new ArrayList<>();
     private HotContract.Presenter mPresenter;
     private WhatsHotRecyclerAdapter mRecyclerAdapter;
