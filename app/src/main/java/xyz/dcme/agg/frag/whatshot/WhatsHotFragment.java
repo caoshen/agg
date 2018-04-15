@@ -72,8 +72,6 @@ public class WhatsHotFragment extends HomeControllerTopBarFragment implements Ho
         if (!isActive) {
             mPullRefreshLayout.finishRefresh();
             showEmptyView(BaseRecycleFragment.EMPTY_VIEW_TYPE.NORMAL);
-        } else {
-            showEmptyView(BaseRecycleFragment.EMPTY_VIEW_TYPE.LOADING);
         }
     }
 

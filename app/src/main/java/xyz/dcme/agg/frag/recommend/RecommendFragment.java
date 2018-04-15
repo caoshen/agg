@@ -89,8 +89,6 @@ public class RecommendFragment extends BaseRecycleFragment implements NewsContra
         if (!isActive) {
             mPullRefreshLayout.finishRefresh();
             showEmptyView(EMPTY_VIEW_TYPE.NORMAL);
-        } else {
-            showEmptyView(EMPTY_VIEW_TYPE.LOADING);
         }
     }
 

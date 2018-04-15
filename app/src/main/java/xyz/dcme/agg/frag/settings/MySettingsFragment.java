@@ -63,6 +63,7 @@ public class MySettingsFragment extends BaseFragment {
 
     private void addLogoutItem(QMUIGroupListView groupListView) {
         QMUICommonListItemView itemLogout = groupListView.createItemView(getString(R.string.logout_current));
+        itemLogout.getTextView().setTextColor(getResources().getColor(R.color.warning_text_color));
         QMUIGroupListView.newSection(getActivity())
                 .addItemView(itemLogout, new View.OnClickListener() {
                     @Override

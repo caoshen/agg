@@ -62,6 +62,7 @@
     <color name="app_body_text_2">#8a000000</color>
     <color name="text_on_primary">#ff004446</color>
     <color name="subtitle_on_primary">#de004446</color>
+    <color name="warning_text_color">#FF0000</color>
 
     <!-- Session Detail colors. -->
 

@@ -98,8 +98,6 @@ public class ExploreTopicFragment extends BaseRecycleFragment implements NodeLis
         if (!isActive) {
             mPullRefreshLayout.finishRefresh();
             showEmptyView(EMPTY_VIEW_TYPE.NORMAL);
-        } else {
-            showEmptyView(EMPTY_VIEW_TYPE.LOADING);
         }
     }
 
