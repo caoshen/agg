@@ -12,6 +12,10 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
+import xyz.dcme.account.AccountInfo;
+import xyz.dcme.account.AccountManager;
+import xyz.dcme.account.ErrorStatus;
+import xyz.dcme.account.LoginHandler;
 import xyz.dcme.agg.R;
 
 public abstract class BaseRecycleFragment extends BaseFragment implements QMUIPullRefreshLayout.OnPullListener, OnLoadMoreListener {
@@ -45,12 +49,6 @@ public abstract class BaseRecycleFragment extends BaseFragment implements QMUIPu
         autoRefresh();
     }
 
-    public enum EMPTY_VIEW_TYPE {
-        LOADING,
-        ERROR,
-        NORMAL;
-    }
-
     protected void showEmptyView(EMPTY_VIEW_TYPE type) {
         if (type == EMPTY_VIEW_TYPE.ERROR) {
             if (!NetworkUtils.isConnected(getActivity())) {
@@ -63,12 +61,30 @@ public abstract class BaseRecycleFragment extends BaseFragment implements QMUIPu
                         });
             }
             mPullRefreshLayout.setVisibility(View.GONE);
-        } else if (type == EMPTY_VIEW_TYPE.LOADING){
+        } else if (type == EMPTY_VIEW_TYPE.LOADING) {
             mEmptyView.show(true);
             mPullRefreshLayout.setVisibility(View.GONE);
         } else if (type == EMPTY_VIEW_TYPE.NORMAL) {
             mEmptyView.hide();
             mPullRefreshLayout.setVisibility(View.VISIBLE);
+        } else if (type == EMPTY_VIEW_TYPE.LOGIN) {
+            mEmptyView.show(false, getString(R.string.login_please), "",
+                    getString(R.string.action_sign_in), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AccountManager.getAccount(getActivity(), new LoginHandler() {
+                                @Override
+                                public void onLogin(AccountInfo account) {
+                                    autoRefresh();
+                                }
+
+                                @Override
+                                public void onError(ErrorStatus status) {
+
+                                }
+                            });
+                        }
+                    });
         }
     }
 
@@ -121,6 +137,13 @@ public abstract class BaseRecycleFragment extends BaseFragment implements QMUIPu
     @Override
     public void onLoadMore() {
 
+    }
+
+    public enum EMPTY_VIEW_TYPE {
+        LOADING,
+        ERROR,
+        NORMAL,
+        LOGIN;
     }
 
 }
