@@ -108,7 +108,7 @@ public class ExploreTopicFragment extends BaseRecycleFragment implements NodeLis
 
     @Override
     public void showLoginTips() {
-
+        showEmptyView(EMPTY_VIEW_TYPE.LOGIN);
     }
 
     private class ExploreTopicAdapter extends BaseRecyclerAdapter<Post> {
