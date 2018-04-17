@@ -68,7 +68,7 @@ public abstract class BaseRecycleFragment extends BaseFragment implements QMUIPu
             mEmptyView.hide();
             mPullRefreshLayout.setVisibility(View.VISIBLE);
         } else if (type == EMPTY_VIEW_TYPE.LOGIN) {
-            mEmptyView.show(false, getString(R.string.login_please), "",
+            mEmptyView.show(false, getString(R.string.login_please), getString(R.string.login_reason),
                     getString(R.string.action_sign_in), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -85,6 +85,8 @@ public abstract class BaseRecycleFragment extends BaseFragment implements QMUIPu
                             });
                         }
                     });
+            mPullRefreshLayout.finishRefresh();
+            mPullRefreshLayout.setVisibility(View.GONE);
         }
     }
 

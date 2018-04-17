@@ -75,7 +75,12 @@ public class NodeListPresenter implements NodeListContract.Presenter {
 
             @Override
             public void onResponse(String response, int id) {
-                mView.showRefresh(PostParser.parseResponse(response));
+                if (LoginUtils.needLogin(response)) {
+                    mView.showLoginTips();
+                } else {
+                    mView.showIndicator(false);
+                    mView.showRefresh(PostParser.parseResponse(response));
+                }
             }
         });
     }

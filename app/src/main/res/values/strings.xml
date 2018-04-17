@@ -110,5 +110,6 @@
     <string name="error_network">请检测网络能否正常连接</string>
     <string name="retry">点击重试</string>
     <string name="logout_current">退出当前账号</string>
+    <string name="login_reason">此版块需要先登录</string>
 
 </resources>
