@@ -17,7 +17,7 @@ import xyz.dcme.agg.base.RecyclerViewHolder;
 import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.ui.favorite.FavoriteContract;
 import xyz.dcme.agg.ui.favorite.FavoritePresenter;
-import xyz.dcme.agg.ui.post.PostCommonAdapter;
+import xyz.dcme.agg.ui.post.OnRvItemListener;
 import xyz.dcme.library.util.ImageLoader;
 
 
@@ -144,7 +144,7 @@ public class FavouriteArticleFragment extends BaseRecycleTopBarFragment implemen
             ImageView iv = holder.getImageView(R.id.post_avatar);
             ImageLoader.displayCircle(mContext, iv, item.avatarUrl);
 
-            holder.setClickListener(R.id.post_item, new PostCommonAdapter.OnRvItemListener(mContext, item));
+            holder.setClickListener(R.id.post_item, new OnRvItemListener(mContext, item));
         }
     }
 }

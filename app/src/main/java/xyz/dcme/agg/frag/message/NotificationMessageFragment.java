@@ -11,10 +11,10 @@ import xyz.dcme.agg.base.BaseRecycleFragment;
 import xyz.dcme.agg.base.BaseRecycleTopBarFragment;
 import xyz.dcme.agg.base.BaseRecyclerAdapter;
 import xyz.dcme.agg.base.RecyclerViewHolder;
+import xyz.dcme.agg.frag.article.ArticleActivity;
 import xyz.dcme.agg.ui.notify.Message;
 import xyz.dcme.agg.ui.notify.MessageContract;
 import xyz.dcme.agg.ui.notify.MessagePresenter;
-import xyz.dcme.agg.ui.postdetail.PostDetailActivity;
 
 public class NotificationMessageFragment extends BaseRecycleTopBarFragment implements MessageContract.View {
     public static final String LOG_TAG = NotificationMessageFragment.class.getSimpleName();
@@ -122,7 +122,7 @@ public class NotificationMessageFragment extends BaseRecycleTopBarFragment imple
             holder.setClickListener(R.id.post_item, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    PostDetailActivity.startActivity(mContext, item.getLink());
+                    ArticleActivity.startActivity(mContext, item.getLink());
                 }
             });
         }

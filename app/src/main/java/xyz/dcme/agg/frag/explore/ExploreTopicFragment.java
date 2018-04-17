@@ -17,7 +17,7 @@ import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.ui.node.Node;
 import xyz.dcme.agg.ui.node.NodeListContract;
 import xyz.dcme.agg.ui.node.NodeListPresenter;
-import xyz.dcme.agg.ui.post.PostCommonAdapter;
+import xyz.dcme.agg.ui.post.OnRvItemListener;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.library.util.ImageLoader;
 
@@ -139,7 +139,7 @@ public class ExploreTopicFragment extends BaseRecycleFragment implements NodeLis
             ImageView iv = holder.getImageView(R.id.post_avatar);
             ImageLoader.displayCircle(mContext, iv, post.avatarUrl);
 
-            holder.setClickListener(R.id.post_item, new PostCommonAdapter.OnRvItemListener(mContext, post));
+            holder.setClickListener(R.id.post_item, new OnRvItemListener(mContext, post));
         }
     }
 }

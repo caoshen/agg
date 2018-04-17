@@ -2,7 +2,6 @@ package xyz.dcme.agg.ui.post;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.zhy.adapter.recyclerview.CommonAdapter;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.model.Post;
-import xyz.dcme.agg.ui.postdetail.PostDetailActivity;
 import xyz.dcme.library.util.ImageLoader;
 
 public class PostCommonAdapter extends CommonAdapter<Post> {
@@ -38,19 +36,4 @@ public class PostCommonAdapter extends CommonAdapter<Post> {
     }
 
 
-    public static class OnRvItemListener implements View.OnClickListener {
-
-        private Post mPost;
-        private Context mContext;
-
-        public OnRvItemListener(Context context, Post post) {
-            mContext = context;
-            mPost = post;
-        }
-
-        @Override
-        public void onClick(View view) {
-            PostDetailActivity.startActivity(mContext, mPost);
-        }
-    }
 }

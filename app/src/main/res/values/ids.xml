@@ -2,4 +2,7 @@
 <resources>
     <item name="agg_main_activity" type="id"/>
     <item name="id_node_all_category_activity" type="id"/>
+    <item name="id_article_activity" type="id"/>
+    <item name="id_menu_more" type="id"/>
+
 </resources>

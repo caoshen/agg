@@ -13,7 +13,7 @@ import xyz.dcme.agg.base.BaseRecyclerAdapter;
 import xyz.dcme.agg.base.RecyclerViewHolder;
 import xyz.dcme.agg.database.HistoryInfo;
 import xyz.dcme.agg.database.helper.HistoryDbHelper;
-import xyz.dcme.agg.ui.postdetail.PostDetailActivity;
+import xyz.dcme.agg.frag.article.ArticleActivity;
 import xyz.dcme.library.util.ImageLoader;
 
 
@@ -100,7 +100,7 @@ public class BrowserHistoryFragment extends BaseRecycleTopBarFragment {
             holder.setClickListener(R.id.post_item, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    PostDetailActivity.startActivity(mContext, item.link);
+                    ArticleActivity.startActivity(mContext, item.link);
                 }
             });
         }

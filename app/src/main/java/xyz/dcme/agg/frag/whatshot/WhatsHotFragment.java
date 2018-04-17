@@ -15,7 +15,7 @@ import xyz.dcme.agg.frag.home.HomeControllerTopBarFragment;
 import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.ui.hot.HotContract;
 import xyz.dcme.agg.ui.hot.HotPresenter;
-import xyz.dcme.agg.ui.post.PostCommonAdapter;
+import xyz.dcme.agg.ui.post.OnRvItemListener;
 import xyz.dcme.library.util.ImageLoader;
 
 public class WhatsHotFragment extends HomeControllerTopBarFragment implements HotContract.View {
@@ -101,7 +101,7 @@ public class WhatsHotFragment extends HomeControllerTopBarFragment implements Ho
             ImageView iv = holder.getImageView(R.id.post_avatar);
             ImageLoader.displayCircle(mContext, iv, post.avatarUrl);
 
-            holder.setClickListener(R.id.post_item, new PostCommonAdapter.OnRvItemListener(mContext, post));
+            holder.setClickListener(R.id.post_item, new OnRvItemListener(mContext, post));
         }
     }
 }

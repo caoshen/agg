@@ -15,7 +15,7 @@ import xyz.dcme.agg.base.RecyclerViewHolder;
 import xyz.dcme.agg.model.Post;
 import xyz.dcme.agg.ui.news.NewsContract;
 import xyz.dcme.agg.ui.news.NewsPresenter;
-import xyz.dcme.agg.ui.post.PostCommonAdapter;
+import xyz.dcme.agg.ui.post.OnRvItemListener;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.library.util.ImageLoader;
 
@@ -125,7 +125,7 @@ public class RecommendFragment extends BaseRecycleFragment implements NewsContra
             ImageView iv = holder.getImageView(R.id.post_avatar);
             ImageLoader.displayCircle(mContext, iv, post.avatarUrl);
 
-            holder.setClickListener(R.id.post_item, new PostCommonAdapter.OnRvItemListener(mContext, post));
+            holder.setClickListener(R.id.post_item, new OnRvItemListener(mContext, post));
         }
     }
 
