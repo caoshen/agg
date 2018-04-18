@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import xyz.dcme.library.util.LogUtils;
 
@@ -40,6 +41,7 @@ public class ImageUtils {
     }
 
     public static void getImageFromAlbum(Activity activity, int requestCode) {
+        Log.d("ImageUtils", "getImageFromAlbum");
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");

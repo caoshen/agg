@@ -11,6 +11,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
@@ -20,10 +21,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import xyz.dcme.account.AccountInfo;
 import xyz.dcme.account.AccountManager;
+import xyz.dcme.account.ErrorStatus;
 import xyz.dcme.account.LoginConstants;
+import xyz.dcme.account.LoginHandler;
+import xyz.dcme.account.OnCheckLoginClickListener;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.frag.home.HomeControllerFragment;
+import xyz.dcme.agg.frag.write.WriteActivity;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.library.base.BaseFragmentAdapter;
 
@@ -38,7 +44,28 @@ public class RecommendTabFragment extends HomeControllerFragment {
     protected View onCreateView() {
         View rootView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_recomment_tab, null);
         initTabAndPager(rootView);
+        initCreateArticle(rootView);
         return rootView;
+    }
+
+    private void initCreateArticle(View rootView) {
+        FrameLayout create = rootView.findViewById(R.id.create_article);
+        create.setOnClickListener(new OnCheckLoginClickListener(getActivity(), new LoginHandler() {
+            @Override
+            public void onLogin(AccountInfo account) {
+
+            }
+
+            @Override
+            public void onError(ErrorStatus status) {
+
+            }
+        }) {
+            @Override
+            protected void doClick(View v) {
+                WriteActivity.startPublish(getActivity());
+            }
+        });
     }
 
     @Override
