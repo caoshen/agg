@@ -1,7 +1,7 @@
 package xyz.dcme.agg.ui.reply;
 
 public class Reply {
-    String title;
-    String content;
-    String detailUrl;
+    public String title;
+    public String content;
+    public String detailUrl;
 }

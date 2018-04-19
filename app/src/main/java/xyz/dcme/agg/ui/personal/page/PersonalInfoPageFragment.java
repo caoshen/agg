@@ -3,6 +3,7 @@ package xyz.dcme.agg.ui.personal.page;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import xyz.dcme.agg.R;
-import xyz.dcme.agg.ui.favorite.FavoriteActivity;
-import xyz.dcme.agg.ui.reply.ReplyActivity;
-import xyz.dcme.agg.ui.topic.TopicActivity;
+import xyz.dcme.agg.frag.user.UserCommonRecyclerFragment;
 import xyz.dcme.agg.util.AccountUtils;
 import xyz.dcme.agg.util.AnimationUtils;
 
 public class PersonalInfoPageFragment extends Fragment
-    implements PersonalInfoPageContract.View, View.OnClickListener {
+        implements PersonalInfoPageContract.View, View.OnClickListener {
 
     private static final String EXTRA_NAME = "extra_name";
+    private static final int ACTION_TOPIC = 1;
+    private static final int ACTION_REPLY = 2;
+    private static final int ACTION_FAV = 3;
     private PersonalInfoPageContract.Presenter mPresenter;
     private String mUserName;
     private ProgressBar mProgressBar;
@@ -115,22 +117,40 @@ public class PersonalInfoPageFragment extends Fragment
 
     @Override
     public void onClick(View v) {
+        int action = ACTION_TOPIC;
+
         switch (v.getId()) {
             case R.id.topics:
             case R.id.my_topic: {
-                TopicActivity.start(getActivity(), mUserName);
+                action = ACTION_TOPIC;
+                // TopicActivity.start(getActivity(), mUserName);
                 break;
             }
             case R.id.replies:
             case R.id.my_reply: {
-                ReplyActivity.start(getActivity(), mUserName);
+                action = ACTION_REPLY;
+                // ReplyActivity.start(getActivity(), mUserName);
                 break;
             }
             case R.id.favourites:
             case R.id.my_focus: {
-                FavoriteActivity.start(getActivity(), mUserName);
+                action = ACTION_FAV;
+                // FavoriteActivity.start(getActivity(), mUserName);
                 break;
             }
+        }
+        addFragment(action);
+    }
+
+    private void addFragment(int action) {
+        UserCommonRecyclerFragment fragment = UserCommonRecyclerFragment.newInstance(mUserName, action);
+        FragmentActivity activity = getActivity();
+        if (activity != null) {
+            activity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.main_content, fragment, UserCommonRecyclerFragment.TAG)
+                    .addToBackStack(UserCommonRecyclerFragment.TAG)
+                    .commit();
         }
     }
 }

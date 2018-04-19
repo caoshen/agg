@@ -5,7 +5,7 @@ import android.view.View;
 
 import xyz.dcme.agg.ui.postdetail.PostDetailActivity;
 
-class OnReplyClickListener implements View.OnClickListener {
+public class OnReplyClickListener implements View.OnClickListener {
     private Context mContext;
     private String mUrl;
 
