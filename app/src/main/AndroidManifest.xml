@@ -109,8 +109,13 @@
 
         <activity
             android:name=".frag.node.NodeAllCategoryActivity"
+            />
+
+        <activity
+            android:name=".frag.node.NodeSelectActivity"
             android:screenOrientation="portrait"
             />
+
 
         <activity
             android:name=".frag.article.ArticleActivity"

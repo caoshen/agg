@@ -34,6 +34,7 @@ import xyz.dcme.agg.R;
 import xyz.dcme.agg.base.BaseFragment;
 import xyz.dcme.agg.common.irecyclerview.IRecyclerView;
 import xyz.dcme.agg.common.irecyclerview.OnLoadMoreListener;
+import xyz.dcme.agg.frag.write.WriteActivity;
 import xyz.dcme.agg.ui.postdetail.OnCommentListener;
 import xyz.dcme.agg.ui.postdetail.PostCommentDelegate;
 import xyz.dcme.agg.ui.postdetail.PostContentDelegate;
@@ -43,7 +44,6 @@ import xyz.dcme.agg.ui.postdetail.PostDetailPresenter;
 import xyz.dcme.agg.ui.postdetail.PostMyCommentDelegate;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
-import xyz.dcme.agg.ui.publish.PublishActivity;
 import xyz.dcme.agg.util.AnimationUtils;
 import xyz.dcme.agg.util.ClipBoardUtils;
 import xyz.dcme.agg.util.Constants;
@@ -71,6 +71,18 @@ public class ArticleFragment extends BaseFragment implements PostDetailContract.
     private int mNextPage = 2;
     private FrameLayout mInsertImage;
     private AppreciateView mLikeImage;
+    private LoginHandler mLoginHandler = new LoginHandler() {
+        @Override
+        public void onLogin(AccountInfo account) {
+
+        }
+
+        @Override
+        public void onError(ErrorStatus status) {
+
+        }
+    };
+    ;
 
     public static ArticleFragment newInstance(String url) {
         ArticleFragment fragment = new ArticleFragment();
@@ -183,12 +195,12 @@ public class ArticleFragment extends BaseFragment implements PostDetailContract.
                     }
                 });
         topbar.addRightImageButton(R.drawable.ic_more_blue, R.id.id_menu_more)
-            .setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    popMenu();
-                }
-            });
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popMenu();
+                    }
+                });
     }
 
     @Override
@@ -285,14 +297,26 @@ public class ArticleFragment extends BaseFragment implements PostDetailContract.
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.send_button) {
-            String comment = mBottomBar.getComment();
-            if (!TextUtils.isEmpty(comment)) {
-                mPresenter.sendComment(comment, mUrl);
+            if (AccountManager.hasLoginAccount(getActivity())) {
+                String comment = mBottomBar.getComment();
+                if (!TextUtils.isEmpty(comment)) {
+                    mPresenter.sendComment(comment, mUrl);
+                }
+            } else {
+                AccountManager.getAccount(getActivity(), mLoginHandler);
             }
         } else if (v.getId() == R.id.comment_bar) {
-            mBottomBar.show();
+            if (AccountManager.hasLoginAccount(getActivity())) {
+                mBottomBar.show();
+            } else {
+                AccountManager.getAccount(getActivity(), mLoginHandler);
+            }
         } else if (v.getId() == R.id.post_insert_photo) {
-            PublishActivity.startPublish(getActivity(), Constants.HOME_URL + mUrl);
+            if (AccountManager.hasLoginAccount(getActivity())) {
+                WriteActivity.startPublish(getActivity(), Constants.HOME_URL + mUrl);
+            } else {
+                AccountManager.getAccount(getActivity(), mLoginHandler);
+            }
         }
     }
 

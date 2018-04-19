@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -26,8 +25,8 @@ import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.base.BaseFragment;
+import xyz.dcme.agg.frag.node.NodeSelectActivity;
 import xyz.dcme.agg.ui.node.Node;
-import xyz.dcme.agg.ui.node.TagSelectActivity;
 import xyz.dcme.agg.ui.publish.PreviewActivity;
 import xyz.dcme.agg.ui.publish.PublishContract;
 import xyz.dcme.agg.ui.publish.PublishPresenter;
@@ -110,8 +109,8 @@ public class WriteFragment extends BaseFragment implements PublishContract.View,
         mNodeText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TagSelectActivity.class);
-                intent.putExtra(TagSelectActivity.KEY_SELECTED_TAG, mSelectedNode);
+                Intent intent = new Intent(getActivity(), NodeSelectActivity.class);
+                intent.putExtra(NodeSelectActivity.KEY_SELECTED_NODE, mSelectedNode);
                 startActivityForResult(intent, REQ_CODE_TAG);
             }
         });
@@ -195,16 +194,12 @@ public class WriteFragment extends BaseFragment implements PublishContract.View,
         if (requestCode == REQ_CODE_ALBUM) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getData();
-                Log.d(LOG_TAG, uri.toString());
                 String imagePathFromURI = ImageUtils.getImagePathFromURI(getActivity(), uri);
-                Log.d(LOG_TAG, imagePathFromURI);
                 File imageFile = new File(imagePathFromURI);
                 uploadImage(imageFile);
-            } else {
-                Log.d(LOG_TAG, data.toString());
             }
         } else if (requestCode == REQ_CODE_TAG && resultCode == Activity.RESULT_OK) {
-            mSelectedNode = data.getParcelableExtra(TagSelectActivity.KEY_SELECTED_TAG);
+            mSelectedNode = data.getParcelableExtra(NodeSelectActivity.KEY_SELECTED_NODE);
             if (null != mSelectedNode) {
                 mNodeText.setText(mSelectedNode.getTitle());
             }
