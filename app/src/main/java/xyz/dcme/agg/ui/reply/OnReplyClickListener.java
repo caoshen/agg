@@ -3,7 +3,7 @@ package xyz.dcme.agg.ui.reply;
 import android.content.Context;
 import android.view.View;
 
-import xyz.dcme.agg.ui.postdetail.PostDetailActivity;
+import xyz.dcme.agg.frag.article.ArticleActivity;
 
 public class OnReplyClickListener implements View.OnClickListener {
     private Context mContext;
@@ -16,6 +16,6 @@ public class OnReplyClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        PostDetailActivity.startActivity(mContext, mUrl);
+        ArticleActivity.startActivity(mContext, mUrl);
     }
 }

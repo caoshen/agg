@@ -65,6 +65,8 @@ dependencies {
     implementation 'pub.devrel:easypermissions:1.0.1'
     implementation 'com.meituan.android.walle:library:1.1.5'
     implementation 'com.qmuiteam:qmui:1.0.6'
+    implementation 'com.zhy:okhttputils:2.6.2'
+    implementation 'com.alibaba:fastjson:1.2.38'
     testImplementation 'junit:junit:4.12'
     implementation project(':arch')
     implementation project(':library')

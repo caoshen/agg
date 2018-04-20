@@ -132,6 +132,11 @@ public class UserCommonRecyclerFragment extends BaseRecycleTopBarFragment implem
     }
 
     @Override
+    protected boolean isLoadMoreEnabled() {
+        return true;
+    }
+
+    @Override
     protected int getTopBarTitleStrId() {
         switch (mAction) {
             case TOPIC: {
@@ -153,20 +158,20 @@ public class UserCommonRecyclerFragment extends BaseRecycleTopBarFragment implem
         switch (mAction) {
             case TOPIC: {
                 mPostAdapter = new TopicRecyclerAdapter(getActivity(), mTopicData);
-                break;
+                return mPostAdapter;
             }
             case REPLY: {
                 mReplyAdapter = new ReplyRecyclerAdapter(getActivity(), mReplyData);
-                break;
+                return mReplyAdapter;
             }
             case FAVOURITE: {
                 mPostAdapter = new FavouriteRecyclerAdapter(getActivity(), mFavData);
-                break;
+                return mPostAdapter;
             }
             default:
                 mPostAdapter = new TopicRecyclerAdapter(getActivity(), mTopicData);
+                return mPostAdapter;
         }
-        return mPostAdapter;
     }
 
     public enum USER_ACTION {
@@ -232,7 +237,7 @@ public class UserCommonRecyclerFragment extends BaseRecycleTopBarFragment implem
 
         @Override
         public int getItemLayoutId(int viewType) {
-            return R.layout.item_reply;
+            return R.layout.item_my_reply;
         }
 
         @Override

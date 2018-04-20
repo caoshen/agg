@@ -132,4 +132,9 @@ public class NotificationMessageFragment extends BaseRecycleTopBarFragment imple
     protected boolean canDragBack() {
         return true;
     }
+
+    @Override
+    protected boolean isLoadMoreEnabled() {
+        return true;
+    }
 }

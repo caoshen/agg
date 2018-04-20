@@ -53,10 +53,16 @@ public abstract class BaseRecycleTopBarFragment extends BaseFragment implements
         mIRecyclerView.setAdapter(getItemAdapter());
         mIRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mIRecyclerView.addItemDecoration(getItemDecoration());
+        mIRecyclerView.setLoadMoreEnabled(isLoadMoreEnabled());
+        mIRecyclerView.setOnLoadMoreListener(this);
 
         mEmptyView = rootView.findViewById(R.id.emptyView);
 
 //        checkNetwork();
+    }
+
+    protected boolean isLoadMoreEnabled() {
+        return false;
     }
 
     // Back icon is not

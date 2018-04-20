@@ -29,10 +29,11 @@ import xyz.dcme.agg.frag.history.BrowserHistoryFragment;
 import xyz.dcme.agg.frag.home.HomeControllerFragment;
 import xyz.dcme.agg.frag.message.NotificationMessageFragment;
 import xyz.dcme.agg.frag.settings.MySettingsFragment;
+import xyz.dcme.agg.frag.user.UserHomePageActivity;
 import xyz.dcme.library.util.ImageLoader;
 
 
-public class MySelfFragment extends HomeControllerFragment implements View.OnClickListener {
+public class MySelfFragment extends HomeControllerFragment {
     private static final String TAG = MySelfFragment.class.getSimpleName();
     private ImageView mUserImageView;
     private TextView mUserNameText;
@@ -94,7 +95,15 @@ public class MySelfFragment extends HomeControllerFragment implements View.OnCli
         topbar.setTitle(R.string.me);
 
         View itemAccount = rootView.findViewById(R.id.item_my_account);
-        itemAccount.setOnClickListener(this);
+        itemAccount.setOnClickListener(new OnCheckLoginClickListener(getActivity(), mLoginHandler) {
+            @Override
+            protected void doClick(View v) {
+                AccountInfo accountInfo = AccountManager.checkLocalLoginAccount(getActivity());
+                if (accountInfo != null) {
+                    UserHomePageActivity.start(getActivity(), accountInfo.getUserName());
+                }
+            }
+        });
         mUserImageView = itemAccount.findViewById(R.id.user_avatar);
         mUserNameText = itemAccount.findViewById(R.id.user_name);
 
@@ -144,15 +153,6 @@ public class MySelfFragment extends HomeControllerFragment implements View.OnCli
         AccountInfo info = AccountManager.checkLocalLoginAccount(getContext());
         if (info != null) {
             updateAccountView(info);
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.item_my_account) {
-//            Intent intent = new Intent(getActivity(), LoginActivity.class);
-//            startActivityForResult(intent, REQ_CODE_LOGIN);
-            doLogin();
         }
     }
 
