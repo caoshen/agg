@@ -1,4 +1,24 @@
 apply plugin: 'com.android.application'
+apply plugin: 'channel'
+
+def loadSigningConfigs() {
+    def Properties props = new Properties()
+    def propFile = file('../signing.properties')
+    if (propFile.canRead()) {
+        props.load(new FileInputStream(propFile))
+        if (props != null && props.containsKey('RELEASE_STORE_FILE') && props.containsKey('RELEASE_STORE_PASSWORD') &&
+                props.containsKey('RELEASE_KEY_ALIAS') && props.containsKey('RELEASE_KEY_PASSWORD')) {
+            android.signingConfigs.release.storeFile = file(props['RELEASE_STORE_FILE'])
+            android.signingConfigs.release.storePassword = props['RELEASE_STORE_PASSWORD']
+            android.signingConfigs.release.keyAlias = props['RELEASE_KEY_ALIAS']
+            android.signingConfigs.release.keyPassword = props['RELEASE_KEY_PASSWORD']
+        } else {
+            android.buildTypes.release.signingConfig = null
+        }
+    } else {
+        android.buildTypes.release.signingConfig = null
+    }
+}
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
@@ -13,20 +33,21 @@ android {
 
     signingConfigs {
         release {
-            Properties properties = new Properties()
-            InputStream inputStream = project.rootProject.file('signing.properties').newDataInputStream();
-            properties.load(inputStream)
+//            storeFile file(keyStoreProperty)
+//            keyAlias keyAliasProperty
+//            storePassword keyStorePasswordProperty
+//            keyPassword keyAliasPasswordProperty
 
-            def keyStoreProperty = hasProperty('KEY_STORE') ? properties.getProperty('KEY_STORE') : "debug.keystore"
-            def keyAliasProperty = hasProperty('KEY_ALIAS') ? properties.getProperty('KEY_ALIAS') : "alias"
-            def keyStorePasswordProperty = hasProperty('KEY_STORE_PASSWORD') ? properties.getProperty('KEY_STORE_PASSWORD') : "storepwd"
-            def keyAliasPasswordProperty = hasProperty('KEY_ALIAS_PASSWORD') ? properties.getProperty('KEY_ALIAS_PASSWORD') : "aliaspwd"
-            storeFile file(keyStoreProperty)
-            keyAlias keyAliasProperty
-            storePassword keyStorePasswordProperty
-            keyPassword keyAliasPasswordProperty
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+
+        debug {
+
         }
     }
+
+    loadSigningConfigs()
 
     buildTypes {
         debug {
@@ -71,4 +92,17 @@ dependencies {
     implementation project(':arch')
     implementation project(':library')
     implementation project(':account')
+    api 'com.leon.channel:helper:1.1.7'
+
+}
+
+channel{
+    //指定渠道文件
+    channelFile = file("/home/cs/android/asworkspace/Agg/channel.txt")
+    //多渠道包的输出目录，默认为new File(project.buildDir,"channel")
+    baseOutputDir = new File(project.buildDir,"channel")
+    //多渠道包的命名规则，默认为：${appName}-${versionName}-${versionCode}-${flavorName}-${buildType}
+    apkNameFormat ='${appName}-${versionName}-${versionCode}-${flavorName}-${buildType}'
+    //快速模式：生成渠道包时不进行校验（速度可以提升10倍以上）
+    isFastMode = false
 }
