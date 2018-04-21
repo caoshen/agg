@@ -9,7 +9,7 @@ import xyz.dcme.agg.R;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.ui.postdetail.data.PostMyComment;
 
-class PostMyCommentDelegate implements ItemViewDelegate<PostDetailItem> {
+public class PostMyCommentDelegate implements ItemViewDelegate<PostDetailItem> {
 
     public PostMyCommentDelegate(Context context) {
     }

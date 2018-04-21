@@ -34,6 +34,7 @@ public class Constants {
     public static final String TAB_INTEREST = "interest";
     public static final String TAB_FOLLOWS = "follows";
     public static final String[] TABS = {TAB_LATEST, TAB_ELITE, TAB_INTEREST, TAB_FOLLOWS};
+    public static final String[] TABS_NOT_LOGIN = {TAB_LATEST, TAB_ELITE};
     public static final String TAB_NAME = "tab_name";
 
     // notifications

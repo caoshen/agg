@@ -66,6 +66,32 @@ public class HistoryDbHelper {
         return infoList;
     }
 
+    public List<HistoryInfo> queryHistoryLimit(Context context, int limit) {
+        List<HistoryInfo> infoList = new ArrayList<>();
+        String sortOrder = HistoryTable.COLUMN_TIMESTAMP + " DESC " + " LIMIT " + limit;
+        Cursor cursor = context.getContentResolver().query(getUri(), null, null, null,
+                sortOrder);
+        try {
+            if (null != cursor) {
+                while (cursor.moveToNext()) {
+                    String author = cursor.getString(cursor.getColumnIndexOrThrow(HistoryTable.COLUMN_AUTHOR));
+                    String avatar = cursor.getString(cursor.getColumnIndexOrThrow(HistoryTable.COLUMN_AVATAR));
+                    String title = cursor.getString(cursor.getColumnIndexOrThrow(HistoryTable.COLUMN_TITLE));
+                    String link = cursor.getString(cursor.getColumnIndexOrThrow(HistoryTable.COLUMN_LINK));
+                    String timestamp = cursor.getString(cursor.getColumnIndexOrThrow(HistoryTable.COLUMN_TIMESTAMP));
+                    HistoryInfo info = new HistoryInfo(author, avatar, title, link, timestamp);
+                    infoList.add(info);
+                }
+            }
+        } catch (Exception e) {
+            LogUtils.e(LOG_TAG, "queryAllHistory -> exception: " + e);
+        }
+        if (null != cursor) {
+            cursor.close();
+        }
+        return infoList;
+    }
+
     private ContentValues makeContentValues(HistoryInfo info) {
         ContentValues cv = new ContentValues();
         cv.put(HistoryTable.COLUMN_AUTHOR, info.author);

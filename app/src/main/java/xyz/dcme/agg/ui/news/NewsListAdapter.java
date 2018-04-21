@@ -11,7 +11,7 @@ import java.util.List;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.model.Post;
-import xyz.dcme.agg.ui.post.PostCommonAdapter;
+import xyz.dcme.agg.ui.post.OnRvItemListener;
 import xyz.dcme.library.util.ImageLoader;
 
 public class NewsListAdapter extends CommonAdapter<Post> {
@@ -38,6 +38,6 @@ public class NewsListAdapter extends CommonAdapter<Post> {
         ImageView iv = holder.getView(R.id.post_avatar);
         ImageLoader.displayCircle(mContext, iv, post.avatarUrl);
 
-        holder.setOnClickListener(R.id.post_item, new PostCommonAdapter.OnRvItemListener(mContext, post));
+        holder.setOnClickListener(R.id.post_item, new OnRvItemListener(mContext, post));
     }
 }

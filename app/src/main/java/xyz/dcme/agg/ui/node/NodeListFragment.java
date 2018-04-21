@@ -126,6 +126,11 @@ public class NodeListFragment extends BaseFragment
     }
 
     @Override
+    public void showError() {
+
+    }
+
+    @Override
     public void showLoginTips() {
         mSwipeRefresh.setVisibility(View.GONE);
         mLoadingTips.setLoadingTip(LoadingTip.LoadStatus.NEED_LOGIN);

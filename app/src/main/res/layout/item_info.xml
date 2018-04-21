@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_8"
+    android:background="?attr/app_content_bg_color"
+    android:paddingBottom="@dimen/padding_8"
+    android:paddingEnd="@dimen/padding_16"
+    android:paddingStart="@dimen/padding_16"
+    android:paddingTop="@dimen/padding_8">
+
+    <ImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_me"/>
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_toEndOf="@id/user_avatar"
+        android:gravity="center"
+        android:text="@string/login_please"
+        android:textSize="16sp"/>
+</RelativeLayout>

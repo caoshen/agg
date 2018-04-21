@@ -26,10 +26,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import xyz.dcme.account.AccountInfo;
+import xyz.dcme.account.AccountManager;
+import xyz.dcme.account.ErrorStatus;
+import xyz.dcme.account.LoginHandler;
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.common.irecyclerview.IRecyclerView;
 import xyz.dcme.agg.common.irecyclerview.OnLoadMoreListener;
-import xyz.dcme.agg.ui.login.LoginActivity;
 import xyz.dcme.agg.ui.postdetail.data.PostContent;
 import xyz.dcme.agg.ui.postdetail.data.PostDetailItem;
 import xyz.dcme.agg.ui.publish.PublishActivity;
@@ -222,8 +225,25 @@ public class PostDetailFragment extends BaseFragment implements PostDetailContra
 
     @Override
     public void startLogin() {
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivityForResult(intent, REQUEST_LOGIN);
+//        Intent intent = new Intent(getActivity(), LoginActivity.class);
+//        startActivityForResult(intent, REQUEST_LOGIN);
+        AccountManager.getAccount(getActivity(), new LoginHandler() {
+            @Override
+            public void onLogin(AccountInfo account) {
+                FragmentActivity activity = getActivity();
+                if (activity != null && !activity.isFinishing()) {
+                    activity.finish();
+                }
+            }
+
+            @Override
+            public void onError(ErrorStatus status) {
+                FragmentActivity activity = getActivity();
+                if (activity != null && !activity.isFinishing()) {
+                    activity.finish();
+                }
+            }
+        });
     }
 
     @Override

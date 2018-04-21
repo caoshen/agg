@@ -72,12 +72,13 @@
     <string name="publish_rightnow">发表于１分钟前</string>
     <string name="tips_content_is_empty">内容不能为空</string>
     <string name="post_detail">帖子详情</string>
+    <string name="article_detail">详情</string>
     <string name="uploading_image">图片上传中&#8230;</string>
     <string name="open_browser">浏览器打开</string>
     <string name="explore">发现</string>
     <string name="whats_hot">热门</string>
     <string name="message">消息</string>
-    <string name="history">历史</string>
+    <string name="history">浏览记录</string>
     <string name="clear_history">清除历史记录</string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
@@ -102,5 +103,15 @@
     <string name="upload_image_permission">上传图片需要相册权限，请允许光谷社区访问你的相册．</string>
     <string name="need_storage_permission">请开启存储权限</string>
     <string name="storage_permission_rational">上传图片需要访问你的相册．请在＂权限管理＂中打开＂读写手机存储＂权限.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="me">我</string>
+    <string name="load_fail">加载失败</string>
+    <string name="error_network">请检测网络能否正常连接</string>
+    <string name="retry">点击重试</string>
+    <string name="logout_current">退出当前账号</string>
+    <string name="login_reason">此版块需要先登录</string>
+    <string name="create_article">发帖</string>
 
 </resources>

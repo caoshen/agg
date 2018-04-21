@@ -24,6 +24,8 @@ public interface NodeListContract {
 
         void showIndicator(boolean isActive);
 
+        void showError();
+
         void showLoginTips();
     }
 }

@@ -46,11 +46,13 @@ public class FavoritePresenter implements FavoriteContract.Presenter {
         HttpUtils.get(Constants.USER_PROFILE_URL + name + Constants.FAVORITES, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                mView.showIndicator(false);
                 LogUtils.e(LOG_TAG, e.toString());
             }
 
             @Override
             public void onResponse(String response, int id) {
+                mView.showIndicator(false);
                 mView.showRefresh(FavoriteParser.parseResponse(response));
             }
         });
@@ -63,11 +65,13 @@ public class FavoritePresenter implements FavoriteContract.Presenter {
         HttpUtils.get(url, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                mView.showIndicator(false);
                 LogUtils.e(LOG_TAG, e.toString());
             }
 
             @Override
             public void onResponse(String response, int id) {
+                mView.showIndicator(false);
                 int total = PostParser.parseTotalCount(response);
                 LogUtils.d(LOG_TAG, "load -> total page: " + total + " current page: " + page);
                 if (page > total) {

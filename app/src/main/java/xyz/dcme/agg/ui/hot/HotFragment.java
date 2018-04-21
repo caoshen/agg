@@ -88,4 +88,9 @@ public class HotFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
     public void showIndicator(boolean isActive) {
         swipe.setRefreshing(isActive);
     }
+
+    @Override
+    public void showError() {
+
+    }
 }

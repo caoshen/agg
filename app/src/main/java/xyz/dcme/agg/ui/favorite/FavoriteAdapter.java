@@ -11,7 +11,7 @@ import java.util.List;
 
 import xyz.dcme.agg.R;
 import xyz.dcme.agg.model.Post;
-import xyz.dcme.agg.ui.post.PostCommonAdapter;
+import xyz.dcme.agg.ui.post.OnRvItemListener;
 import xyz.dcme.library.util.CircleTransformation;
 
 class FavoriteAdapter extends CommonAdapter<Post> {
@@ -31,6 +31,6 @@ class FavoriteAdapter extends CommonAdapter<Post> {
                 .load(post.avatarUrl)
                 .transform(new CircleTransformation(mContext))
                 .into(avatar);
-        holder.setOnClickListener(R.id.post_item, new PostCommonAdapter.OnRvItemListener(mContext, post));
+        holder.setOnClickListener(R.id.post_item, new OnRvItemListener(mContext, post));
     }
 }

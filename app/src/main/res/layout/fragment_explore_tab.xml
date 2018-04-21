@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/qmui_config_color_white"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tab_panel_bg">
+
+        <TextView
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/qmui_topbar_height"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_4"
+            android:contentDescription="@string/add_node"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:paddingEnd="@dimen/padding_8"
+            android:paddingStart="@dimen/padding_8"
+            android:text="@string/more"
+            android:textColor="?attr/app_primary_color"/>
+
+        <com.qmuiteam.qmui.widget.QMUITabSegment
+            android:id="@+id/tabSegment"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/qmui_topbar_height"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/more">
+        </com.qmuiteam.qmui.widget.QMUITabSegment>
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/contentViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/qmui_config_color_white">
+    </android.support.v4.view.ViewPager>
+</LinearLayout>

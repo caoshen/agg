@@ -15,5 +15,7 @@ public interface HotContract {
         void showRefresh(List<Post> data);
 
         void showIndicator(boolean isActive);
+
+        void showError();
     }
 }

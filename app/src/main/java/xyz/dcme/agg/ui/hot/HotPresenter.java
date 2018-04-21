@@ -3,11 +3,11 @@ package xyz.dcme.agg.ui.hot;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
-import xyz.dcme.agg.parser.PostParser;
 import xyz.dcme.agg.util.Constants;
 import xyz.dcme.agg.util.HttpUtils;
 
-public class HotPresenter implements HotContract.Presenter {
+public class
+HotPresenter implements HotContract.Presenter {
 
     private final HotContract.View mView;
 
@@ -29,7 +29,7 @@ public class HotPresenter implements HotContract.Presenter {
         HttpUtils.get(url, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                mView.showIndicator(false);
+                mView.showError();
             }
 
             @Override
