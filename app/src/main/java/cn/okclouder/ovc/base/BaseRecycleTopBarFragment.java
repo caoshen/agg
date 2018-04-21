@@ -59,6 +59,9 @@ public abstract class BaseRecycleTopBarFragment extends BaseFragment implements
         mEmptyView = rootView.findViewById(R.id.emptyView);
 
 //        checkNetwork();
+        // show loading indicator
+        mEmptyView.show(true);
+        mPullRefreshLayout.setVisibility(View.GONE);
     }
 
     protected boolean isLoadMoreEnabled() {
@@ -77,6 +80,8 @@ public abstract class BaseRecycleTopBarFragment extends BaseFragment implements
                         getString(R.string.retry), new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                mEmptyView.show(true);
+                                mPullRefreshLayout.setVisibility(View.GONE);
                                 autoRefresh();
                             }
                         });

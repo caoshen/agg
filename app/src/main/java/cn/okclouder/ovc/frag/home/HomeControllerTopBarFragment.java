@@ -46,7 +46,8 @@ public abstract class HomeControllerTopBarFragment extends HomeControllerFragmen
         mIRecyclerView.addItemDecoration(getItemDecoration());
 
         mEmptyView = rootView.findViewById(R.id.emptyView);
-
+        mEmptyView.show(true);
+        mPullRefreshLayout.setVisibility(View.GONE);
 //        checkNetwork();
     }
 
@@ -57,6 +58,8 @@ public abstract class HomeControllerTopBarFragment extends HomeControllerFragmen
                         getString(R.string.retry), new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                mEmptyView.show(true);
+                                mPullRefreshLayout.setVisibility(View.GONE);
                                 autoRefresh();
                             }
                         });

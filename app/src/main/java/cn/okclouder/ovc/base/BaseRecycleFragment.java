@@ -47,6 +47,9 @@ public abstract class BaseRecycleFragment extends BaseFragment implements QMUIPu
         mEmptyView = rootView.findViewById(R.id.emptyView);
 
 //        checkNetwork();
+        // show indicator
+        mEmptyView.show(true);
+        mPullRefreshLayout.setVisibility(View.GONE);
         autoRefresh();
     }
 
@@ -64,6 +67,8 @@ public abstract class BaseRecycleFragment extends BaseFragment implements QMUIPu
                         getString(R.string.retry), new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                mEmptyView.show(true);
+                                mPullRefreshLayout.setVisibility(View.GONE);
                                 autoRefresh();
                             }
                         });
