@@ -18,6 +18,7 @@ import cn.okclouder.library.util.ImageLoader;
 
 
 public class BrowserHistoryFragment extends BaseRecycleTopBarFragment {
+    public static final int LIMIT = 30;
     private List<HistoryInfo> mData = new ArrayList<>();
     private BrowserHistoryRecyclerAdapter mAdapter;
 
@@ -60,10 +61,12 @@ public class BrowserHistoryFragment extends BaseRecycleTopBarFragment {
 
     private void load() {
         // TODO: should in work thread when operate db.
-        List<HistoryInfo> historyList = HistoryDbHelper.getInstance().queryHistoryLimit(getActivity(), 20);
+        List<HistoryInfo> historyList = HistoryDbHelper.getInstance().queryHistoryLimit(getActivity(), LIMIT);
         mAdapter.clearAndAddAll(historyList);
+        mPullRefreshLayout.setVisibility(View.VISIBLE);
         mPullRefreshLayout.finishRefresh();
-        // TODO: should delete history > limit.
+
+        mEmptyView.hide();
     }
 
     @Override

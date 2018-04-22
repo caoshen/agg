@@ -14,6 +14,7 @@ import cn.okclouder.library.util.LogUtils;
 
 public class HistoryDbHelper {
     private static final String LOG_TAG = "HistoryDbHelper";
+    private static final String TAG = HistoryDbHelper.class.getSimpleName();
     private static HistoryDbHelper mInstance;
 
     private HistoryDbHelper() {
@@ -83,6 +84,11 @@ public class HistoryDbHelper {
                     infoList.add(info);
                 }
             }
+            if (!infoList.isEmpty()) {
+                HistoryInfo historyInfo = infoList.get(infoList.size() - 1);
+                String timestamp = historyInfo.timestamp;
+                deleteHistoryLimit(context, timestamp);
+            }
         } catch (Exception e) {
             LogUtils.e(LOG_TAG, "queryAllHistory -> exception: " + e);
         }
@@ -90,6 +96,13 @@ public class HistoryDbHelper {
             cursor.close();
         }
         return infoList;
+    }
+
+    private int deleteHistoryLimit(Context context, String timeStampLimit) {
+        String where = HistoryTable.COLUMN_TIMESTAMP + " < " + timeStampLimit;
+        int count = context.getContentResolver().delete(getUri(), where, null);
+        LogUtils.d(TAG, "deleteHistoryLimit count:" + count);
+        return count;
     }
 
     private ContentValues makeContentValues(HistoryInfo info) {
