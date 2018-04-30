@@ -389,8 +389,12 @@ public class ArticleFragment extends BaseFragment implements PostDetailContract.
 
     @Override
     public void onCommentToFloor(String comment) {
-        mBottomBar.show();
-        mBottomBar.setComment(comment);
+        if (AccountManager.hasLoginAccount(getActivity())) {
+            mBottomBar.show();
+            mBottomBar.setComment(comment);
+        } else {
+            AccountManager.getAccount(getActivity(), mLoginHandler);
+        }
     }
 
     @Override
