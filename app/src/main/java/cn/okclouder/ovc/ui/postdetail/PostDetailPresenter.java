@@ -31,6 +31,10 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
 
     @Override
     public void start(String url) {
+        if (TextUtils.isEmpty(url)) {
+            LogUtils.e(TAG, "start -> null url.");
+            return;
+        }
         mView.showIndicator(true);
 
         if (!url.startsWith(Constants.HOME_URL)) {
