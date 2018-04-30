@@ -299,7 +299,10 @@ public class ArticleFragment extends BaseFragment implements PostDetailContract.
 
     @Override
     public void showPostLike(String tips) {
-        Toast.makeText(getActivity(), tips, Toast.LENGTH_SHORT).show();
+        FragmentActivity activity = getActivity();
+        if (activity != null && !TextUtils.isEmpty(tips)) {
+            Toast.makeText(activity, tips, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
