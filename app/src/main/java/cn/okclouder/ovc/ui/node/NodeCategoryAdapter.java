@@ -3,6 +3,7 @@ package cn.okclouder.ovc.ui.node;
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.zhy.adapter.recyclerview.CommonAdapter;
@@ -37,6 +38,10 @@ public class NodeCategoryAdapter extends CommonAdapter<NodeCategory> {
                 @SuppressWarnings("deprecation")
                 @Override
                 public void onClick(View v) {
+                    if (!isNodeCountValid(n)) {
+                        Toast.makeText(mContext, R.string.please_select_at_least_one_node, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     tagView.toggle();
                     if (tagView.isChecked()) {
                         tv.setTextColor(mContext.getResources().getColor(R.color.theme_primary));
@@ -50,5 +55,30 @@ public class NodeCategoryAdapter extends CommonAdapter<NodeCategory> {
 
             flexBox.addView(tagView);
         }
+    }
+
+    private boolean isNodeCountValid(Node n) {
+        if (n.getSelected() == 0) {
+            return true;
+        }
+        List<NodeCategory> categories = getDatas();
+        if (categories == null) {
+            return false;
+        }
+        for (NodeCategory category : categories) {
+            List<Node> nodeList = category.getNodeList();
+            if (nodeList == null) {
+                continue;
+            }
+            for (Node node : nodeList) {
+                if (node == n) {
+                    continue;
+                }
+                if (node.getSelected() == 1) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

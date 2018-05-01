@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
@@ -27,21 +28,25 @@ import cn.okclouder.account.ErrorStatus;
 import cn.okclouder.account.LoginConstants;
 import cn.okclouder.account.LoginHandler;
 import cn.okclouder.account.OnCheckLoginClickListener;
+import cn.okclouder.library.base.BaseFragmentStateAdapter;
+import cn.okclouder.library.util.LogUtils;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.frag.home.HomeControllerFragment;
 import cn.okclouder.ovc.frag.write.WriteActivity;
 import cn.okclouder.ovc.util.Constants;
-import cn.okclouder.library.base.BaseFragmentAdapter;
 
 
 public class RecommendTabFragment extends HomeControllerFragment {
-    private BaseFragmentAdapter mAdapter;
+    private static final String TAG = RecommendTabFragment.class.getSimpleName();
+    private BaseFragmentStateAdapter mAdapter;
     private BroadcastReceiver mReceiver;
     private ViewPager mViewPager;
     private QMUITabSegment mTabs;
+    private boolean isAccountChanged = false;
 
     @Override
     protected View onCreateView() {
+        LogUtils.d(TAG, "onCreateView");
         View rootView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_recomment_tab, null);
         initTabAndPager(rootView);
         initCreateArticle(rootView);
@@ -70,12 +75,14 @@ public class RecommendTabFragment extends HomeControllerFragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        LogUtils.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         registerAccountBroadcast();
     }
 
     @Override
     public void onDestroy() {
+        LogUtils.d(TAG, "onDestroy");
         super.onDestroy();
         LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mReceiver);
         mReceiver = null;
@@ -88,6 +95,7 @@ public class RecommendTabFragment extends HomeControllerFragment {
                 String action = intent.getAction();
                 if (LoginConstants.ACTION_LOGIN_SUCCESS.equals(action)
                         || LoginConstants.ACTION_LOGOUT_ACCOUNT.equals(action)) {
+                    isAccountChanged = true;
                     updateTabsAndPagers();
                 }
             }
@@ -101,6 +109,7 @@ public class RecommendTabFragment extends HomeControllerFragment {
     private void initTabAndPager(View rootView) {
         mTabs = rootView.findViewById(R.id.tabSegment);
         mViewPager = rootView.findViewById(R.id.contentViewPager);
+        setupTabs();
         updateTabsAndPagers();
     }
 
@@ -110,20 +119,94 @@ public class RecommendTabFragment extends HomeControllerFragment {
         if (frags.size() != titles.size()) {
             return;
         }
-        if (mAdapter != null) {
-            mAdapter.setFragments(getChildFragmentManager(), frags, titles);
+        if (mAdapter == null) {
+            mAdapter = new BaseFragmentStateAdapter(getChildFragmentManager(),
+                    frags, titles);
+            mViewPager.setAdapter(mAdapter);
+            mTabs.setupWithViewPager(mViewPager, true);
         } else {
-            mAdapter = new BaseFragmentAdapter(getChildFragmentManager(), frags, titles);
+//            mSelectedItem = 0;
+            mAdapter.setFragments(getChildFragmentManager(), frags, titles);
+//            mViewPager.setCurrentItem(0);
+            LogUtils.d(TAG, "adapter count:" + mAdapter.getCount());
+            LogUtils.d(TAG, "cur index:" + mViewPager.getCurrentItem());
+            LogUtils.d(TAG, "cur tab:" + mTabs.getSelectedIndex());
         }
-        mViewPager.setAdapter(mAdapter);
+    }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        LogUtils.d(TAG, "onSaveInstanceState");
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        LogUtils.d(TAG, "onViewStateRestored");
+        super.onViewStateRestored(savedInstanceState);
+        if (isAccountChanged) {
+            mViewPager.setCurrentItem(0);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogUtils.d(TAG, "onStart");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtils.d(TAG, "onPause");
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        LogUtils.d(TAG, "onStop");
+    }
+
+    @Override
+    public void onResume() {
+        LogUtils.d(TAG, "onResume");
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        LogUtils.d(TAG, "onDestroyView");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        LogUtils.d(TAG, "onDetach");
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        LogUtils.d(TAG, "onAttach");
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        LogUtils.d(TAG, "onActivityCreated");
+
+    }
+
+    private void setupTabs() {
         mTabs.setHasIndicator(true);
         mTabs.setMode(QMUITabSegment.MODE_SCROLLABLE);
         mTabs.setTabTextSize(QMUIDisplayHelper.dp2px(getContext(), 14));
         int space = QMUIDisplayHelper.dp2px(getContext(), 16);
         mTabs.setItemSpaceInScrollMode(space);
         mTabs.setPadding(space, 0, space, 0);
-        mTabs.setupWithViewPager(mViewPager, true);
     }
 
     private List<String> makeTabs() {

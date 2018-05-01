@@ -14,13 +14,13 @@ import com.qmuiteam.qmui.widget.QMUITabSegment;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.okclouder.library.base.BaseFragmentStateAdapter;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.frag.home.HomeControllerFragment;
 import cn.okclouder.ovc.frag.node.NodeAllCategoryActivity;
 import cn.okclouder.ovc.ui.node.Node;
 import cn.okclouder.ovc.ui.node.NodeMainContract;
 import cn.okclouder.ovc.ui.node.NodeMainPresenter;
-import cn.okclouder.library.base.BaseFragmentAdapter;
 import cn.okclouder.library.util.LogUtils;
 
 
@@ -28,10 +28,9 @@ public class ExploreTabFragment extends HomeControllerFragment implements View.O
     private static final int REQUEST_CHOOSE_NODE = 1000;
     private static final String LOG_TAG = "ExploreTabFragment";
     private NodeMainContract.Presenter mPresenter;
-    private BaseFragmentAdapter mAdapter;
+    private BaseFragmentStateAdapter mAdapter;
     private QMUITabSegment mTabs;
     private ViewPager mPager;
-    private Node mSelectNode;
 
     @Override
     protected View onCreateView() {
@@ -79,8 +78,8 @@ public class ExploreTabFragment extends HomeControllerFragment implements View.O
 
     @Override
     public void showNodes(final List<Node> nodes) {
-        if (nodes == null || nodes.isEmpty()) {
-            LogUtils.d(LOG_TAG, "showNodes -> nodes is empty");
+        if (nodes == null) {
+            LogUtils.d(LOG_TAG, "showNodes -> nodes is null.");
             return;
         }
 
@@ -92,24 +91,13 @@ public class ExploreTabFragment extends HomeControllerFragment implements View.O
         }
 
         if (mAdapter == null) {
-            mAdapter = new BaseFragmentAdapter(getChildFragmentManager(),
+            mAdapter = new BaseFragmentStateAdapter(getChildFragmentManager(),
                     nodeFragments, nodeNames);
+            mPager.setAdapter(mAdapter);
+            mTabs.setupWithViewPager(mPager, true);
         } else {
             mAdapter.setFragments(getChildFragmentManager(), nodeFragments, nodeNames);
         }
-        mPager.setAdapter(mAdapter);
-        mTabs.setupWithViewPager(mPager, true);
-
-        mSelectNode = nodes.get(0);
-        mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                if (position < 0 || position >= nodes.size()) {
-                    return;
-                }
-                mSelectNode = nodes.get(position);
-            }
-        });
     }
 
     private Fragment makeFrags(Node node) {
