@@ -47,5 +47,7 @@ public interface PostDetailContract {
         void showFavouriteAddTips(String tips);
 
         void showPostLike(String tips);
+
+        void showLoginTips();
     }
 }

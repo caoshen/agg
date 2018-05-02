@@ -47,7 +47,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
             @Override
             public void onResponse(String response, int id) {
                 if (LoginUtils.needLogin(response)) {
-                    mView.startLogin();
+                    mView.showLoginTips();
                 } else {
                     mView.showRefresh(PostDetailParser.parseResponse(response));
                 }

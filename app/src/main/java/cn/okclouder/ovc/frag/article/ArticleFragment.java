@@ -19,8 +19,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import java.util.ArrayList;
@@ -71,6 +73,8 @@ public class ArticleFragment extends BaseFragment implements PostDetailContract.
     private int mNextPage = 2;
     private FrameLayout mInsertImage;
     private AppreciateView mLikeImage;
+    private QMUIEmptyView mEmptyView;
+
     private LoginHandler mLoginHandler = new LoginHandler() {
         @Override
         public void onLogin(AccountInfo account) {
@@ -82,7 +86,8 @@ public class ArticleFragment extends BaseFragment implements PostDetailContract.
 
         }
     };
-    ;
+    private RelativeLayout mContentView;
+
 
     public static ArticleFragment newInstance(String url) {
         ArticleFragment fragment = new ArticleFragment();
@@ -145,6 +150,9 @@ public class ArticleFragment extends BaseFragment implements PostDetailContract.
 
         initPresenter();
         mPresenter.start(mUrl);
+
+        mEmptyView = view.findViewById(R.id.emptyView);
+        mContentView = view.findViewById(R.id.contentView);
     }
 
     private void initLike(View rootView) {
@@ -292,6 +300,30 @@ public class ArticleFragment extends BaseFragment implements PostDetailContract.
     @Override
     public void showPostLike(String tips) {
         Toast.makeText(getActivity(), tips, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLoginTips() {
+        mEmptyView.show(false, getString(R.string.login_please), getString(R.string.login_reason),
+                getString(R.string.action_sign_in), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AccountManager.getAccount(getActivity(), new LoginHandler() {
+                            @Override
+                            public void onLogin(AccountInfo account) {
+                                mContentView.setVisibility(View.VISIBLE);
+                                mEmptyView.hide();
+                                onRefresh();
+                            }
+
+                            @Override
+                            public void onError(ErrorStatus status) {
+
+                            }
+                        });
+                    }
+                });
+        mContentView.setVisibility(View.GONE);
     }
 
     @Override
