@@ -22,7 +22,6 @@ import cn.okclouder.ovc.frag.explore.ExploreTabFragment;
 import cn.okclouder.ovc.frag.myself.MySelfFragment;
 import cn.okclouder.ovc.frag.recommend.RecommendTabFragment;
 import cn.okclouder.ovc.frag.whatshot.WhatsHotFragment;
-import cn.okclouder.arch.QMUIFragment;
 
 public class HomeFragment extends BaseFragment {
     private static final String TAG = HomeFragment.class.getSimpleName();
@@ -52,20 +51,10 @@ public class HomeFragment extends BaseFragment {
     private void initPagers(View view) {
         mViewPager = view.findViewById(R.id.home_pager);
         mPages = new HashMap<>();
-        HomeControllerFragment.HomeControllerListener listener = new HomeControllerFragment.HomeControllerListener() {
-            @Override
-            public void startFragment(QMUIFragment fragment) {
-                HomeFragment.this.startFragment(fragment);
-            }
-        };
         RecommendTabFragment recommendTabFragment = new RecommendTabFragment();
-        recommendTabFragment.setHomeControllerListener(listener);
         WhatsHotFragment whatsHotFragment = new WhatsHotFragment();
-        whatsHotFragment.setHomeControllerListener(listener);
         ExploreTabFragment exploreTabFragment = new ExploreTabFragment();
-        exploreTabFragment.setHomeControllerListener(listener);
         MySelfFragment mySelfFragment = new MySelfFragment();
-        mySelfFragment.setHomeControllerListener(listener);
 
         mPages.put(Pager.HOME, recommendTabFragment);
         mPages.put(Pager.HOT, whatsHotFragment);
