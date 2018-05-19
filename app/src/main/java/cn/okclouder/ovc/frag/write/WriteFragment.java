@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -27,7 +29,6 @@ import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.base.BaseFragment;
 import cn.okclouder.ovc.frag.node.NodeSelectActivity;
 import cn.okclouder.ovc.ui.node.Node;
-import cn.okclouder.ovc.ui.publish.PreviewActivity;
 import cn.okclouder.ovc.ui.publish.PublishContract;
 import cn.okclouder.ovc.ui.publish.PublishPresenter;
 import cn.okclouder.ovc.util.EditUtils;
@@ -39,11 +40,11 @@ public class WriteFragment extends BaseFragment implements PublishContract.View,
     private static final String LOG_TAG = "WriteFragment";
 
     private static final int REQ_CODE_ALBUM = 100;
-    private static final int REQ_CODE_LOGIN = 200;
     private static final String ARG_URL = "argument_comment_url";
     private static final String ARG_NODE = "argument_selected_node";
     private static final int REQ_CODE_TAG = 300;
     private static final int RC_READ_EXTERNAL_STORAGE_PERM = 1000;
+    private static final String TAG = WriteFragment.class.getSimpleName();
 
     private PublishContract.Presenter mPresenter;
     private ImageButton mImgButton;
@@ -90,7 +91,7 @@ public class WriteFragment extends BaseFragment implements PublishContract.View,
     }
 
     protected void initView(View view) {
-        mImgButton = (ImageButton) view.findViewById(R.id.publish_image);
+        mImgButton = view.findViewById(R.id.publish_image);
         mImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,11 +99,11 @@ public class WriteFragment extends BaseFragment implements PublishContract.View,
             }
         });
 
-        mTitle = (EditText) view.findViewById(R.id.publish_title);
-        mContent = (EditText) view.findViewById(R.id.publish_content);
-        mUploadResponse = (TextView) view.findViewById(R.id.upload_response);
+        mTitle = view.findViewById(R.id.publish_title);
+        mContent = view.findViewById(R.id.publish_content);
+        mUploadResponse = view.findViewById(R.id.upload_response);
 
-        mNodeText = (TextView) view.findViewById(R.id.node_selection);
+        mNodeText = view.findViewById(R.id.node_selection);
         if (mSelectedNode != null) {
             mNodeText.setText(mSelectedNode.getTitle());
         }
@@ -182,18 +183,16 @@ public class WriteFragment extends BaseFragment implements PublishContract.View,
         }
     }
 
-    private void startPreview() {
-        String title = mTitle.getText().toString();
-        String content = mContent.getText().toString();
-        PreviewActivity.startPreview(getActivity(), title, content);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQ_CODE_ALBUM) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getData();
+                if (uri == null) {
+                    Log.e(TAG, "uri is null");
+                    return;
+                }
                 String imagePathFromURI = ImageUtils.getImagePathFromURI(getActivity(), uri);
                 if (TextUtils.isEmpty(imagePathFromURI)) {
                     return;
@@ -238,7 +237,10 @@ public class WriteFragment extends BaseFragment implements PublishContract.View,
 
     @Override
     public void sendArticleSuccess() {
-        getActivity().finish();
+        FragmentActivity activity = getActivity();
+        if (activity != null) {
+            activity.finish();
+        }
     }
 
     @Override
@@ -248,7 +250,10 @@ public class WriteFragment extends BaseFragment implements PublishContract.View,
 
     @Override
     public void sendCommentSuccess() {
-        getActivity().finish();
+        FragmentActivity activity = getActivity();
+        if (activity != null) {
+            activity.finish();
+        }
     }
 
     @Override
