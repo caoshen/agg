@@ -156,20 +156,6 @@ public class MySelfFragment extends HomeControllerFragment {
         }
     }
 
-    private void doLogin() {
-        AccountManager.getAccount(getActivity(), new LoginHandler() {
-            @Override
-            public void onLogin(AccountInfo account) {
-                updateAccountView(account);
-            }
-
-            @Override
-            public void onError(ErrorStatus status) {
-
-            }
-        });
-    }
-
     private void updateAccountView(AccountInfo account) {
         Log.d(TAG, "updateAccountView");
         if (account != null) {

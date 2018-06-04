@@ -26,11 +26,7 @@ public class AccountManager {
     }
 
     public static void getAccount(Context context, LoginHandler handler) {
-        if (hasLoginAccount(context)) {
-            handler.onLogin(getActiveAccountInfo(context));
-        } else {
-            AccountDummyActivity.startLogin(context, handler);
-        }
+        AccountDummyActivity.startLogin(context, handler);
     }
 
     private static AccountInfo getActiveAccountInfo(Context context) {
