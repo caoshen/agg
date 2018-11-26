@@ -16,7 +16,10 @@ def loadSigningConfigs() {
             android.buildTypes.release.signingConfig = null
         }
     } else {
-        android.buildTypes.release.signingConfig = null
+        android.signingConfigs.release.storeFile = file(rootProject.getRootDir().getAbsolutePath() + "/release.jks")
+        android.signingConfigs.release.storePassword = System.getenv("STORE_PASSWORD")
+        android.signingConfigs.release.keyAlias = System.getenv("KEY_ALIAS")
+        android.signingConfigs.release.keyPassword = System.getenv("KEY_PASSWORD")
     }
 }
 
@@ -33,11 +36,6 @@ android {
 
     signingConfigs {
         release {
-//            storeFile file(keyStoreProperty)
-//            keyAlias keyAliasProperty
-//            storePassword keyStorePasswordProperty
-//            keyPassword keyAliasPasswordProperty
-
             v1SigningEnabled true
             v2SigningEnabled true
         }
