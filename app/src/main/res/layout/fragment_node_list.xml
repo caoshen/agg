@@ -9,19 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <xyz.dcme.agg.common.irecyclerview.IRecyclerView
+        <cn.okclouder.ovc.common.irecyclerview.IRecyclerView
             android:id="@+id/node_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </xyz.dcme.agg.common.irecyclerview.IRecyclerView>
+        </cn.okclouder.ovc.common.irecyclerview.IRecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <xyz.dcme.agg.widget.LoadingTip
+    <cn.okclouder.ovc.widget.LoadingTip
         android:id="@+id/loading_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone">
-    </xyz.dcme.agg.widget.LoadingTip>
+    </cn.okclouder.ovc.widget.LoadingTip>
 
 </FrameLayout>

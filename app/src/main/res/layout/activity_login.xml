@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:gravity="center_horizontal"
               android:orientation="vertical"
-              tools:context="xyz.dcme.agg.ui.login.LoginActivity">
+              tools:context="cn.okclouder.ovc.ui.login.LoginActivity">
 
     <include layout="@layout/toolbar_back"/>
 

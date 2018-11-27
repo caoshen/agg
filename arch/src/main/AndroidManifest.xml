@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-          package="xyz.dcme.arch"
+          package="cn.okclouder.arch"
 >
 
     <application android:allowBackup="true"

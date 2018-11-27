@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/settings_fragment"
-        android:name="xyz.dcme.agg.ui.settings.SettingsFragment"
+        android:name="cn.okclouder.ovc.ui.settings.SettingsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
