@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="xyz.dcme.agg">
+    package="cn.okclouder.ovc">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -8,12 +8,12 @@
     <!-- Third party SDK permissions-->
     <!-- Tencent Bugly -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
 
     <application
-        android:name=".AggApplication"
+        android:name="cn.okclouder.ovc.AggApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -31,7 +31,7 @@
         <!-- Tencent Bugly end -->
 
         <activity
-            android:name=".activity.LauncherActivity"
+            android:name="cn.okclouder.ovc.activity.LauncherActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -40,24 +40,24 @@
         </activity>
 
         <activity
-            android:name=".activity.AggMainActivity"
+            android:name="cn.okclouder.ovc.activity.AggMainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
 
         <activity
-            android:name=".ui.postdetail.PostDetailActivity"
+            android:name="cn.okclouder.ovc.ui.postdetail.PostDetailActivity"
             android:label="@string/post_detail"
             android:screenOrientation="portrait"
             android:theme="@style/PostDetailTheme">
         </activity>
 
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name="cn.okclouder.ovc.ui.login.LoginActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.personal.PersonalInfoActivity"
+            android:name="cn.okclouder.ovc.ui.personal.PersonalInfoActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <data
@@ -72,70 +72,70 @@
         </activity>
 
         <activity
-            android:name=".ui.topic.TopicActivity"
+            android:name="cn.okclouder.ovc.ui.topic.TopicActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.reply.ReplyActivity"
+            android:name="cn.okclouder.ovc.ui.reply.ReplyActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.favorite.FavoriteActivity"
+            android:name="cn.okclouder.ovc.ui.favorite.FavoriteActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.settings.SettingsActivity"
+            android:name="cn.okclouder.ovc.ui.settings.SettingsActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.node.NodeChooseActivity"
+            android:name="cn.okclouder.ovc.ui.node.NodeChooseActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.publish.PublishActivity"
+            android:name="cn.okclouder.ovc.ui.publish.PublishActivity"
             android:label="@string/publish"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <activity
-            android:name=".ui.node.NodeManagerActivity"
+            android:name="cn.okclouder.ovc.ui.node.NodeManagerActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.node.TagSelectActivity"
+            android:name="cn.okclouder.ovc.ui.node.TagSelectActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.about.AboutActivity"
+            android:name="cn.okclouder.ovc.ui.about.AboutActivity"
             android:label="@string/about"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".frag.node.NodeAllCategoryActivity"
+            android:name="cn.okclouder.ovc.frag.node.NodeAllCategoryActivity"
             />
 
         <activity
-            android:name=".frag.node.NodeSelectActivity"
+            android:name="cn.okclouder.ovc.frag.node.NodeSelectActivity"
             android:screenOrientation="portrait"
             />
 
 
         <activity
-            android:name=".frag.article.ArticleActivity"
+            android:name="cn.okclouder.ovc.frag.article.ArticleActivity"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".frag.write.WriteActivity"
+            android:name="cn.okclouder.ovc.frag.write.WriteActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
-            android:name=".frag.user.UserHomePageActivity"
+            android:name="cn.okclouder.ovc.frag.user.UserHomePageActivity"
             android:screenOrientation="portrait"
             />
 
-        <service android:name=".service.NotificationService"/>
+        <service android:name="cn.okclouder.ovc.service.NotificationService"/>
 
         <provider
-            android:name=".database.ContentProviders"
-            android:authorities="xyz.dcme.agg.provider"
+            android:name="cn.okclouder.ovc.database.ContentProviders"
+            android:authorities="cn.okclouder.ovc.provider"
             android:exported="false"/>
 
         <!-- Tencent Bugly upgrade begin -->

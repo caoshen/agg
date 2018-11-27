@@ -45,5 +45,4 @@
 -dontwarn okio.**
 -dontwarn org.codehaus.**
 -keep public class org.codehaus.**{*;}
-
--keep class xyz.dcme.agg.ui.postdetail.**{*;}
+git

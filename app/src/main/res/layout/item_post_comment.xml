@@ -82,7 +82,7 @@
             android:descendantFocusability="blocksDescendants"
             android:orientation="horizontal">
 
-            <xyz.dcme.library.widget.appreciateview.AppreciateView
+            <cn.okclouder.library.widget.appreciateview.AppreciateView
                 android:id="@+id/appreciate_view"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
@@ -90,7 +90,7 @@
                 android:layout_marginEnd="@dimen/margin_8"
                 app:image_size="16dp"
                 app:uncheck_disable="true">
-            </xyz.dcme.library.widget.appreciateview.AppreciateView>
+            </cn.okclouder.library.widget.appreciateview.AppreciateView>
 
             <TextView
                 android:id="@+id/post_comment_like_count"

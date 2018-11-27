@@ -13,7 +13,7 @@
         android:layout_height="?attr/qmui_topbar_height">
     </com.qmuiteam.qmui.widget.QMUITopBar>
 
-    <xyz.dcme.library.widget.TagFlowLayout
+    <cn.okclouder.library.widget.TagFlowLayout
         android:id="@+id/flow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,5 +29,5 @@
         app:selectedDrawable="@drawable/bg_tag_selected"
         app:selectedTextColor="@color/white"
         app:showDivider="beginning|end|middle">
-    </xyz.dcme.library.widget.TagFlowLayout>
+    </cn.okclouder.library.widget.TagFlowLayout>
 </LinearLayout>
