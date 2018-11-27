@@ -195,6 +195,9 @@ public class WriteFragment extends BaseFragment implements PublishContract.View,
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getData();
                 String imagePathFromURI = ImageUtils.getImagePathFromURI(getActivity(), uri);
+                if (TextUtils.isEmpty(imagePathFromURI)) {
+                    return;
+                }
                 File imageFile = new File(imagePathFromURI);
                 uploadImage(imageFile);
             }

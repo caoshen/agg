@@ -49,9 +49,7 @@ public class ImageUtils {
     }
 
     public static void getImageFromAlbum(Fragment fragment, int requestCode) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         fragment.startActivityForResult(intent, requestCode);
     }
 }
