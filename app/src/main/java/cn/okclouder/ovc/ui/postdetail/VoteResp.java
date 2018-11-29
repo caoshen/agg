@@ -18,50 +18,25 @@ public class VoteResp {
         ERROR_MAP.put("can_not_vote_your_reply", "不能喜欢自己的赞");
     }
 
-    private String mMessage;
+    public String message;
     // 0: already voted, 1: vote success
-    private int mSuccess;
-
-    public VoteResp() {
-
-    }
-
-    public VoteResp(String message, int success) {
-        mMessage = message;
-        mSuccess = success;
-    }
-
-    public String getMessage() {
-        return mMessage;
-    }
-
-    public void setMessage(String message) {
-        mMessage = message;
-    }
-
-    public int getSuccess() {
-        return mSuccess;
-    }
-
-    public void setSuccess(int success) {
-        mSuccess = success;
-    }
+    public int success;
 
     public String getTips() {
-        if (TextUtils.isEmpty(mMessage)) {
+        if (TextUtils.isEmpty(message)) {
             return Constants.EMPTY_STR;
         } else if (voteSuccess()) {
             return "已赞";
         }
-        return ERROR_MAP.get(mMessage);
+        return ERROR_MAP.get(message);
     }
 
     private boolean voteSuccess() {
-        return mSuccess == VOTE_SUCCESS;
+        return success == VOTE_SUCCESS;
     }
 
     @Override
     public String toString() {
-        return "vote resp, message:" + mMessage + ", success:" + mSuccess;
+        return "vote resp, message:" + message + ", success:" + success;
     }
 }

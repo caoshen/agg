@@ -45,3 +45,6 @@
 -dontwarn okio.**
 -dontwarn org.codehaus.**
 -keep public class org.codehaus.**{*;}
+
+# fastjson cannot parse proguarded beans
+-keep class cn.okclouder.ovc.ui.postdetail.**{*;}
