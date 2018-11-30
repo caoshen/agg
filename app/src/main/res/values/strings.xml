@@ -1,16 +1,11 @@
 <resources>
     <string name="app_name">光谷社区</string>
     <string name="app_version_name">光谷社区%1$s</string>
-    <string name="menu_home_page">首页</string>
     <string name="loading">加载中&#8230;</string>
-    <string name="welcome">欢迎</string>
     <string name="login">登录</string>
-    <string name="form_password">请输入密码</string>
-    <string name="form_username">请输入账号</string>
     <string name="read_count">阅读%1$s</string>
     <string name="comment_count">评论%1$s</string>
     <string name="like_count">%1$s 人赞</string>
-    <string name="fav_count">%1$s 人收藏</string>
     <string name="right_now">刚刚</string>
     <string name="welcome_to_gg_community">欢迎来到光谷社区 Guanggoo.com—源自光谷的交流分享社区</string>
     <string name="post_click_count">%1$s 次点击</string>
@@ -31,9 +26,7 @@
     <string name="error_incorrect_password">账号或密码不正确</string>
     <string name="error_field_required">必填</string>
     <string name="login_please">请登录账号</string>
-    <string name="send">发送</string>
     <string name="share">分享</string>
-    <string name="my_avatar">我的头像</string>
     <string name="info_page">个人主页</string>
     <string name="info_detail">详细信息</string>
     <string name="zero">0</string>
@@ -54,8 +47,6 @@
     <string name="server_error">服务器出错了</string>
     <string name="network_error">网络出错了</string>
     <string name="no_data">没有数据</string>
-    <string name="logout">退出</string>
-    <string name="account">账号</string>
     <string name="more">更多</string>
     <string name="node_choose_operation">点击可以增加/删除节点，长按拖曳可以重新排序</string>
     <string name="current_node">当前节点</string>
@@ -68,20 +59,13 @@
     <string name="please_input_content">请输入内容</string>
     <string name="publish">发帖</string>
     <string name="please_input_title">请输入标题</string>
-    <string name="preview">预览</string>
-    <string name="publish_rightnow">发表于１分钟前</string>
     <string name="tips_content_is_empty">内容不能为空</string>
-    <string name="post_detail">帖子详情</string>
     <string name="article_detail">详情</string>
     <string name="uploading_image">图片上传中&#8230;</string>
     <string name="open_browser">浏览器打开</string>
-    <string name="explore">发现</string>
     <string name="whats_hot">热门</string>
     <string name="message">消息</string>
     <string name="history">浏览记录</string>
-    <string name="clear_history">清除历史记录</string>
-    <string name="ok">确定</string>
-    <string name="cancel">取消</string>
     <string name="life">生活百科</string>
     <string name="social">社会信息</string>
     <string name="science">科学技术</string>
@@ -93,19 +77,15 @@
     <string name="tag_select">选择版块</string>
     <string name="copy_link">复制链接</string>
     <string name="has_copy">已复制到剪贴板</string>
-    <string name="admin">管理</string>
     <string name="version_upgrade">版本更新</string>
     <string name="about">关于</string>
-    <string name="advice">建议反馈</string>
     <string name="app_copyright">光谷社区 版权所有</string>
-    <string name="advice_title">[光谷社区Android客户端反馈]</string>
     <string name="register">注册账号</string>
     <string name="upload_image_permission">上传图片需要相册权限，请允许光谷社区访问你的相册．</string>
     <string name="need_storage_permission">请开启存储权限</string>
     <string name="storage_permission_rational">上传图片需要访问你的相册．请在＂权限管理＂中打开＂读写手机存储＂权限.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="me">我</string>
     <string name="load_fail">加载失败</string>
     <string name="error_network">请检测网络能否正常连接</string>

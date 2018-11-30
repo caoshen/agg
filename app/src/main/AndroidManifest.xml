@@ -46,63 +46,9 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
 
         <activity
-            android:name="cn.okclouder.ovc.ui.postdetail.PostDetailActivity"
-            android:label="@string/post_detail"
-            android:screenOrientation="portrait"
-            android:theme="@style/PostDetailTheme">
-        </activity>
-
-        <activity
             android:name="cn.okclouder.ovc.ui.login.LoginActivity"
             android:screenOrientation="portrait"/>
 
-        <activity
-            android:name="cn.okclouder.ovc.ui.personal.PersonalInfoActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <data
-                    android:host="www.guanggoo.com"
-                    android:pathPrefix="/u"
-                    android:scheme="http"/>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="cn.okclouder.ovc.ui.topic.TopicActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="cn.okclouder.ovc.ui.reply.ReplyActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="cn.okclouder.ovc.ui.favorite.FavoriteActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="cn.okclouder.ovc.ui.settings.SettingsActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="cn.okclouder.ovc.ui.node.NodeChooseActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="cn.okclouder.ovc.ui.publish.PublishActivity"
-            android:label="@string/publish"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize"/>
-
-        <activity
-            android:name="cn.okclouder.ovc.ui.node.NodeManagerActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="cn.okclouder.ovc.ui.node.TagSelectActivity"
-            android:screenOrientation="portrait"/>
         <activity
             android:name="cn.okclouder.ovc.ui.about.AboutActivity"
             android:label="@string/about"
@@ -130,8 +76,6 @@
             android:name="cn.okclouder.ovc.frag.user.UserHomePageActivity"
             android:screenOrientation="portrait"
             />
-
-        <service android:name="cn.okclouder.ovc.service.NotificationService"/>
 
         <provider
             android:name="cn.okclouder.ovc.database.ContentProviders"

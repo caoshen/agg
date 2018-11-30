@@ -9,7 +9,6 @@ import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.base.BaseFragmentActivity;
 import cn.okclouder.ovc.ui.node.Node;
-import cn.okclouder.ovc.ui.publish.PublishFragment;
 
 
 public class WriteActivity extends BaseFragmentActivity {
@@ -49,7 +48,7 @@ public class WriteActivity extends BaseFragmentActivity {
         mCommentUrl = intent.getStringExtra(EXTRA_COMMENT_URL);
         mSelectedNode = intent.getParcelableExtra(EXTRA_SELECTED_NODE);
 
-        String tag = PublishFragment.class.getSimpleName();
+        String tag = WriteFragment.class.getSimpleName();
         getSupportFragmentManager().beginTransaction()
                 .add(getContextViewId(), WriteFragment.newInstance(mCommentUrl, mSelectedNode), tag)
                 .addToBackStack(tag)

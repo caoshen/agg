@@ -37,23 +37,6 @@
         </item>
     </style>
 
-    <style name="QDCommonTitle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">6dp</item>
-        <item name="android:textColor">?attr/qmui_config_color_gray_1</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="QDCommonDescription">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">20dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/app_color_description</item>
-        <item name="android:textSize">15sp</item>
-    </style>
-
     <style name="QDTopBar" parent="QMUI.TopBar">
         <item name="qmui_topbar_bg_color">@color/qmui_config_color_white</item>
         <item name="qmui_topbar_title_color">@color/qmui_config_color_white</item>
@@ -61,24 +44,6 @@
         <item name="qmui_topbar_text_btn_color_state_list">@color/s_topbar_btn_color</item>
         <item name="qmui_topbar_height">30dp</item>
         <item name="qmui_topbar_image_btn_height">30dp</item>
-    </style>
-
-    <style name="QDRadiusButton" parent="@style/Button">
-        <item name="android:layout_height">40dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:paddingLeft">?attr/qmui_content_spacing_horizontal</item>
-        <item name="android:paddingRight">?attr/qmui_content_spacing_horizontal</item>
-        <item name="android:textColor">@color/s_app_color_blue_2</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="button_wrapper_style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">24dp</item>
-        <item name="android:paddingBottom">24dp</item>
-        <item name="android:background">@drawable/qmui_divider_bottom_bitmap</item>
     </style>
 
     <!-- Base application theme. -->
@@ -97,10 +62,6 @@
     <style name="AppTheme" parent="BaseAppTheme"/>
 
     <!-- ActionBar theme -->
-    <style name="ActionBarThemeOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:textColorPrimary">@color/text_on_primary</item>
-        <item name="android:textColorSecondary">@color/subtitle_on_primary</item>
-    </style>
 
     <style name="AppTheme.Light" parent="AppTheme">
     </style>
@@ -137,10 +98,6 @@
     <style name="AppTheme.MeItemText.Small.Black">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="PostDetailTheme" parent="AppTheme">
-        <item name="android:listDivider">@drawable/divider_bg_post_detail</item>
     </style>
 
 </resources>

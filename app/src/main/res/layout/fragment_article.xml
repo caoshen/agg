@@ -41,11 +41,11 @@
                 android:layout_height="match_parent"
                 android:layout_above="@id/comment_bar">
 
-                <xyz.dcme.agg.common.irecyclerview.IRecyclerView
+                <cn.okclouder.ovc.common.irecyclerview.IRecyclerView
                     android:id="@+id/post_detail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                </xyz.dcme.agg.common.irecyclerview.IRecyclerView>
+                </cn.okclouder.ovc.common.irecyclerview.IRecyclerView>
             </android.support.v4.widget.SwipeRefreshLayout>
         </RelativeLayout>
     </FrameLayout>
