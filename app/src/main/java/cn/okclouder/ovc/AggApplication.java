@@ -6,6 +6,7 @@ import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.leon.channel.helper.ChannelReaderUtil;
 import com.tencent.bugly.Bugly;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -40,6 +41,8 @@ public class AggApplication extends Application {
     }
 
     private void initBugly() {
+        String channel = ChannelReaderUtil.getChannel(getApplicationContext());
+        Bugly.setAppChannel(this, channel);
         Bugly.init(getApplicationContext(), "2d0424a759", false);
     }
 }
