@@ -125,6 +125,9 @@ public class UserHomePageFragment extends BaseFragment implements UserHomeContra
 
     @Override
     public void showDetails(List<Detail> details) {
+        if (mGroupListView == null) {
+            return;
+        }
         QMUIGroupListView.Section section = QMUIGroupListView.newSection(getActivity());
         for (Detail detail : details) {
             QMUICommonListItemView itemView = mGroupListView.createItemView(detail.title);

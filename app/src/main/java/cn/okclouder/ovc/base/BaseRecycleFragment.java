@@ -1,6 +1,7 @@
 package cn.okclouder.ovc.base;
 
 import android.graphics.Rect;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -50,8 +51,15 @@ public abstract class BaseRecycleFragment extends BaseFragment implements QMUIPu
     }
 
     protected void showEmptyView(EMPTY_VIEW_TYPE type) {
+        final FragmentActivity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        if (!isAttachedToActivity()) {
+            return;
+        }
         if (type == EMPTY_VIEW_TYPE.ERROR) {
-            if (!NetworkUtils.isConnected(getActivity())) {
+            if (!NetworkUtils.isConnected(activity)) {
                 mEmptyView.show(false, getString(R.string.load_fail), getString(R.string.error_network),
                         getString(R.string.retry), new View.OnClickListener() {
                             @Override
@@ -72,7 +80,7 @@ public abstract class BaseRecycleFragment extends BaseFragment implements QMUIPu
                     getString(R.string.action_sign_in), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            AccountManager.getAccount(getActivity(), new LoginHandler() {
+                            AccountManager.getAccount(activity, new LoginHandler() {
                                 @Override
                                 public void onLogin(AccountInfo account) {
                                     autoRefresh();
