@@ -98,7 +98,7 @@ dependencies {
 
 channel{
     //指定渠道文件
-    channelFile = file("/home/cs/android/asworkspace/Agg/channel.txt")
+    channelFile = file(rootProject.getRootDir().getAbsolutePath() + "/channel.txt")
     //多渠道包的输出目录，默认为new File(project.buildDir,"channel")
     baseOutputDir = new File(project.buildDir,"channel")
     //多渠道包的命名规则，默认为：${appName}-${versionName}-${versionCode}-${flavorName}-${buildType}

@@ -1,18 +1,9 @@
 googleplay
-yingyongbao
-360
 baidu
 xiaomi
 huawei
-oppo
-vivo
-bubugao
-coolapk
-anzhi
-wandoujia
-pp
-smartisan
 samsung
-meizu
-
+coolapk
+github
+update
 

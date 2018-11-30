@@ -9,12 +9,13 @@ android:
 before_install:
 - chmod +x gradlew
 script:
-- "./gradlew assembleRelease"
+- "./gradlew channelRelease"
 deploy:
   provider: releases
   api_key:
     secure: UZppaSWnncGu6TsDP3mi7JV6AOAUA0wPmD/oXVXeG3ahLwAMhEzIUWyDikVhwYCmiAPVY4aDPYBcYimCV5e328Y43rL+cARHJ5/eNJEFhlcWp0WOHns+zUdNVoYANnr+OnwL9gH6e7eQ/oNou/IrE8wXhE+MAiy2Rd20yRclNQSB+Ff8/Z+yKZAztdHCyVUKVFoUc/u4rloNcO07Ne+e5cQEXqnRJf1bUxTeOrd0N7IfaU/zFAsqRpI8eWu624viKDfjxortb+SpdwIR6kuz3YiXMVNVKNoIeo/Iz+S4XNwjpbNwfpGB0iTfk5fxFkbDH/IBgX3IEbjx1ipGmvncG3hOjisb4cNmZdSisPPU/mdDuvvvZgtoG6h7BFEjhxNkk9OS23qI+UsUrcAiYiXMDmxayP65RFpEQr1oWDaWU0yMHg1uy0iS3dbGrQeAf5fOpXG8gw/56PPYJk9U7WklKCMBTo+XuMO1w10Ibs8TU3ZGSqYK5536qIj2hCTXC33g1czt62M7ejyRbTNQozDMi30cvZyH2Cv6uCEjrY7206W4nhgU5az7da9hy/QxndTQzMknBGETz+RvttUI1p9+qdCz4qJx+CU2Q2qDjvflhgMoOOSRtEvHzOd75nwa/mPehlYyMXKDqYLDrC+IbUfkE3ntfCRlCY+Hl9qBlsgMrLA=
-  file: app/build/outputs/apk/release/app-release.apk
+  file_glob: true
+  file: app/build/channel/release/*.apk
   skip_cleanup: true
   on:
     tags: true
