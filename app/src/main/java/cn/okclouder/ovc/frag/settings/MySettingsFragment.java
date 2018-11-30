@@ -1,6 +1,9 @@
 package cn.okclouder.ovc.frag.settings;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import com.tencent.bugly.beta.Beta;
 
 import cn.okclouder.account.AccountManager;
 import cn.okclouder.account.LoginConstants;
+import cn.okclouder.library.util.LogUtils;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.base.BaseFragment;
 import cn.okclouder.ovc.frag.about.AboutFragment;
@@ -20,6 +24,8 @@ import cn.okclouder.ovc.util.VersionUtil;
 
 
 public class MySettingsFragment extends BaseFragment {
+
+    private static final String TAG = MySettingsFragment.class.getSimpleName();
 
     @Override
     protected View onCreateView() {
@@ -41,6 +47,12 @@ public class MySettingsFragment extends BaseFragment {
         QMUICommonListItemView itemAbout = groupListView.createItemView(getString(R.string.about));
         itemAbout.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
+        QMUICommonListItemView itemFeedback = groupListView.createItemView(getString(R.string.feedback));
+        itemFeedback.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
+
+        QMUICommonListItemView itemAppMarket = groupListView.createItemView(getString(R.string.go_to_app_market));
+        itemAppMarket.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
+
         QMUIGroupListView.newSection(getActivity())
                 .addItemView(itemUpgrade, new View.OnClickListener() {
                     @Override
@@ -48,16 +60,44 @@ public class MySettingsFragment extends BaseFragment {
                         Beta.checkUpgrade();
                     }
                 })
-                .addItemView(itemAbout, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startFragment(new AboutFragment());
-                    }
-                })
+                .addItemView(itemFeedback, v -> sendFeedback())
+                .addItemView(itemAppMarket, v -> gotoMarket())
+                .addItemView(itemAbout, v -> startFragment(new AboutFragment()))
                 .addTo(groupListView);
 
         if (AccountManager.hasLoginAccount(getActivity())) {
             addLogoutItem(groupListView);
+        }
+    }
+
+    private void gotoMarket() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        FragmentActivity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        String packageName = activity.getPackageName();
+        intent.setData(Uri.parse("market://details?id=" + packageName));
+
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            LogUtils.e(TAG, "no market, activity not found ex:" + e);
+        }
+    }
+
+    private void sendFeedback() {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        String mail = "pubtst@126.com";
+        intent.setData(Uri.parse("mailto:" + mail));
+        String appVersionName = VersionUtil.getAppVersionName(getActivity());
+        String feedback = getString(R.string.feedback);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "#" + feedback + "#" + appVersionName);
+
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            LogUtils.e(TAG, "activity not found ex:" + e);
         }
     }
 

@@ -94,5 +94,7 @@
     <string name="login_reason">此版块需要先登录</string>
     <string name="create_article">发帖</string>
     <string name="please_select_at_least_one_node">请选择至少一个节点浏览</string>
+    <string name="feedback">问题反馈</string>
+    <string name="go_to_app_market">去评分</string>
 
 </resources>
