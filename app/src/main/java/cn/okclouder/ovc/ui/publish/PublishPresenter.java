@@ -77,27 +77,4 @@ public class PublishPresenter implements PublishContract.Presenter {
             }
         });
     }
-
-    @Override
-    public void preview() {
-
-    }
-
-    @Override
-    public void uploadImage(File file) {
-        mView.showUploadTips(true);
-
-        mUploadHelper.uploadImage(file, new ImageUpLoadListener() {
-            @Override
-            public void onError(String err) {
-                mView.showUploadImageError(err);
-            }
-
-            @Override
-            public void onResponse(String imageName, String imageUrl) {
-                mView.insertImage(imageUrl, imageName);
-                mView.showUploadTips(false);
-            }
-        });
-    }
 }
