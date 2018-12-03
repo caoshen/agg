@@ -1,7 +1,5 @@
-googleplay
 xiaomi
 huawei
-samsung
 coolapk
 github
 update
