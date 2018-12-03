@@ -73,6 +73,15 @@ public class ImageLoader {
     }
 
     public static void displayCircle(Context context, ImageView imageView, String url) {
+        if (context == null) {
+            return;
+        }
+        if (imageView == null) {
+            return;
+        }
+        if (url == null) {
+            return;
+        }
         Glide.with(context).load(url)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.ic_empty_picture)
