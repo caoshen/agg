@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'channel'
+apply plugin: 'bugly'
+
 
 def loadSigningConfigs() {
     def Properties props = new Properties()
@@ -106,4 +108,9 @@ channel{
     apkNameFormat ='${appName}-${versionName}-${versionCode}-${flavorName}-${buildType}'
     //快速模式：生成渠道包时不进行校验（速度可以提升10倍以上）
     isFastMode = false
+}
+
+bugly {
+    appId = '2d0424a759' // 注册时分配的App ID
+    appKey = 'f100cba7-bab1-466b-8e61-eb4203d10d28' // 注册时分配的App Key
 }
