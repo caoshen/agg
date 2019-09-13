@@ -49,14 +49,6 @@ public class AccountInfo implements Parcelable {
 
     }
 
-    public String getId() {
-        return mId;
-    }
-
-    public void setId(String id) {
-        mId = id;
-    }
-
     public String getUserName() {
         return mUserName;
     }
@@ -65,84 +57,12 @@ public class AccountInfo implements Parcelable {
         mUserName = userName;
     }
 
-    public String getNickName() {
-        return mNickName;
-    }
-
-    public void setNickName(String nickName) {
-        mNickName = nickName;
-    }
-
-    public String getEmail() {
-        return mEmail;
-    }
-
-    public void setEmail(String email) {
-        mEmail = email;
-    }
-
     public String getAvatarUrl() {
         return mAvatarUrl;
     }
 
     public void setAvatarUrl(String avatarUrl) {
         mAvatarUrl = avatarUrl;
-    }
-
-    public String getLink() {
-        return mLink;
-    }
-
-    public void setLink(String link) {
-        mLink = link;
-    }
-
-    public String getTopicCount() {
-        return mTopicCount;
-    }
-
-    public void setTopicCount(String topicCount) {
-        mTopicCount = topicCount;
-    }
-
-    public String getReplyCount() {
-        return mReplyCount;
-    }
-
-    public void setReplyCount(String replyCount) {
-        mReplyCount = replyCount;
-    }
-
-    public String getFavouriteCount() {
-        return mFavouriteCount;
-    }
-
-    public void setFavouriteCount(String favouriteCount) {
-        mFavouriteCount = favouriteCount;
-    }
-
-    public String getCreditCount() {
-        return mCreditCount;
-    }
-
-    public void setCreditCount(String creditCount) {
-        mCreditCount = creditCount;
-    }
-
-    public String getRegisterCount() {
-        return mRegisterCount;
-    }
-
-    public void setRegisterCount(String registerCount) {
-        mRegisterCount = registerCount;
-    }
-
-    public String getRegisterTime() {
-        return mRegisterTime;
-    }
-
-    public void setRegisterTime(String registerTime) {
-        mRegisterTime = registerTime;
     }
 
     @Override

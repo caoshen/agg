@@ -22,7 +22,6 @@ import cn.okclouder.ovc.ui.reply.OnReplyClickListener;
 import cn.okclouder.ovc.ui.reply.Reply;
 
 public class UserCommonRecyclerFragment extends BaseRecycleTopBarFragment implements UserCommonContract.View {
-    public static final String TAG = UserCommonRecyclerFragment.class.getSimpleName();
     private static final String KEY_USER_NAME = "key_user_name";
     private static final java.lang.String KEY_USER_ACTION = "key_user_action";
     private USER_ACTION mAction = USER_ACTION.TOPIC;

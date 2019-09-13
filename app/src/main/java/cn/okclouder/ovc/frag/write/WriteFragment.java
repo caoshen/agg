@@ -24,7 +24,6 @@ import cn.okclouder.ovc.util.EditUtils;
 
 
 public class WriteFragment extends BaseFragment implements PublishContract.View {
-    private static final String LOG_TAG = "WriteFragment";
 
     private static final String ARG_URL = "argument_comment_url";
     private static final String ARG_NODE = "argument_selected_node";

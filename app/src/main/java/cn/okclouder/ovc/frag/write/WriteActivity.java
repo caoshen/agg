@@ -28,12 +28,6 @@ public class WriteActivity extends BaseFragmentActivity {
         context.startActivity(intent);
     }
 
-    public static void startPublish(Context context, Node node) {
-        Intent intent = new Intent(context, WriteActivity.class);
-        intent.putExtra(EXTRA_SELECTED_NODE, node);
-        context.startActivity(intent);
-    }
-
     @Override
     protected int getContextViewId() {
         return R.id.id_write_activity;
