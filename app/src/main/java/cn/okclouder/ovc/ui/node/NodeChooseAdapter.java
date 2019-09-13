@@ -20,7 +20,6 @@ public class NodeChooseAdapter extends CommonAdapter<Node>
 
     @Override
     protected void convert(ViewHolder holder, Node node, int position) {
-        holder.setText(R.id.item_node_choose_text, node.getTitle());
     }
 
     @Override
