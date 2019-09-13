@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.okclouder.library.util.ImageLoader;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.base.BaseRecycleFragment;
 import cn.okclouder.ovc.base.BaseRecyclerAdapter;
@@ -17,7 +18,6 @@ import cn.okclouder.ovc.ui.news.NewsContract;
 import cn.okclouder.ovc.ui.news.NewsPresenter;
 import cn.okclouder.ovc.ui.post.OnRvItemListener;
 import cn.okclouder.ovc.util.Constants;
-import cn.okclouder.library.util.ImageLoader;
 
 public class RecommendFragment extends BaseRecycleFragment implements NewsContract.View {
     private List<Post> mData = new ArrayList<>();

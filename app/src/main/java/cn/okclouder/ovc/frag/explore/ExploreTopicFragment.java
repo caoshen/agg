@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.okclouder.library.util.ImageLoader;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.base.BaseRecycleFragment;
 import cn.okclouder.ovc.base.BaseRecyclerAdapter;
@@ -19,7 +20,6 @@ import cn.okclouder.ovc.ui.node.NodeListContract;
 import cn.okclouder.ovc.ui.node.NodeListPresenter;
 import cn.okclouder.ovc.ui.post.OnRvItemListener;
 import cn.okclouder.ovc.util.Constants;
-import cn.okclouder.library.util.ImageLoader;
 
 
 public class ExploreTopicFragment extends BaseRecycleFragment implements NodeListContract.View {

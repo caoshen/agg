@@ -7,9 +7,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-import cn.okclouder.ovc.R;
 import cn.okclouder.library.util.LogUtils;
+import cn.okclouder.ovc.R;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static cn.okclouder.library.util.LogUtils.makeLogTag;
 

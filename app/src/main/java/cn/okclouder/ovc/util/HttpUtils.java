@@ -12,9 +12,9 @@ import org.jsoup.select.Elements;
 import java.io.File;
 import java.util.Map;
 
+import cn.okclouder.library.util.LogUtils;
 import okhttp3.CookieJar;
 import okhttp3.OkHttpClient;
-import cn.okclouder.library.util.LogUtils;
 
 public class HttpUtils {
     private static final String TAG = "HttpUtils";

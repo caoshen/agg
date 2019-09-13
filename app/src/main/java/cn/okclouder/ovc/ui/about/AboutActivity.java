@@ -5,9 +5,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.widget.TextView;
 
+import cn.okclouder.library.base.BaseActivity;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.util.VersionUtil;
-import cn.okclouder.library.base.BaseActivity;
 
 public class AboutActivity extends BaseActivity {
     @Override

@@ -5,12 +5,12 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import java.io.File;
 import java.io.IOException;
 
+import cn.okclouder.library.util.LogUtils;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import cn.okclouder.library.util.LogUtils;
 
 public class Uploader {
 

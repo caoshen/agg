@@ -23,6 +23,7 @@ import cn.okclouder.account.ErrorStatus;
 import cn.okclouder.account.LoginConstants;
 import cn.okclouder.account.LoginHandler;
 import cn.okclouder.account.OnCheckLoginClickListener;
+import cn.okclouder.library.util.ImageLoader;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.frag.favourite.MyFavouriteArticleFragment;
 import cn.okclouder.ovc.frag.history.BrowserHistoryFragment;
@@ -30,7 +31,6 @@ import cn.okclouder.ovc.frag.home.HomeControllerFragment;
 import cn.okclouder.ovc.frag.message.NotificationMessageFragment;
 import cn.okclouder.ovc.frag.settings.MySettingsFragment;
 import cn.okclouder.ovc.frag.user.UserHomePageActivity;
-import cn.okclouder.library.util.ImageLoader;
 
 
 public class MySelfFragment extends HomeControllerFragment {

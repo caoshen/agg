@@ -8,7 +8,6 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 import java.util.Collections;
 import java.util.List;
 
-import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.widget.ItemDragHelperCallback;
 
 public class NodeChooseAdapter extends CommonAdapter<Node>

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.okclouder.library.util.ImageLoader;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.base.BaseRecycleFragment;
 import cn.okclouder.ovc.base.BaseRecycleTopBarFragment;
@@ -18,7 +19,6 @@ import cn.okclouder.ovc.model.Post;
 import cn.okclouder.ovc.ui.favorite.FavoriteContract;
 import cn.okclouder.ovc.ui.favorite.FavoritePresenter;
 import cn.okclouder.ovc.ui.post.OnRvItemListener;
-import cn.okclouder.library.util.ImageLoader;
 
 
 public class FavouriteArticleFragment extends BaseRecycleTopBarFragment implements FavoriteContract.View {

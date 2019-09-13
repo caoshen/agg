@@ -4,14 +4,11 @@ import android.text.TextUtils;
 
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.io.File;
-
-import okhttp3.Call;
+import cn.okclouder.library.util.LogUtils;
 import cn.okclouder.ovc.ui.publish.helper.CommentHelper;
-import cn.okclouder.ovc.ui.publish.helper.ImageUpLoadListener;
 import cn.okclouder.ovc.ui.publish.helper.ImageUploadHelper;
 import cn.okclouder.ovc.ui.publish.helper.PostHelper;
-import cn.okclouder.library.util.LogUtils;
+import okhttp3.Call;
 
 public class PublishPresenter implements PublishContract.Presenter {
     private static final String LOG_TAG = "PublishPresenter";

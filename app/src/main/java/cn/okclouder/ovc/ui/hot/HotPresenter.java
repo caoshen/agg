@@ -2,9 +2,9 @@ package cn.okclouder.ovc.ui.hot;
 
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import okhttp3.Call;
 import cn.okclouder.ovc.util.Constants;
 import cn.okclouder.ovc.util.HttpUtils;
+import okhttp3.Call;
 
 public class
 HotPresenter implements HotContract.Presenter {

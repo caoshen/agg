@@ -13,14 +13,14 @@ import com.bumptech.glide.Glide;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import cn.okclouder.library.util.CircleTransformation;
+import cn.okclouder.library.widget.appreciateview.AppreciateView;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.account.OnAccountClickListener;
 import cn.okclouder.ovc.ui.postdetail.data.PostComment;
 import cn.okclouder.ovc.ui.postdetail.data.PostDetailItem;
 import cn.okclouder.ovc.util.Constants;
 import cn.okclouder.ovc.util.HtmlUtils;
-import cn.okclouder.library.util.CircleTransformation;
-import cn.okclouder.library.widget.appreciateview.AppreciateView;
 
 public class PostCommentDelegate implements ItemViewDelegate<PostDetailItem> {
 

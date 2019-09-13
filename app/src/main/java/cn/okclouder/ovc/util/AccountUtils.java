@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
-import cn.okclouder.ovc.account.AccountInfo;
 import cn.okclouder.library.util.LogUtils;
+import cn.okclouder.ovc.account.AccountInfo;
 
 public class AccountUtils {
     private static final String TAG = LogUtils.makeLogTag("AccountUtils");

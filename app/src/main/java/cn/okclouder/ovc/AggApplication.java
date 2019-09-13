@@ -12,9 +12,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.OkHttpClient;
-import cn.okclouder.ovc.util.HttpConfig;
 import cn.okclouder.library.loading.LoadingManager;
+import cn.okclouder.ovc.util.HttpConfig;
+import okhttp3.OkHttpClient;
 
 
 public class AggApplication extends Application {

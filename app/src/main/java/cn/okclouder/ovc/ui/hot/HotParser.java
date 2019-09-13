@@ -8,8 +8,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.okclouder.ovc.model.Post;
 import cn.okclouder.library.util.LogUtils;
+import cn.okclouder.ovc.model.Post;
 
 public class HotParser {
     private static final String TAG = "HotParser";

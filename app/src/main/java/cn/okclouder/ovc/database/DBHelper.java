@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.okclouder.library.util.LogUtils;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.database.table.CurNodeTable;
 import cn.okclouder.ovc.database.table.HistoryTable;
@@ -15,7 +16,6 @@ import cn.okclouder.ovc.database.table.MoreNodeTable;
 import cn.okclouder.ovc.database.table.NodeTable;
 import cn.okclouder.ovc.ui.node.Node;
 import cn.okclouder.ovc.util.Constants;
-import cn.okclouder.library.util.LogUtils;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";

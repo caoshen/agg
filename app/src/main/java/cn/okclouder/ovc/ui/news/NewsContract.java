@@ -2,9 +2,9 @@ package cn.okclouder.ovc.ui.news;
 
 import java.util.List;
 
-import cn.okclouder.ovc.model.Post;
 import cn.okclouder.library.base.BasePresenter;
 import cn.okclouder.library.base.BaseView;
+import cn.okclouder.ovc.model.Post;
 
 public interface NewsContract {
     interface Presenter extends BasePresenter {

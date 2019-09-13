@@ -2,11 +2,11 @@ package cn.okclouder.ovc.ui.favorite;
 
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import okhttp3.Call;
+import cn.okclouder.library.util.LogUtils;
 import cn.okclouder.ovc.parser.PostParser;
 import cn.okclouder.ovc.util.Constants;
 import cn.okclouder.ovc.util.HttpUtils;
-import cn.okclouder.library.util.LogUtils;
+import okhttp3.Call;
 
 public class FavoritePresenter implements FavoriteContract.Presenter {
     private static final String LOG_TAG = "FavoritePresenter";

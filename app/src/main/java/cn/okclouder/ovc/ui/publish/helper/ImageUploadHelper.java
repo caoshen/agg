@@ -10,9 +10,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 
-import okhttp3.Call;
-import cn.okclouder.ovc.util.HttpUtils;
 import cn.okclouder.library.util.LogUtils;
+import cn.okclouder.ovc.util.HttpUtils;
+import okhttp3.Call;
 
 public class ImageUploadHelper {
     private static final String LOG_TAG = "ImageUploadHelper";

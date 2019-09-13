@@ -3,8 +3,8 @@ package cn.okclouder.ovc.util;
 import android.content.Context;
 import android.widget.EditText;
 
-import cn.okclouder.ovc.R;
 import cn.okclouder.library.util.StringUtils;
+import cn.okclouder.ovc.R;
 
 public class EditUtils {
 

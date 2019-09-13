@@ -14,11 +14,11 @@ import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import java.util.List;
 
+import cn.okclouder.library.util.ImageLoader;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.base.BaseFragment;
 import cn.okclouder.ovc.ui.personal.detail.Detail;
 import cn.okclouder.ovc.ui.personal.page.Count;
-import cn.okclouder.library.util.ImageLoader;
 
 
 public class UserHomePageFragment extends BaseFragment implements UserHomeContract.View {

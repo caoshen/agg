@@ -8,11 +8,11 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.okclouder.library.util.LogUtils;
 import cn.okclouder.ovc.ui.postdetail.data.PostComment;
 import cn.okclouder.ovc.ui.postdetail.data.PostContent;
 import cn.okclouder.ovc.ui.postdetail.data.PostDetailItem;
 import cn.okclouder.ovc.ui.postdetail.data.PostMyComment;
-import cn.okclouder.library.util.LogUtils;
 
 public class PostDetailParser {
     private static final String TAG = LogUtils.makeLogTag("PostDetailParser");

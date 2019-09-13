@@ -32,6 +32,7 @@ import cn.okclouder.account.AccountInfo;
 import cn.okclouder.account.AccountManager;
 import cn.okclouder.account.ErrorStatus;
 import cn.okclouder.account.LoginHandler;
+import cn.okclouder.library.widget.appreciateview.AppreciateView;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.base.BaseFragment;
 import cn.okclouder.ovc.common.irecyclerview.IRecyclerView;
@@ -53,7 +54,6 @@ import cn.okclouder.ovc.util.PostUtils;
 import cn.okclouder.ovc.util.ShareUtils;
 import cn.okclouder.ovc.widget.BottomMenu;
 import cn.okclouder.ovc.widget.BottomSheetBar;
-import cn.okclouder.library.widget.appreciateview.AppreciateView;
 
 
 public class ArticleFragment extends BaseFragment implements PostDetailContract.View,

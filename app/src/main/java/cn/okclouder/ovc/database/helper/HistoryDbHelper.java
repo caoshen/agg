@@ -8,9 +8,9 @@ import android.net.Uri;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.okclouder.library.util.LogUtils;
 import cn.okclouder.ovc.database.HistoryInfo;
 import cn.okclouder.ovc.database.table.HistoryTable;
-import cn.okclouder.library.util.LogUtils;
 
 public class HistoryDbHelper {
     private static final String LOG_TAG = "HistoryDbHelper";

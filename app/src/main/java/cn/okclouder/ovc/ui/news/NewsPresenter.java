@@ -4,10 +4,10 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.Arrays;
 
-import okhttp3.Call;
 import cn.okclouder.ovc.parser.PostParser;
 import cn.okclouder.ovc.util.Constants;
 import cn.okclouder.ovc.util.HttpUtils;
+import okhttp3.Call;
 
 public class NewsPresenter implements NewsContract.Presenter {
 

@@ -20,7 +20,6 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.Call;
 import cn.okclouder.account.AccountInfo;
 import cn.okclouder.account.AccountManager;
 import cn.okclouder.account.AccountParser;
@@ -28,6 +27,7 @@ import cn.okclouder.account.LoginConstants;
 import cn.okclouder.account.R;
 import cn.okclouder.arch.QMUIFragment;
 import cn.okclouder.library.util.HttpUtils;
+import okhttp3.Call;
 
 
 public class LoginAccountFragment extends QMUIFragment {

@@ -2,12 +2,12 @@ package cn.okclouder.ovc.frag.user;
 
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import okhttp3.Call;
 import cn.okclouder.ovc.parser.PostParser;
 import cn.okclouder.ovc.ui.favorite.FavoriteParser;
 import cn.okclouder.ovc.ui.reply.ReplyParser;
 import cn.okclouder.ovc.util.Constants;
 import cn.okclouder.ovc.util.HttpUtils;
+import okhttp3.Call;
 
 public class UserCommonPresenter implements UserCommonContract.Presenter {
     private final UserCommonRecyclerFragment.USER_ACTION mAction;

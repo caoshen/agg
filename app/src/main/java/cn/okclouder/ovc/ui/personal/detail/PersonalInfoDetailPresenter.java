@@ -2,10 +2,10 @@ package cn.okclouder.ovc.ui.personal.detail;
 
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import okhttp3.Call;
+import cn.okclouder.library.util.LogUtils;
 import cn.okclouder.ovc.util.Constants;
 import cn.okclouder.ovc.util.HttpUtils;
-import cn.okclouder.library.util.LogUtils;
+import okhttp3.Call;
 
 import static cn.okclouder.library.util.LogUtils.makeLogTag;
 

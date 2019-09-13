@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.okclouder.library.util.ImageLoader;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.base.BaseRecycleFragment;
 import cn.okclouder.ovc.base.BaseRecyclerAdapter;
@@ -16,7 +17,6 @@ import cn.okclouder.ovc.model.Post;
 import cn.okclouder.ovc.ui.hot.HotContract;
 import cn.okclouder.ovc.ui.hot.HotPresenter;
 import cn.okclouder.ovc.ui.post.OnRvItemListener;
-import cn.okclouder.library.util.ImageLoader;
 
 public class WhatsHotFragment extends HomeControllerTopBarFragment implements HotContract.View {
     private List<Post> mData = new ArrayList<>();

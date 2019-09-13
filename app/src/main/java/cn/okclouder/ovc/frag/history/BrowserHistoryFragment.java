@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.okclouder.library.util.ImageLoader;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.base.BaseRecycleTopBarFragment;
 import cn.okclouder.ovc.base.BaseRecyclerAdapter;
@@ -14,7 +15,6 @@ import cn.okclouder.ovc.base.RecyclerViewHolder;
 import cn.okclouder.ovc.database.HistoryInfo;
 import cn.okclouder.ovc.database.helper.HistoryDbHelper;
 import cn.okclouder.ovc.frag.article.ArticleActivity;
-import cn.okclouder.library.util.ImageLoader;
 
 
 public class BrowserHistoryFragment extends BaseRecycleTopBarFragment {

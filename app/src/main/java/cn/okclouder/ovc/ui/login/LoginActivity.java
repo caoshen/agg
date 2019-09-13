@@ -21,15 +21,15 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.Call;
+import cn.okclouder.library.base.BaseActivity;
+import cn.okclouder.library.util.LogUtils;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.account.AccountInfo;
 import cn.okclouder.ovc.util.AccountUtils;
 import cn.okclouder.ovc.util.AnimationUtils;
 import cn.okclouder.ovc.util.Constants;
 import cn.okclouder.ovc.util.HttpUtils;
-import cn.okclouder.library.base.BaseActivity;
-import cn.okclouder.library.util.LogUtils;
+import okhttp3.Call;
 
 /**
  * A login screen that offers login via email/password.

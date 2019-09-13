@@ -4,12 +4,12 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.List;
 
-import okhttp3.Call;
+import cn.okclouder.library.util.LogUtils;
 import cn.okclouder.ovc.model.Post;
 import cn.okclouder.ovc.parser.PostParser;
 import cn.okclouder.ovc.util.Constants;
 import cn.okclouder.ovc.util.HttpUtils;
-import cn.okclouder.library.util.LogUtils;
+import okhttp3.Call;
 
 public class PostPresenter implements PostContract.Presenter {
     private static final String FIRST_PAGE = "1";

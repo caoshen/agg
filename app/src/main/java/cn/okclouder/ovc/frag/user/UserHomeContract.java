@@ -2,10 +2,10 @@ package cn.okclouder.ovc.frag.user;
 
 import java.util.List;
 
-import cn.okclouder.ovc.ui.personal.detail.Detail;
-import cn.okclouder.ovc.ui.personal.page.Count;
 import cn.okclouder.library.base.BasePresenter;
 import cn.okclouder.library.base.BaseView;
+import cn.okclouder.ovc.ui.personal.detail.Detail;
+import cn.okclouder.ovc.ui.personal.page.Count;
 
 public class UserHomeContract {
     interface Presenter extends BasePresenter {

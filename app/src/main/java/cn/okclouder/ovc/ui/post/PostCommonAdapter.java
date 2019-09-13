@@ -9,9 +9,9 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.List;
 
+import cn.okclouder.library.util.ImageLoader;
 import cn.okclouder.ovc.R;
 import cn.okclouder.ovc.model.Post;
-import cn.okclouder.library.util.ImageLoader;
 
 public class PostCommonAdapter extends CommonAdapter<Post> {
     public PostCommonAdapter(Context context, int layoutId, List<Post> datas) {

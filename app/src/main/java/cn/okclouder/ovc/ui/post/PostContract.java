@@ -2,9 +2,9 @@ package cn.okclouder.ovc.ui.post;
 
 import java.util.List;
 
+import cn.okclouder.library.base.BasePresenter;
 import cn.okclouder.library.base.BaseView;
 import cn.okclouder.ovc.model.Post;
-import cn.okclouder.library.base.BasePresenter;
 
 public interface PostContract {
 

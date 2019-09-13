@@ -12,9 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
-import cn.okclouder.ovc.R;
-import cn.okclouder.library.util.StringUtils;
 import cn.okclouder.library.util.DeviceUtils;
+import cn.okclouder.library.util.StringUtils;
+import cn.okclouder.ovc.R;
 
 public class BottomSheetBar {
 

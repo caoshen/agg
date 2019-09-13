@@ -2,10 +2,10 @@ package cn.okclouder.ovc.frag.user;
 
 import java.util.List;
 
-import cn.okclouder.ovc.model.Post;
-import cn.okclouder.ovc.ui.reply.Reply;
 import cn.okclouder.library.base.BasePresenter;
 import cn.okclouder.library.base.BaseView;
+import cn.okclouder.ovc.model.Post;
+import cn.okclouder.ovc.ui.reply.Reply;
 
 public class UserCommonContract {
     interface View extends BaseView<Presenter> {
